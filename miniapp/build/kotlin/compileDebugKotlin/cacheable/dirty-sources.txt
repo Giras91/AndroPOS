@@ -1,0 +1,2 @@
+/home/hp/Documents/AndroPOS/miniapp/src/main/java/com/example/miniapp/MainActivity.kt
+/home/hp/Documents/AndroPOS/miniapp/src/main/java/com/extrotarget/extropos/MainActivity.kt
