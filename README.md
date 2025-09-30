@@ -54,6 +54,11 @@ com.example.pos/
 - **Async**: Coroutines + Flow
 - **UI**: ViewModel + LiveData/StateFlow
 
+<!-- CI status badge -->
+[![PR - Quick checks](https://github.com/ExtroTargetSdnBhd/AndroPOS/actions/workflows/pr-check.yml/badge.svg?branch=main)](https://github.com/ExtroTargetSdnBhd/AndroPOS/actions/workflows/pr-check.yml)
+
+[![Nightly integration](https://github.com/ExtroTargetSdnBhd/AndroPOS/actions/workflows/nightly-integration.yml/badge.svg?branch=main)](https://github.com/ExtroTargetSdnBhd/AndroPOS/actions/workflows/nightly-integration.yml)
+
 ## Key Patterns
 
 ### Price Handling

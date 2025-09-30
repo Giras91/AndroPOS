@@ -1,0 +1,27 @@
+# CODEOWNERS for AndroPOS
+# Add exact GitHub usernames or team slugs (e.g. @my-org/android-team or @username)
+# Replace the placeholder handles below with your real owners.
+
+
+# App module owners
+/app/ @ExtroTargetSdnBhd/LemonSquad @LemonSquad
+
+# Feature modules
+/modules/feature-product/ @ExtroTargetSdnBhd/LemonSquad @LemonSquad
+/modules/feature-cart/ @ExtroTargetSdnBhd/LemonSquad @LemonSquad
+/modules/feature-reports/ @ExtroTargetSdnBhd/LemonSquad @LemonSquad
+
+# Shared data & common code
+/shared-data/ @ExtroTargetSdnBhd/LemonSquad @LemonSquad
+
+# Build and CI configs
+/.github/ @ExtroTargetSdnBhd/LemonSquad @LemonSquad
+/.github/workflows/ @ExtroTargetSdnBhd/LemonSquad @LemonSquad
+
+# Default owners for everything else
+/* @Giras91
+
+# Notes:
+# - Use team slugs for organization teams: @org/team-name
+# - Use GitHub usernames for individuals: @username
+# - Update this file with real owners before relying on CODEOWNERS enforcement.

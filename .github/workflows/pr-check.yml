@@ -1,0 +1,86 @@
+name: PR - Quick checks
+
+on:
+  pull_request:
+    paths:
+      - '**/*.kt'
+      - '**/*.java'
+      - '**/*.gradle'
+      - 'settings.gradle'
+      - 'build.gradle'
+      - 'gradle/**'
+      - 'modules/**'
+      - 'app/**'
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [8, 11, 17]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '${{ matrix.java }}'
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ matrix.java }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run ktlint (if configured)
+        run: |
+          if [ -f ktlint.yml ] || [ -f .ktlint.yml ] || [ -f ktlint.gradle ]; then
+            echo "ktlint config found. Running ktlint if available..."
+            if ./gradlew -q tasks --all | grep -q ktlint; then
+              ./gradlew ktlintCheck --no-daemon
+            elif command -v ktlint >/dev/null 2>&1; then
+              ktlint -F "**/*.kt"
+            else
+              echo "ktlint not installed in runner; skipping"
+            fi
+          else
+            echo "No ktlint config found; skipping"
+          fi
+
+      - name: Run detekt (if configured)
+        run: |
+          if [ -f detekt.yml ] || [ -f config/detekt/detekt.yml ]; then
+            echo "detekt config found. Running detekt if available..."
+            if ./gradlew -q tasks --all | grep -q detekt; then
+              ./gradlew detekt --no-daemon
+            elif command -v detekt >/dev/null 2>&1; then
+              detekt --config detekt.yml
+            else
+              echo "detekt not installed in runner; skipping"
+            fi
+          else
+            echo "No detekt config found; skipping"
+          fi
+
+      - name: Run unit tests (fast)
+        run: ./gradlew test --no-daemon --stacktrace
+
+      - name: Upload test results (if present)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: app/build/test-results/**
+
+# Notes:
+# - Workflow runs unit tests across JDK 8, 11, 17 to catch multi-JDK issues.
+# - ktlint/detekt steps only run if repo contains common config files; otherwise they are skipped.
