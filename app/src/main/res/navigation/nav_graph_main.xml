@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.extrotarget.extropos.ui.main.MainFragment"
+        android:label="Main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_main_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.extrotarget.extropos.ui.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settings_to_printer_setup"
+            app:destination="@id/printerSetupFragment" />
+        <action
+            android:id="@+id/action_settings_to_employee_management"
+            app:destination="@id/employeeManagementFragment" />
+        <action
+            android:id="@+id/action_settings_to_inventory_management"
+            app:destination="@id/inventoryManagementFragment" />
+        <action
+            android:id="@+id/action_settings_to_payment_settings"
+            app:destination="@id/paymentSettingsFragment" />
+        <action
+            android:id="@+id/action_settings_to_hardware_settings"
+            app:destination="@id/hardwareSettingsFragment" />
+        <action
+            android:id="@+id/action_settings_to_reporting_settings"
+            app:destination="@id/reportingSettingsFragment" />
+    </fragment>
+
+    <!-- Settings Sub-fragments -->
+    <fragment
+        android:id="@+id/printerSetupFragment"
+        android:name="com.extrotarget.extropos.ui.settings.printer.PrinterSetupFragment"
+        android:label="Printer Setup"
+        tools:layout="@layout/fragment_printer_setup" />
+
+    <fragment
+        android:id="@+id/employeeManagementFragment"
+        android:name="com.extrotarget.extropos.ui.settings.employee.EmployeeManagementFragment"
+        android:label="Employee Management"
+        tools:layout="@layout/fragment_employee_management" />
+
+    <fragment
+        android:id="@+id/inventoryManagementFragment"
+        android:name="com.extrotarget.extropos.ui.settings.inventory.InventoryManagementFragment"
+        android:label="Inventory Management"
+        tools:layout="@layout/fragment_inventory_management" />
+
+    <fragment
+        android:id="@+id/paymentSettingsFragment"
+        android:name="com.extrotarget.extropos.ui.settings.payment.PaymentSettingsFragment"
+        android:label="Payment Settings"
+        tools:layout="@layout/fragment_payment_settings" />
+
+    <fragment
+        android:id="@+id/hardwareSettingsFragment"
+        android:name="com.extrotarget.extropos.ui.settings.hardware.HardwareSettingsFragment"
+        android:label="Hardware Settings"
+        tools:layout="@layout/fragment_hardware_settings" />
+
+    <fragment
+        android:id="@+id/reportingSettingsFragment"
+        android:name="com.extrotarget.extropos.ui.settings.reporting.ReportingSettingsFragment"
+        android:label="Reporting Settings"
+        tools:layout="@layout/fragment_reporting_settings" />
+
+</navigation>

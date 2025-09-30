@@ -1,0 +1,130 @@
+package com.extrotarget.extropos.ui.auth
+
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.extrotarget.extropos.R
+import com.extrotarget.extropos.databinding.FragmentAppLockBinding
+import com.extrotarget.extropos.domain.model.AuthState
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
+@AndroidEntryPoint
+class AppLockFragment : Fragment() {
+
+    private var _binding: FragmentAppLockBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: AuthViewModel by viewModels()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentAppLockBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupClickListeners()
+        observeViewModel()
+        startVerificationCheck()
+    }
+
+    private fun setupClickListeners() {
+        binding.resendEmailButton.setOnClickListener {
+            viewModel.resendVerificationEmail()
+        }
+
+        binding.logoutButton.setOnClickListener {
+            viewModel.logout()
+            findNavController().navigate(R.id.action_app_lock_to_login)
+        }
+
+        binding.callButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:+60312345678")
+            }
+            startActivity(intent)
+        }
+
+        binding.emailButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:support@extrotarget.com.my")
+                putExtra(Intent.EXTRA_SUBJECT, "ExtroPOS Account Verification")
+            }
+            startActivity(intent)
+        }
+    }
+
+    private fun observeViewModel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                binding.loadingProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.error.collect { error ->
+                binding.errorTextView.text = error
+                binding.errorTextView.visibility = if (error != null) View.VISIBLE else View.GONE
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.authState.collect { state ->
+                when (state) {
+                    AuthState.AUTHENTICATED_VERIFIED -> {
+                        // User is now verified, go to main app
+                        findNavController().navigate(R.id.action_app_lock_to_main)
+                    }
+                    AuthState.NOT_AUTHENTICATED -> {
+                        // User logged out, go back to login
+                        findNavController().navigate(R.id.action_app_lock_to_login)
+                    }
+                    else -> {
+                        // Stay on lock screen
+                    }
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.resendResult.collect { result ->
+                result?.let {
+                    if (it.success) {
+                        binding.errorTextView.text = "Verification email sent successfully"
+                        binding.errorTextView.setTextColor(resources.getColor(R.color.success_color, null))
+                        binding.errorTextView.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
+    }
+
+    private fun startVerificationCheck() {
+        // Check verification status every 5 seconds
+        viewLifecycleOwner.lifecycleScope.launch {
+            while (true) {
+                viewModel.checkVerificationStatus()
+                delay(5000) // 5 seconds
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "nav_graph_auth",
+    "navigationXmlIds": [
+      "nav_graph_main"
+    ],
+    "deepLinks": []
+  },
+  {
+    "name": "nav_graph_main",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  }
+]
