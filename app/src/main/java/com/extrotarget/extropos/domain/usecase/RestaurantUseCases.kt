@@ -4,6 +4,7 @@ import com.extrotarget.extropos.domain.model.*
 import com.extrotarget.extropos.domain.repository.IMenuRepository
 import com.extrotarget.extropos.domain.repository.IOrderRepository
 import com.extrotarget.extropos.domain.repository.ITableRepository
+import javax.inject.Inject
 
 class GetMenuUseCase(private val menuRepository: IMenuRepository) {
     suspend operator fun invoke(): Map<Category, List<MenuItem>> {
@@ -17,13 +18,17 @@ class GetMenuUseCase(private val menuRepository: IMenuRepository) {
 // GetMenuItemsUseCase is defined separately in GetMenuItemsUseCase.kt and
 // intentionally not duplicated here to avoid redeclaration errors.
 
-class SearchMenuItemsUseCase(private val menuRepository: IMenuRepository) {
+class SearchMenuItemsUseCase @Inject constructor(
+    private val menuRepository: IMenuRepository
+) {
     suspend operator fun invoke(query: String): List<MenuItem> {
         return menuRepository.searchMenuItems(query)
     }
 }
 
-class CreateOrderUseCase(private val orderRepository: IOrderRepository) {
+class CreateOrderUseCase @Inject constructor(
+    private val orderRepository: IOrderRepository
+) {
     suspend operator fun invoke(
         tableId: String? = null,
         orderType: OrderType = OrderType.DINE_IN
@@ -42,7 +47,9 @@ class CreateOrderUseCase(private val orderRepository: IOrderRepository) {
     }
 }
 
-class AddItemToOrderUseCase(private val orderRepository: IOrderRepository) {
+class AddItemToOrderUseCase @Inject constructor(
+    private val orderRepository: IOrderRepository
+) {
     suspend operator fun invoke(orderId: String, menuItem: MenuItem, quantity: Int = 1, notes: String? = null) {
         val orderItem = OrderItem(
             id = "",
@@ -56,25 +63,31 @@ class AddItemToOrderUseCase(private val orderRepository: IOrderRepository) {
     }
 }
 
-class GetActiveOrdersUseCase(private val orderRepository: IOrderRepository) {
+class GetActiveOrdersUseCase @Inject constructor(
+    private val orderRepository: IOrderRepository
+) {
     suspend operator fun invoke(): List<Order> {
         return orderRepository.getActiveOrders()
     }
 }
 
-class UpdateOrderStatusUseCase(private val orderRepository: IOrderRepository) {
+class UpdateOrderStatusUseCase @Inject constructor(
+    private val orderRepository: IOrderRepository
+) {
     suspend operator fun invoke(orderId: String, status: OrderStatus) {
         orderRepository.updateOrderStatus(orderId, status)
     }
 }
 
-class GetAvailableTablesUseCase(private val tableRepository: ITableRepository) {
+class GetAvailableTablesUseCase @Inject constructor(
+    private val tableRepository: ITableRepository
+) {
     suspend operator fun invoke(): List<Table> {
         return tableRepository.getAvailableTables()
     }
 }
 
-class AssignTableToOrderUseCase(
+class AssignTableToOrderUseCase @Inject constructor(
     private val tableRepository: ITableRepository,
     private val orderRepository: IOrderRepository
 ) {

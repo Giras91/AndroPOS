@@ -4,22 +4,22 @@ package com.extrotarget.extropos.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import com.extrotarget.extropos.R;
+import com.google.android.material.button.MaterialButton;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class ItemCartBinding extends ViewDataBinding {
   @NonNull
-  public final Button decreaseButton;
+  public final MaterialButton decreaseButton;
 
   @NonNull
-  public final Button increaseButton;
+  public final MaterialButton increaseButton;
 
   @NonNull
   public final TextView productNameTextView;
@@ -28,7 +28,7 @@ public abstract class ItemCartBinding extends ViewDataBinding {
   public final TextView quantityTextView;
 
   @NonNull
-  public final Button removeButton;
+  public final MaterialButton removeButton;
 
   @NonNull
   public final TextView totalPriceTextView;
@@ -37,8 +37,8 @@ public abstract class ItemCartBinding extends ViewDataBinding {
   public final TextView unitPriceTextView;
 
   protected ItemCartBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      Button decreaseButton, Button increaseButton, TextView productNameTextView,
-      TextView quantityTextView, Button removeButton, TextView totalPriceTextView,
+      MaterialButton decreaseButton, MaterialButton increaseButton, TextView productNameTextView,
+      TextView quantityTextView, MaterialButton removeButton, TextView totalPriceTextView,
       TextView unitPriceTextView) {
     super(_bindingComponent, _root, _localFieldCount);
     this.decreaseButton = decreaseButton;

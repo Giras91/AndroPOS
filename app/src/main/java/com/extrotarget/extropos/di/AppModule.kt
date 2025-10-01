@@ -49,6 +49,36 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideCategoryDao(): com.extrotarget.extropos.data.local.dao.CategoryDao {
+        return com.extrotarget.extropos.data.local.InMemoryCategoryDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMenuItemDao(): com.extrotarget.extropos.data.local.dao.MenuItemDao {
+        return com.extrotarget.extropos.data.local.InMemoryMenuItemDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideOrderDao(): com.extrotarget.extropos.data.local.dao.OrderDao {
+        return com.extrotarget.extropos.data.local.InMemoryOrderDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideOrderItemDao(): com.extrotarget.extropos.data.local.dao.OrderItemDao {
+        return com.extrotarget.extropos.data.local.InMemoryOrderItemDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideTableDao(): com.extrotarget.extropos.data.local.dao.TableDao {
+        return com.extrotarget.extropos.data.local.InMemoryTableDao()
+    }
+
+    @Provides
+    @Singleton
     fun provideMoshi(): Moshi {
         return Moshi.Builder()
             .add(KotlinJsonAdapterFactory())

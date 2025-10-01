@@ -1,9 +1,16 @@
 R_DEF: Internal format may change without notice
 local
+color accent
+color brand_primary
+color brand_primary_variant
+color brand_secondary
 color colorAccent
 color colorPrimary
 color colorPrimaryDark
+color muted
+color on_surface
 color success_color
+color surface
 drawable badge_background
 drawable category_background
 drawable edit_text_background
@@ -19,6 +26,7 @@ drawable ic_edit_24dp
 drawable ic_email
 drawable ic_inventory_24dp
 drawable ic_launcher_foreground
+drawable ic_launcher_foreground_bitmap
 drawable ic_location
 drawable ic_lock
 drawable ic_payment_24dp
@@ -31,6 +39,7 @@ id action_app_lock_to_main
 id action_login_to_app_lock
 id action_login_to_main
 id action_login_to_signup
+id action_main_to_pos
 id action_main_to_settings
 id action_settings_to_employee_management
 id action_settings_to_hardware_settings
@@ -101,6 +110,15 @@ id paymentSettingsFragment
 id phoneEditText
 id portEditText
 id portInputLayout
+id posButton
+id posFragment
+id pos_cart_recycler
+id pos_checkout_button
+id pos_items_count
+id pos_products_container
+id pos_subtotal
+id pos_tax
+id pos_total
 id preparationTimeTextView
 id printerNameTextView
 id printerSetupCard
@@ -108,6 +126,7 @@ id printerSetupFragment
 id printerTypeSpinner
 id printerTypeTextView
 id printersRecyclerView
+id productImageView
 id productNameTextView
 id productPriceTextView
 id productsRecyclerView
@@ -148,6 +167,7 @@ layout fragment_login
 layout fragment_main
 layout fragment_menu
 layout fragment_payment_settings
+layout fragment_pos
 layout fragment_printer_setup
 layout fragment_products_grid
 layout fragment_reporting_settings
@@ -160,7 +180,9 @@ layout item_menu_item
 layout item_printer
 layout item_product
 mipmap ic_launcher
+mipmap ic_launcher_round
 navigation nav_graph_auth
 navigation nav_graph_main
 string app_name
 style AppTheme
+style Widget.ExtroPOS.MaterialButton

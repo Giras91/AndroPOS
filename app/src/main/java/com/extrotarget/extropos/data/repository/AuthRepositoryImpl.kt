@@ -22,8 +22,8 @@ class AuthRepository @Inject constructor(
 
     companion object {
         private const val TAG = "AuthRepository"
-        private const val DATABASE_ID = "main"
-        private const val COLLECTION_ID = "users"
+        private const val DATABASE_ID = com.extrotarget.extropos.constants.AppwriteConfig.APPWRITE_DATABASE_ID
+        private const val COLLECTION_ID = com.extrotarget.extropos.constants.AppwriteConfig.APPWRITE_USERS_COLLECTION_ID
     }
 
     override suspend fun login(request: LoginRequest): AuthResult = withContext(Dispatchers.IO) {
@@ -40,22 +40,39 @@ class AuthRepository @Inject constructor(
 
             // Get user details
             val appwriteUser = account.get()
-            val user = getUserFromDatabase(appwriteUser.id)
+            var user = getUserFromDatabase(appwriteUser.id)
 
-            if (user != null) {
-                AuthResult(
-                    success = true,
-                    user = user,
-                    requiresVerification = !user.emailVerified
+            if (user == null) {
+                // User is present in Appwrite Auth but missing in our database.
+                // Attempt to create the profile document automatically. This
+                // requires the collection to exist and permissions that allow
+                // creation by the authenticated session (recommended).
+                Log.w(TAG, "User authenticated but not found in database; creating profile document for id=${appwriteUser.id}")
+
+                val createdUser = User(
+                    id = appwriteUser.id,
+                    email = appwriteUser.email ?: "",
+                    name = appwriteUser.name ?: "",
+                    companyName = "",
+                    companyRegistrationNumber = "",
+                    address = "",
+                    phoneNumber = "",
+                    emailVerified = appwriteUser.emailVerification ?: false
                 )
-            } else {
-                // User exists in auth but not in database - this shouldn't happen
-                Log.e(TAG, "User authenticated but not found in database")
-                AuthResult(
-                    success = false,
-                    errorMessage = "Account data not found. Please contact support."
-                )
+
+                val saved = saveUserToDatabase(createdUser)
+                if (!saved) {
+                    Log.w(TAG, "Could not create user profile in database for id=${appwriteUser.id}; continuing without database record")
+                }
+                user = createdUser
+                Log.d(TAG, "Continuing login with user from Auth service for id=${appwriteUser.id}")
             }
+
+            AuthResult(
+                success = true,
+                user = user,
+                requiresVerification = !user.emailVerified
+            )
 
         } catch (e: AppwriteException) {
             Log.e(TAG, "Login failed", e)
@@ -99,11 +116,14 @@ class AuthRepository @Inject constructor(
                 emailVerified = false
             )
 
-            saveUserToDatabase(user)
+            val saved = saveUserToDatabase(user)
+            if (!saved) {
+                Log.w(TAG, "Signup: could not save user to database, proceeding without DB record for id=${user.id}")
+            }
 
             // Send verification email
             try {
-                account.createVerification(url = "appwrite-callback-${com.extrotarget.extropos.constants.AppwriteConfig.APPWRITE_PROJECT_ID}")
+                account.createVerification(url = com.extrotarget.extropos.constants.AppwriteConfig.APPWRITE_VERIFICATION_CALLBACK)
                 Log.d(TAG, "Verification email sent")
             } catch (e: Exception) {
                 Log.w(TAG, "Failed to send verification email", e)
@@ -168,7 +188,7 @@ class AuthRepository @Inject constructor(
         try {
             Log.d(TAG, "Resending verification email")
             val account = Account(appwriteService.client)
-            account.createVerification(url = "appwrite-callback-${com.extrotarget.extropos.constants.AppwriteConfig.APPWRITE_PROJECT_ID}")
+            account.createVerification(url = com.extrotarget.extropos.constants.AppwriteConfig.APPWRITE_VERIFICATION_CALLBACK)
             Log.d(TAG, "Verification email resent")
             true
         } catch (e: Exception) {
@@ -187,8 +207,15 @@ class AuthRepository @Inject constructor(
         }
     }
 
-    private suspend fun saveUserToDatabase(user: User) {
-        try {
+    /**
+     * Attempts to save the user profile to the Appwrite database.
+     * Returns true when the document was created successfully, false otherwise.
+     * This method intentionally does not throw so callers can continue
+     * authentication flows even when the database/collection is missing or
+     * permissions are insufficient.
+     */
+    private suspend fun saveUserToDatabase(user: User): Boolean {
+        return try {
             val databases = Databases(appwriteService.client)
             val documentData = mapOf(
                 "email" to user.email,
@@ -210,10 +237,11 @@ class AuthRepository @Inject constructor(
             )
 
             Log.d(TAG, "User profile saved to database: ${user.id}")
+            true
 
         } catch (e: Exception) {
             Log.e(TAG, "Failed to save user to database", e)
-            throw e
+            false
         }
     }
 

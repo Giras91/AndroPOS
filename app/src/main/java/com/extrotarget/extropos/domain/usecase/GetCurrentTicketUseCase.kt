@@ -1,9 +1,12 @@
 package com.extrotarget.extropos.domain.usecase
 
 import com.extrotarget.extropos.domain.model.Ticket
+import com.extrotarget.extropos.data.repository.ITicketRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import javax.inject.Inject
 
-class GetCurrentTicketUseCase {
-    operator fun invoke(): Flow<Ticket?> = flowOf(null) // TODO: Implement with repository
+class GetCurrentTicketUseCase @Inject constructor(
+    private val ticketRepository: ITicketRepository
+) {
+    operator fun invoke(): Flow<Ticket?> = ticketRepository.getCurrentTicket()
 }

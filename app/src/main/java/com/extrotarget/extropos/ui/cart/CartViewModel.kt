@@ -4,7 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.extrotarget.extropos.domain.model.CartItem
 import com.extrotarget.extropos.domain.model.Ticket
-import com.extrotarget.extropos.domain.usecase.*
+import com.extrotarget.extropos.domain.model.TicketItem
+import com.extrotarget.extropos.domain.usecase.ticket.AddItemToTicketUseCase
+import com.extrotarget.extropos.domain.usecase.ticket.ClearTicketUseCase
+import com.extrotarget.extropos.domain.usecase.ticket.CompleteTicketUseCase
+import com.extrotarget.extropos.domain.usecase.ticket.CreateTicketUseCase
+import com.extrotarget.extropos.domain.usecase.ticket.GetCurrentTicketUseCase
+import com.extrotarget.extropos.domain.usecase.ticket.RemoveItemFromTicketUseCase
+import com.extrotarget.extropos.domain.usecase.ticket.SuspendTicketUseCase
+import com.extrotarget.extropos.domain.usecase.ticket.UpdateItemQuantityUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -73,48 +81,67 @@ class CartViewModel @Inject constructor(
                 quantity = quantity,
                 unitPriceCents = unitPriceCents
             )
-            val updatedTicket = addItemToTicketUseCase(currentTicket, cartItem)
-            _currentTicket.value = updatedTicket
+            // map CartItem -> TicketItem and call ticket use-case; rely on ticket flow to update current ticket
+            val ticketItem = TicketItem(
+                id = "",
+                productId = cartItem.productId,
+                name = cartItem.name,
+                quantity = cartItem.quantity,
+                unitPriceCents = cartItem.unitPriceCents,
+                notes = ""
+            )
+            addItemToTicketUseCase(ticketItem)
         }
     }
 
     fun updateItemQuantity(item: CartItem, newQuantity: Int) {
         viewModelScope.launch {
             val currentTicket = _currentTicket.value ?: return@launch
-            val updatedTicket = updateItemQuantityUseCase(currentTicket, item.productId, newQuantity)
-            _currentTicket.value = updatedTicket
+            val ticketItem = TicketItem(
+                id = "",
+                productId = item.productId,
+                name = item.name,
+                quantity = item.quantity,
+                unitPriceCents = item.unitPriceCents,
+                notes = ""
+            )
+            updateItemQuantityUseCase(ticketItem, newQuantity)
         }
     }
 
     fun removeItem(item: CartItem) {
         viewModelScope.launch {
             val currentTicket = _currentTicket.value ?: return@launch
-            val updatedTicket = removeItemFromTicketUseCase(currentTicket, item.productId)
-            _currentTicket.value = updatedTicket
+            val ticketItem = TicketItem(
+                id = "",
+                productId = item.productId,
+                name = item.name,
+                quantity = item.quantity,
+                unitPriceCents = item.unitPriceCents,
+                notes = ""
+            )
+            removeItemFromTicketUseCase(ticketItem)
         }
     }
 
     fun clearCart() {
         viewModelScope.launch {
             val currentTicket = _currentTicket.value ?: return@launch
-            val clearedTicket = clearTicketUseCase(currentTicket)
-            _currentTicket.value = clearedTicket
+            clearTicketUseCase()
         }
     }
 
     fun suspendTicket() {
         viewModelScope.launch {
             val currentTicket = _currentTicket.value ?: return@launch
-            val suspendedTicket = suspendTicketUseCase(currentTicket)
-            _currentTicket.value = suspendedTicket
+            suspendTicketUseCase()
         }
     }
 
     fun completeTicket() {
         viewModelScope.launch {
             val currentTicket = _currentTicket.value ?: return@launch
-            val completedTicket = completeTicketUseCase(currentTicket)
-            _currentTicket.value = completedTicket
+            completeTicketUseCase()
         }
     }
 

@@ -47,6 +47,9 @@ class MainFragment : Fragment() {
             // Navigate to settings screen
             findNavController().navigate(R.id.action_main_to_settings)
         }
+        binding.posButton.setOnClickListener {
+            findNavController().navigate(R.id.action_main_to_pos)
+        }
     }
 
     private fun observeAuthState() {

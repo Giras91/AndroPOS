@@ -13,8 +13,18 @@
         <action
             android:id="@+id/action_main_to_settings"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_main_to_pos"
+            app:destination="@id/posFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/posFragment"
+        android:name="com.extrotarget.extropos.ui.pos.PosFragment"
+        android:label="POS"
+        tools:layout="@layout/fragment_pos" />
+
+    
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.extrotarget.extropos.ui.settings.SettingsFragment"

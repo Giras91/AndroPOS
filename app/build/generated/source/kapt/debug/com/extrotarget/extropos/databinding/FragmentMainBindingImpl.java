@@ -16,7 +16,8 @@ public class FragmentMainBindingImpl extends FragmentMainBinding  {
         sViewsWithIds = new android.util.SparseIntArray();
         sViewsWithIds.put(R.id.welcomeTextView, 1);
         sViewsWithIds.put(R.id.settingsButton, 2);
-        sViewsWithIds.put(R.id.logoutButton, 3);
+        sViewsWithIds.put(R.id.posButton, 3);
+        sViewsWithIds.put(R.id.logoutButton, 4);
     }
     // views
     @NonNull
@@ -27,10 +28,11 @@ public class FragmentMainBindingImpl extends FragmentMainBinding  {
     // Inverse Binding Event Handlers
 
     public FragmentMainBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 4, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 5, sIncludes, sViewsWithIds));
     }
     private FragmentMainBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
+            , (android.widget.Button) bindings[4]
             , (android.widget.Button) bindings[3]
             , (android.widget.Button) bindings[2]
             , (android.widget.TextView) bindings[1]

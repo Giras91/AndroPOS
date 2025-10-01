@@ -2,8 +2,9 @@ package com.extrotarget.extropos.domain.usecase
 
 import com.extrotarget.extropos.domain.model.Table
 import com.extrotarget.extropos.domain.model.TableStatus
+import javax.inject.Inject
 
-class UpdateTableStatusUseCase {
+class UpdateTableStatusUseCase @Inject constructor() {
     suspend operator fun invoke(table: Table, newStatus: TableStatus): Table {
         // TODO: Implement with repository
         return table.copy(status = newStatus)

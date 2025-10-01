@@ -12,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import com.extrotarget.extropos.R
 import android.widget.*
 import kotlinx.coroutines.launch
+import android.content.Intent
+import com.extrotarget.extropos.MainActivity
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -95,6 +97,10 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToMainScreen() {
-        // TODO: Navigate to main POS screen
+        // Simple navigation: start MainActivity and finish the current activity.
+        val ctx = requireContext()
+        val intent = Intent(ctx, MainActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 }

@@ -18,7 +18,10 @@ class AppwriteService @Inject constructor(
         .setSelfSigned(true) // For development - remove in production
 
     init {
-        // Optional: Add custom headers or configuration
-        client.addHeader("X-Appwrite-Key", AppwriteConfig.APPWRITE_API_KEY)
+        // Do NOT set a global API key header here. When a user session is created,
+        // requests must use the session auth and not an API key. Setting both
+        // results in Appwrite rejecting requests with: "API key and session used
+        // in the same request." If you need server-side/admin calls, create a
+        // separate client configured with the API key on the server side only.
     }
 }

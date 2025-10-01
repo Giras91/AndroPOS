@@ -1,14 +1,18 @@
+
 package com.extrotarget.extropos.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.extrotarget.extropos.domain.usecase.AuthenticateUserUseCase
+import com.extrotarget.extropos.domain.usecase.LoginUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel(
-    private val authenticateUser: AuthenticateUserUseCase = AuthenticateUserUseCase() // TODO: Inject properly
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
     private val _loginState = MutableStateFlow<LoginState>(LoginState.Idle)
@@ -19,11 +23,11 @@ class LoginViewModel(
             _loginState.value = LoginState.Loading
 
             try {
-                val result = authenticateUser(username, password)
-                if (result) {
+                val result = loginUseCase(username, password)
+                if (result.success) {
                     _loginState.value = LoginState.Success
                 } else {
-                    _loginState.value = LoginState.Error("Invalid username or password")
+                    _loginState.value = LoginState.Error(result.errorMessage ?: "Invalid username or password")
                 }
             } catch (e: Exception) {
                 _loginState.value = LoginState.Error("Login failed: ${e.message}")

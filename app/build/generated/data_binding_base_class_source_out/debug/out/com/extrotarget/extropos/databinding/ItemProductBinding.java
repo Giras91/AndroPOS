@@ -4,6 +4,7 @@ package com.extrotarget.extropos.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,9 @@ import java.lang.Object;
 
 public abstract class ItemProductBinding extends ViewDataBinding {
   @NonNull
+  public final ImageView productImageView;
+
+  @NonNull
   public final TextView productNameTextView;
 
   @NonNull
@@ -24,8 +28,10 @@ public abstract class ItemProductBinding extends ViewDataBinding {
   public final TextView stockTextView;
 
   protected ItemProductBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      TextView productNameTextView, TextView productPriceTextView, TextView stockTextView) {
+      ImageView productImageView, TextView productNameTextView, TextView productPriceTextView,
+      TextView stockTextView) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.productImageView = productImageView;
     this.productNameTextView = productNameTextView;
     this.productPriceTextView = productPriceTextView;
     this.stockTextView = stockTextView;

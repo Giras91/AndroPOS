@@ -1,13 +1,13 @@
 package com.extrotarget.extropos.ui.cart;
 
-import com.extrotarget.extropos.domain.usecase.AddItemToTicketUseCase;
-import com.extrotarget.extropos.domain.usecase.ClearTicketUseCase;
-import com.extrotarget.extropos.domain.usecase.CompleteTicketUseCase;
-import com.extrotarget.extropos.domain.usecase.CreateTicketUseCase;
-import com.extrotarget.extropos.domain.usecase.GetCurrentTicketUseCase;
-import com.extrotarget.extropos.domain.usecase.RemoveItemFromTicketUseCase;
-import com.extrotarget.extropos.domain.usecase.SuspendTicketUseCase;
-import com.extrotarget.extropos.domain.usecase.UpdateItemQuantityUseCase;
+import com.extrotarget.extropos.domain.usecase.ticket.AddItemToTicketUseCase;
+import com.extrotarget.extropos.domain.usecase.ticket.ClearTicketUseCase;
+import com.extrotarget.extropos.domain.usecase.ticket.CompleteTicketUseCase;
+import com.extrotarget.extropos.domain.usecase.ticket.CreateTicketUseCase;
+import com.extrotarget.extropos.domain.usecase.ticket.GetCurrentTicketUseCase;
+import com.extrotarget.extropos.domain.usecase.ticket.RemoveItemFromTicketUseCase;
+import com.extrotarget.extropos.domain.usecase.ticket.SuspendTicketUseCase;
+import com.extrotarget.extropos.domain.usecase.ticket.UpdateItemQuantityUseCase;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;

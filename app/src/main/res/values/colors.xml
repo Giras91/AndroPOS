@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Brand palette -->
+    <color name="brand_primary">#0D47A1</color>
+    <color name="brand_primary_variant">#0B3A86</color>
+    <color name="brand_secondary">#03A9F4</color>
+
+    <!-- Surface / text -->
+    <color name="surface">#FFFFFF</color>
+    <color name="on_surface">#212121</color>
+    <color name="muted">#9E9E9E</color>
+
+    <!-- Accent / status -->
+    <color name="accent">#4CAF50</color>
+    <color name="success_color">#4CAF50</color>
+
+    <!-- Compatibility colors -->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="success_color">#4CAF50</color>
 </resources>

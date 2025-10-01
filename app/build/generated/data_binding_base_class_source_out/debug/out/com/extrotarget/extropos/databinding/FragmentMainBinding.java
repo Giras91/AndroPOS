@@ -19,15 +19,19 @@ public abstract class FragmentMainBinding extends ViewDataBinding {
   public final Button logoutButton;
 
   @NonNull
+  public final Button posButton;
+
+  @NonNull
   public final Button settingsButton;
 
   @NonNull
   public final TextView welcomeTextView;
 
   protected FragmentMainBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      Button logoutButton, Button settingsButton, TextView welcomeTextView) {
+      Button logoutButton, Button posButton, Button settingsButton, TextView welcomeTextView) {
     super(_bindingComponent, _root, _localFieldCount);
     this.logoutButton = logoutButton;
+    this.posButton = posButton;
     this.settingsButton = settingsButton;
     this.welcomeTextView = welcomeTextView;
   }

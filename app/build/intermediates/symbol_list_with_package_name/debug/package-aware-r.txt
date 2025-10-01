@@ -1391,6 +1391,7 @@ color abc_tint_edittext
 color abc_tint_seek_thumb
 color abc_tint_spinner
 color abc_tint_switch_track
+color accent
 color accent_material_dark
 color accent_material_light
 color androidx_core_ripple_material_light
@@ -1399,6 +1400,9 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color brand_primary
+color brand_primary_variant
+color brand_secondary
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -2119,8 +2123,10 @@ color mtrl_textinput_disabled_color
 color mtrl_textinput_filled_box_default_background_color
 color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
+color muted
 color notification_action_color_filter
 color notification_icon_bg_color
+color on_surface
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -2136,6 +2142,7 @@ color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
 color success_color
+color surface
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
 color switch_thumb_material_dark
@@ -3062,6 +3069,7 @@ drawable ic_email
 drawable ic_inventory_24dp
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_foreground
+drawable ic_launcher_foreground_bitmap
 drawable ic_location
 drawable ic_lock
 drawable ic_m3_chip_check
@@ -3219,6 +3227,7 @@ id action_image
 id action_login_to_app_lock
 id action_login_to_main
 id action_login_to_signup
+id action_main_to_pos
 id action_main_to_settings
 id action_menu_divider
 id action_menu_presenter
@@ -3592,6 +3601,15 @@ id pin
 id pooling_container_listener_holder_tag
 id portEditText
 id portInputLayout
+id posButton
+id posFragment
+id pos_cart_recycler
+id pos_checkout_button
+id pos_items_count
+id pos_products_container
+id pos_subtotal
+id pos_tax
+id pos_total
 id position
 id postLayout
 id preparationTimeTextView
@@ -3602,6 +3620,7 @@ id printerSetupFragment
 id printerTypeSpinner
 id printerTypeTextView
 id printersRecyclerView
+id productImageView
 id productNameTextView
 id productPriceTextView
 id productsRecyclerView
@@ -3922,6 +3941,7 @@ layout fragment_login
 layout fragment_main
 layout fragment_menu
 layout fragment_payment_settings
+layout fragment_pos
 layout fragment_printer_setup
 layout fragment_products_grid
 layout fragment_reporting_settings
@@ -3997,6 +4017,7 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 mipmap ic_launcher
+mipmap ic_launcher_round
 navigation nav_graph_auth
 navigation nav_graph_main
 plurals mtrl_badge_content_description
@@ -5000,6 +5021,7 @@ style Widget_Design_Snackbar
 style Widget_Design_TabLayout
 style Widget_Design_TextInputEditText
 style Widget_Design_TextInputLayout
+style Widget_ExtroPOS_MaterialButton
 style Widget_Material3_ActionBar_Solid
 style Widget_Material3_ActionMode
 style Widget_Material3_AppBarLayout

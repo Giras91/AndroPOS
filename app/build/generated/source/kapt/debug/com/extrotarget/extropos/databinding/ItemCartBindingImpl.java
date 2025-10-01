@@ -24,7 +24,7 @@ public class ItemCartBindingImpl extends ItemCartBinding  {
     }
     // views
     @NonNull
-    private final android.widget.LinearLayout mboundView0;
+    private final com.google.android.material.card.MaterialCardView mboundView0;
     // variables
     // values
     // listeners
@@ -35,15 +35,15 @@ public class ItemCartBindingImpl extends ItemCartBinding  {
     }
     private ItemCartBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
-            , (android.widget.Button) bindings[2]
-            , (android.widget.Button) bindings[4]
+            , (com.google.android.material.button.MaterialButton) bindings[2]
+            , (com.google.android.material.button.MaterialButton) bindings[4]
             , (android.widget.TextView) bindings[1]
             , (android.widget.TextView) bindings[3]
-            , (android.widget.Button) bindings[7]
+            , (com.google.android.material.button.MaterialButton) bindings[7]
             , (android.widget.TextView) bindings[6]
             , (android.widget.TextView) bindings[5]
             );
-        this.mboundView0 = (android.widget.LinearLayout) bindings[0];
+        this.mboundView0 = (com.google.android.material.card.MaterialCardView) bindings[0];
         this.mboundView0.setTag(null);
         setRootTag(root);
         // listeners
