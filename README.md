@@ -25,7 +25,7 @@ A modern Android POS (Point of Sale) application built with Kotlin, following Cl
 This app follows **Clean Architecture** with strict separation of concerns:
 
 ```
-com.example.pos/
+    com.extrotarget.extropos/
 ├── di/                    # Hilt dependency injection modules
 ├── data/                  # Data layer
 │   ├── local/            # Room database entities and DAOs

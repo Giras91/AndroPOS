@@ -7,7 +7,7 @@ Editor quick notes: see `EDITOR_NOTES.md` at the repo root for a short, actionab
 
 1. Big picture
    - Multi-module Android POS app. Top-level modules: `app/`, `modules/feature-cart/`, `modules/feature-product/`, `modules/feature-reports/`, `shared-data/`.
-   - App uses a local Room database (see `app/src/main/java/com/example/pos/data/local/entity/Entities.kt`) + remote API sync.
+	- App uses a local Room database (see `app/src/main/java/com/extrotarget/extropos/data/local/entity/Entities.kt`) + remote API sync.
    - DI is used (Hilt) and features follow a Clean-ish separation: data (Room / Retrofit), domain (use-cases), ui (ViewModel + StateFlow).
 
 2. Build / test / run (important commands)
