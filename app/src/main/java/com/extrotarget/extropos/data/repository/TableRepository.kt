@@ -20,60 +20,43 @@ class TableRepository @Inject constructor(
         return tableDao.getById(id)?.toDomain()
     }
 
-    override suspend fun getTablesByStatus(status: TableStatus): List<Table> {
-        return tableDao.getByStatus(status.name).map { it.toDomain() }
-    }
-
     override suspend fun updateTableStatus(tableId: String, status: TableStatus) {
         tableDao.updateStatus(tableId, status.name)
     }
 
-    override suspend fun createTable(table: Table): String {
-        val entity = table.toEntity()
-        tableDao.insert(entity)
-        return table.id
-    }
-
-    override suspend fun updateTable(table: Table) {
-        val entity = table.toEntity()
-        tableDao.update(entity)
-    }
-
-    override suspend fun deleteTable(tableId: String) {
-        tableDao.deleteById(tableId)
+    override suspend fun assignOrderToTable(tableId: String, orderId: String) {
+        // TableDao exposes assignOrder(tableId, orderId)
+        tableDao.assignOrder(tableId, orderId)
     }
 
     override suspend fun getAvailableTables(): List<Table> {
-        return tableDao.getByStatus(TableStatus.AVAILABLE.name).map { it.toDomain() }
+        return tableDao.getAvailable().map { it.toDomain() }
     }
 
     override suspend fun getOccupiedTables(): List<Table> {
-        return tableDao.getByStatus(TableStatus.OCCUPIED.name).map { it.toDomain() }
+        return tableDao.getOccupied().map { it.toDomain() }
     }
 
+    // Map TableEntity -> Table (convert number:String -> Int)
     private fun TableEntity.toDomain(): Table {
+        val num = number.toIntOrNull() ?: 0
         return Table(
             id = id,
-            number = number,
-            name = name,
-            status = TableStatus.valueOf(status),
+            number = num,
             capacity = capacity,
-            location = location,
-            createdAt = createdAt,
-            updatedAt = updatedAt
+            status = try { TableStatus.valueOf(status) } catch (e: Exception) { TableStatus.AVAILABLE },
+            currentOrderId = currentOrderId
         )
     }
 
+    // Map Table -> TableEntity (convert number:Int -> String)
     private fun Table.toEntity(): TableEntity {
         return TableEntity(
             id = id,
-            number = number,
-            name = name,
-            status = status.name,
+            number = number.toString(),
             capacity = capacity,
-            location = location,
-            createdAt = createdAt,
-            updatedAt = updatedAt
+            status = status.name,
+            currentOrderId = currentOrderId
         )
     }
 }

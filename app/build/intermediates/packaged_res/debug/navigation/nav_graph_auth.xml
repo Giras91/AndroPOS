@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_auth"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.extrotarget.extropos.ui.auth.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_signup"
+            app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_login_to_app_lock"
+            app:destination="@id/appLockFragment" />
+        <action
+            android:id="@+id/action_login_to_main"
+            app:destination="@id/nav_graph_main"
+            app:popUpTo="@+id/nav_graph_auth"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.extrotarget.extropos.ui.auth.SignupFragment"
+        android:label="Sign Up"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/action_signup_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@+id/loginFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_signup_to_app_lock"
+            app:destination="@id/appLockFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/appLockFragment"
+        android:name="com.extrotarget.extropos.ui.auth.AppLockFragment"
+        android:label="App Lock"
+        tools:layout="@layout/fragment_app_lock">
+        <action
+            android:id="@+id/action_app_lock_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@+id/nav_graph_auth"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_app_lock_to_main"
+            app:destination="@id/nav_graph_main"
+            app:popUpTo="@+id/nav_graph_auth"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- Include main navigation graph -->
+    <include app:graph="@navigation/nav_graph_main" />
+
+</navigation>

@@ -35,9 +35,11 @@ import android.view.Gravity
  */
 open class PosLayout(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
-    protected var context: Context = context
-    protected var attrs: AttributeSet? = attrs
-    protected var resources: Resources = context.resources
+    // avoid declaring properties named `context` or `resources` which collide with
+    // the platform getters (getContext/getResources) and cause JVM signature clashes
+    protected val ctx: Context = context
+    protected val attributes: AttributeSet? = attrs
+    protected val res: Resources = ctx.resources
 
     init {
         layoutParams = LinearLayout.LayoutParams(
@@ -47,7 +49,7 @@ open class PosLayout(context: Context, attrs: AttributeSet?) : LinearLayout(cont
     }
 
     fun getIntAttr(name: String, defValue: Int): Int {
-        attrs?.let { attributes ->
+        attributes?.let { attributes ->
             for (i in 0 until attributes.attributeCount) {
                 if (attributes.getAttributeName(i) == name) {
                     return attributes.getAttributeIntValue(i, defValue)
@@ -58,7 +60,7 @@ open class PosLayout(context: Context, attrs: AttributeSet?) : LinearLayout(cont
     }
 
     fun getStringAttr(name: String, defValue: String): String {
-        attrs?.let { attributes ->
+        attributes?.let { attributes ->
             for (i in 0 until attributes.attributeCount) {
                 if (attributes.getAttributeName(i) == name) {
                     return attributes.getAttributeValue(i) ?: defValue
@@ -69,7 +71,7 @@ open class PosLayout(context: Context, attrs: AttributeSet?) : LinearLayout(cont
     }
 
     fun getBooleanAttr(name: String, defValue: Boolean): Boolean {
-        attrs?.let { attributes ->
+        attributes?.let { attributes ->
             for (i in 0 until attributes.attributeCount) {
                 if (attributes.getAttributeName(i) == name) {
                     return attributes.getAttributeBooleanValue(i, defValue)
@@ -80,7 +82,7 @@ open class PosLayout(context: Context, attrs: AttributeSet?) : LinearLayout(cont
     }
 
     fun getFloatAttr(name: String, defValue: Float): Float {
-        attrs?.let { attributes ->
+        attributes?.let { attributes ->
             for (i in 0 until attributes.attributeCount) {
                 if (attributes.getAttributeName(i) == name) {
                     return attributes.getAttributeFloatValue(i, defValue)
@@ -91,7 +93,7 @@ open class PosLayout(context: Context, attrs: AttributeSet?) : LinearLayout(cont
     }
 
     fun getDimensionAttr(name: String, defValue: Float): Float {
-        attrs?.let { attributes ->
+        attributes?.let { attributes ->
             for (i in 0 until attributes.attributeCount) {
                 if (attributes.getAttributeName(i) == name) {
                     return attributes.getAttributeFloatValue(i, defValue)
@@ -127,8 +129,8 @@ open class PosLayout(context: Context, attrs: AttributeSet?) : LinearLayout(cont
      * Get color from theme or resources
      */
     fun getThemeColor(attr: Int): Int {
-        val typedArray = context.theme.obtainStyledAttributes(intArrayOf(attr))
-        val color = typedArray.getColor(0, Color.BLACK)
+    val typedArray = ctx.theme.obtainStyledAttributes(intArrayOf(attr))
+    val color = typedArray.getColor(0, Color.BLACK)
         typedArray.recycle()
         return color
     }
@@ -137,8 +139,8 @@ open class PosLayout(context: Context, attrs: AttributeSet?) : LinearLayout(cont
      * Get dimension from theme or resources
      */
     fun getThemeDimension(attr: Int): Float {
-        val typedArray = context.theme.obtainStyledAttributes(intArrayOf(attr))
-        val dimension = typedArray.getDimension(0, 0f)
+    val typedArray = ctx.theme.obtainStyledAttributes(intArrayOf(attr))
+    val dimension = typedArray.getDimension(0, 0f)
         typedArray.recycle()
         return dimension
     }

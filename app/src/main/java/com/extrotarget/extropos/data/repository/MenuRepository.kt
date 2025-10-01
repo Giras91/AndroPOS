@@ -46,9 +46,8 @@ class MenuRepository @Inject constructor(
         return Category(
             id = id,
             name = name,
-            description = description,
-            displayOrder = displayOrder,
-            isActive = isActive
+            description = description ?: "",
+            imageUrl = ""
         )
     }
 
@@ -63,14 +62,14 @@ class MenuRepository @Inject constructor(
 
         return MenuItem(
             id = id,
-            name = name,
-            description = description,
-            price = priceCents,
             categoryId = categoryId,
-            imageUrl = imageUrl,
-            isAvailable = isAvailable,
-            preparationTime = preparationTimeMinutes,
-            allergens = allergensList
+            name = name,
+            description = description ?: "",
+            priceCents = priceCents,
+            imageUrl = imageUrl ?: "",
+            preparationTimeMinutes = preparationTimeMinutes ?: 0,
+            allergens = allergensList,
+            isAvailable = isAvailable
         )
     }
 }

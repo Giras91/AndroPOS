@@ -14,6 +14,7 @@ interface TicketDao {
     suspend fun deleteTicket(id: Int)
     suspend fun getAllTenders(): List<TenderEntity>
     suspend fun getAllDepartments(): List<DepartmentEntity>
+    suspend fun getAllTaxGroups(): List<TaxGroupEntity>
     suspend fun getCurrentTicket(): TicketEntity?
     suspend fun getCurrentTicketId(): Int?
     suspend fun updateTicketState(ticketId: Int, state: String, updatedAt: Long = System.currentTimeMillis())

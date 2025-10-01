@@ -1,10 +1,11 @@
 package com.extrotarget.extropos.domain.usecase
 
 import com.extrotarget.extropos.domain.model.Table
-import com.extrotarget.extropos.domain.model.TableStatus
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import com.extrotarget.extropos.domain.repository.ITableRepository
+import javax.inject.Inject
 
-class GetOccupiedTablesUseCase {
-    operator fun invoke(): Flow<List<Table>> = flowOf(emptyList()) // TODO: Implement with repository
+class GetOccupiedTablesUseCase @Inject constructor(
+    private val tableRepository: ITableRepository
+) {
+    suspend operator fun invoke(): List<Table> = tableRepository.getOccupiedTables()
 }

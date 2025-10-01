@@ -54,7 +54,8 @@ class SampleDataInserter @Inject constructor(
             )
         )
 
-        categories.forEach { categoryDao.insert(it) }
+    // DAOs expose upsert(...) in this project
+    categoryDao.upsert(*categories.toTypedArray())
 
         // Insert sample menu items
         val menuItems = listOf(
@@ -166,62 +167,47 @@ class SampleDataInserter @Inject constructor(
             )
         )
 
-        menuItems.forEach { menuItemDao.insert(it) }
+    menuItemDao.upsert(*menuItems.toTypedArray())
 
         // Insert sample tables
         val tables = listOf(
             TableEntity(
                 id = "table-001",
-                number = 1,
-                name = "Table 1",
-                status = "AVAILABLE",
+                number = "1",
                 capacity = 4,
-                location = "Window Side",
-                createdAt = Date(),
-                updatedAt = Date()
+                status = "AVAILABLE",
+                currentOrderId = null
             ),
             TableEntity(
                 id = "table-002",
-                number = 2,
-                name = "Table 2",
-                status = "AVAILABLE",
+                number = "2",
                 capacity = 6,
-                location = "Center",
-                createdAt = Date(),
-                updatedAt = Date()
+                status = "AVAILABLE",
+                currentOrderId = null
             ),
             TableEntity(
                 id = "table-003",
-                number = 3,
-                name = "Table 3",
-                status = "AVAILABLE",
+                number = "3",
                 capacity = 2,
-                location = "Corner",
-                createdAt = Date(),
-                updatedAt = Date()
+                status = "AVAILABLE",
+                currentOrderId = null
             ),
             TableEntity(
                 id = "table-004",
-                number = 4,
-                name = "Table 4",
-                status = "AVAILABLE",
+                number = "4",
                 capacity = 8,
-                location = "Patio",
-                createdAt = Date(),
-                updatedAt = Date()
+                status = "AVAILABLE",
+                currentOrderId = null
             ),
             TableEntity(
                 id = "table-005",
-                number = 5,
-                name = "Bar Counter",
-                status = "AVAILABLE",
+                number = "5",
                 capacity = 1,
-                location = "Bar",
-                createdAt = Date(),
-                updatedAt = Date()
+                status = "AVAILABLE",
+                currentOrderId = null
             )
         )
 
-        tables.forEach { tableDao.insert(it) }
+    tableDao.upsert(*tables.toTypedArray())
     }
 }

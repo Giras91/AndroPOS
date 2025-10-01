@@ -42,33 +42,19 @@ class SignupFragment : Fragment() {
             val name = binding.nameEditText.text.toString().trim()
             val email = binding.emailEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString()
-            val confirmPassword = binding.confirmPasswordEditText.text.toString()
             val companyName = binding.companyNameEditText.text.toString().trim()
-            val companyRegistration = binding.companyRegistrationEditText.text.toString().trim()
+            val companyRegistration = binding.companyRegEditText.text.toString().trim()
             val address = binding.addressEditText.text.toString().trim()
-            val city = binding.cityEditText.text.toString().trim()
-            val state = binding.stateEditText.text.toString().trim()
-            val postcode = binding.postcodeEditText.text.toString().trim()
             val phone = binding.phoneEditText.text.toString().trim()
 
-            // Validate passwords match
-            if (password != confirmPassword) {
-                binding.errorTextView.text = "Passwords do not match"
-                binding.errorTextView.visibility = View.VISIBLE
-                return@setOnClickListener
-            }
-
             viewModel.signup(
-                name = name,
                 email = email,
                 password = password,
+                name = name,
                 companyName = companyName,
-                companyRegistration = companyRegistration,
+                companyRegistrationNumber = companyRegistration,
                 address = address,
-                city = city,
-                state = state,
-                postcode = postcode,
-                phone = phone
+                phoneNumber = phone
             )
         }
 

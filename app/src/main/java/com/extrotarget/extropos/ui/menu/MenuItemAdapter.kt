@@ -39,13 +39,13 @@ class MenuItemAdapter(
         fun bind(menuItem: MenuItem) {
             binding.itemNameTextView.text = menuItem.name
             binding.itemDescriptionTextView.text = menuItem.description
-            binding.itemPriceTextView.text = formatPrice(menuItem.price)
+            binding.itemPriceTextView.text = formatPrice(menuItem.priceCents)
 
             // Show preparation time if available
-            menuItem.preparationTime?.let { time ->
-                binding.preparationTimeTextView.text = "${time} min"
+            if (menuItem.preparationTimeMinutes > 0) {
+                binding.preparationTimeTextView.text = "${menuItem.preparationTimeMinutes} min"
                 binding.preparationTimeTextView.visibility = android.view.View.VISIBLE
-            } ?: run {
+            } else {
                 binding.preparationTimeTextView.visibility = android.view.View.GONE
             }
 

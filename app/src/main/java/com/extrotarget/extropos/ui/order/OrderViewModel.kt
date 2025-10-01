@@ -17,7 +17,7 @@ import javax.inject.Inject
 class OrderViewModel @Inject constructor(
     private val createOrder: CreateOrderUseCase,
     private val getOrder: GetOrderUseCase,
-    private val updateOrder: UpdateOrderUseCase,
+    private val updateOrderStatus: UpdateOrderStatusUseCase,
     private val addItemToOrder: AddItemToOrderUseCase,
     private val updateOrderItem: UpdateOrderItemUseCase,
     private val removeOrderItem: RemoveOrderItemUseCase,
@@ -40,7 +40,7 @@ class OrderViewModel @Inject constructor(
         loadActiveOrders()
     }
 
-    fun createNewOrder(tableId: String, orderType: OrderType = OrderType.DINE_IN): String {
+    fun createNewOrder(tableId: String, orderType: OrderType = OrderType.DINE_IN) {
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
@@ -48,15 +48,12 @@ class OrderViewModel @Inject constructor(
                 val orderId = createOrder(tableId, orderType)
                 loadOrder(orderId)
                 loadActiveOrders()
-                return@launch orderId
             } catch (e: Exception) {
                 _error.value = "Failed to create order: ${e.message}"
-                return@launch ""
             } finally {
                 _isLoading.value = false
             }
         }
-        return ""
     }
 
     fun loadOrder(orderId: String) {
@@ -81,18 +78,20 @@ class OrderViewModel @Inject constructor(
             _isLoading.value = true
             _error.value = null
             try {
-                val orderItem = OrderItem(
-                    id = "",
-                    menuItemId = menuItemId,
-                    menuItemName = menuItemName,
-                    quantity = quantity,
-                    unitPrice = unitPrice,
-                    totalPrice = unitPrice * quantity,
-                    notes = notes,
-                    status = com.extrotarget.extropos.domain.model.OrderItemStatus.PENDING
+                // The AddItemToOrderUseCase expects a MenuItem; construct a lightweight MenuItem to reuse it
+                val menuItem = com.extrotarget.extropos.domain.model.MenuItem(
+                    id = menuItemId,
+                    categoryId = "",
+                    name = menuItemName,
+                    description = "",
+                    priceCents = unitPrice,
+                    imageUrl = "",
+                    preparationTimeMinutes = 0,
+                    allergens = emptyList(),
+                    isAvailable = true
                 )
 
-                addItemToOrder(order.id, orderItem)
+                addItemToOrder(order.id, menuItem, quantity, notes)
                 loadOrder(order.id) // Refresh order with updated items
             } catch (e: Exception) {
                 _error.value = "Failed to add item: ${e.message}"
@@ -137,7 +136,7 @@ class OrderViewModel @Inject constructor(
             _isLoading.value = true
             _error.value = null
             try {
-                updateOrder(orderId, status)
+                updateOrderStatus(orderId, status)
                 loadOrder(orderId)
                 loadActiveOrders()
             } catch (e: Exception) {
@@ -164,14 +163,19 @@ class OrderViewModel @Inject constructor(
     }
 
     fun getOrderTotal(): Long {
-        return _currentOrder.value?.total ?: 0L
+        val items = _currentOrder.value?.items ?: return 0L
+        val subtotal = items.sumOf { it.totalPriceCents }
+        val tax = (subtotal * 0.1).toLong()
+        return subtotal + tax
     }
 
     fun getOrderSubtotal(): Long {
-        return _currentOrder.value?.subtotal ?: 0L
+        val items = _currentOrder.value?.items ?: return 0L
+        return items.sumOf { it.totalPriceCents }
     }
 
     fun getOrderTax(): Long {
-        return _currentOrder.value?.tax ?: 0L
+        val subtotal = getOrderSubtotal()
+        return (subtotal * 0.1).toLong()
     }
 }

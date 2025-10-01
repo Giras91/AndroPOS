@@ -26,6 +26,7 @@ android {
 
     buildFeatures {
         dataBinding = true
+        viewBinding = true
     }
 
     compileOptions {
@@ -79,4 +80,49 @@ dependencies {
     implementation "androidx.room:room-runtime:2.6.1"
     implementation "androidx.room:room-ktx:2.6.1"
     kapt "androidx.room:room-compiler:2.6.1"
+}
+
+// Defensive JaCoCo report task (uses Provider API to avoid eager reads of transform outputs)
+apply plugin: 'jacoco'
+jacoco {
+    toolVersion = "0.8.10"
+}
+
+// Register a jacocoTestReport that uses Providers to access transform outputs lazily.
+// This prevents errors like: "Querying the mapped value of task ':app:transformDebugUnitTestClassesWithAsm' property 'jarsOutputDir' before task has completed is not supported"
+tasks.register("jacocoTestReport", JacocoReport) { reportTask ->
+    // wire to unit test task if present
+    def unitTestTask = tasks.findByName("testDebugUnitTest") ?: tasks.findByName("test")
+    if (unitTestTask != null) {
+        reportTask.dependsOn unitTestTask
+    }
+
+    reports {
+        xml.required = true
+        html.required = true
+    }
+
+    // Try to reference the AGP transform task lazily. If it's not present, fall back to compiled classes directory.
+    try {
+        def asmTaskProvider = tasks.named("transformDebugUnitTestClassesWithAsm")
+        // Use flatMap to obtain the jarsOutputDir provider without forcing its value now
+        def jarsProvider = asmTaskProvider.flatMap { t ->
+            // t may expose a property 'jarsOutputDir' (Provider<File>) on newer AGP versions
+            // use Groovy safe-navigation to avoid hard failure if property missing
+            try {
+                return t.jarsOutputDir
+            } catch (MissingPropertyException mpe) {
+                // If the property isn't available, return provider of empty file collection
+                return project.providers.provider { project.files() }
+            }
+        }
+        classDirectories.setFrom(files(jarsProvider))
+    } catch (org.gradle.api.UnknownTaskException ute) {
+        // transform task not registered at this point; use a safe fallback
+        classDirectories.setFrom(fileTree(dir: "$buildDir/intermediates/javac/debug/classes", includes: ['**/*.class']))
+    }
+
+    // Source dirs and potential execution data locations
+    sourceDirectories.setFrom(files("${projectDir}/src/main/java", "${projectDir}/src/main/kotlin"))
+    executionData.setFrom(fileTree(dir: "$buildDir", includes: ["**/jacoco/*.exec", "**/outputs/code-coverage/connected/*coverage.ec"]))
 }

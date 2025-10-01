@@ -90,8 +90,8 @@ class AddPrinterDialogFragment : DialogFragment() {
 
     private fun addPrinter() {
         val name = binding.nameEditText.text.toString().trim()
-        val printerTypeIndex = binding.printerTypeSpinner.selectedItemPosition
-        val connectionTypeIndex = binding.connectionTypeSpinner.selectedItemPosition
+    val printerTypeString = binding.printerTypeSpinner.text?.toString() ?: ""
+    val connectionTypeString = binding.connectionTypeSpinner.text?.toString() ?: ""
         val address = binding.addressEditText.text.toString().trim()
         val portText = binding.portEditText.text.toString().trim()
 
@@ -100,16 +100,16 @@ class AddPrinterDialogFragment : DialogFragment() {
             return
         }
 
-        val printerType = when (printerTypeIndex) {
-            0 -> PrinterType.RECEIPT
-            1 -> PrinterType.KITCHEN
+        val printerType = when (printerTypeString) {
+            "Receipt Printer" -> PrinterType.RECEIPT
+            "Kitchen Printer" -> PrinterType.KITCHEN
             else -> PrinterType.RECEIPT
         }
 
-        val connectionType = when (connectionTypeIndex) {
-            0 -> ConnectionType.USB
-            1 -> ConnectionType.BLUETOOTH
-            2 -> ConnectionType.NETWORK
+        val connectionType = when (connectionTypeString) {
+            "USB" -> ConnectionType.USB
+            "Bluetooth" -> ConnectionType.BLUETOOTH
+            "Network" -> ConnectionType.NETWORK
             else -> ConnectionType.USB
         }
 

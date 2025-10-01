@@ -10,6 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extrotarget.extropos.databinding.FragmentEmployeeManagementBinding
 import com.extrotarget.extropos.ui.settings.employee.adapters.EmployeeAdapter
+import com.extrotarget.extropos.ui.settings.employee.dialogs.AddEmployeeDialogFragment
+import com.extrotarget.extropos.ui.settings.employee.dialogs.EmployeeDetailsDialogFragment
+import com.extrotarget.extropos.ui.settings.employee.dialogs.EditEmployeeDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

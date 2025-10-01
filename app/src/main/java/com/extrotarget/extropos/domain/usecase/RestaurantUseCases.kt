@@ -14,11 +14,8 @@ class GetMenuUseCase(private val menuRepository: IMenuRepository) {
     }
 }
 
-class GetMenuItemsUseCase(private val menuRepository: IMenuRepository) {
-    suspend operator fun invoke(): List<MenuItem> {
-        return menuRepository.getAllMenuItems()
-    }
-}
+// GetMenuItemsUseCase is defined separately in GetMenuItemsUseCase.kt and
+// intentionally not duplicated here to avoid redeclaration errors.
 
 class SearchMenuItemsUseCase(private val menuRepository: IMenuRepository) {
     suspend operator fun invoke(query: String): List<MenuItem> {
@@ -31,12 +28,10 @@ class CreateOrderUseCase(private val orderRepository: IOrderRepository) {
         tableId: String? = null,
         orderType: OrderType = OrderType.DINE_IN
     ): String {
-        val orderNumber = generateOrderNumber()
+        // Domain Order is simplified (id, items, status, timestamps).
         val order = Order(
-            id = "", // Will be set by repository
-            tableId = tableId,
-            orderNumber = orderNumber,
-            orderType = orderType
+            id = "",
+            items = emptyList()
         )
         return orderRepository.createOrder(order)
     }
@@ -50,13 +45,12 @@ class CreateOrderUseCase(private val orderRepository: IOrderRepository) {
 class AddItemToOrderUseCase(private val orderRepository: IOrderRepository) {
     suspend operator fun invoke(orderId: String, menuItem: MenuItem, quantity: Int = 1, notes: String? = null) {
         val orderItem = OrderItem(
-            id = "", // Will be set by repository
+            id = "",
             menuItemId = menuItem.id,
-            menuItemName = menuItem.name,
+            name = menuItem.name,
             quantity = quantity,
-            unitPrice = menuItem.price,
-            totalPrice = menuItem.price * quantity,
-            notes = notes
+            unitPriceCents = menuItem.priceCents,
+            notes = notes ?: ""
         )
         orderRepository.addItemToOrder(orderId, orderItem)
     }

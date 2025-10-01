@@ -1,9 +1,11 @@
 package com.extrotarget.extropos.domain.usecase
 
 import com.extrotarget.extropos.domain.model.Category
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import com.extrotarget.extropos.domain.repository.IMenuRepository
+import javax.inject.Inject
 
-class GetCategoriesUseCase {
-    operator fun invoke(): Flow<List<Category>> = flowOf(emptyList()) // TODO: Implement with repository
+class GetCategoriesUseCase @Inject constructor(
+    private val menuRepository: IMenuRepository
+) {
+    suspend operator fun invoke(): List<Category> = menuRepository.getAllCategories()
 }

@@ -16,8 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MenuViewModel @Inject constructor(
     private val getCategories: GetCategoriesUseCase,
-    private val getMenuItems: GetMenuItemsUseCase,
-    private val searchMenuItems: SearchMenuItemsUseCase
+    private val getMenuItemsUseCase: GetMenuItemsUseCase,
+    private val searchMenuItemsUseCase: SearchMenuItemsUseCase
 ) : ViewModel() {
 
     private val _categories = MutableStateFlow<List<Category>>(emptyList())
@@ -63,7 +63,7 @@ class MenuViewModel @Inject constructor(
             _isLoading.value = true
             _error.value = null
             try {
-                val items = getMenuItems()
+                val items: List<MenuItem> = getMenuItemsUseCase.invoke()
                 _menuItems.value = items
             } catch (e: Exception) {
                 _error.value = "Failed to load menu items: ${e.message}"
@@ -78,7 +78,7 @@ class MenuViewModel @Inject constructor(
             _isLoading.value = true
             _error.value = null
             try {
-                val items = getMenuItems(categoryId)
+                val items: List<MenuItem> = getMenuItemsUseCase.invoke(categoryId)
                 _menuItems.value = items
             } catch (e: Exception) {
                 _error.value = "Failed to load menu items: ${e.message}"
@@ -98,7 +98,7 @@ class MenuViewModel @Inject constructor(
             _isLoading.value = true
             _error.value = null
             try {
-                val items = searchMenuItems(query)
+                val items = searchMenuItemsUseCase.invoke(query)
                 _menuItems.value = items
             } catch (e: Exception) {
                 _error.value = "Failed to search menu items: ${e.message}"

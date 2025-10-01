@@ -39,23 +39,9 @@ class ProductsAdapter(
         fun bind(product: Product) {
             binding.apply {
                 productNameTextView.text = product.name
-                productDescriptionTextView.text = product.description
                 productPriceTextView.text = "RM ${String.format("%.2f", product.priceCents / 100.0)}"
-                
-                // Handle availability
-                if (product.isAvailable) {
-                    availabilityTextView.text = "Available"
-                    availabilityTextView.setTextColor(
-                        binding.root.context.getColor(android.R.color.holo_green_dark)
-                    )
-                    root.alpha = 1.0f
-                } else {
-                    availabilityTextView.text = "Out of Stock"
-                    availabilityTextView.setTextColor(
-                        binding.root.context.getColor(android.R.color.holo_red_dark)
-                    )
-                    root.alpha = 0.6f
-                }
+                stockTextView.text = "Stock: ${product.stockQuantity}"
+                root.alpha = if (product.isAvailable) 1.0f else 0.6f
             }
         }
     }

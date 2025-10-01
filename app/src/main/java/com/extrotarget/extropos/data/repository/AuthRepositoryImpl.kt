@@ -103,7 +103,7 @@ class AuthRepository @Inject constructor(
 
             // Send verification email
             try {
-                account.createVerification(url = "appwrite-callback-${appwriteService.client.config.project}")
+                account.createVerification(url = "appwrite-callback-${com.extrotarget.extropos.constants.AppwriteConfig.APPWRITE_PROJECT_ID}")
                 Log.d(TAG, "Verification email sent")
             } catch (e: Exception) {
                 Log.w(TAG, "Failed to send verification email", e)
@@ -168,7 +168,7 @@ class AuthRepository @Inject constructor(
         try {
             Log.d(TAG, "Resending verification email")
             val account = Account(appwriteService.client)
-            account.createVerification(url = "appwrite-callback-${appwriteService.client.config.project}")
+            account.createVerification(url = "appwrite-callback-${com.extrotarget.extropos.constants.AppwriteConfig.APPWRITE_PROJECT_ID}")
             Log.d(TAG, "Verification email resent")
             true
         } catch (e: Exception) {

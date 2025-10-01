@@ -20,7 +20,7 @@ class LoginViewModel(
 
             try {
                 val result = authenticateUser(username, password)
-                if (result.isSuccess) {
+                if (result) {
                     _loginState.value = LoginState.Success
                 } else {
                     _loginState.value = LoginState.Error("Invalid username or password")

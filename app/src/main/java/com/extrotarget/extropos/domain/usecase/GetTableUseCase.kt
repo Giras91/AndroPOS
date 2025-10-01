@@ -1,9 +1,11 @@
 package com.extrotarget.extropos.domain.usecase
 
 import com.extrotarget.extropos.domain.model.Table
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import com.extrotarget.extropos.domain.repository.ITableRepository
+import javax.inject.Inject
 
-class GetTableUseCase {
-    operator fun invoke(tableId: String): Flow<Table?> = flowOf(null) // TODO: Implement with repository
+class GetTableUseCase @Inject constructor(
+    private val tableRepository: ITableRepository
+) {
+    suspend operator fun invoke(tableId: String): Table? = tableRepository.getTableById(tableId)
 }

@@ -13,19 +13,22 @@ import com.extrotarget.extropos.domain.usecase.ticket.GetCurrentTicketUseCase
 import com.extrotarget.extropos.domain.usecase.ticket.RemoveItemFromTicketUseCase
 import com.extrotarget.extropos.domain.usecase.ticket.SuspendTicketUseCase
 import com.extrotarget.extropos.domain.usecase.ticket.UpdateItemQuantityUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TicketViewModel(
-    private val getCurrentTicket: GetCurrentTicketUseCase = GetCurrentTicketUseCase(),
-    private val createTicket: CreateTicketUseCase = CreateTicketUseCase(),
-    private val addItemToTicket: AddItemToTicketUseCase = AddItemToTicketUseCase(),
-    private val updateItemQuantity: UpdateItemQuantityUseCase = UpdateItemQuantityUseCase(),
-    private val removeItemFromTicket: RemoveItemFromTicketUseCase = RemoveItemFromTicketUseCase(),
-    private val clearTicket: ClearTicketUseCase = ClearTicketUseCase(),
-    private val suspendTicket: SuspendTicketUseCase = SuspendTicketUseCase(),
-    private val completeTicket: CompleteTicketUseCase = CompleteTicketUseCase()
+@HiltViewModel
+class TicketViewModel @Inject constructor(
+    private val getCurrentTicket: GetCurrentTicketUseCase,
+    private val createTicket: CreateTicketUseCase,
+    private val addItemToTicket: AddItemToTicketUseCase,
+    private val updateItemQuantity: UpdateItemQuantityUseCase,
+    private val removeItemFromTicket: RemoveItemFromTicketUseCase,
+    private val clearTicket: ClearTicketUseCase,
+    private val suspendTicket: SuspendTicketUseCase,
+    private val completeTicket: CompleteTicketUseCase
 ) : ViewModel() {
 
     private val _currentTicket = MutableStateFlow<Ticket?>(null)
@@ -50,12 +53,11 @@ class TicketViewModel(
     fun addItem(cartItem: CartItem) {
         viewModelScope.launch {
             val ticketItem = TicketItem(
-                id = 0, // Will be assigned by repository
+                id = "", // repository will assign an id
                 productId = cartItem.productId,
-                productName = cartItem.name,
-                quantity = cartItem.qty,
-                unitPriceCents = cartItem.unitPriceCents,
-                totalCents = cartItem.qty * cartItem.unitPriceCents
+                name = cartItem.name,
+                quantity = cartItem.quantity,
+                unitPriceCents = cartItem.unitPriceCents
             )
             addItemToTicket(ticketItem)
         }

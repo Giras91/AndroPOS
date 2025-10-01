@@ -90,6 +90,8 @@ class InMemoryTicketDao : TicketDao {
 
     override suspend fun getAllDepartments(): List<DepartmentEntity> = departments.toList()
 
+    override suspend fun getAllTaxGroups(): List<TaxGroupEntity> = emptyList()
+
     override suspend fun getCurrentTicket(): TicketEntity? = tickets.filter { it.state in listOf(1, 2) }.maxByOrNull { it.id }
 
     override suspend fun getCurrentTicketId(): Int? = getCurrentTicket()?.id

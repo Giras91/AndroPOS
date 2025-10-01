@@ -51,21 +51,6 @@ class AppLockFragment : Fragment() {
             viewModel.logout()
             findNavController().navigate(R.id.action_app_lock_to_login)
         }
-
-        binding.callButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_DIAL).apply {
-                data = Uri.parse("tel:+60312345678")
-            }
-            startActivity(intent)
-        }
-
-        binding.emailButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:support@extrotarget.com.my")
-                putExtra(Intent.EXTRA_SUBJECT, "ExtroPOS Account Verification")
-            }
-            startActivity(intent)
-        }
     }
 
     private fun observeViewModel() {
@@ -77,8 +62,8 @@ class AppLockFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.error.collect { error ->
-                binding.errorTextView.text = error
-                binding.errorTextView.visibility = if (error != null) View.VISIBLE else View.GONE
+                binding.statusTextView.text = error ?: ""
+                binding.statusTextView.visibility = if (error != null) View.VISIBLE else View.GONE
             }
         }
 
@@ -100,24 +85,14 @@ class AppLockFragment : Fragment() {
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.resendResult.collect { result ->
-                result?.let {
-                    if (it.success) {
-                        binding.errorTextView.text = "Verification email sent successfully"
-                        binding.errorTextView.setTextColor(resources.getColor(R.color.success_color, null))
-                        binding.errorTextView.visibility = View.VISIBLE
-                    }
-                }
-            }
-        }
+        // AuthViewModel exposes resendVerificationEmail() and sets error/messages via error/state flows.
     }
 
     private fun startVerificationCheck() {
         // Check verification status every 5 seconds
         viewLifecycleOwner.lifecycleScope.launch {
             while (true) {
-                viewModel.checkVerificationStatus()
+                viewModel.checkAppActivation()
                 delay(5000) // 5 seconds
             }
         }

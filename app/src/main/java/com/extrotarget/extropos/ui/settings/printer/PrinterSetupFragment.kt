@@ -10,6 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extrotarget.extropos.databinding.FragmentPrinterSetupBinding
 import com.extrotarget.extropos.ui.settings.printer.adapters.PrinterAdapter
+import com.extrotarget.extropos.ui.settings.printer.dialogs.AddPrinterDialogFragment
+import com.extrotarget.extropos.ui.settings.printer.dialogs.PrinterDetailsDialogFragment
+import com.extrotarget.extropos.ui.settings.printer.dialogs.ScanResultsDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

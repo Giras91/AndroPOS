@@ -1,9 +1,11 @@
 package com.extrotarget.extropos.domain.usecase
 
 import com.extrotarget.extropos.domain.model.Order
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import com.extrotarget.extropos.domain.repository.IOrderRepository
+import javax.inject.Inject
 
-class GetOrderUseCase {
-    operator fun invoke(orderId: String): Flow<Order?> = flowOf(null) // TODO: Implement with repository
+class GetOrderUseCase @Inject constructor(
+    private val orderRepository: IOrderRepository
+) {
+    suspend operator fun invoke(orderId: String): Order? = orderRepository.getOrderById(orderId)
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.extrotarget.extropos.databinding.FragmentProductsGridBinding
@@ -16,21 +17,20 @@ import com.extrotarget.extropos.domain.model.Product
 import com.extrotarget.extropos.ui.cart.CartViewModel
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ProductsGridFragment : Fragment() {
 
     private var _binding: FragmentProductsGridBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var productViewModel: ProductViewModel
-    private lateinit var cartViewModel: CartViewModel
+    private val productViewModel: ProductViewModel by viewModels()
+    private val cartViewModel: CartViewModel by viewModels()
 
     private lateinit var productsAdapter: ProductsAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        // TODO: Inject ViewModels with Dagger 2
-        productViewModel = ProductViewModel()
-        cartViewModel = CartViewModel()
+        // ViewModels are injected via Hilt
     }
 
     override fun onCreateView(
@@ -87,14 +87,7 @@ class ProductsGridFragment : Fragment() {
             return
         }
 
-        val cartItem = CartItem(
-            productId = product.id,
-            name = product.name,
-            qty = 1,
-            unitPriceCents = product.priceCents
-        )
-
-        cartViewModel.addItem(cartItem)
+        cartViewModel.addItem(product.id, product.name, product.priceCents, 1)
         // TODO: Show added to cart feedback
     }
 

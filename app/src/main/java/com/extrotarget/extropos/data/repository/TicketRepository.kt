@@ -4,8 +4,9 @@ import com.extrotarget.extropos.data.local.dao.TicketDao
 import com.extrotarget.extropos.data.local.entity.*
 import com.extrotarget.extropos.domain.model.Ticket
 import com.extrotarget.extropos.domain.model.TicketItem
-import com.extrotarget.extropos.domain.model.TicketState
+import com.extrotarget.extropos.domain.model.TicketStatus
 import com.extrotarget.extropos.domain.model.TicketTender
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -35,9 +36,9 @@ class TicketRepository @Inject constructor(
     override suspend fun createTicket(): Ticket {
         val entity = TicketEntity(
             id = 0,
-            ticketType = "SALE",
-            state = TicketState.SALE.name,
-            total = 0.0,
+            ticketType = 1, // SALE/default
+            state = 1, // OPEN/default
+            total = 0L,
             createdAt = System.currentTimeMillis(),
             updatedAt = System.currentTimeMillis(),
             sessionId = 1 // TODO: Get from session manager
@@ -47,8 +48,9 @@ class TicketRepository @Inject constructor(
     }
 
     override fun getCurrentTicket(): Flow<Ticket?> {
-        return ticketDao.getCurrentTicket().map { entity ->
-            entity?.let { mapToDomain(it) }
+        return flow {
+            val entity = ticketDao.getCurrentTicket()
+            emit(entity?.let { mapToDomain(it) })
         }
     }
 
@@ -60,25 +62,26 @@ class TicketRepository @Inject constructor(
     override suspend fun addItemToTicket(item: TicketItem) {
         val ticketId = getCurrentTicketId()
         val entity = TicketItemEntity(
+            id = 0,
             ticketId = ticketId,
-            itemId = item.productId.toString(),
+            itemId = item.productId.toIntOrNull() ?: 0,
             sku = "", // TODO: Add SKU to TicketItem
             quantity = item.quantity,
-            amount = item.totalCents / 100.0,
-            cost = 0.0, // TODO: Add cost
-            itemDesc = item.productName,
-            state = "ACTIVE"
+            amount = item.unitPriceCents,
+            cost = 0L, // TODO: Add cost
+            itemDesc = item.name,
+            state = 1
         )
         ticketDao.insertTicketItem(entity)
     }
 
     override suspend fun updateItemQuantity(item: TicketItem, newQuantity: Int) {
         val newAmount = newQuantity * (item.unitPriceCents / 100.0)
-        ticketDao.updateTicketItemQuantity(item.id, newQuantity, newAmount)
+        ticketDao.updateTicketItemQuantity(item.id.toIntOrNull() ?: 0, newQuantity, newAmount)
     }
 
     override suspend fun removeItemFromTicket(item: TicketItem) {
-        ticketDao.deleteTicketItem(item.id)
+        ticketDao.deleteTicketItem(item.id.toIntOrNull() ?: 0)
     }
 
     override suspend fun clearCurrentTicket() {
@@ -88,16 +91,16 @@ class TicketRepository @Inject constructor(
 
     override suspend fun suspendTicket() {
         val currentId = getCurrentTicketId()
-        ticketDao.updateTicketState(currentId, TicketState.SUSPENDED.name)
+        ticketDao.updateTicketState(currentId, statusToInt(TicketStatus.SUSPENDED).toString())
     }
 
     override suspend fun completeTicket() {
         val currentId = getCurrentTicketId()
-        ticketDao.updateTicketState(currentId, TicketState.COMPLETED.name)
+        ticketDao.updateTicketState(currentId, statusToInt(TicketStatus.COMPLETED).toString())
     }
 
     override suspend fun getSuspendedTickets(): List<Ticket> {
-        val entities = ticketDao.getTicketsByState(TicketState.SUSPENDED.name)
+        val entities = ticketDao.getTicketsByState(statusToInt(TicketStatus.SUSPENDED).toString())
         return entities.mapNotNull { getTicketById(it.id) }
     }
 
@@ -108,38 +111,56 @@ class TicketRepository @Inject constructor(
     override suspend fun getAllTaxGroups(): List<TaxGroupEntity> = ticketDao.getAllTaxGroups()
 
     private suspend fun getCurrentTicketId(): Int {
-        return ticketDao.getCurrentTicketId() ?: createTicket().id
+        val current = ticketDao.getCurrentTicketId()
+        if (current != null) return current
+        val newTicket = createTicket()
+        return newTicket.id.toIntOrNull()
+            ?: throw IllegalStateException("Created ticket id is not numeric: ${'$'}{newTicket.id}")
     }
 
     private suspend fun mapToDomain(entity: TicketEntity): Ticket {
         val items = ticketDao.getTicketItems(entity.id).map { itemEntity ->
             TicketItem(
-                id = itemEntity.id,
-                productId = itemEntity.itemId,
-                productName = itemEntity.itemDesc,
+                id = itemEntity.id.toString(),
+                productId = itemEntity.itemId.toString(),
+                name = itemEntity.itemDesc,
                 quantity = itemEntity.quantity,
-                unitPriceCents = (itemEntity.amount / itemEntity.quantity * 100).toInt(),
-                totalCents = (itemEntity.amount * 100).toInt()
+                unitPriceCents = itemEntity.amount,
+                notes = ""
             )
         }
 
         val tenders = ticketDao.getTicketTenders(entity.id).map { tenderEntity ->
             TicketTender(
-                id = tenderEntity.id,
-                ticketId = tenderEntity.ticketId,
+                id = tenderEntity.id.toString(),
+                ticketId = tenderEntity.ticketId.toString(),
                 tenderType = tenderEntity.tenderType,
-                amountCents = (tenderEntity.amount * 100).toInt(),
-                reference = "" // TODO: Add reference field
+                amountCents = tenderEntity.amount,
+                reference = ""
             )
         }
 
         return Ticket(
-            id = entity.id,
-            state = TicketState.valueOf(entity.state),
+            id = entity.id.toString(),
+            status = intToStatus(entity.state),
             items = items,
-            tenders = tenders,
             createdAt = entity.createdAt,
             updatedAt = entity.updatedAt
         )
+    }
+
+    private fun intToStatus(state: Int): TicketStatus = when (state) {
+        1 -> TicketStatus.OPEN
+        2 -> TicketStatus.SUSPENDED
+        3 -> TicketStatus.COMPLETED
+        4 -> TicketStatus.CANCELLED
+        else -> TicketStatus.OPEN
+    }
+
+    private fun statusToInt(status: TicketStatus): Int = when (status) {
+        TicketStatus.OPEN -> 1
+        TicketStatus.SUSPENDED -> 2
+        TicketStatus.COMPLETED -> 3
+        TicketStatus.CANCELLED -> 4
     }
 }

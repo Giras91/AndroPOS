@@ -1,10 +1,14 @@
 package com.extrotarget.extropos.domain.usecase
 
 import com.extrotarget.extropos.domain.model.MenuItem
+import com.extrotarget.extropos.domain.repository.IMenuRepository
+import javax.inject.Inject
 
-class GetMenuItemsUseCase {
+class GetMenuItemsUseCase @Inject constructor(
+    private val menuRepository: IMenuRepository
+) {
     suspend operator fun invoke(categoryId: String? = null): List<MenuItem> {
-        // TODO: Implement with repository
-        return emptyList()
+        return if (categoryId == null) menuRepository.getAllMenuItems()
+        else menuRepository.getMenuItemsByCategory(categoryId)
     }
 }

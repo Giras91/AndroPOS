@@ -106,10 +106,12 @@ class Config(context: Context) {
 
             // IP addresses
             val ips = getIPAddresses()
-            network.put("ip_addresses", ips)
+            network.put("ip_addresses", ips as Any)
 
         } catch (e: Exception) {
-            network.put("error", e.message)
+            // Jar.put has overloads for Any and List; ensure we pass a suitable type
+            val msg = e.message ?: "Unknown network error"
+            network.put("error", listOf(msg))
         }
 
         return network
@@ -130,7 +132,8 @@ class Config(context: Context) {
             display.put("orientation", configuration.orientation)
 
         } catch (e: Exception) {
-            display.put("error", e.message)
+            val msg = e.message ?: "Unknown display error"
+            display.put("error", listOf(msg))
         }
 
         return display
