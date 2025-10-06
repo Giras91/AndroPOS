@@ -25,7 +25,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class OrderViewModel_Factory implements Factory<OrderViewModel> {
   private final Provider<CreateOrderUseCase> createOrderProvider;

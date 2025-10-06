@@ -10,6 +10,8 @@ import com.extrotarget.extropos.data.local.dao.TicketDao
 import com.extrotarget.extropos.data.remote.ApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.extrotarget.extropos.ui.main.DashboardPrefs
+import com.extrotarget.extropos.ui.guide.GuideOverlayManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -98,5 +100,40 @@ object AppModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGuideOverlayManager(prefs: DashboardPrefs): GuideOverlayManager = GuideOverlayManager(prefs)
+
+    // Extended DAOs for comprehensive POS functionality
+    @Provides
+    @Singleton
+    fun provideSaleItemDao(): com.extrotarget.extropos.data.local.dao.SaleItemDao {
+        return com.extrotarget.extropos.data.local.InMemorySaleItemDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCustomerDao(): com.extrotarget.extropos.data.local.dao.CustomerDao {
+        return com.extrotarget.extropos.data.local.InMemoryCustomerDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideInventoryTransactionDao(): com.extrotarget.extropos.data.local.dao.InventoryTransactionDao {
+        return com.extrotarget.extropos.data.local.InMemoryInventoryTransactionDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providePaymentDao(): com.extrotarget.extropos.data.local.dao.PaymentDao {
+        return com.extrotarget.extropos.data.local.InMemoryPaymentDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaleDao(): com.extrotarget.extropos.data.local.dao.SaleDao {
+        return com.extrotarget.extropos.data.local.InMemorySaleDaoExtended()
     }
 }

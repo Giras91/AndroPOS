@@ -20,7 +20,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class OrderRepository_Factory implements Factory<OrderRepository> {
   private final Provider<OrderDao> orderDaoProvider;

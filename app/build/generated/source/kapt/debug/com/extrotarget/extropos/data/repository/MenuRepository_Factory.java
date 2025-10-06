@@ -21,7 +21,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class MenuRepository_Factory implements Factory<MenuRepository> {
   private final Provider<CategoryDao> categoryDaoProvider;

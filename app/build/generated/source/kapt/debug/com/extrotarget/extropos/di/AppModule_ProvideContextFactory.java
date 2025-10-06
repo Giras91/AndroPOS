@@ -21,7 +21,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class AppModule_ProvideContextFactory implements Factory<Context> {
   private final Provider<Application> applicationProvider;

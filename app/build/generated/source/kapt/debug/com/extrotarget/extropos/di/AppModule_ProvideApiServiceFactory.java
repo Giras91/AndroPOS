@@ -21,7 +21,9 @@ import retrofit2.Retrofit;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class AppModule_ProvideApiServiceFactory implements Factory<ApiService> {
   private final Provider<Retrofit> retrofitProvider;

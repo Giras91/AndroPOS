@@ -20,7 +20,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class AssignTableToOrderUseCase_Factory implements Factory<AssignTableToOrderUseCase> {
   private final Provider<ITableRepository> tableRepositoryProvider;

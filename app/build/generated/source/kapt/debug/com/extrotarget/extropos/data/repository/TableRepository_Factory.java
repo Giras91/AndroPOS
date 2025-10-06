@@ -19,7 +19,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class TableRepository_Factory implements Factory<TableRepository> {
   private final Provider<TableDao> tableDaoProvider;

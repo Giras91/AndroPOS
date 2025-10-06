@@ -2,7 +2,6 @@ package com.extrotarget.extropos.ui.menu;
 
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
-import dagger.internal.Preconditions;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
@@ -18,11 +17,13 @@ import javax.annotation.processing.Generated;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
-public final class MenuViewModel_HiltModules_KeyModule_ProvideFactory implements Factory<String> {
+public final class MenuViewModel_HiltModules_KeyModule_ProvideFactory implements Factory<Boolean> {
   @Override
-  public String get() {
+  public Boolean get() {
     return provide();
   }
 
@@ -30,8 +31,8 @@ public final class MenuViewModel_HiltModules_KeyModule_ProvideFactory implements
     return InstanceHolder.INSTANCE;
   }
 
-  public static String provide() {
-    return Preconditions.checkNotNullFromProvides(MenuViewModel_HiltModules.KeyModule.provide());
+  public static boolean provide() {
+    return MenuViewModel_HiltModules.KeyModule.provide();
   }
 
   private static final class InstanceHolder {

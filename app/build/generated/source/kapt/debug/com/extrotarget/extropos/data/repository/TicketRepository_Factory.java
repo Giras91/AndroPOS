@@ -19,7 +19,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class TicketRepository_Factory implements Factory<TicketRepository> {
   private final Provider<TicketDao> ticketDaoProvider;

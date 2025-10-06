@@ -1,0 +1,24 @@
+<resources>
+    <!-- Dashboard strings -->
+    <string name="dashboard_sale">Sale</string>
+    <string name="dashboard_products">Products</string>
+    <string name="dashboard_inventory">Inventory</string>
+    <string name="dashboard_reports">Reports</string>
+    <string name="dashboard_customers">Customers</string>
+    <string name="dashboard_settings">Settings</string>
+    
+    <!-- Mode strings -->
+    <string name="training_mode">Training Mode</string>
+    <string name="guide_mode">Guide Mode</string>
+    
+    <!-- PDF strings -->
+    <string name="pdf_generation">PDF Generation</string>
+    <string name="generate_receipt">Generate Receipt</string>
+    <string name="generate_sales_report">Generate Sales Report</string>
+    <string name="generate_inventory_report">Generate Inventory Report</string>
+    <string name="generate_invoice">Generate Invoice</string>
+    
+    <!-- Colors for training mode -->
+    <color name="training_mode_accent">#FF9800</color>
+    <color name="primary_blue">#2196F3</color>
+</resources>

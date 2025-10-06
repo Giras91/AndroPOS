@@ -26,7 +26,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class CartViewModel_Factory implements Factory<CartViewModel> {
   private final Provider<GetCurrentTicketUseCase> getCurrentTicketUseCaseProvider;

@@ -19,7 +19,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class AuthRepository_Factory implements Factory<AuthRepository> {
   private final Provider<AppwriteService> appwriteServiceProvider;

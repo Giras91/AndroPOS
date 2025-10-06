@@ -19,7 +19,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class ResendVerificationEmailUseCase_Factory implements Factory<ResendVerificationEmailUseCase> {
   private final Provider<IAuthRepository> authRepositoryProvider;

@@ -17,7 +17,9 @@ import javax.annotation.processing.Generated;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class ProductViewModel_Factory implements Factory<ProductViewModel> {
   @Override

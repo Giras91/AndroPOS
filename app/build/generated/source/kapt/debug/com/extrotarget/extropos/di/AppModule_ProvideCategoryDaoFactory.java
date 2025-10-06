@@ -19,7 +19,9 @@ import javax.annotation.processing.Generated;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class AppModule_ProvideCategoryDaoFactory implements Factory<CategoryDao> {
   @Override

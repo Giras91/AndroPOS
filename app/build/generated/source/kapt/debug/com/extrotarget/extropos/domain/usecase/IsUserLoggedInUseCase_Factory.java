@@ -19,7 +19,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class IsUserLoggedInUseCase_Factory implements Factory<IsUserLoggedInUseCase> {
   private final Provider<IAuthRepository> authRepositoryProvider;

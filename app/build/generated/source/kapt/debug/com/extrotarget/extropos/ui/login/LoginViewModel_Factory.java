@@ -19,7 +19,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class LoginViewModel_Factory implements Factory<LoginViewModel> {
   private final Provider<LoginUseCase> loginUseCaseProvider;

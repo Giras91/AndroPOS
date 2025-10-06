@@ -19,7 +19,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class CheckEmailVerificationUseCase_Factory implements Factory<CheckEmailVerificationUseCase> {
   private final Provider<IAuthRepository> authRepositoryProvider;

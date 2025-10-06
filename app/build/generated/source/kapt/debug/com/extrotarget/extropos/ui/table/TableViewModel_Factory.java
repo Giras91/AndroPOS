@@ -23,7 +23,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class TableViewModel_Factory implements Factory<TableViewModel> {
   private final Provider<GetTablesUseCase> getTablesProvider;

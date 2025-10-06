@@ -28,6 +28,7 @@ import android.transition.TransitionManager
 import android.transition.Fade
 import android.transition.Slide
 import android.view.Gravity
+import androidx.core.content.res.use
 
 /**
  * PosLayout - Custom layout class for POS UI components
@@ -128,20 +129,12 @@ open class PosLayout(context: Context, attrs: AttributeSet?) : LinearLayout(cont
     /**
      * Get color from theme or resources
      */
-    fun getThemeColor(attr: Int): Int {
-    val typedArray = ctx.theme.obtainStyledAttributes(intArrayOf(attr))
-    val color = typedArray.getColor(0, Color.BLACK)
-        typedArray.recycle()
-        return color
-    }
+    fun getThemeColor(attr: Int): Int =
+        ctx.theme.obtainStyledAttributes(intArrayOf(attr)).use { it.getColor(0, Color.BLACK) }
 
     /**
      * Get dimension from theme or resources
      */
-    fun getThemeDimension(attr: Int): Float {
-    val typedArray = ctx.theme.obtainStyledAttributes(intArrayOf(attr))
-    val dimension = typedArray.getDimension(0, 0f)
-        typedArray.recycle()
-        return dimension
-    }
+    fun getThemeDimension(attr: Int): Float =
+        ctx.theme.obtainStyledAttributes(intArrayOf(attr)).use { it.getDimension(0, 0f) }
 }

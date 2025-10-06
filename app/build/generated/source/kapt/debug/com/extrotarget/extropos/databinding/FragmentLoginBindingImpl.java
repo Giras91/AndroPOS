@@ -23,7 +23,7 @@ public class FragmentLoginBindingImpl extends FragmentLoginBinding  {
     }
     // views
     @NonNull
-    private final android.widget.LinearLayout mboundView0;
+    private final android.widget.ScrollView mboundView0;
     // variables
     // values
     // listeners
@@ -41,7 +41,7 @@ public class FragmentLoginBindingImpl extends FragmentLoginBinding  {
             , (com.google.android.material.textfield.TextInputEditText) bindings[2]
             , (android.widget.TextView) bindings[4]
             );
-        this.mboundView0 = (android.widget.LinearLayout) bindings[0];
+        this.mboundView0 = (android.widget.ScrollView) bindings[0];
         this.mboundView0.setTag(null);
         setRootTag(root);
         // listeners

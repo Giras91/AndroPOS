@@ -14,10 +14,19 @@ public class FragmentMainBindingImpl extends FragmentMainBinding  {
     static {
         sIncludes = null;
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.welcomeTextView, 1);
-        sViewsWithIds.put(R.id.settingsButton, 2);
-        sViewsWithIds.put(R.id.posButton, 3);
-        sViewsWithIds.put(R.id.logoutButton, 4);
+        sViewsWithIds.put(R.id.btn_cash_register, 2);
+        sViewsWithIds.put(R.id.btn_table, 3);
+        sViewsWithIds.put(R.id.btn_report, 4);
+        sViewsWithIds.put(R.id.btn_customers, 5);
+        sViewsWithIds.put(R.id.btn_settings, 6);
+        sViewsWithIds.put(R.id.headerBar, 7);
+        sViewsWithIds.put(R.id.accountText, 8);
+        sViewsWithIds.put(R.id.loggedInRoleText, 9);
+        sViewsWithIds.put(R.id.appTitle, 10);
+        sViewsWithIds.put(R.id.modeSwitches, 11);
+        sViewsWithIds.put(R.id.switchGuide, 12);
+        sViewsWithIds.put(R.id.switchTraining, 13);
+        sViewsWithIds.put(R.id.fabLogout, 14);
     }
     // views
     @NonNull
@@ -28,15 +37,26 @@ public class FragmentMainBindingImpl extends FragmentMainBinding  {
     // Inverse Binding Event Handlers
 
     public FragmentMainBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 5, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 15, sIncludes, sViewsWithIds));
     }
     private FragmentMainBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
-            , (android.widget.Button) bindings[4]
-            , (android.widget.Button) bindings[3]
-            , (android.widget.Button) bindings[2]
-            , (android.widget.TextView) bindings[1]
+            , (android.widget.TextView) bindings[8]
+            , (android.widget.TextView) bindings[10]
+            , (bindings[2] != null) ? com.extrotarget.extropos.databinding.ItemDashboardButtonBinding.bind((android.view.View) bindings[2]) : null
+            , (bindings[5] != null) ? com.extrotarget.extropos.databinding.ItemDashboardButtonBinding.bind((android.view.View) bindings[5]) : null
+            , (bindings[4] != null) ? com.extrotarget.extropos.databinding.ItemDashboardButtonBinding.bind((android.view.View) bindings[4]) : null
+            , (bindings[6] != null) ? com.extrotarget.extropos.databinding.ItemDashboardButtonBinding.bind((android.view.View) bindings[6]) : null
+            , (bindings[3] != null) ? com.extrotarget.extropos.databinding.ItemDashboardButtonBinding.bind((android.view.View) bindings[3]) : null
+            , (com.google.android.material.floatingactionbutton.FloatingActionButton) bindings[14]
+            , (android.widget.LinearLayout) bindings[7]
+            , (android.widget.TextView) bindings[9]
+            , (androidx.gridlayout.widget.GridLayout) bindings[1]
+            , (android.widget.LinearLayout) bindings[11]
+            , (android.widget.Switch) bindings[12]
+            , (android.widget.Switch) bindings[13]
             );
+        this.mainButtonGrid.setTag(null);
         this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];
         this.mboundView0.setTag(null);
         setRootTag(root);

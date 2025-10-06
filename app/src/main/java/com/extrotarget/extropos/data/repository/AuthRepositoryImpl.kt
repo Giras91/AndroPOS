@@ -1,6 +1,7 @@
 package com.extrotarget.extropos.data.repository
 
 import android.util.Log
+import android.os.SystemClock
 import com.extrotarget.extropos.data.remote.AppwriteService
 import com.extrotarget.extropos.domain.model.*
 import com.extrotarget.extropos.domain.repository.IAuthRepository
@@ -27,28 +28,32 @@ class AuthRepository @Inject constructor(
     }
 
     override suspend fun login(request: LoginRequest): AuthResult = withContext(Dispatchers.IO) {
+        val tStart = SystemClock.elapsedRealtime()
         try {
-            Log.d(TAG, "Attempting login for email: ${request.email}")
+            Log.d(TAG, "[perf] login START email=${request.email}")
 
             val account = Account(appwriteService.client)
+            val tSessionStart = SystemClock.elapsedRealtime()
             val session = account.createEmailPasswordSession(
                 email = request.email,
                 password = request.password
             )
+            val tSessionEnd = SystemClock.elapsedRealtime()
+            Log.d(TAG, "[perf] session created id=${session.id} dtSession=${tSessionEnd - tSessionStart}ms")
 
-            Log.d(TAG, "Login successful, session created: ${session.id}")
-
-            // Get user details
+            val tAccountGetStart = SystemClock.elapsedRealtime()
             val appwriteUser = account.get()
+            val tAccountGetEnd = SystemClock.elapsedRealtime()
+            Log.d(TAG, "[perf] account.get dt=${tAccountGetEnd - tAccountGetStart}ms userId=${appwriteUser.id}")
+
+            val tDbFetchStart = SystemClock.elapsedRealtime()
             var user = getUserFromDatabase(appwriteUser.id)
+            val tDbFetchEnd = SystemClock.elapsedRealtime()
+            Log.d(TAG, "[perf] getUserFromDatabase dt=${tDbFetchEnd - tDbFetchStart}ms found=${user != null}")
 
             if (user == null) {
-                // User is present in Appwrite Auth but missing in our database.
-                // Attempt to create the profile document automatically. This
-                // requires the collection to exist and permissions that allow
-                // creation by the authenticated session (recommended).
-                Log.w(TAG, "User authenticated but not found in database; creating profile document for id=${appwriteUser.id}")
-
+                Log.w(TAG, "User missing in DB, creating profile doc id=${appwriteUser.id}")
+                val tProfileCreateStart = SystemClock.elapsedRealtime()
                 val createdUser = User(
                     id = appwriteUser.id,
                     email = appwriteUser.email ?: "",
@@ -59,23 +64,26 @@ class AuthRepository @Inject constructor(
                     phoneNumber = "",
                     emailVerified = appwriteUser.emailVerification ?: false
                 )
-
                 val saved = saveUserToDatabase(createdUser)
+                val tProfileCreateEnd = SystemClock.elapsedRealtime()
+                Log.d(TAG, "[perf] saveUserToDatabase dt=${tProfileCreateEnd - tProfileCreateStart}ms success=$saved")
                 if (!saved) {
-                    Log.w(TAG, "Could not create user profile in database for id=${appwriteUser.id}; continuing without database record")
+                    Log.w(TAG, "Profile creation failed for id=${appwriteUser.id}; proceeding anyway")
                 }
                 user = createdUser
-                Log.d(TAG, "Continuing login with user from Auth service for id=${appwriteUser.id}")
             }
+
+            val total = SystemClock.elapsedRealtime() - tStart
+            Log.d(TAG, "[perf] login SUCCESS total=${total}ms verifyPending=${!(user?.emailVerified ?: false)}")
 
             AuthResult(
                 success = true,
                 user = user,
-                requiresVerification = !user.emailVerified
+                requiresVerification = !(user?.emailVerified ?: false)
             )
-
         } catch (e: AppwriteException) {
-            Log.e(TAG, "Login failed", e)
+            val total = SystemClock.elapsedRealtime() - tStart
+            Log.e(TAG, "[perf] login FAILED appwrite total=${total}ms code=${e.code} msg=${e.message}", e)
             val errorMessage = when (e.code) {
                 401 -> "Invalid email or password"
                 429 -> "Too many login attempts. Please try again later"
@@ -83,7 +91,8 @@ class AuthRepository @Inject constructor(
             }
             AuthResult(success = false, errorMessage = errorMessage)
         } catch (e: Exception) {
-            Log.e(TAG, "Unexpected error during login", e)
+            val total = SystemClock.elapsedRealtime() - tStart
+            Log.e(TAG, "[perf] login FAILED unexpected total=${total}ms", e)
             AuthResult(success = false, errorMessage = "An unexpected error occurred")
         }
     }

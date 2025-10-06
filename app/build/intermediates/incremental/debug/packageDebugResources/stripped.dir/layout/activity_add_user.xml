@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                   
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".ui.user.AddUserActivity" android:tag="layout/activity_add_user_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create User PIN"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp" />
+
+            <EditText
+                android:id="@+id/pin1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberPassword"
+                android:hint="PIN"
+                android:maxLength="8" />
+
+            <EditText
+                android:id="@+id/pin2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:inputType="numberPassword"
+                android:hint="Confirm PIN"
+                android:maxLength="8" />
+
+            <Button
+                android:id="@+id/savePinBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:layout_marginTop="24dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+         

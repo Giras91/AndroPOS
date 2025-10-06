@@ -17,7 +17,9 @@ import javax.annotation.processing.Generated;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class UpdateTableStatusUseCase_Factory implements Factory<UpdateTableStatusUseCase> {
   @Override

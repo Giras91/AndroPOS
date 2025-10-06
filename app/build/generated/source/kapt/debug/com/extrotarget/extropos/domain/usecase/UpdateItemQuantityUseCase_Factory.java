@@ -19,7 +19,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class UpdateItemQuantityUseCase_Factory implements Factory<UpdateItemQuantityUseCase> {
   private final Provider<ITicketRepository> ticketRepositoryProvider;

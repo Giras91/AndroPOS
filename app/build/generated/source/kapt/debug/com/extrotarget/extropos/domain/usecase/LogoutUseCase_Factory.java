@@ -19,7 +19,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class LogoutUseCase_Factory implements Factory<LogoutUseCase> {
   private final Provider<IAuthRepository> authRepositoryProvider;

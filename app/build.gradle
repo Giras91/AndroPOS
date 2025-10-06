@@ -43,7 +43,6 @@ android {
 }
 
 dependencies {
-    kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0" // still explicit (not in catalog)
     implementation libs.androidx.appcompat
     implementation libs.androidx.core.ktx
     implementation libs.androidx.constraintlayout
@@ -70,6 +69,21 @@ dependencies {
     implementation libs.room.ktx
     kapt libs.room.compiler
     implementation project(':modules:feature-printer')
+    // AndroidX Security for EncryptedSharedPreferences (LocalAuthManager)
+    implementation "androidx.security:security-crypto:1.1.0-alpha06"
+    // AndroidX GridLayout for dashboard layout
+    implementation "androidx.gridlayout:gridlayout:1.0.0"
+    // DataStore for dashboard mode persistence
+    implementation "androidx.datastore:datastore-preferences:1.1.1"
+    
+    // PDF generation libraries
+    implementation 'com.itextpdf:itext7-core:7.2.5'
+    implementation 'com.itextpdf:html2pdf:4.0.5'
+    
+    // Test dependencies
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:5.5.0'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
 }
 
 // Defensive JaCoCo report task (uses Provider API to avoid eager reads of transform outputs)

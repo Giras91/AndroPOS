@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#4CAF50</color>
+    <color name="brand_primary">#0D47A1</color>
+    <color name="brand_primary_variant">#0B3A86</color>
+    <color name="brand_secondary">#03A9F4</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="muted">#9E9E9E</color>
+    <color name="on_surface">#212121</color>
+    <color name="primary_blue">#2196F3</color>
+    <color name="success_color">#4CAF50</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="training_mode_accent">#FF9800</color>
+    <string name="app_name">ExtroPOS</string>
+    <string name="dashboard_customers">Customers</string>
+    <string name="dashboard_inventory">Inventory</string>
+    <string name="dashboard_products">Products</string>
+    <string name="dashboard_reports">Reports</string>
+    <string name="dashboard_sale">Sale</string>
+    <string name="dashboard_settings">Settings</string>
+    <string name="generate_inventory_report">Generate Inventory Report</string>
+    <string name="generate_invoice">Generate Invoice</string>
+    <string name="generate_receipt">Generate Receipt</string>
+    <string name="generate_sales_report">Generate Sales Report</string>
+    <string name="guide_mode">Guide Mode</string>
+    <string name="pdf_generation">PDF Generation</string>
+    <string name="training_mode">Training Mode</string>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorPrimaryVariant">@color/brand_primary_variant</item>
+        <item name="colorOnPrimary">@color/surface</item>
+        <item name="colorSecondary">@color/brand_secondary</item>
+        <item name="colorSecondaryVariant">@color/brand_secondary</item>
+        <item name="android:statusBarColor">@color/brand_primary</item>
+        <item name="materialButtonStyle">@style/Widget.ExtroPOS.MaterialButton</item>
+    </style>
+    <style name="Widget.ExtroPOS.MaterialButton" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">8dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+    </style>
+</resources>

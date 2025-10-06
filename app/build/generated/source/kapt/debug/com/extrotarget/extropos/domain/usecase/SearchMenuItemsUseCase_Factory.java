@@ -19,7 +19,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class SearchMenuItemsUseCase_Factory implements Factory<SearchMenuItemsUseCase> {
   private final Provider<IMenuRepository> menuRepositoryProvider;

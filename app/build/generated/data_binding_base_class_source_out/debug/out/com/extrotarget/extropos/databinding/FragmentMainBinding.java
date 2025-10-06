@@ -4,36 +4,84 @@ package com.extrotarget.extropos.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.gridlayout.widget.GridLayout;
 import com.extrotarget.extropos.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class FragmentMainBinding extends ViewDataBinding {
   @NonNull
-  public final Button logoutButton;
+  public final TextView accountText;
 
   @NonNull
-  public final Button posButton;
+  public final TextView appTitle;
 
   @NonNull
-  public final Button settingsButton;
+  public final ItemDashboardButtonBinding btnCashRegister;
 
   @NonNull
-  public final TextView welcomeTextView;
+  public final ItemDashboardButtonBinding btnCustomers;
+
+  @NonNull
+  public final ItemDashboardButtonBinding btnReport;
+
+  @NonNull
+  public final ItemDashboardButtonBinding btnSettings;
+
+  @NonNull
+  public final ItemDashboardButtonBinding btnTable;
+
+  @NonNull
+  public final FloatingActionButton fabLogout;
+
+  @NonNull
+  public final LinearLayout headerBar;
+
+  @NonNull
+  public final TextView loggedInRoleText;
+
+  @NonNull
+  public final GridLayout mainButtonGrid;
+
+  @NonNull
+  public final LinearLayout modeSwitches;
+
+  @NonNull
+  public final Switch switchGuide;
+
+  @NonNull
+  public final Switch switchTraining;
 
   protected FragmentMainBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      Button logoutButton, Button posButton, Button settingsButton, TextView welcomeTextView) {
+      TextView accountText, TextView appTitle, ItemDashboardButtonBinding btnCashRegister,
+      ItemDashboardButtonBinding btnCustomers, ItemDashboardButtonBinding btnReport,
+      ItemDashboardButtonBinding btnSettings, ItemDashboardButtonBinding btnTable,
+      FloatingActionButton fabLogout, LinearLayout headerBar, TextView loggedInRoleText,
+      GridLayout mainButtonGrid, LinearLayout modeSwitches, Switch switchGuide,
+      Switch switchTraining) {
     super(_bindingComponent, _root, _localFieldCount);
-    this.logoutButton = logoutButton;
-    this.posButton = posButton;
-    this.settingsButton = settingsButton;
-    this.welcomeTextView = welcomeTextView;
+    this.accountText = accountText;
+    this.appTitle = appTitle;
+    this.btnCashRegister = btnCashRegister;
+    this.btnCustomers = btnCustomers;
+    this.btnReport = btnReport;
+    this.btnSettings = btnSettings;
+    this.btnTable = btnTable;
+    this.fabLogout = fabLogout;
+    this.headerBar = headerBar;
+    this.loggedInRoleText = loggedInRoleText;
+    this.mainButtonGrid = mainButtonGrid;
+    this.modeSwitches = modeSwitches;
+    this.switchGuide = switchGuide;
+    this.switchTraining = switchTraining;
   }
 
   @NonNull

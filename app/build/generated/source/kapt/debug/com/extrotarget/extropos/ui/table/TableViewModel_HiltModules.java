@@ -10,9 +10,7 @@ import dagger.hilt.android.components.ViewModelComponent;
 import dagger.hilt.android.internal.lifecycle.HiltViewModelMap;
 import dagger.hilt.codegen.OriginatingElement;
 import dagger.multibindings.IntoMap;
-import dagger.multibindings.IntoSet;
-import dagger.multibindings.StringKey;
-import java.lang.String;
+import dagger.multibindings.LazyClassKey;
 import javax.annotation.processing.Generated;
 
 @Generated("dagger.hilt.android.processor.internal.viewmodel.ViewModelProcessor")
@@ -31,7 +29,7 @@ public final class TableViewModel_HiltModules {
 
     @Binds
     @IntoMap
-    @StringKey("com.extrotarget.extropos.ui.table.TableViewModel")
+    @LazyClassKey(TableViewModel.class)
     @HiltViewModelMap
     public abstract ViewModel binds(TableViewModel vm);
   }
@@ -43,10 +41,11 @@ public final class TableViewModel_HiltModules {
     }
 
     @Provides
-    @IntoSet
+    @IntoMap
+    @LazyClassKey(TableViewModel.class)
     @HiltViewModelMap.KeySet
-    public static String provide() {
-      return "com.extrotarget.extropos.ui.table.TableViewModel";
+    public static boolean provide() {
+      return true;
     }
   }
 }

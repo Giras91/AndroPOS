@@ -3,6 +3,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" 
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" 
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
 
     <application
         android:name=".App"
@@ -12,14 +19,41 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
+        <!-- Two-step auth flow activities -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".auth.EmailAuthActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.pin.PinLoginActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.user.AddUserActivity"
+            android:exported="false" />
+
+        <!-- Existing main entry - reached only after PIN auth -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <!-- Dashboard with modern POS interface -->
+        <activity
+            android:name=".ui.dashboard.DashboardActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- PDF Generation Test Activity -->
+        <activity
+            android:name=".pdf.test.PdfTestActivity"
+            android:exported="false"
+            android:label="PDF Test" />
 
     </application>
 

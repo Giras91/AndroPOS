@@ -6,6 +6,9 @@ import android.view.View;
 import androidx.databinding.DataBinderMapper;
 import androidx.databinding.DataBindingComponent;
 import androidx.databinding.ViewDataBinding;
+import com.extrotarget.extropos.databinding.ActivityAddUserBindingImpl;
+import com.extrotarget.extropos.databinding.ActivityEmailAuthBindingImpl;
+import com.extrotarget.extropos.databinding.ActivityPinLoginBindingImpl;
 import com.extrotarget.extropos.databinding.FragmentLoginBindingImpl;
 import com.extrotarget.extropos.databinding.FragmentMainBindingImpl;
 import com.extrotarget.extropos.databinding.FragmentMenuBindingImpl;
@@ -27,29 +30,38 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DataBinderMapperImpl extends DataBinderMapper {
-  private static final int LAYOUT_FRAGMENTLOGIN = 1;
+  private static final int LAYOUT_ACTIVITYADDUSER = 1;
 
-  private static final int LAYOUT_FRAGMENTMAIN = 2;
+  private static final int LAYOUT_ACTIVITYEMAILAUTH = 2;
 
-  private static final int LAYOUT_FRAGMENTMENU = 3;
+  private static final int LAYOUT_ACTIVITYPINLOGIN = 3;
 
-  private static final int LAYOUT_FRAGMENTPRODUCTSGRID = 4;
+  private static final int LAYOUT_FRAGMENTLOGIN = 4;
 
-  private static final int LAYOUT_FRAGMENTSETTINGS = 5;
+  private static final int LAYOUT_FRAGMENTMAIN = 5;
 
-  private static final int LAYOUT_FRAGMENTSIGNUP = 6;
+  private static final int LAYOUT_FRAGMENTMENU = 6;
 
-  private static final int LAYOUT_ITEMCART = 7;
+  private static final int LAYOUT_FRAGMENTPRODUCTSGRID = 7;
 
-  private static final int LAYOUT_ITEMCATEGORY = 8;
+  private static final int LAYOUT_FRAGMENTSETTINGS = 8;
 
-  private static final int LAYOUT_ITEMMENUITEM = 9;
+  private static final int LAYOUT_FRAGMENTSIGNUP = 9;
 
-  private static final int LAYOUT_ITEMPRODUCT = 10;
+  private static final int LAYOUT_ITEMCART = 10;
 
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(10);
+  private static final int LAYOUT_ITEMCATEGORY = 11;
+
+  private static final int LAYOUT_ITEMMENUITEM = 12;
+
+  private static final int LAYOUT_ITEMPRODUCT = 13;
+
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(13);
 
   static {
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.extrotarget.extropos.R.layout.activity_add_user, LAYOUT_ACTIVITYADDUSER);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.extrotarget.extropos.R.layout.activity_email_auth, LAYOUT_ACTIVITYEMAILAUTH);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.extrotarget.extropos.R.layout.activity_pin_login, LAYOUT_ACTIVITYPINLOGIN);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.extrotarget.extropos.R.layout.fragment_login, LAYOUT_FRAGMENTLOGIN);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.extrotarget.extropos.R.layout.fragment_main, LAYOUT_FRAGMENTMAIN);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.extrotarget.extropos.R.layout.fragment_menu, LAYOUT_FRAGMENTMENU);
@@ -71,6 +83,24 @@ public class DataBinderMapperImpl extends DataBinderMapper {
         throw new RuntimeException("view must have a tag");
       }
       switch(localizedLayoutId) {
+        case  LAYOUT_ACTIVITYADDUSER: {
+          if ("layout/activity_add_user_0".equals(tag)) {
+            return new ActivityAddUserBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for activity_add_user is invalid. Received: " + tag);
+        }
+        case  LAYOUT_ACTIVITYEMAILAUTH: {
+          if ("layout/activity_email_auth_0".equals(tag)) {
+            return new ActivityEmailAuthBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for activity_email_auth is invalid. Received: " + tag);
+        }
+        case  LAYOUT_ACTIVITYPINLOGIN: {
+          if ("layout/activity_pin_login_0".equals(tag)) {
+            return new ActivityPinLoginBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for activity_pin_login is invalid. Received: " + tag);
+        }
         case  LAYOUT_FRAGMENTLOGIN: {
           if ("layout/fragment_login_0".equals(tag)) {
             return new FragmentLoginBindingImpl(component, view);
@@ -184,9 +214,12 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(10);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(13);
 
     static {
+      sKeys.put("layout/activity_add_user_0", com.extrotarget.extropos.R.layout.activity_add_user);
+      sKeys.put("layout/activity_email_auth_0", com.extrotarget.extropos.R.layout.activity_email_auth);
+      sKeys.put("layout/activity_pin_login_0", com.extrotarget.extropos.R.layout.activity_pin_login);
       sKeys.put("layout/fragment_login_0", com.extrotarget.extropos.R.layout.fragment_login);
       sKeys.put("layout/fragment_main_0", com.extrotarget.extropos.R.layout.fragment_main);
       sKeys.put("layout/fragment_menu_0", com.extrotarget.extropos.R.layout.fragment_menu);

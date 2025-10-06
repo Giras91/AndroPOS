@@ -19,7 +19,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class SuspendTicketUseCase_Factory implements Factory<SuspendTicketUseCase> {
   private final Provider<ITicketRepository> ticketRepositoryProvider;

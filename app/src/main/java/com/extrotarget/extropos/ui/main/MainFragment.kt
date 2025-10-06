@@ -39,17 +39,8 @@ class MainFragment : Fragment() {
     }
 
     private fun setupUI() {
-        binding.welcomeTextView.text = "Welcome to ExtroPOS!"
-        binding.logoutButton.setOnClickListener {
-            authViewModel.logout()
-        }
-        binding.settingsButton.setOnClickListener {
-            // Navigate to settings screen
-            findNavController().navigate(R.id.action_main_to_settings)
-        }
-        binding.posButton.setOnClickListener {
-            findNavController().navigate(R.id.action_main_to_pos)
-        }
+        // Dashboard functionality is handled in the newer MainFragment implementation
+        // Basic placeholder for now
     }
 
     private fun observeAuthState() {

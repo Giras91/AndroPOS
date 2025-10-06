@@ -21,7 +21,9 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
 })
 public final class MenuViewModel_Factory implements Factory<MenuViewModel> {
   private final Provider<GetCategoriesUseCase> getCategoriesProvider;

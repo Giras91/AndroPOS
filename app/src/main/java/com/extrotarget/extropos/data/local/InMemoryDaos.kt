@@ -21,6 +21,10 @@ class InMemoryProductDao : ProductDao {
     }
 
     override suspend fun getById(id: String): ProductEntity? = products.find { it.id == id }
+
+    fun clearAll() {
+        products.clear()
+    }
 }
 
 class InMemoryTicketDao : TicketDao {
@@ -30,18 +34,29 @@ class InMemoryTicketDao : TicketDao {
     private val tenders = mutableListOf<TenderEntity>()
     private val departments = mutableListOf<DepartmentEntity>()
 
-    init {
-        // Initialize with some default data
-        tenders.addAll(listOf(
-            TenderEntity(1, "Cash", "cash", true, true),
-            TenderEntity(2, "Card", "card", false, true),
-            TenderEntity(3, "QR Pay", "qr", false, true)
-        ))
+    init { seedDefaults() }
 
-        departments.addAll(listOf(
-            DepartmentEntity(1, "Food & Beverage", 1),
-            DepartmentEntity(2, "Retail", 2)
-        ))
+    private fun seedDefaults() {
+        if (tenders.isEmpty()) {
+            tenders.addAll(listOf(
+                TenderEntity(1, "Cash", "cash", true, true),
+                TenderEntity(2, "Card", "card", false, true),
+                TenderEntity(3, "QR Pay", "qr", false, true)
+            ))
+        }
+        if (departments.isEmpty()) {
+            departments.addAll(listOf(
+                DepartmentEntity(1, "Food & Beverage", 1),
+                DepartmentEntity(2, "Retail", 2)
+            ))
+        }
+    }
+
+    fun clearAll() {
+        tickets.clear()
+        ticketItems.clear()
+        ticketTenders.clear()
+        // keep reference data (tenders, departments) – do not clear for training isolation resets
     }
 
     override suspend fun getTicketById(id: Int): TicketEntity? = tickets.find { it.id == id }
@@ -142,6 +157,10 @@ class InMemoryCategoryDao : com.extrotarget.extropos.data.local.dao.CategoryDao 
         val idx = categories.indexOfFirst { it.id == id }
         if (idx >= 0) categories[idx] = categories[idx].copy(isActive = isActive)
     }
+
+    fun clearAll() {
+        categories.clear()
+    }
 }
 
 class InMemoryMenuItemDao : com.extrotarget.extropos.data.local.dao.MenuItemDao {
@@ -169,6 +188,10 @@ class InMemoryMenuItemDao : com.extrotarget.extropos.data.local.dao.MenuItemDao 
     override suspend fun updateAvailability(id: String, isAvailable: Boolean) {
         val idx = items.indexOfFirst { it.id == id }
         if (idx >= 0) items[idx] = items[idx].copy(isAvailable = isAvailable)
+    }
+
+    fun clearAll() {
+        items.clear()
     }
 }
 
@@ -209,6 +232,11 @@ class InMemoryOrderDao : com.extrotarget.extropos.data.local.dao.OrderDao {
         val idx = orders.indexOfFirst { it.id == id }
         if (idx >= 0) orders[idx] = orders[idx].copy(status = status, updatedAt = updatedAt)
     }
+
+    fun clearAll() {
+        orders.clear()
+        nextId = 1L
+    }
 }
 
 class InMemoryOrderItemDao : com.extrotarget.extropos.data.local.dao.OrderItemDao {
@@ -235,6 +263,10 @@ class InMemoryOrderItemDao : com.extrotarget.extropos.data.local.dao.OrderItemDa
 
     override suspend fun deleteById(orderId: String, itemId: String) {
         items.removeIf { it.orderId == orderId && it.id == itemId }
+    }
+
+    fun clearAll() {
+        items.clear()
     }
 }
 
@@ -264,5 +296,9 @@ class InMemoryTableDao : com.extrotarget.extropos.data.local.dao.TableDao {
     override suspend fun assignOrder(tableId: String, orderId: String) {
         val idx = tables.indexOfFirst { it.id == tableId }
         if (idx >= 0) tables[idx] = tables[idx].copy(currentOrderId = orderId)
+    }
+
+    fun clearAll() {
+        tables.clear()
     }
 }
