@@ -19,11 +19,10 @@ android {
 
 dependencies {
     kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0")
-    implementation("com.google.dagger:hilt-android:2.52")
-    kapt("com.google.dagger:hilt-compiler:2.52")
+    implementation(libs.coroutines.android)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
     testImplementation("junit:junit:4.13.2")
 }
 
