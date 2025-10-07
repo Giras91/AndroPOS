@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14628525797467257871.xml:2:13-83
-INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14628525797467257871.xml:2:13-83
+ADDED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14893019735198919194.xml:2:13-83
+INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14893019735198919194.xml:2:13-83
 	package
-		INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14628525797467257871.xml
+		INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14893019735198919194.xml
 	xmlns:android
-		ADDED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14628525797467257871.xml:2:23-81
+		ADDED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14893019735198919194.xml:2:23-81
 uses-sdk
-INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14628525797467257871.xml reason: use-sdk injection requested
-INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14628525797467257871.xml
-INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14628525797467257871.xml
+INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14893019735198919194.xml reason: use-sdk injection requested
+INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14893019735198919194.xml
+INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14893019735198919194.xml
 	android:targetSdkVersion
-		INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14628525797467257871.xml
+		INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14893019735198919194.xml
 	android:minSdkVersion
-		INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14628525797467257871.xml
+		INJECTED from /home/hp/Documents/AndroPOS/modules/feature-printer/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14893019735198919194.xml

@@ -1,0 +1,78 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.extrotarget.extropos"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <permission
+11-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
+12        android:name="com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+12-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
+13        android:protectionLevel="signature" />
+13-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
+14
+15    <uses-permission android:name="com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+15-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+16
+17    <application
+17-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:4:5-16:19
+18        android:allowBackup="true"
+18-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:5:9-35
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
+20        android:extractNativeLibs="false"
+21        android:icon="@mipmap/ic_launcher"
+21-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:7:9-43
+22        android:label="ExtroPOS MiniApp"
+22-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:6:9-41
+23        android:roundIcon="@mipmap/ic_launcher_round"
+23-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:8:9-54
+24        android:supportsRtl="true" >
+24-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:9:9-35
+25        <activity
+25-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:10:9-15:20
+26            android:name="com.extrotarget.extropos.MainActivity"
+26-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:10:19-71
+27            android:exported="true" >
+27-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:10:72-95
+28            <intent-filter>
+28-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:11:13-14:29
+29                <action android:name="android.intent.action.MAIN" />
+29-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:12:17-69
+29-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:12:25-66
+30
+31                <category android:name="android.intent.category.LAUNCHER" />
+31-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:13:17-77
+31-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:13:27-74
+32            </intent-filter>
+33        </activity>
+34
+35        <provider
+35-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+36            android:name="androidx.startup.InitializationProvider"
+36-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+37            android:authorities="com.extrotarget.extropos.androidx-startup"
+37-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+38            android:exported="false" >
+38-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+39            <meta-data
+39-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+40                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+40-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+41                android:value="androidx.startup" />
+41-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+42            <meta-data
+42-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/hp/.gradle/caches/8.13/transforms/aed9c65f6aecf6dd19c756895cce98d7/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+43                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+43-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/hp/.gradle/caches/8.13/transforms/aed9c65f6aecf6dd19c756895cce98d7/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+44                android:value="androidx.startup" />
+44-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/hp/.gradle/caches/8.13/transforms/aed9c65f6aecf6dd19c756895cce98d7/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+45        </provider>
+46    </application>
+47
+48</manifest>
