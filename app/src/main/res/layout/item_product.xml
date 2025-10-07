@@ -5,8 +5,8 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="2dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
         android:padding="8dp"
         android:clickable="true"
         android:focusable="true">
@@ -14,45 +14,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/productImageView"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
                 android:scaleType="centerCrop"
                 android:src="@android:drawable/ic_menu_gallery"
                 android:contentDescription="Product image"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginBottom="8dp" />
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/productNameTextView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:text="Product Name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/on_surface"
+                android:gravity="center"
+                android:maxLines="2"
+                android:ellipsize="end" />
 
-                <TextView
-                    android:id="@+id/productNameTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Product Name"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:maxLines="2"
-                    android:ellipsize="end" />
-
-                <TextView
-                    android:id="@+id/stockTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Stock: 0"
-                    android:textSize="12sp"
-                    android:textColor="@android:color/darker_gray"
-                    android:layout_marginTop="2dp" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/stockTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Stock: 0"
+                android:textSize="12sp"
+                android:textColor="@color/muted"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
 
             <TextView
                 android:id="@+id/productPriceTextView"
@@ -60,8 +55,9 @@
                 android:layout_height="wrap_content"
                 android:text="RM 0.00"
                 android:textSize="14sp"
-                android:textColor="@android:color/holo_green_dark"
-                android:layout_marginStart="8dp" />
+                android:textColor="@color/success_color"
+                android:layout_marginTop="6dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

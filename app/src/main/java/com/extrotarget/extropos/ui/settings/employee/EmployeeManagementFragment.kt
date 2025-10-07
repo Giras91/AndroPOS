@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extrotarget.extropos.databinding.FragmentEmployeeManagementBinding
 import com.extrotarget.extropos.ui.settings.employee.adapters.EmployeeAdapter
@@ -75,15 +77,19 @@ class EmployeeManagementFragment : Fragment() {
 
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.employees.collect { employees ->
-                employeeAdapter.submitList(employees)
-                binding.emptyStateTextView.visibility = if (employees.isEmpty()) View.VISIBLE else View.GONE
-            }
-        }
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.employees.collect { employees ->
+                        employeeAdapter.submitList(employees)
+                        binding.emptyStateTextView.visibility = if (employees.isEmpty()) View.VISIBLE else View.GONE
+                    }
+                }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.isLoading.collect { isLoading ->
-                binding.loadingProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+                launch {
+                    viewModel.isLoading.collect { isLoading ->
+                        binding.loadingProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+                    }
+                }
             }
         }
     }

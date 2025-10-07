@@ -1,0 +1,302 @@
+[
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_activity_dashboard.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/activity_dashboard.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_activity_pin_login.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/activity_pin_login.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/navigation_nav_graph_main.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/navigation/nav_graph_main.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_phone.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_phone.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_activity_pdf_test.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/activity_pdf_test.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_dashboard_table.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_dashboard_table.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_activity_email_auth.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/activity_email_auth.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_edit_24dp.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_edit_24dp.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_person.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_person.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_add_24dp.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_add_24dp.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_login.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_login.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_customers.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_customers.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_inventory_management.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_inventory_management.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/mipmap_ic_launcher.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/mipmap/ic_launcher.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_inventory_24dp.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_inventory_24dp.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_dashboard_cash_register.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_dashboard_cash_register.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_menu.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_menu.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_arrow_back_white_24dp.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_arrow_back_white_24dp.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_delete_24dp.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_delete_24dp.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_arrow_forward_24dp.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_arrow_forward_24dp.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_product_detail.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_product_detail.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/navigation_nav_graph_auth.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/navigation/nav_graph_auth.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_edit_text_background.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/edit_text_background.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_activity_main.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable-nodpi_extropos_ic_foreground.png.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable-nodpi/extropos_ic_foreground.png"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_item_category.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/item_category.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_extropos_foreground.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_extropos_foreground.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/mipmap_ic_launcher_foreground.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/mipmap/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/mipmap_ic_launcher_round.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/mipmap/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_launcher_foreground_bitmap.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_launcher_foreground_bitmap.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_hardware_settings.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_hardware_settings.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_dialog_add_printer.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/dialog_add_printer.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_devices_24dp.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_devices_24dp.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_products_grid.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_products_grid.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_dashboard_settings.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_dashboard_settings.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_item_cart.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/item_cart.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_item_employee.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/item_employee.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_assignment.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_assignment.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_dashboard_report.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_dashboard_report.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_item_dashboard_button.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/item_dashboard_button.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_settings.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_email.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_email.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_employee_management.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_employee_management.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_payment_24dp.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_payment_24dp.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_reporting_settings.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_reporting_settings.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_lock.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_lock.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_printer_24dp.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_printer_24dp.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_location.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_location.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_item_menu_item.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/item_menu_item.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_printer_setup.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_printer_setup.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_app_lock.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_app_lock.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_dashboard_customers.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_dashboard_customers.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_main.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_main.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_payment_settings.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_payment_settings.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_item_product.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/item_product.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_badge_background.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/badge_background.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_activity_add_user.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/activity_add_user.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_cart.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_cart.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_signup.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_signup.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_category_background.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/category_background.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_item_printer.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/item_printer.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/mipmap_ic_launcher_background.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/mipmap/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_pos.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_pos.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/layout_fragment_tables.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/layout/fragment_tables.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_analytics_24dp.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_analytics_24dp.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_people_24dp.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_people_24dp.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-release-62:/drawable_ic_business.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-63:/drawable/ic_business.xml"
+    }
+]

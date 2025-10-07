@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extrotarget.extropos.databinding.FragmentPrinterSetupBinding
 import com.extrotarget.extropos.ui.settings.printer.adapters.PrinterAdapter
@@ -81,24 +83,28 @@ class PrinterSetupFragment : Fragment() {
 
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.printers.collect { printers ->
-                printerAdapter.submitList(printers)
-                binding.emptyStateTextView.visibility = if (printers.isEmpty()) View.VISIBLE else View.GONE
-            }
-        }
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.printers.collect { printers ->
+                        printerAdapter.submitList(printers)
+                        binding.emptyStateTextView.visibility = if (printers.isEmpty()) View.VISIBLE else View.GONE
+                    }
+                }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.isScanning.collect { isScanning ->
-                binding.scanningProgressBar.visibility = if (isScanning) View.VISIBLE else View.GONE
-                binding.scanPrintersButton.isEnabled = !isScanning
-                binding.scanPrintersButton.text = if (isScanning) "Scanning..." else "Scan for Printers"
-            }
-        }
+                launch {
+                    viewModel.isScanning.collect { isScanning ->
+                        binding.scanningProgressBar.visibility = if (isScanning) View.VISIBLE else View.GONE
+                        binding.scanPrintersButton.isEnabled = !isScanning
+                        binding.scanPrintersButton.text = if (isScanning) "Scanning..." else "Scan for Printers"
+                    }
+                }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.scanResults.collect { results ->
-                if (results.isNotEmpty()) {
-                    showScanResultsDialog(results)
+                launch {
+                    viewModel.scanResults.collect { results ->
+                        if (results.isNotEmpty()) {
+                            showScanResultsDialog(results)
+                        }
+                    }
                 }
             }
         }

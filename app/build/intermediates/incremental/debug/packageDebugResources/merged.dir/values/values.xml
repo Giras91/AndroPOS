@@ -12,6 +12,11 @@
     <color name="primary_blue">#2196F3</color>
     <color name="success_color">#4CAF50</color>
     <color name="surface">#FFFFFF</color>
+    <color name="tile_blue">#1976D2</color>
+    <color name="tile_cyan">#00BCD4</color>
+    <color name="tile_orange">#FB8C00</color>
+    <color name="tile_purple">#8E24AA</color>
+    <color name="tile_teal">#009688</color>
     <color name="training_mode_accent">#FF9800</color>
     <string name="app_name">ExtroPOS</string>
     <string name="dashboard_customers">Customers</string>

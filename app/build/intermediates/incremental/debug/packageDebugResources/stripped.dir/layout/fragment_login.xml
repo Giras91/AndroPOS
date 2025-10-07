@@ -14,13 +14,13 @@
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="12dp">
 
         <!-- Logo and Title -->
         <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginBottom="24dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="12dp"
             android:contentDescription="AndroPOS Logo"
             android:src="@drawable/ic_launcher_foreground"
             app:tint="@android:color/white" />
@@ -28,49 +28,49 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         android:text="AndroPOS"
         android:textColor="@android:color/white"
-        android:textSize="32sp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:text="Restaurant Point of Sale"
         android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:alpha="0.8" />
+        android:textSize="13sp"
+        android:alpha="0.9" />
 
     <!-- Login Card -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="8dp">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="12dp"
                 android:text="Login to Your Account"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <!-- Email Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:hint="Email Address"
                 app:endIconMode="clear_text"
                 app:startIconDrawable="@drawable/ic_email">
@@ -88,7 +88,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="12dp"
                 android:hint="Password"
                 app:endIconMode="password_toggle"
                 app:startIconDrawable="@drawable/ic_lock">
@@ -107,12 +107,12 @@
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Login"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
-                app:cornerRadius="8dp" />
+                android:textSize="14sp"
+                app:cornerRadius="6dp" />
 
             <!-- Sign Up Link -->
             <TextView
@@ -120,14 +120,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:padding="8dp"
+                android:padding="6dp"
                 android:text="Don't have an account? Sign Up"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <!-- Error Message -->
             <TextView

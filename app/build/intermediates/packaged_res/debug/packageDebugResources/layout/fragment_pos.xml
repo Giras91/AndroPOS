@@ -1,40 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     android:padding="8dp">
 
-    <!-- Products area (keeps hosting the ProductsGridFragment) -->
-    <FrameLayout
-        android:id="@+id/pos_products_container"
-        android:layout_width="0dp"
+    <!-- Left: Vertical categories column (narrow) -->
+    <ScrollView
+        android:id="@+id/pos_left_scroll"
+        android:layout_width="96dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:background="?android:attr/selectableItemBackground" />
+        android:fillViewport="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp">
 
-    <!-- Cart panel -->
+        <LinearLayout
+            android:id="@+id/pos_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="6dp"
+            android:gravity="top" />
+
+    </ScrollView>
+
+    <!-- Center: Search + Products area -->
     <LinearLayout
+        android:id="@+id/pos_center_column"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingStart="12dp"
-        android:paddingEnd="4dp">
+        app:layout_constraintStart_toEndOf="@id/pos_left_scroll"
+        app:layout_constraintEnd_toStartOf="@+id/pos_right_column"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Prominent search field (center top) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pos_search"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Search products"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:backgroundTintMode="src_over" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Products grid host (ProductsGridFragment will be placed here) -->
+        <FrameLayout
+            android:id="@+id/pos_products_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:background="?android:attr/selectableItemBackground" />
+
+    </LinearLayout>
+
+    <!-- Right: Ticket / Cart panel (styled closer to Loyverse) -->
+    <LinearLayout
+        android:id="@+id/pos_right_column"
+        android:layout_width="360dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingBottom="8dp">
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp">
 
             <TextView
+                android:id="@+id/pos_cart_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cart"
+                android:text="Ticket"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -42,10 +96,9 @@
                 android:id="@+id/pos_items_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 items"
+                android:text="0"
                 android:textSize="12sp"
-                android:textColor="@color/muted"
-                android:layout_marginStart="8dp" />
+                android:textColor="@color/muted" />
 
         </LinearLayout>
 
@@ -55,7 +108,7 @@
             android:layout_weight="1"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            android:padding="8dp">
+            android:layout_margin="8dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pos_cart_recycler"
@@ -65,16 +118,18 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Totals and big Pay button -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="8dp">
+            android:padding="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="6dp">
 
                 <TextView
                     android:id="@+id/pos_subtotal"
@@ -89,37 +144,51 @@
                     android:layout_height="wrap_content"
                     android:text="RM 0.00"
                     android:layout_marginStart="8dp" />
+
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/pos_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RM 0.00"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="end"
+                android:paddingBottom="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pos_checkout_button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="PAY"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                style="?attr/materialButtonStyle"
+                app:cornerRadius="8dp"
+                app:backgroundTint="@color/colorPrimary" />
+
+            <!-- Secondary actions row (small buttons) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingTop="6dp">
-
-                <TextView
-                    android:id="@+id/pos_total"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="RM 0.00"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                android:layout_marginTop="12dp">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/pos_checkout_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Checkout"
-                    app:cornerRadius="8dp"
-                    app:iconPadding="8dp"
-                    style="?attr/materialButtonStyle"
-                    app:iconTint="@color/surface"
-                    app:icon="@android:drawable/ic_menu_send"
-                    android:layout_marginStart="8dp"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp" />
+                    android:id="@+id/pos_btn_discount"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:text="Discount" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/pos_btn_hold"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:text="Hold"
+                    android:layout_marginStart="8dp" />
 
             </LinearLayout>
 
@@ -127,4 +196,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

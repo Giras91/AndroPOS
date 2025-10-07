@@ -64,6 +64,10 @@
         "source": "com.extrotarget.extropos.app-main-64:/drawable/ic_dashboard_customers.xml"
     },
     {
+        "merged": "com.extrotarget.extropos.app-debug-62:/layout_fragment_tables.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_tables.xml"
+    },
+    {
         "merged": "com.extrotarget.extropos.app-debug-62:/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "com.extrotarget.extropos.app-main-64:/mipmap-xxhdpi/ic_launcher.png"
     },
@@ -86,6 +90,10 @@
     {
         "merged": "com.extrotarget.extropos.app-debug-62:/drawable_ic_dashboard_report.xml.flat",
         "source": "com.extrotarget.extropos.app-main-64:/drawable/ic_dashboard_report.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-debug-62:/layout_fragment_product_detail.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_product_detail.xml"
     },
     {
         "merged": "com.extrotarget.extropos.app-debug-62:/drawable_ic_devices_24dp.xml.flat",
@@ -118,6 +126,10 @@
     {
         "merged": "com.extrotarget.extropos.app-debug-62:/drawable_ic_business.xml.flat",
         "source": "com.extrotarget.extropos.app-main-64:/drawable/ic_business.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-debug-62:/drawable_ic_extropos_foreground.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-64:/drawable/ic_extropos_foreground.xml"
     },
     {
         "merged": "com.extrotarget.extropos.app-debug-62:/layout_item_cart.xml.flat",
@@ -180,6 +192,10 @@
         "source": "com.extrotarget.extropos.app-main-64:/layout/item_menu_item.xml"
     },
     {
+        "merged": "com.extrotarget.extropos.app-debug-62:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-64:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
         "merged": "com.extrotarget.extropos.app-debug-62:/drawable_ic_delete_24dp.xml.flat",
         "source": "com.extrotarget.extropos.app-main-64:/drawable/ic_delete_24dp.xml"
     },
@@ -192,8 +208,16 @@
         "source": "com.extrotarget.extropos.app-main-64:/drawable/edit_text_background.xml"
     },
     {
+        "merged": "com.extrotarget.extropos.app-debug-62:/drawable-nodpi_extropos_ic_foreground.png.flat",
+        "source": "com.extrotarget.extropos.app-main-64:/drawable-nodpi/extropos_ic_foreground.png"
+    },
+    {
         "merged": "com.extrotarget.extropos.app-debug-62:/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "com.extrotarget.extropos.app-main-64:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-debug-62:/layout_fragment_customers.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_customers.xml"
     },
     {
         "merged": "com.extrotarget.extropos.app-debug-62:/layout_fragment_pos.xml.flat",
@@ -208,12 +232,12 @@
         "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_menu.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-debug-62:/layout_fragment_login.xml.flat",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_login.xml"
-    },
-    {
         "merged": "com.extrotarget.extropos.app-debug-62:/layout_activity_pin_login.xml.flat",
         "source": "com.extrotarget.extropos.app-main-64:/layout/activity_pin_login.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-debug-62:/layout_fragment_login.xml.flat",
+        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_login.xml"
     },
     {
         "merged": "com.extrotarget.extropos.app-debug-62:/layout_dialog_add_printer.xml.flat",

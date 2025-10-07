@@ -16,6 +16,15 @@
         <action
             android:id="@+id/action_main_to_pos"
             app:destination="@id/posFragment" />
+        <action
+            android:id="@+id/action_main_to_tables"
+            app:destination="@id/tablesFragment" />
+        <action
+            android:id="@+id/action_main_to_customers"
+            app:destination="@id/customersFragment" />
+        <action
+            android:id="@+id/action_main_to_reporting"
+            app:destination="@id/reportingSettingsFragment" />
     </fragment>
 
     <fragment
@@ -23,6 +32,12 @@
         android:name="com.extrotarget.extropos.ui.pos.PosFragment"
         android:label="POS"
         tools:layout="@layout/fragment_pos" />
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.extrotarget.extropos.ui.product.ProductDetailFragment"
+        android:label="Product Detail"
+        tools:layout="@layout/fragment_product_detail" />
 
     
     <fragment
@@ -86,5 +101,18 @@
         android:name="com.extrotarget.extropos.ui.settings.reporting.ReportingSettingsFragment"
         android:label="Reporting Settings"
         tools:layout="@layout/fragment_reporting_settings" />
+
+    <!-- Tables placeholder fragment -->
+    <fragment
+        android:id="@+id/tablesFragment"
+        android:name="com.extrotarget.extropos.ui.main.TablesFragment"
+        android:label="Tables"
+        tools:layout="@layout/fragment_tables" />
+
+    <fragment
+        android:id="@+id/customersFragment"
+        android:name="com.extrotarget.extropos.ui.customers.CustomersFragment"
+        android:label="Customers"
+        tools:layout="@layout/fragment_customers" />
 
 </navigation>

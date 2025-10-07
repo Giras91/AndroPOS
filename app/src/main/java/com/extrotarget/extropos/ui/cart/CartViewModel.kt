@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import android.util.Log
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
@@ -57,8 +58,9 @@ class CartViewModel @Inject constructor(
     private fun loadCurrentTicket() {
         viewModelScope.launch {
             getCurrentTicketUseCase().collect { ticket ->
-                ticket?.let {
-                    _items.value = it.items.map { ticketItem ->
+                if (ticket != null) {
+                    _currentTicket.value = ticket
+                    _items.value = ticket.items.map { ticketItem ->
                         CartItem(
                             productId = ticketItem.productId,
                             name = ticketItem.name,
@@ -74,7 +76,19 @@ class CartViewModel @Inject constructor(
 
     fun addItem(productId: String, name: String, unitPriceCents: Long, quantity: Int = 1) {
         viewModelScope.launch {
-            val currentTicket = _currentTicket.value ?: return@launch
+            var currentTicket = _currentTicket.value
+            if (currentTicket == null) {
+                // Create a new ticket when none exists (debug-friendly)
+                try {
+                    val created = createTicketUseCase()
+                    _currentTicket.value = created
+                    currentTicket = created
+                    Log.i("DashboardDebug", "CreateTicket: id=${created.id}")
+                } catch (e: Exception) {
+                    Log.i("DashboardDebug", "CreateTicket failed: ${e.message}")
+                    return@launch
+                }
+            }
             val cartItem = CartItem(
                 productId = productId,
                 name = name,
@@ -91,6 +105,7 @@ class CartViewModel @Inject constructor(
                 notes = ""
             )
             addItemToTicketUseCase(ticketItem)
+            Log.i("DashboardDebug", "CartViewModel.addItem: id=$productId name=$name qty=$quantity priceCents=$unitPriceCents")
         }
     }
 

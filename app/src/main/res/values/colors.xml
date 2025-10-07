@@ -14,6 +14,13 @@
     <color name="accent">#4CAF50</color>
     <color name="success_color">#4CAF50</color>
 
+    <!-- Dashboard tile palette (Loyverse-like accents) -->
+    <color name="tile_blue">#1976D2</color>
+    <color name="tile_orange">#FB8C00</color>
+    <color name="tile_teal">#009688</color>
+    <color name="tile_purple">#8E24AA</color>
+    <color name="tile_cyan">#00BCD4</color>
+
     <!-- Compatibility colors -->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>

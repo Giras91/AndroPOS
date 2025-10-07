@@ -4,13 +4,14 @@ package com.extrotarget.extropos.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.gridlayout.widget.GridLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.extrotarget.extropos.R;
@@ -25,6 +26,9 @@ public final class ActivityDashboardBinding implements ViewBinding {
 
   @NonNull
   public final TextView accountText;
+
+  @NonNull
+  public final TextView actionStatus;
 
   @NonNull
   public final TextView appTitle;
@@ -45,16 +49,46 @@ public final class ActivityDashboardBinding implements ViewBinding {
   public final ItemDashboardButtonBinding btnTable;
 
   @NonNull
+  public final TextView customersCount;
+
+  @NonNull
+  public final TextView customersLabel;
+
+  @NonNull
+  public final ConstraintLayout dashboardColumns;
+
+  @NonNull
   public final FloatingActionButton fabPdf;
 
   @NonNull
   public final LinearLayout headerBar;
 
   @NonNull
+  public final HorizontalScrollView leftScroll;
+
+  @NonNull
   public final TextView loggedInRoleText;
 
   @NonNull
-  public final GridLayout mainButtonGrid;
+  public final LinearLayout mainButtonGrid;
+
+  @NonNull
+  public final TextView metricsTitle;
+
+  @NonNull
+  public final TextView ordersCount;
+
+  @NonNull
+  public final TextView ordersLabel;
+
+  @NonNull
+  public final RecyclerView recentSalesRecycler;
+
+  @NonNull
+  public final TextView recentTitle;
+
+  @NonNull
+  public final LinearLayout rightPanel;
 
   @NonNull
   public final Switch switchGuideMode;
@@ -62,29 +96,54 @@ public final class ActivityDashboardBinding implements ViewBinding {
   @NonNull
   public final Switch switchTrainingMode;
 
+  @NonNull
+  public final TextView totalSales;
+
+  @NonNull
+  public final TextView totalSalesLabel;
+
   private ActivityDashboardBinding(@NonNull ConstraintLayout rootView,
-      @NonNull TextView accountText, @NonNull TextView appTitle,
+      @NonNull TextView accountText, @NonNull TextView actionStatus, @NonNull TextView appTitle,
       @NonNull ItemDashboardButtonBinding btnCashRegister,
       @NonNull ItemDashboardButtonBinding btnCustomers,
       @NonNull ItemDashboardButtonBinding btnReport,
       @NonNull ItemDashboardButtonBinding btnSettings, @NonNull ItemDashboardButtonBinding btnTable,
-      @NonNull FloatingActionButton fabPdf, @NonNull LinearLayout headerBar,
-      @NonNull TextView loggedInRoleText, @NonNull GridLayout mainButtonGrid,
-      @NonNull Switch switchGuideMode, @NonNull Switch switchTrainingMode) {
+      @NonNull TextView customersCount, @NonNull TextView customersLabel,
+      @NonNull ConstraintLayout dashboardColumns, @NonNull FloatingActionButton fabPdf,
+      @NonNull LinearLayout headerBar, @NonNull HorizontalScrollView leftScroll,
+      @NonNull TextView loggedInRoleText, @NonNull LinearLayout mainButtonGrid,
+      @NonNull TextView metricsTitle, @NonNull TextView ordersCount, @NonNull TextView ordersLabel,
+      @NonNull RecyclerView recentSalesRecycler, @NonNull TextView recentTitle,
+      @NonNull LinearLayout rightPanel, @NonNull Switch switchGuideMode,
+      @NonNull Switch switchTrainingMode, @NonNull TextView totalSales,
+      @NonNull TextView totalSalesLabel) {
     this.rootView = rootView;
     this.accountText = accountText;
+    this.actionStatus = actionStatus;
     this.appTitle = appTitle;
     this.btnCashRegister = btnCashRegister;
     this.btnCustomers = btnCustomers;
     this.btnReport = btnReport;
     this.btnSettings = btnSettings;
     this.btnTable = btnTable;
+    this.customersCount = customersCount;
+    this.customersLabel = customersLabel;
+    this.dashboardColumns = dashboardColumns;
     this.fabPdf = fabPdf;
     this.headerBar = headerBar;
+    this.leftScroll = leftScroll;
     this.loggedInRoleText = loggedInRoleText;
     this.mainButtonGrid = mainButtonGrid;
+    this.metricsTitle = metricsTitle;
+    this.ordersCount = ordersCount;
+    this.ordersLabel = ordersLabel;
+    this.recentSalesRecycler = recentSalesRecycler;
+    this.recentTitle = recentTitle;
+    this.rightPanel = rightPanel;
     this.switchGuideMode = switchGuideMode;
     this.switchTrainingMode = switchTrainingMode;
+    this.totalSales = totalSales;
+    this.totalSalesLabel = totalSalesLabel;
   }
 
   @Override
@@ -117,6 +176,12 @@ public final class ActivityDashboardBinding implements ViewBinding {
       id = R.id.accountText;
       TextView accountText = ViewBindings.findChildViewById(rootView, id);
       if (accountText == null) {
+        break missingId;
+      }
+
+      id = R.id.actionStatus;
+      TextView actionStatus = ViewBindings.findChildViewById(rootView, id);
+      if (actionStatus == null) {
         break missingId;
       }
 
@@ -161,6 +226,24 @@ public final class ActivityDashboardBinding implements ViewBinding {
       }
       ItemDashboardButtonBinding binding_btnTable = ItemDashboardButtonBinding.bind(btnTable);
 
+      id = R.id.customersCount;
+      TextView customersCount = ViewBindings.findChildViewById(rootView, id);
+      if (customersCount == null) {
+        break missingId;
+      }
+
+      id = R.id.customersLabel;
+      TextView customersLabel = ViewBindings.findChildViewById(rootView, id);
+      if (customersLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.dashboardColumns;
+      ConstraintLayout dashboardColumns = ViewBindings.findChildViewById(rootView, id);
+      if (dashboardColumns == null) {
+        break missingId;
+      }
+
       id = R.id.fabPdf;
       FloatingActionButton fabPdf = ViewBindings.findChildViewById(rootView, id);
       if (fabPdf == null) {
@@ -173,6 +256,12 @@ public final class ActivityDashboardBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.leftScroll;
+      HorizontalScrollView leftScroll = ViewBindings.findChildViewById(rootView, id);
+      if (leftScroll == null) {
+        break missingId;
+      }
+
       id = R.id.loggedInRoleText;
       TextView loggedInRoleText = ViewBindings.findChildViewById(rootView, id);
       if (loggedInRoleText == null) {
@@ -180,8 +269,44 @@ public final class ActivityDashboardBinding implements ViewBinding {
       }
 
       id = R.id.mainButtonGrid;
-      GridLayout mainButtonGrid = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout mainButtonGrid = ViewBindings.findChildViewById(rootView, id);
       if (mainButtonGrid == null) {
+        break missingId;
+      }
+
+      id = R.id.metricsTitle;
+      TextView metricsTitle = ViewBindings.findChildViewById(rootView, id);
+      if (metricsTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.ordersCount;
+      TextView ordersCount = ViewBindings.findChildViewById(rootView, id);
+      if (ordersCount == null) {
+        break missingId;
+      }
+
+      id = R.id.ordersLabel;
+      TextView ordersLabel = ViewBindings.findChildViewById(rootView, id);
+      if (ordersLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.recent_sales_recycler;
+      RecyclerView recentSalesRecycler = ViewBindings.findChildViewById(rootView, id);
+      if (recentSalesRecycler == null) {
+        break missingId;
+      }
+
+      id = R.id.recentTitle;
+      TextView recentTitle = ViewBindings.findChildViewById(rootView, id);
+      if (recentTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.rightPanel;
+      LinearLayout rightPanel = ViewBindings.findChildViewById(rootView, id);
+      if (rightPanel == null) {
         break missingId;
       }
 
@@ -197,10 +322,24 @@ public final class ActivityDashboardBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityDashboardBinding((ConstraintLayout) rootView, accountText, appTitle,
-          binding_btnCashRegister, binding_btnCustomers, binding_btnReport, binding_btnSettings,
-          binding_btnTable, fabPdf, headerBar, loggedInRoleText, mainButtonGrid, switchGuideMode,
-          switchTrainingMode);
+      id = R.id.totalSales;
+      TextView totalSales = ViewBindings.findChildViewById(rootView, id);
+      if (totalSales == null) {
+        break missingId;
+      }
+
+      id = R.id.totalSalesLabel;
+      TextView totalSalesLabel = ViewBindings.findChildViewById(rootView, id);
+      if (totalSalesLabel == null) {
+        break missingId;
+      }
+
+      return new ActivityDashboardBinding((ConstraintLayout) rootView, accountText, actionStatus,
+          appTitle, binding_btnCashRegister, binding_btnCustomers, binding_btnReport,
+          binding_btnSettings, binding_btnTable, customersCount, customersLabel, dashboardColumns,
+          fabPdf, headerBar, leftScroll, loggedInRoleText, mainButtonGrid, metricsTitle,
+          ordersCount, ordersLabel, recentSalesRecycler, recentTitle, rightPanel, switchGuideMode,
+          switchTrainingMode, totalSales, totalSalesLabel);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

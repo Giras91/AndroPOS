@@ -47,12 +47,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ExtroPOS"
-            android:textSize="40sp"
+            android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/headerBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="16dp" />
 
         <!-- Switches on top-right (Guide Mode / Training Mode) -->
         <LinearLayout
@@ -103,18 +103,22 @@
             android:id="@+id/main_button_grid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:columnCount="5"
-            android:rowCount="1"
+            android:layout_marginTop="24dp"
+            android:alignmentMode="alignMargins"
+            android:useDefaultMargins="true"
+            android:columnCount="3"
+            android:padding="12dp"
             app:layout_constraintTop_toBottomOf="@id/appTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5">
 
-            <include layout="@layout/item_dashboard_button" android:id="@+id/btn_cash_register" />
-            <include layout="@layout/item_dashboard_button" android:id="@+id/btn_table" />
-            <include layout="@layout/item_dashboard_button" android:id="@+id/btn_report" />
-            <include layout="@layout/item_dashboard_button" android:id="@+id/btn_customers" />
-            <include layout="@layout/item_dashboard_button" android:id="@+id/btn_settings" />
+            <!-- Center the buttons by using a wrap_content grid and symmetric margins on includes -->
+            <include layout="@layout/item_dashboard_button" android:id="@+id/btn_cash_register" android:layout_margin="12dp" />
+            <include layout="@layout/item_dashboard_button" android:id="@+id/btn_table" android:layout_margin="12dp" />
+            <include layout="@layout/item_dashboard_button" android:id="@+id/btn_report" android:layout_margin="12dp" />
+            <include layout="@layout/item_dashboard_button" android:id="@+id/btn_customers" android:layout_margin="12dp" />
+            <include layout="@layout/item_dashboard_button" android:id="@+id/btn_settings" android:layout_margin="12dp" />
         </androidx.gridlayout.widget.GridLayout>
 
         <!-- Floating action (e.g., logout) -->

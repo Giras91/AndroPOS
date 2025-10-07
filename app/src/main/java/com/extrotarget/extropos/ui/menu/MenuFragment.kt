@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extrotarget.extropos.databinding.FragmentMenuBinding
@@ -83,33 +85,37 @@ class MenuFragment : Fragment() {
 
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.categories.collect { categories ->
-                categoryAdapter.submitList(categories)
-            }
-        }
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.categories.collect { categories ->
+                        categoryAdapter.submitList(categories)
+                    }
+                }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.menuItems.collect { menuItems ->
-                menuItemAdapter.submitList(menuItems)
-                binding.emptyStateTextView.visibility =
-                    if (menuItems.isEmpty()) View.VISIBLE else View.GONE
-            }
-        }
+                launch {
+                    viewModel.menuItems.collect { menuItems ->
+                        menuItemAdapter.submitList(menuItems)
+                        binding.emptyStateTextView.visibility =
+                            if (menuItems.isEmpty()) View.VISIBLE else View.GONE
+                    }
+                }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.isLoading.collect { isLoading ->
-                binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-            }
-        }
+                launch {
+                    viewModel.isLoading.collect { isLoading ->
+                        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+                    }
+                }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.error.collect { error ->
-                error?.let {
-                    // Show error message
-                    binding.errorTextView.text = it
-                    binding.errorTextView.visibility = View.VISIBLE
-                } ?: run {
-                    binding.errorTextView.visibility = View.GONE
+                launch {
+                    viewModel.error.collect { error ->
+                        error?.let {
+                            // Show error message
+                            binding.errorTextView.text = it
+                            binding.errorTextView.visibility = View.VISIBLE
+                        } ?: run {
+                            binding.errorTextView.visibility = View.GONE
+                        }
+                    }
                 }
             }
         }

@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import com.extrotarget.extropos.R
 import android.widget.*
 import kotlinx.coroutines.launch
@@ -68,28 +70,32 @@ class LoginFragment : Fragment() {
 
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.loginState.collect { state ->
-                when (state) {
-                    is LoginState.Loading -> {
-                        loginButton.isEnabled = false
-                        progressBar.visibility = View.VISIBLE
-                    }
-                    is LoginState.Success -> {
-                        loginButton.isEnabled = true
-                        progressBar.visibility = View.GONE
-                        // Navigate to main POS screen
-                        navigateToMainScreen()
-                    }
-                    is LoginState.Error -> {
-                        loginButton.isEnabled = true
-                        progressBar.visibility = View.GONE
-                        errorTextView.text = state.message
-                        errorTextView.visibility = View.VISIBLE
-                    }
-                    LoginState.Idle -> {
-                        loginButton.isEnabled = true
-                        progressBar.visibility = View.GONE
-                        errorTextView.visibility = View.GONE
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.loginState.collect { state ->
+                        when (state) {
+                            is LoginState.Loading -> {
+                                loginButton.isEnabled = false
+                                progressBar.visibility = View.VISIBLE
+                            }
+                            is LoginState.Success -> {
+                                loginButton.isEnabled = true
+                                progressBar.visibility = View.GONE
+                                // Navigate to main POS screen
+                                navigateToMainScreen()
+                            }
+                            is LoginState.Error -> {
+                                loginButton.isEnabled = true
+                                progressBar.visibility = View.GONE
+                                errorTextView.text = state.message
+                                errorTextView.visibility = View.VISIBLE
+                            }
+                            LoginState.Idle -> {
+                                loginButton.isEnabled = true
+                                progressBar.visibility = View.GONE
+                                errorTextView.visibility = View.GONE
+                            }
+                        }
                     }
                 }
             }

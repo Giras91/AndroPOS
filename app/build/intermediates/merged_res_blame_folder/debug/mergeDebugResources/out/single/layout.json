@@ -1,5 +1,9 @@
 [
     {
+        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_tables.xml",
+        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_tables.xml"
+    },
+    {
         "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/item_printer.xml",
         "source": "com.extrotarget.extropos.app-main-64:/layout/item_printer.xml"
     },
@@ -30,6 +34,10 @@
     {
         "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/activity_pdf_test.xml",
         "source": "com.extrotarget.extropos.app-main-64:/layout/activity_pdf_test.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_customers.xml",
+        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_customers.xml"
     },
     {
         "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/item_cart.xml",
@@ -82,6 +90,10 @@
     {
         "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_inventory_management.xml",
         "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_inventory_management.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_product_detail.xml",
+        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_product_detail.xml"
     },
     {
         "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/item_employee.xml",

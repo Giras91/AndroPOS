@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="140dp"
     android:layout_height="140dp"
     android:layout_margin="12dp"
-    app:cardCornerRadius="16dp"
+    app:cardCornerRadius="18dp"
     app:cardElevation="6dp"
-    app:cardBackgroundColor="@android:color/white"
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="@color/surface"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground">
@@ -15,25 +16,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
-        android:padding="8dp">
+    android:gravity="center"
+    android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/button_icon"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="Dashboard icon"
-            android:src="@drawable/ic_dashboard_cash_register" />
+        <TextView
+            android:id="@+id/button_emoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💰"
+            android:textSize="44sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_marginBottom="8dp"
+            android:includeFontPadding="false" />
 
         <TextView
             android:id="@+id/button_label"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Label"
-            android:textSize="16sp"
+            android:text="Cash"
+            android:textSize="14sp"
+            android:textColor="@color/on_surface"
             android:textStyle="bold"
-            android:textColor="#333333" />
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:lineSpacingMultiplier="0.95" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

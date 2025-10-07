@@ -8,7 +8,7 @@
     android:background="#F0F2F5"
     tools:context=".ui.main.DashboardActivity">
 
-    <!-- Top header bar with account info and mode switches -->
+    <!-- Top header bar with account info and mode switches (left aligned actions preserved) -->
     <LinearLayout
         android:id="@+id/headerBar"
         android:layout_width="0dp"
@@ -52,42 +52,208 @@
             android:text="Guide" />
     </LinearLayout>
 
-    <!-- App name -->
+    <!-- App title -->
     <TextView
         android:id="@+id/appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ExtroPOS"
-        android:textSize="40sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         android:textColor="#222"
         app:layout_constraintTop_toBottomOf="@id/headerBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp" />
 
-    <!-- Button grid -->
-    <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/mainButtonGrid"
+    <!-- Small status area used by debug to show last action -->
+    <TextView
+        android:id="@+id/actionStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:columnCount="5"
-        app:rowCount="1"
-        android:layout_marginTop="64dp"
+        android:text=""
+        android:textSize="14sp"
+        android:textColor="#333"
         app:layout_constraintTop_toBottomOf="@id/appTitle"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp" />
+
+    <!-- Two-column dashboard: left = main action tiles, right = metrics + recent sales -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dashboardColumns"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/actionStatus"
+        app:layout_constraintBottom_toTopOf="@id/fabPdf"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.4">
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp">
 
-        <!-- Use include for each dashboard button -->
-        <include layout="@layout/item_dashboard_button" android:id="@+id/btn_cash_register" />
-        <include layout="@layout/item_dashboard_button" android:id="@+id/btn_table" />
-        <include layout="@layout/item_dashboard_button" android:id="@+id/btn_report" />
-        <include layout="@layout/item_dashboard_button" android:id="@+id/btn_customers" />
-        <include layout="@layout/item_dashboard_button" android:id="@+id/btn_settings" />
-    </androidx.gridlayout.widget.GridLayout>
+        <!-- Left column: main actions grid (preserve mainButtonGrid id and includes) -->
+        <HorizontalScrollView
+            android:id="@+id/leftScroll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:fillViewport="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rightPanel"
+            android:padding="8dp"
+            android:scrollbars="none">
 
-    <!-- Floating logout button -->
+            <LinearLayout
+                android:id="@+id/mainButtonGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp">
+
+                <!-- Use include for each dashboard button (preserve ids) -->
+                <include layout="@layout/item_dashboard_button" android:id="@+id/btn_cash_register" />
+                <include layout="@layout/item_dashboard_button" android:id="@+id/btn_table" />
+                <include layout="@layout/item_dashboard_button" android:id="@+id/btn_report" />
+                <include layout="@layout/item_dashboard_button" android:id="@+id/btn_customers" />
+                <include layout="@layout/item_dashboard_button" android:id="@+id/btn_settings" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Right panel: quick metrics and recent sales list -->
+        <LinearLayout
+            android:id="@+id/rightPanel"
+            android:layout_width="360dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/leftScroll">
+
+            <TextView
+                android:id="@+id/metricsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quick Summary"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+                        <TextView
+                            android:id="@+id/totalSalesLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sales"
+                            android:textSize="12sp" />
+                        <TextView
+                            android:id="@+id/totalSales"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="RM 0.00"
+                            android:textStyle="bold"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+                        <TextView
+                            android:id="@+id/ordersLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Orders"
+                            android:textSize="12sp" />
+                        <TextView
+                            android:id="@+id/ordersCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textStyle="bold"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+                        <TextView
+                            android:id="@+id/customersLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Customers"
+                            android:textSize="12sp" />
+                        <TextView
+                            android:id="@+id/customersCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textStyle="bold"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/recentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recent Sales"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="6dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recent_sales_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:overScrollMode="ifContentScrolls" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Floating action button (kept) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabPdf"
         android:layout_width="wrap_content"

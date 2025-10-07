@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +21,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class CartFragment : Fragment() {
 
-    private val cartViewModel: CartViewModel by viewModels()
+    // Use activity-scoped CartViewModel so different fragments (detail, grid, cart) share the same state
+    private val cartViewModel: CartViewModel by activityViewModels()
     private lateinit var cartItemsAdapter: CartItemsAdapter
     
     private lateinit var cartItemsRecyclerView: RecyclerView
@@ -94,6 +97,7 @@ class CartFragment : Fragment() {
             cartViewModel.items.collect { items ->
                 cartItemsAdapter.submitList(items)
                 updateTotals()
+                Log.i("DashboardDebug", "CartFragment.observe: items=${items.size} total=${cartViewModel.getFormattedTotal()}")
             }
         }
     }

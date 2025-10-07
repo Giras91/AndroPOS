@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.extrotarget.extropos.R
 import com.extrotarget.extropos.databinding.FragmentSignupBinding
@@ -65,25 +67,29 @@ class SignupFragment : Fragment() {
 
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.isLoading.collect { isLoading ->
-                binding.loadingProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-                binding.signupButton.isEnabled = !isLoading
-            }
-        }
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.isLoading.collect { isLoading ->
+                        binding.loadingProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+                        binding.signupButton.isEnabled = !isLoading
+                    }
+                }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.error.collect { error ->
-                binding.errorTextView.text = error
-                binding.errorTextView.visibility = if (error != null) View.VISIBLE else View.GONE
-            }
-        }
+                launch {
+                    viewModel.error.collect { error ->
+                        binding.errorTextView.text = error
+                        binding.errorTextView.visibility = if (error != null) View.VISIBLE else View.GONE
+                    }
+                }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.signupResult.collect { result ->
-                result?.let {
-                    if (it.success) {
-                        // Navigate to app lock screen for verification
-                        findNavController().navigate(R.id.action_signup_to_app_lock)
+                launch {
+                    viewModel.signupResult.collect { result ->
+                        result?.let {
+                            if (it.success) {
+                                // Navigate to app lock screen for verification
+                                findNavController().navigate(R.id.action_signup_to_app_lock)
+                            }
+                        }
                     }
                 }
             }

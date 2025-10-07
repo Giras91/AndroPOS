@@ -18,6 +18,9 @@ class ProductViewModel @Inject constructor(
     private val _products = MutableStateFlow<List<Product>>(emptyList())
     val products: StateFlow<List<Product>> = _products.asStateFlow()
 
+    // Keep a master list so searches/filters can be applied from original dataset
+    private var allProducts: List<Product> = emptyList()
+
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
@@ -28,6 +31,18 @@ class ProductViewModel @Inject constructor(
         loadProducts()
     }
 
+    // Mock categories store (id -> name). In a real app this comes from repository.
+    private val categoriesMap: Map<String, String> = mapOf(
+        "1" to "Mains",
+        "2" to "Beverages"
+    )
+
+    fun getCategories(): List<Pair<String, String>> {
+        // Return categories that are present in the dataset in stable order
+        val ids = allProducts.map { it.categoryId }.distinct()
+        return ids.map { Pair(it, categoriesMap[it] ?: "Category ${it}") }
+    }
+
     fun loadProducts() {
         viewModelScope.launch {
             _isLoading.value = true
@@ -36,7 +51,8 @@ class ProductViewModel @Inject constructor(
             try {
                 // TODO: Load from repository
                 // For now, create mock data
-                _products.value = createMockProducts()
+                allProducts = createMockProducts()
+                _products.value = allProducts
                 _isLoading.value = false
             } catch (e: Exception) {
                 _error.value = e.message
@@ -48,16 +64,31 @@ class ProductViewModel @Inject constructor(
     fun searchProducts(query: String) {
         viewModelScope.launch {
             if (query.isBlank()) {
-                loadProducts()
+                _products.value = allProducts
                 return@launch
             }
             
-            val filteredProducts = _products.value.filter {
+            val filteredProducts = allProducts.filter {
                 it.name.contains(query, ignoreCase = true) ||
                 it.description.contains(query, ignoreCase = true)
             }
             _products.value = filteredProducts
         }
+    }
+
+    fun filterByCategory(categoryId: String?) {
+        viewModelScope.launch {
+            if (categoryId.isNullOrBlank()) {
+                _products.value = allProducts
+                return@launch
+            }
+            _products.value = allProducts.filter { it.categoryId == categoryId }
+        }
+    }
+
+    // Return a product by id from the loaded dataset (or null if missing)
+    fun getProductById(id: String): Product? {
+        return allProducts.find { it.id == id }
     }
 
     private fun createMockProducts(): List<Product> {

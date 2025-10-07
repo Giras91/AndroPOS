@@ -9,6 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.extrotarget.extropos.ui.user.AddUserActivity
+import com.extrotarget.extropos.MainActivity
 import com.extrotarget.extropos.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -42,9 +43,10 @@ class PinLoginActivity : ComponentActivity() {
                         finish()
                     }
                     PinLoginEvent.NavigateMain -> {
-                        // Navigate to Dashboard after successful PIN login
-                        val intent = Intent(this@PinLoginActivity, 
-                            Class.forName("com.extrotarget.extropos.ui.dashboard.DashboardActivity"))
+                        // Navigate to the app's main activity which hosts the fragment-based dashboard
+                        val intent = Intent(this@PinLoginActivity, MainActivity::class.java)
+                        // Request the main dashboard be opened after auth
+                        intent.putExtra("debug_open_dashboard", true)
                         startActivity(intent)
                         finish()
                     }

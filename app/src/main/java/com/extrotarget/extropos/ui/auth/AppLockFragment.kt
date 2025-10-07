@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.extrotarget.extropos.R
 import com.extrotarget.extropos.databinding.FragmentAppLockBinding
@@ -55,31 +57,35 @@ class AppLockFragment : Fragment() {
 
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.isLoading.collect { isLoading ->
-                binding.loadingProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.error.collect { error ->
-                binding.statusTextView.text = error ?: ""
-                binding.statusTextView.visibility = if (error != null) View.VISIBLE else View.GONE
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.authState.collect { state ->
-                when (state) {
-                    AuthState.AUTHENTICATED_VERIFIED -> {
-                        // User is now verified, go to main app
-                        findNavController().navigate(R.id.action_app_lock_to_main)
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.isLoading.collect { isLoading ->
+                        binding.loadingProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
                     }
-                    AuthState.NOT_AUTHENTICATED -> {
-                        // User logged out, go back to login
-                        findNavController().navigate(R.id.action_app_lock_to_login)
+                }
+
+                launch {
+                    viewModel.error.collect { error ->
+                        binding.statusTextView.text = error ?: ""
+                        binding.statusTextView.visibility = if (error != null) View.VISIBLE else View.GONE
                     }
-                    else -> {
-                        // Stay on lock screen
+                }
+
+                launch {
+                    viewModel.authState.collect { state ->
+                        when (state) {
+                            AuthState.AUTHENTICATED_VERIFIED -> {
+                                // User is now verified, go to main app
+                                findNavController().navigate(R.id.action_app_lock_to_main)
+                            }
+                            AuthState.NOT_AUTHENTICATED -> {
+                                // User logged out, go back to login
+                                findNavController().navigate(R.id.action_app_lock_to_login)
+                            }
+                            else -> {
+                                // Stay on lock screen
+                            }
+                        }
                     }
                 }
             }
@@ -89,11 +95,13 @@ class AppLockFragment : Fragment() {
     }
 
     private fun startVerificationCheck() {
-        // Check verification status every 5 seconds
+        // Check verification status every 5 seconds while view is STARTED
         viewLifecycleOwner.lifecycleScope.launch {
-            while (true) {
-                viewModel.checkAppActivation()
-                delay(5000) // 5 seconds
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                while (true) {
+                    viewModel.checkAppActivation()
+                    kotlinx.coroutines.delay(5000) // 5 seconds
+                }
             }
         }
     }

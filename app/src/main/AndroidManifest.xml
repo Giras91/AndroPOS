@@ -20,15 +20,19 @@
         android:usesCleartextTraffic="true">
 
         <!-- Two-step auth flow activities -->
+        <!-- Use MainActivity as the launcher so the fragment-based dashboard is the home entry.
+             DashboardActivity is kept but marked non-exported; it can be started from the app's debug-only launcher
+             activity or via internal navigation for testing. -->
+        <activity
+            android:name=".ui.dashboard.DashboardActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher" />
+
         <activity
             android:name=".auth.EmailAuthActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name=".ui.pin.PinLoginActivity"
@@ -38,16 +42,19 @@
             android:name=".ui.user.AddUserActivity"
             android:exported="false" />
 
-        <!-- Existing main entry - reached only after PIN auth -->
+        <!-- Existing main entry - will be the app's main host for fragment navigation. Keep non-exported. -->
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-        <!-- Dashboard with modern POS interface -->
-        <activity
-            android:name=".ui.dashboard.DashboardActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+        <!-- Legacy DashboardActivity removed: the fragment-based dashboard (MainActivity -> MainFragment) is used instead. -->
 
         <!-- PDF Generation Test Activity -->
         <activity

@@ -38,35 +38,48 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
 
-        <!-- Two-step auth flow activities -->
+        <!-- Debug-only activity to quickly open the dashboard during development. -->
         <activity
-            android:name="com.extrotarget.extropos.auth.EmailAuthActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustPan" >
+            android:name="com.extrotarget.extropos.debug.DebugLauncherActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Two-step auth flow activities -->
+        <!--
+ Use MainActivity as the launcher so the fragment-based dashboard is the home entry.
+             DashboardActivity is kept but marked non-exported; it can be started from the app's debug-only launcher
+             activity or via internal navigation for testing.
+        -->
+        <activity
+            android:name="com.extrotarget.extropos.ui.dashboard.DashboardActivity"
+            android:exported="false"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.extrotarget.extropos.auth.EmailAuthActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.extrotarget.extropos.ui.pin.PinLoginActivity"
             android:exported="false" />
         <activity
             android:name="com.extrotarget.extropos.ui.user.AddUserActivity"
-            android:exported="false" />
-
-        <!-- Existing main entry - reached only after PIN auth -->
+            android:exported="false" /> <!-- Existing main entry - will be the app's main host for fragment navigation. Keep non-exported. -->
         <activity
             android:name="com.extrotarget.extropos.MainActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <!-- Dashboard with modern POS interface -->
-        <activity
-            android:name="com.extrotarget.extropos.ui.dashboard.DashboardActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- Legacy DashboardActivity removed: the fragment-based dashboard (MainActivity -> MainFragment) is used instead. -->
         <!-- PDF Generation Test Activity -->
         <activity
             android:name="com.extrotarget.extropos.pdf.test.PdfTestActivity"

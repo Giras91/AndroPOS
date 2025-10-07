@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Replaced reference to the corrupted extropos_ic_foreground.png with the existing
+    vector drawable `ic_launcher_foreground`. This avoids AAPT failures while a
+    proper PNG is provided. If you later want the original bitmap, replace the
+    `android:src` with @drawable/extropos_ic_foreground after fixing the file.
+-->
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/ic_launcher_foreground"
+    android:gravity="center"
+    android:antialias="true" />
