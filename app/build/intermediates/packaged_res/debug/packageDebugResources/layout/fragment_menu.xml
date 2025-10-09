@@ -82,6 +82,15 @@
             android:textColor="@android:color/holo_red_dark"
             android:visibility="gone" />
 
-    </LinearLayout>
+        <!-- Floating action button to add a category (shown in menu debug/admin mode) -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addCategoryFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:contentDescription="Add category"
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:layout_gravity="end|bottom" />
 
+    </LinearLayout>
          

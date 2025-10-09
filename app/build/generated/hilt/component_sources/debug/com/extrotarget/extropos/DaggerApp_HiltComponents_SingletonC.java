@@ -9,26 +9,32 @@ import androidx.lifecycle.ViewModel;
 import com.extrotarget.extropos.auth.EmailAuthActivity;
 import com.extrotarget.extropos.auth.EmailAuthViewModel;
 import com.extrotarget.extropos.auth.EmailAuthViewModel_HiltModules;
+import com.extrotarget.extropos.data.local.AppDatabase;
 import com.extrotarget.extropos.data.local.auth.LocalAuthManager;
 import com.extrotarget.extropos.data.local.dao.CategoryDao;
 import com.extrotarget.extropos.data.local.dao.MenuItemDao;
 import com.extrotarget.extropos.data.local.dao.OrderDao;
 import com.extrotarget.extropos.data.local.dao.OrderItemDao;
+import com.extrotarget.extropos.data.local.dao.ProductDao;
 import com.extrotarget.extropos.data.local.dao.TableDao;
 import com.extrotarget.extropos.data.local.dao.TicketDao;
 import com.extrotarget.extropos.data.remote.AppwriteService;
 import com.extrotarget.extropos.data.repository.AuthRepository;
 import com.extrotarget.extropos.data.repository.MenuRepository;
 import com.extrotarget.extropos.data.repository.OrderRepository;
+import com.extrotarget.extropos.data.repository.ProductRepositoryImpl;
 import com.extrotarget.extropos.data.repository.TableRepository;
 import com.extrotarget.extropos.data.repository.TicketRepository;
+import com.extrotarget.extropos.di.AppModule_ProvideAppDatabaseFactory;
 import com.extrotarget.extropos.di.AppModule_ProvideCategoryDaoFactory;
 import com.extrotarget.extropos.di.AppModule_ProvideMenuItemDaoFactory;
 import com.extrotarget.extropos.di.AppModule_ProvideMoshiFactory;
 import com.extrotarget.extropos.di.AppModule_ProvideOrderDaoFactory;
 import com.extrotarget.extropos.di.AppModule_ProvideOrderItemDaoFactory;
+import com.extrotarget.extropos.di.AppModule_ProvideProductDaoFactory;
 import com.extrotarget.extropos.di.AppModule_ProvideTableDaoFactory;
 import com.extrotarget.extropos.di.AppModule_ProvideTicketDaoFactory;
+import com.extrotarget.extropos.domain.usecase.AddCategoryUseCase;
 import com.extrotarget.extropos.domain.usecase.AddItemToOrderUseCase;
 import com.extrotarget.extropos.domain.usecase.CheckAppActivationUseCase;
 import com.extrotarget.extropos.domain.usecase.CheckEmailVerificationUseCase;
@@ -78,6 +84,10 @@ import com.extrotarget.extropos.ui.cart.CartViewModel_HiltModules;
 import com.extrotarget.extropos.ui.cart.TicketViewModel;
 import com.extrotarget.extropos.ui.cart.TicketViewModel_HiltModules;
 import com.extrotarget.extropos.ui.dashboard.DashboardActivity;
+import com.extrotarget.extropos.ui.debug.DebugCategoryActivity;
+import com.extrotarget.extropos.ui.debug.DebugCategoryActivity_MembersInjector;
+import com.extrotarget.extropos.ui.debug.DebugProductActivity;
+import com.extrotarget.extropos.ui.debug.DebugProductActivity_MembersInjector;
 import com.extrotarget.extropos.ui.login.LoginViewModel;
 import com.extrotarget.extropos.ui.login.LoginViewModel_HiltModules;
 import com.extrotarget.extropos.ui.main.MainFragment;
@@ -118,6 +128,7 @@ import dagger.hilt.android.internal.lifecycle.DefaultViewModelFactories_Internal
 import dagger.hilt.android.internal.managers.ActivityRetainedComponentManager_LifecycleModule_ProvideActivityRetainedLifecycleFactory;
 import dagger.hilt.android.internal.managers.SavedStateHandleHolder;
 import dagger.hilt.android.internal.modules.ApplicationContextModule;
+import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideApplicationFactory;
 import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideContextFactory;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
@@ -525,6 +536,16 @@ public final class DaggerApp_HiltComponents_SingletonC {
     }
 
     @Override
+    public void injectDebugCategoryActivity(DebugCategoryActivity debugCategoryActivity) {
+      injectDebugCategoryActivity2(debugCategoryActivity);
+    }
+
+    @Override
+    public void injectDebugProductActivity(DebugProductActivity debugProductActivity) {
+      injectDebugProductActivity2(debugProductActivity);
+    }
+
+    @Override
     public void injectPinLoginActivity(PinLoginActivity pinLoginActivity) {
     }
 
@@ -563,37 +584,49 @@ public final class DaggerApp_HiltComponents_SingletonC {
       return instance;
     }
 
+    @CanIgnoreReturnValue
+    private DebugCategoryActivity injectDebugCategoryActivity2(DebugCategoryActivity instance2) {
+      DebugCategoryActivity_MembersInjector.injectMenuRepository(instance2, singletonCImpl.menuRepositoryProvider.get());
+      return instance2;
+    }
+
+    @CanIgnoreReturnValue
+    private DebugProductActivity injectDebugProductActivity2(DebugProductActivity instance3) {
+      DebugProductActivity_MembersInjector.injectProductRepository(instance3, singletonCImpl.productRepositoryImplProvider.get());
+      return instance3;
+    }
+
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_extrotarget_extropos_ui_user_AddUserViewModel = "com.extrotarget.extropos.ui.user.AddUserViewModel";
+      static String com_extrotarget_extropos_ui_table_TableViewModel = "com.extrotarget.extropos.ui.table.TableViewModel";
 
-      static String com_extrotarget_extropos_ui_cart_TicketViewModel = "com.extrotarget.extropos.ui.cart.TicketViewModel";
+      static String com_extrotarget_extropos_ui_pin_PinLoginViewModel = "com.extrotarget.extropos.ui.pin.PinLoginViewModel";
 
       static String com_extrotarget_extropos_ui_login_LoginViewModel = "com.extrotarget.extropos.ui.login.LoginViewModel";
 
       static String com_extrotarget_extropos_ui_product_ProductViewModel = "com.extrotarget.extropos.ui.product.ProductViewModel";
 
-      static String com_extrotarget_extropos_ui_pin_PinLoginViewModel = "com.extrotarget.extropos.ui.pin.PinLoginViewModel";
+      static String com_extrotarget_extropos_printer_ui_PrinterViewModel = "com.extrotarget.extropos.printer.ui.PrinterViewModel";
 
-      static String com_extrotarget_extropos_ui_auth_AuthViewModel = "com.extrotarget.extropos.ui.auth.AuthViewModel";
+      static String com_extrotarget_extropos_ui_cart_TicketViewModel = "com.extrotarget.extropos.ui.cart.TicketViewModel";
 
       static String com_extrotarget_extropos_ui_order_OrderViewModel = "com.extrotarget.extropos.ui.order.OrderViewModel";
 
-      static String com_extrotarget_extropos_ui_cart_CartViewModel = "com.extrotarget.extropos.ui.cart.CartViewModel";
-
-      static String com_extrotarget_extropos_printer_ui_PrinterViewModel = "com.extrotarget.extropos.printer.ui.PrinterViewModel";
+      static String com_extrotarget_extropos_ui_auth_AuthViewModel = "com.extrotarget.extropos.ui.auth.AuthViewModel";
 
       static String com_extrotarget_extropos_ui_menu_MenuViewModel = "com.extrotarget.extropos.ui.menu.MenuViewModel";
 
       static String com_extrotarget_extropos_auth_EmailAuthViewModel = "com.extrotarget.extropos.auth.EmailAuthViewModel";
 
-      static String com_extrotarget_extropos_ui_table_TableViewModel = "com.extrotarget.extropos.ui.table.TableViewModel";
+      static String com_extrotarget_extropos_ui_cart_CartViewModel = "com.extrotarget.extropos.ui.cart.CartViewModel";
+
+      static String com_extrotarget_extropos_ui_user_AddUserViewModel = "com.extrotarget.extropos.ui.user.AddUserViewModel";
 
       @KeepFieldType
-      AddUserViewModel com_extrotarget_extropos_ui_user_AddUserViewModel2;
+      TableViewModel com_extrotarget_extropos_ui_table_TableViewModel2;
 
       @KeepFieldType
-      TicketViewModel com_extrotarget_extropos_ui_cart_TicketViewModel2;
+      PinLoginViewModel com_extrotarget_extropos_ui_pin_PinLoginViewModel2;
 
       @KeepFieldType
       LoginViewModel com_extrotarget_extropos_ui_login_LoginViewModel2;
@@ -602,19 +635,16 @@ public final class DaggerApp_HiltComponents_SingletonC {
       ProductViewModel com_extrotarget_extropos_ui_product_ProductViewModel2;
 
       @KeepFieldType
-      PinLoginViewModel com_extrotarget_extropos_ui_pin_PinLoginViewModel2;
+      PrinterViewModel com_extrotarget_extropos_printer_ui_PrinterViewModel2;
 
       @KeepFieldType
-      AuthViewModel com_extrotarget_extropos_ui_auth_AuthViewModel2;
+      TicketViewModel com_extrotarget_extropos_ui_cart_TicketViewModel2;
 
       @KeepFieldType
       OrderViewModel com_extrotarget_extropos_ui_order_OrderViewModel2;
 
       @KeepFieldType
-      CartViewModel com_extrotarget_extropos_ui_cart_CartViewModel2;
-
-      @KeepFieldType
-      PrinterViewModel com_extrotarget_extropos_printer_ui_PrinterViewModel2;
+      AuthViewModel com_extrotarget_extropos_ui_auth_AuthViewModel2;
 
       @KeepFieldType
       MenuViewModel com_extrotarget_extropos_ui_menu_MenuViewModel2;
@@ -623,7 +653,10 @@ public final class DaggerApp_HiltComponents_SingletonC {
       EmailAuthViewModel com_extrotarget_extropos_auth_EmailAuthViewModel2;
 
       @KeepFieldType
-      TableViewModel com_extrotarget_extropos_ui_table_TableViewModel2;
+      CartViewModel com_extrotarget_extropos_ui_cart_CartViewModel2;
+
+      @KeepFieldType
+      AddUserViewModel com_extrotarget_extropos_ui_user_AddUserViewModel2;
     }
   }
 
@@ -772,6 +805,10 @@ public final class DaggerApp_HiltComponents_SingletonC {
       return new PrintReceiptUseCase(singletonCImpl.bindPrinterRepositoryProvider.get());
     }
 
+    private AddCategoryUseCase addCategoryUseCase() {
+      return new AddCategoryUseCase(singletonCImpl.menuRepositoryProvider.get());
+    }
+
     private GetTablesUseCase getTablesUseCase() {
       return new GetTablesUseCase(singletonCImpl.tableRepositoryProvider.get());
     }
@@ -817,11 +854,7 @@ public final class DaggerApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_extrotarget_extropos_ui_pin_PinLoginViewModel = "com.extrotarget.extropos.ui.pin.PinLoginViewModel";
-
       static String com_extrotarget_extropos_ui_user_AddUserViewModel = "com.extrotarget.extropos.ui.user.AddUserViewModel";
-
-      static String com_extrotarget_extropos_printer_ui_PrinterViewModel = "com.extrotarget.extropos.printer.ui.PrinterViewModel";
 
       static String com_extrotarget_extropos_ui_table_TableViewModel = "com.extrotarget.extropos.ui.table.TableViewModel";
 
@@ -831,24 +864,22 @@ public final class DaggerApp_HiltComponents_SingletonC {
 
       static String com_extrotarget_extropos_ui_order_OrderViewModel = "com.extrotarget.extropos.ui.order.OrderViewModel";
 
-      static String com_extrotarget_extropos_ui_login_LoginViewModel = "com.extrotarget.extropos.ui.login.LoginViewModel";
+      static String com_extrotarget_extropos_ui_pin_PinLoginViewModel = "com.extrotarget.extropos.ui.pin.PinLoginViewModel";
 
       static String com_extrotarget_extropos_auth_EmailAuthViewModel = "com.extrotarget.extropos.auth.EmailAuthViewModel";
 
-      static String com_extrotarget_extropos_ui_menu_MenuViewModel = "com.extrotarget.extropos.ui.menu.MenuViewModel";
-
-      static String com_extrotarget_extropos_ui_product_ProductViewModel = "com.extrotarget.extropos.ui.product.ProductViewModel";
+      static String com_extrotarget_extropos_ui_login_LoginViewModel = "com.extrotarget.extropos.ui.login.LoginViewModel";
 
       static String com_extrotarget_extropos_ui_auth_AuthViewModel = "com.extrotarget.extropos.ui.auth.AuthViewModel";
 
-      @KeepFieldType
-      PinLoginViewModel com_extrotarget_extropos_ui_pin_PinLoginViewModel2;
+      static String com_extrotarget_extropos_ui_menu_MenuViewModel = "com.extrotarget.extropos.ui.menu.MenuViewModel";
+
+      static String com_extrotarget_extropos_printer_ui_PrinterViewModel = "com.extrotarget.extropos.printer.ui.PrinterViewModel";
+
+      static String com_extrotarget_extropos_ui_product_ProductViewModel = "com.extrotarget.extropos.ui.product.ProductViewModel";
 
       @KeepFieldType
       AddUserViewModel com_extrotarget_extropos_ui_user_AddUserViewModel2;
-
-      @KeepFieldType
-      PrinterViewModel com_extrotarget_extropos_printer_ui_PrinterViewModel2;
 
       @KeepFieldType
       TableViewModel com_extrotarget_extropos_ui_table_TableViewModel2;
@@ -863,19 +894,25 @@ public final class DaggerApp_HiltComponents_SingletonC {
       OrderViewModel com_extrotarget_extropos_ui_order_OrderViewModel2;
 
       @KeepFieldType
-      LoginViewModel com_extrotarget_extropos_ui_login_LoginViewModel2;
+      PinLoginViewModel com_extrotarget_extropos_ui_pin_PinLoginViewModel2;
 
       @KeepFieldType
       EmailAuthViewModel com_extrotarget_extropos_auth_EmailAuthViewModel2;
 
       @KeepFieldType
-      MenuViewModel com_extrotarget_extropos_ui_menu_MenuViewModel2;
-
-      @KeepFieldType
-      ProductViewModel com_extrotarget_extropos_ui_product_ProductViewModel2;
+      LoginViewModel com_extrotarget_extropos_ui_login_LoginViewModel2;
 
       @KeepFieldType
       AuthViewModel com_extrotarget_extropos_ui_auth_AuthViewModel2;
+
+      @KeepFieldType
+      MenuViewModel com_extrotarget_extropos_ui_menu_MenuViewModel2;
+
+      @KeepFieldType
+      PrinterViewModel com_extrotarget_extropos_printer_ui_PrinterViewModel2;
+
+      @KeepFieldType
+      ProductViewModel com_extrotarget_extropos_ui_product_ProductViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -927,7 +964,7 @@ public final class DaggerApp_HiltComponents_SingletonC {
           return (T) new PrinterViewModel(viewModelCImpl.printReceiptUseCase());
 
           case 9: // com.extrotarget.extropos.ui.product.ProductViewModel 
-          return (T) new ProductViewModel();
+          return (T) new ProductViewModel(singletonCImpl.productRepositoryImplProvider.get(), viewModelCImpl.addCategoryUseCase());
 
           case 10: // com.extrotarget.extropos.ui.table.TableViewModel 
           return (T) new TableViewModel(viewModelCImpl.getTablesUseCase(), viewModelCImpl.getTableUseCase(), new UpdateTableStatusUseCase(), viewModelCImpl.getAvailableTablesUseCase(), viewModelCImpl.getOccupiedTablesUseCase());
@@ -1017,6 +1054,20 @@ public final class DaggerApp_HiltComponents_SingletonC {
 
     private Provider<PdfGenerationService> pdfGenerationServiceProvider;
 
+    private Provider<AppDatabase> provideAppDatabaseProvider;
+
+    private Provider<CategoryDao> provideCategoryDaoProvider;
+
+    private Provider<MenuItemDao> provideMenuItemDaoProvider;
+
+    private Provider<Moshi> provideMoshiProvider;
+
+    private Provider<MenuRepository> menuRepositoryProvider;
+
+    private Provider<ProductDao> provideProductDaoProvider;
+
+    private Provider<ProductRepositoryImpl> productRepositoryImplProvider;
+
     private Provider<LocalAuthManager> localAuthManagerProvider;
 
     private Provider<AppwriteService> appwriteServiceProvider;
@@ -1026,14 +1077,6 @@ public final class DaggerApp_HiltComponents_SingletonC {
     private Provider<TicketDao> provideTicketDaoProvider;
 
     private Provider<TicketRepository> ticketRepositoryProvider;
-
-    private Provider<CategoryDao> provideCategoryDaoProvider;
-
-    private Provider<MenuItemDao> provideMenuItemDaoProvider;
-
-    private Provider<Moshi> provideMoshiProvider;
-
-    private Provider<MenuRepository> menuRepositoryProvider;
 
     private Provider<OrderDao> provideOrderDaoProvider;
 
@@ -1058,22 +1101,25 @@ public final class DaggerApp_HiltComponents_SingletonC {
     @SuppressWarnings("unchecked")
     private void initialize(final ApplicationContextModule applicationContextModuleParam) {
       this.pdfGenerationServiceProvider = DoubleCheck.provider(new SwitchingProvider<PdfGenerationService>(singletonCImpl, 0));
-      this.localAuthManagerProvider = DoubleCheck.provider(new SwitchingProvider<LocalAuthManager>(singletonCImpl, 1));
-      this.appwriteServiceProvider = DoubleCheck.provider(new SwitchingProvider<AppwriteService>(singletonCImpl, 3));
-      this.authRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<AuthRepository>(singletonCImpl, 2));
-      this.provideTicketDaoProvider = DoubleCheck.provider(new SwitchingProvider<TicketDao>(singletonCImpl, 5));
-      this.ticketRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<TicketRepository>(singletonCImpl, 4));
-      this.provideCategoryDaoProvider = DoubleCheck.provider(new SwitchingProvider<CategoryDao>(singletonCImpl, 7));
-      this.provideMenuItemDaoProvider = DoubleCheck.provider(new SwitchingProvider<MenuItemDao>(singletonCImpl, 8));
-      this.provideMoshiProvider = DoubleCheck.provider(new SwitchingProvider<Moshi>(singletonCImpl, 9));
-      this.menuRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<MenuRepository>(singletonCImpl, 6));
-      this.provideOrderDaoProvider = DoubleCheck.provider(new SwitchingProvider<OrderDao>(singletonCImpl, 11));
-      this.provideOrderItemDaoProvider = DoubleCheck.provider(new SwitchingProvider<OrderItemDao>(singletonCImpl, 12));
-      this.orderRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<OrderRepository>(singletonCImpl, 10));
-      this.printerRepositoryProvider = new SwitchingProvider<>(singletonCImpl, 13);
+      this.provideAppDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<AppDatabase>(singletonCImpl, 3));
+      this.provideCategoryDaoProvider = DoubleCheck.provider(new SwitchingProvider<CategoryDao>(singletonCImpl, 2));
+      this.provideMenuItemDaoProvider = DoubleCheck.provider(new SwitchingProvider<MenuItemDao>(singletonCImpl, 4));
+      this.provideMoshiProvider = DoubleCheck.provider(new SwitchingProvider<Moshi>(singletonCImpl, 5));
+      this.menuRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<MenuRepository>(singletonCImpl, 1));
+      this.provideProductDaoProvider = DoubleCheck.provider(new SwitchingProvider<ProductDao>(singletonCImpl, 7));
+      this.productRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<ProductRepositoryImpl>(singletonCImpl, 6));
+      this.localAuthManagerProvider = DoubleCheck.provider(new SwitchingProvider<LocalAuthManager>(singletonCImpl, 8));
+      this.appwriteServiceProvider = DoubleCheck.provider(new SwitchingProvider<AppwriteService>(singletonCImpl, 10));
+      this.authRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<AuthRepository>(singletonCImpl, 9));
+      this.provideTicketDaoProvider = DoubleCheck.provider(new SwitchingProvider<TicketDao>(singletonCImpl, 12));
+      this.ticketRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<TicketRepository>(singletonCImpl, 11));
+      this.provideOrderDaoProvider = DoubleCheck.provider(new SwitchingProvider<OrderDao>(singletonCImpl, 14));
+      this.provideOrderItemDaoProvider = DoubleCheck.provider(new SwitchingProvider<OrderItemDao>(singletonCImpl, 15));
+      this.orderRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<OrderRepository>(singletonCImpl, 13));
+      this.printerRepositoryProvider = new SwitchingProvider<>(singletonCImpl, 16);
       this.bindPrinterRepositoryProvider = DoubleCheck.provider((Provider) printerRepositoryProvider);
-      this.provideTableDaoProvider = DoubleCheck.provider(new SwitchingProvider<TableDao>(singletonCImpl, 15));
-      this.tableRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<TableRepository>(singletonCImpl, 14));
+      this.provideTableDaoProvider = DoubleCheck.provider(new SwitchingProvider<TableDao>(singletonCImpl, 18));
+      this.tableRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<TableRepository>(singletonCImpl, 17));
     }
 
     @Override
@@ -1112,49 +1158,58 @@ public final class DaggerApp_HiltComponents_SingletonC {
           case 0: // com.extrotarget.extropos.pdf.PdfGenerationService 
           return (T) new PdfGenerationService(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 1: // com.extrotarget.extropos.data.local.auth.LocalAuthManager 
-          return (T) new LocalAuthManager(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
-
-          case 2: // com.extrotarget.extropos.data.repository.AuthRepository 
-          return (T) new AuthRepository(singletonCImpl.appwriteServiceProvider.get());
-
-          case 3: // com.extrotarget.extropos.data.remote.AppwriteService 
-          return (T) new AppwriteService(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
-
-          case 4: // com.extrotarget.extropos.data.repository.TicketRepository 
-          return (T) new TicketRepository(singletonCImpl.provideTicketDaoProvider.get());
-
-          case 5: // com.extrotarget.extropos.data.local.dao.TicketDao 
-          return (T) AppModule_ProvideTicketDaoFactory.provideTicketDao();
-
-          case 6: // com.extrotarget.extropos.data.repository.MenuRepository 
+          case 1: // com.extrotarget.extropos.data.repository.MenuRepository 
           return (T) new MenuRepository(singletonCImpl.provideCategoryDaoProvider.get(), singletonCImpl.provideMenuItemDaoProvider.get(), singletonCImpl.provideMoshiProvider.get());
 
-          case 7: // com.extrotarget.extropos.data.local.dao.CategoryDao 
-          return (T) AppModule_ProvideCategoryDaoFactory.provideCategoryDao();
+          case 2: // com.extrotarget.extropos.data.local.dao.CategoryDao 
+          return (T) AppModule_ProvideCategoryDaoFactory.provideCategoryDao(singletonCImpl.provideAppDatabaseProvider.get());
 
-          case 8: // com.extrotarget.extropos.data.local.dao.MenuItemDao 
-          return (T) AppModule_ProvideMenuItemDaoFactory.provideMenuItemDao();
+          case 3: // com.extrotarget.extropos.data.local.AppDatabase 
+          return (T) AppModule_ProvideAppDatabaseFactory.provideAppDatabase(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonCImpl.applicationContextModule));
 
-          case 9: // com.squareup.moshi.Moshi 
+          case 4: // com.extrotarget.extropos.data.local.dao.MenuItemDao 
+          return (T) AppModule_ProvideMenuItemDaoFactory.provideMenuItemDao(singletonCImpl.provideAppDatabaseProvider.get());
+
+          case 5: // com.squareup.moshi.Moshi 
           return (T) AppModule_ProvideMoshiFactory.provideMoshi();
 
-          case 10: // com.extrotarget.extropos.data.repository.OrderRepository 
+          case 6: // com.extrotarget.extropos.data.repository.ProductRepositoryImpl 
+          return (T) new ProductRepositoryImpl(singletonCImpl.provideProductDaoProvider.get());
+
+          case 7: // com.extrotarget.extropos.data.local.dao.ProductDao 
+          return (T) AppModule_ProvideProductDaoFactory.provideProductDao(singletonCImpl.provideAppDatabaseProvider.get());
+
+          case 8: // com.extrotarget.extropos.data.local.auth.LocalAuthManager 
+          return (T) new LocalAuthManager(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 9: // com.extrotarget.extropos.data.repository.AuthRepository 
+          return (T) new AuthRepository(singletonCImpl.appwriteServiceProvider.get());
+
+          case 10: // com.extrotarget.extropos.data.remote.AppwriteService 
+          return (T) new AppwriteService(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 11: // com.extrotarget.extropos.data.repository.TicketRepository 
+          return (T) new TicketRepository(singletonCImpl.provideTicketDaoProvider.get());
+
+          case 12: // com.extrotarget.extropos.data.local.dao.TicketDao 
+          return (T) AppModule_ProvideTicketDaoFactory.provideTicketDao();
+
+          case 13: // com.extrotarget.extropos.data.repository.OrderRepository 
           return (T) new OrderRepository(singletonCImpl.provideOrderDaoProvider.get(), singletonCImpl.provideOrderItemDaoProvider.get());
 
-          case 11: // com.extrotarget.extropos.data.local.dao.OrderDao 
+          case 14: // com.extrotarget.extropos.data.local.dao.OrderDao 
           return (T) AppModule_ProvideOrderDaoFactory.provideOrderDao();
 
-          case 12: // com.extrotarget.extropos.data.local.dao.OrderItemDao 
+          case 15: // com.extrotarget.extropos.data.local.dao.OrderItemDao 
           return (T) AppModule_ProvideOrderItemDaoFactory.provideOrderItemDao();
 
-          case 13: // com.extrotarget.extropos.printer.data.PrinterRepository 
+          case 16: // com.extrotarget.extropos.printer.data.PrinterRepository 
           return (T) new PrinterRepository();
 
-          case 14: // com.extrotarget.extropos.data.repository.TableRepository 
+          case 17: // com.extrotarget.extropos.data.repository.TableRepository 
           return (T) new TableRepository(singletonCImpl.provideTableDaoProvider.get());
 
-          case 15: // com.extrotarget.extropos.data.local.dao.TableDao 
+          case 18: // com.extrotarget.extropos.data.local.dao.TableDao 
           return (T) AppModule_ProvideTableDaoFactory.provideTableDao();
 
           default: throw new AssertionError(id);

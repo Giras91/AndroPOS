@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dialog input IDs for stable instrumentation matching -->
+    <item name="dialog_category_id_input" type="id" />
+    <item name="dialog_category_name_input" type="id" />
+
+    <item name="dialog_product_id_input" type="id" />
+    <item name="dialog_product_name_input" type="id" />
+    <item name="dialog_product_price_input" type="id" />
+    <item name="dialog_product_category_input" type="id" />
+</resources>

@@ -18,6 +18,12 @@
     <color name="tile_purple">#8E24AA</color>
     <color name="tile_teal">#009688</color>
     <color name="training_mode_accent">#FF9800</color>
+    <item name="dialog_category_id_input" type="id"/>
+    <item name="dialog_category_name_input" type="id"/>
+    <item name="dialog_product_category_input" type="id"/>
+    <item name="dialog_product_id_input" type="id"/>
+    <item name="dialog_product_name_input" type="id"/>
+    <item name="dialog_product_price_input" type="id"/>
     <string name="app_name">ExtroPOS</string>
     <string name="dashboard_customers">Customers</string>
     <string name="dashboard_inventory">Inventory</string>

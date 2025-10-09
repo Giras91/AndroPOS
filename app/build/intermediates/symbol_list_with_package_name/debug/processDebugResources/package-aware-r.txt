@@ -3280,8 +3280,10 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id addCategoryFab
 id addEmployeeFab
 id addPrinterFab
+id addProductFab
 id addToCartButton
 id addressEditText
 id addressInputLayout
@@ -3405,6 +3407,12 @@ id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
 id dialog_button
+id dialog_category_id_input
+id dialog_category_name_input
+id dialog_product_category_input
+id dialog_product_id_input
+id dialog_product_name_input
+id dialog_product_price_input
 id dimensions
 id direct
 id disableHome

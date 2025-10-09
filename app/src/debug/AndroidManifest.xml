@@ -11,6 +11,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Expose debug helper activity that inserts a deterministic category for instrumentation tests -->
+        <activity android:name=".ui.debug.DebugCategoryActivity"
+            android:exported="true" />
+        <activity android:name=".ui.debug.DebugProductActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

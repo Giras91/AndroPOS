@@ -4,7 +4,7 @@
             "outputFile": "com.extrotarget.extropos.miniapp-mergeDebugResources-18:/values-zh-rCN/values-zh-rCN.xml",
             "map": [
                 {
-                    "source": "/home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/res/values-zh-rCN/values-zh-rCN.xml",
+                    "source": "/home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/res/values-zh-rCN/values-zh-rCN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/home/hp/.gradle/caches/8.13/transforms/6052cefb5c46d2e6fa3ab011f128dbf2/transformed/appcompat-1.6.1/res/values-zh-rCN/values-zh-rCN.xml",
+                    "source": "/home/hp/.gradle/caches/8.13/transforms/e6453936d60c1ca4103708c818a55176/transformed/appcompat-1.6.1/res/values-zh-rCN/values-zh-rCN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

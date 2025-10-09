@@ -4,6 +4,7 @@ import com.extrotarget.extropos.auth.EmailAuthActivity_GeneratedInjector;
 import com.extrotarget.extropos.auth.EmailAuthViewModel_HiltModules;
 import com.extrotarget.extropos.di.AppModule;
 import com.extrotarget.extropos.di.RepositoryModule;
+import com.extrotarget.extropos.di.UseCaseModule;
 import com.extrotarget.extropos.pdf.test.PdfTestActivity_GeneratedInjector;
 import com.extrotarget.extropos.printer.di.PrinterModule;
 import com.extrotarget.extropos.printer.ui.PrinterViewModel_HiltModules;
@@ -15,6 +16,8 @@ import com.extrotarget.extropos.ui.cart.CartFragment_GeneratedInjector;
 import com.extrotarget.extropos.ui.cart.CartViewModel_HiltModules;
 import com.extrotarget.extropos.ui.cart.TicketViewModel_HiltModules;
 import com.extrotarget.extropos.ui.dashboard.DashboardActivity_GeneratedInjector;
+import com.extrotarget.extropos.ui.debug.DebugCategoryActivity_GeneratedInjector;
+import com.extrotarget.extropos.ui.debug.DebugProductActivity_GeneratedInjector;
 import com.extrotarget.extropos.ui.login.LoginViewModel_HiltModules;
 import com.extrotarget.extropos.ui.main.MainFragment_GeneratedInjector;
 import com.extrotarget.extropos.ui.menu.MenuFragment_GeneratedInjector;
@@ -162,7 +165,8 @@ public final class App_HiltComponents {
           ApplicationContextModule.class,
           HiltWrapper_FragmentGetContextFix_FragmentGetContextFixModule.class,
           PrinterModule.class,
-          RepositoryModule.class
+          RepositoryModule.class,
+          UseCaseModule.class
       }
   )
   @Singleton
@@ -226,6 +230,8 @@ public final class App_HiltComponents {
       EmailAuthActivity_GeneratedInjector,
       PdfTestActivity_GeneratedInjector,
       DashboardActivity_GeneratedInjector,
+      DebugCategoryActivity_GeneratedInjector,
+      DebugProductActivity_GeneratedInjector,
       PinLoginActivity_GeneratedInjector,
       AddUserActivity_GeneratedInjector,
       ActivityComponent,

@@ -16,6 +16,7 @@ public class FragmentProductsGridBindingImpl extends FragmentProductsGridBinding
         sViewsWithIds = new android.util.SparseIntArray();
         sViewsWithIds.put(R.id.searchEditText, 1);
         sViewsWithIds.put(R.id.productsRecyclerView, 2);
+        sViewsWithIds.put(R.id.addProductFab, 3);
     }
     // views
     @NonNull
@@ -26,10 +27,11 @@ public class FragmentProductsGridBindingImpl extends FragmentProductsGridBinding
     // Inverse Binding Event Handlers
 
     public FragmentProductsGridBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 3, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 4, sIncludes, sViewsWithIds));
     }
     private FragmentProductsGridBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
+            , (com.google.android.material.floatingactionbutton.FloatingActionButton) bindings[3]
             , (androidx.recyclerview.widget.RecyclerView) bindings[2]
             , (android.widget.EditText) bindings[1]
             );

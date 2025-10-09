@@ -1,1 +1,0 @@
-com.extrotarget.extropos.printer

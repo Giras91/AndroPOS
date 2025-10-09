@@ -11,10 +11,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 import com.extrotarget.extropos.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class FragmentProductsGridBinding extends ViewDataBinding {
+  @NonNull
+  public final FloatingActionButton addProductFab;
+
   @NonNull
   public final RecyclerView productsRecyclerView;
 
@@ -22,8 +26,10 @@ public abstract class FragmentProductsGridBinding extends ViewDataBinding {
   public final EditText searchEditText;
 
   protected FragmentProductsGridBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      RecyclerView productsRecyclerView, EditText searchEditText) {
+      FloatingActionButton addProductFab, RecyclerView productsRecyclerView,
+      EditText searchEditText) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.addProductFab = addProductFab;
     this.productsRecyclerView = productsRecyclerView;
     this.searchEditText = searchEditText;
   }

@@ -22,6 +22,38 @@ class MenuRepository @Inject constructor(
         return categoryDao.getAllActive().map { it.toDomain() }
     }
 
+    override suspend fun upsertCategory(category: com.extrotarget.extropos.domain.model.Category) {
+        val entity = CategoryEntity(
+            id = category.id,
+            name = category.name,
+            description = category.description.ifBlank { null },
+            displayOrder = 0,
+            isActive = true
+        )
+        categoryDao.upsert(entity)
+    }
+
+    override suspend fun upsertMenuItem(item: com.extrotarget.extropos.domain.model.MenuItem) {
+        val allergensJson = try {
+            moshi.adapter(List::class.java).toJson(item.allergens)
+        } catch (e: Exception) {
+            null
+        }
+
+        val entity = MenuItemEntity(
+            id = item.id,
+            name = item.name,
+            description = item.description.ifBlank { null },
+            priceCents = item.priceCents,
+            categoryId = item.categoryId,
+            imageUrl = item.imageUrl.ifBlank { null },
+            isAvailable = item.isAvailable,
+            preparationTimeMinutes = item.preparationTimeMinutes.takeIf { it > 0 },
+            allergens = allergensJson
+        )
+        menuItemDao.upsert(entity)
+    }
+
     override suspend fun getCategoryById(id: String): Category? {
         return categoryDao.getById(id)?.toDomain()
     }

@@ -9,22 +9,22 @@
 9        android:targetSdkVersion="34" />
 10
 11    <permission
-11-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
+11-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
 12        android:name="com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-12-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
+12-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
 13        android:protectionLevel="signature" />
-13-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
+13-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
 14
 15    <uses-permission android:name="com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-15-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
-15-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+15-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
 16
 17    <application
 17-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:4:5-16:19
 18        android:allowBackup="true"
 18-->/home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:5:9-35
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/34f2202f2bf3a1efa86edbe6e6efcf03/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
+19-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
 20        android:debuggable="true"
 21        android:extractNativeLibs="false"
 22        android:icon="@mipmap/ic_launcher"
@@ -54,25 +54,25 @@
 34        </activity>
 35
 36        <provider
-36-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+36-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
 37            android:name="androidx.startup.InitializationProvider"
-37-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+37-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
 38            android:authorities="com.extrotarget.extropos.androidx-startup"
-38-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+38-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
 39            android:exported="false" >
-39-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+39-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
 40            <meta-data
-40-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+40-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
 41                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-41-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+41-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
 42                android:value="androidx.startup" />
-42-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/7d575601ab3c1a3998033e6bdeed3942/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+42-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
 43            <meta-data
-43-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/hp/.gradle/caches/8.13/transforms/aed9c65f6aecf6dd19c756895cce98d7/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+43-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/hp/.gradle/caches/8.13/transforms/28177e0b80d445e3af81c2f48b53e7f5/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
 44                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-44-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/hp/.gradle/caches/8.13/transforms/aed9c65f6aecf6dd19c756895cce98d7/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+44-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/hp/.gradle/caches/8.13/transforms/28177e0b80d445e3af81c2f48b53e7f5/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
 45                android:value="androidx.startup" />
-45-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/hp/.gradle/caches/8.13/transforms/aed9c65f6aecf6dd19c756895cce98d7/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+45-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/hp/.gradle/caches/8.13/transforms/28177e0b80d445e3af81c2f48b53e7f5/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
 46        </provider>
 47    </application>
 48

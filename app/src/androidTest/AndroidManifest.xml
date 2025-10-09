@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="false"
+        android:debuggable="true">
+
+        <!-- Register the test-local HiltTestActivity so ActivityScenario can launch it. -->
+        <activity android:name="com.extrotarget.extropos.ui.tests.HiltTestActivity"
+                  android:exported="false" />
+
+        <!-- Ensure EmptyFragmentActivity is available for fragment-testing -->
+                <activity android:name="androidx.fragment.app.testing.EmptyFragmentActivity"
+                    android:exported="false"
+                    tools:replace="android:exported" />
+    </application>
+
+</manifest>

@@ -1,0 +1,4 @@
+com.extrotarget.extropos.test.miniapp-androidTest-0 /home/hp/Documents/AndroPOS/miniapp/build/generated/res/resValues/androidTest/debug
+com.extrotarget.extropos.test.miniapp-mergeDebugAndroidTestResources-1 /home/hp/Documents/AndroPOS/miniapp/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+com.extrotarget.extropos.test.miniapp-mergeDebugAndroidTestResources-2 /home/hp/Documents/AndroPOS/miniapp/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+com.extrotarget.extropos.test.miniapp-debugAndroidTest-3 /home/hp/Documents/AndroPOS/miniapp/build/intermediates/merged_res/debugAndroidTest/mergeDebugAndroidTestResources

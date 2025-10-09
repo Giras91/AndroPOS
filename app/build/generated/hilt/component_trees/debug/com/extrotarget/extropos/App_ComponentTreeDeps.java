@@ -24,6 +24,7 @@ import hilt_aggregated_deps._com_extrotarget_extropos_auth_EmailAuthViewModel_Hi
 import hilt_aggregated_deps._com_extrotarget_extropos_auth_EmailAuthViewModel_HiltModules_KeyModule;
 import hilt_aggregated_deps._com_extrotarget_extropos_di_AppModule;
 import hilt_aggregated_deps._com_extrotarget_extropos_di_RepositoryModule;
+import hilt_aggregated_deps._com_extrotarget_extropos_di_UseCaseModule;
 import hilt_aggregated_deps._com_extrotarget_extropos_pdf_test_PdfTestActivity_GeneratedInjector;
 import hilt_aggregated_deps._com_extrotarget_extropos_printer_di_PrinterModule;
 import hilt_aggregated_deps._com_extrotarget_extropos_printer_ui_PrinterViewModel_HiltModules_BindsModule;
@@ -39,6 +40,8 @@ import hilt_aggregated_deps._com_extrotarget_extropos_ui_cart_CartViewModel_Hilt
 import hilt_aggregated_deps._com_extrotarget_extropos_ui_cart_TicketViewModel_HiltModules_BindsModule;
 import hilt_aggregated_deps._com_extrotarget_extropos_ui_cart_TicketViewModel_HiltModules_KeyModule;
 import hilt_aggregated_deps._com_extrotarget_extropos_ui_dashboard_DashboardActivity_GeneratedInjector;
+import hilt_aggregated_deps._com_extrotarget_extropos_ui_debug_DebugCategoryActivity_GeneratedInjector;
+import hilt_aggregated_deps._com_extrotarget_extropos_ui_debug_DebugProductActivity_GeneratedInjector;
 import hilt_aggregated_deps._com_extrotarget_extropos_ui_login_LoginFragment_GeneratedInjector;
 import hilt_aggregated_deps._com_extrotarget_extropos_ui_login_LoginViewModel_HiltModules_BindsModule;
 import hilt_aggregated_deps._com_extrotarget_extropos_ui_login_LoginViewModel_HiltModules_KeyModule;
@@ -111,6 +114,7 @@ import hilt_aggregated_deps._dagger_hilt_android_internal_modules_HiltWrapper_Ac
         _com_extrotarget_extropos_auth_EmailAuthViewModel_HiltModules_KeyModule.class,
         _com_extrotarget_extropos_di_AppModule.class,
         _com_extrotarget_extropos_di_RepositoryModule.class,
+        _com_extrotarget_extropos_di_UseCaseModule.class,
         _com_extrotarget_extropos_pdf_test_PdfTestActivity_GeneratedInjector.class,
         _com_extrotarget_extropos_printer_di_PrinterModule.class,
         _com_extrotarget_extropos_printer_ui_PrinterViewModel_HiltModules_BindsModule.class,
@@ -126,6 +130,8 @@ import hilt_aggregated_deps._dagger_hilt_android_internal_modules_HiltWrapper_Ac
         _com_extrotarget_extropos_ui_cart_TicketViewModel_HiltModules_BindsModule.class,
         _com_extrotarget_extropos_ui_cart_TicketViewModel_HiltModules_KeyModule.class,
         _com_extrotarget_extropos_ui_dashboard_DashboardActivity_GeneratedInjector.class,
+        _com_extrotarget_extropos_ui_debug_DebugCategoryActivity_GeneratedInjector.class,
+        _com_extrotarget_extropos_ui_debug_DebugProductActivity_GeneratedInjector.class,
         _com_extrotarget_extropos_ui_login_LoginFragment_GeneratedInjector.class,
         _com_extrotarget_extropos_ui_login_LoginViewModel_HiltModules_BindsModule.class,
         _com_extrotarget_extropos_ui_login_LoginViewModel_HiltModules_KeyModule.class,

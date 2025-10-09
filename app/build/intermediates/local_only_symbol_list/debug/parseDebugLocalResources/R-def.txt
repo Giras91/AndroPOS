@@ -68,8 +68,10 @@ id action_settings_to_printer_setup
 id action_settings_to_reporting_settings
 id action_signup_to_app_lock
 id action_signup_to_login
+id addCategoryFab
 id addEmployeeFab
 id addPrinterFab
+id addProductFab
 id addToCartButton
 id addressEditText
 id addressInputLayout
@@ -105,6 +107,12 @@ id dashboardColumns
 id decreaseButton
 id defaultBadge
 id deleteButton
+id dialog_category_id_input
+id dialog_category_name_input
+id dialog_product_category_input
+id dialog_product_id_input
+id dialog_product_name_input
+id dialog_product_price_input
 id editButton
 id emailEditText
 id emailInput

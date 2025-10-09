@@ -9,6 +9,9 @@ interface IMenuRepository {
     suspend fun getMenuItemById(id: String): MenuItem?
     suspend fun getAllMenuItems(): List<MenuItem>
     suspend fun searchMenuItems(query: String): List<MenuItem>
+    // Persistence operations for adding/updating
+    suspend fun upsertCategory(category: Category)
+    suspend fun upsertMenuItem(item: MenuItem)
 }
 
 interface IOrderRepository {

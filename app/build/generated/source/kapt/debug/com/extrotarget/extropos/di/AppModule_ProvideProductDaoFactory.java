@@ -1,5 +1,6 @@
 package com.extrotarget.extropos.di;
 
+import com.extrotarget.extropos.data.local.AppDatabase;
 import com.extrotarget.extropos.data.local.dao.ProductDao;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -7,6 +8,7 @@ import dagger.internal.Preconditions;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
+import javax.inject.Provider;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata
@@ -24,20 +26,22 @@ import javax.annotation.processing.Generated;
     "deprecation"
 })
 public final class AppModule_ProvideProductDaoFactory implements Factory<ProductDao> {
+  private final Provider<AppDatabase> dbProvider;
+
+  public AppModule_ProvideProductDaoFactory(Provider<AppDatabase> dbProvider) {
+    this.dbProvider = dbProvider;
+  }
+
   @Override
   public ProductDao get() {
-    return provideProductDao();
+    return provideProductDao(dbProvider.get());
   }
 
-  public static AppModule_ProvideProductDaoFactory create() {
-    return InstanceHolder.INSTANCE;
+  public static AppModule_ProvideProductDaoFactory create(Provider<AppDatabase> dbProvider) {
+    return new AppModule_ProvideProductDaoFactory(dbProvider);
   }
 
-  public static ProductDao provideProductDao() {
-    return Preconditions.checkNotNullFromProvides(AppModule.INSTANCE.provideProductDao());
-  }
-
-  private static final class InstanceHolder {
-    private static final AppModule_ProvideProductDaoFactory INSTANCE = new AppModule_ProvideProductDaoFactory();
+  public static ProductDao provideProductDao(AppDatabase db) {
+    return Preconditions.checkNotNullFromProvides(AppModule.INSTANCE.provideProductDao(db));
   }
 }

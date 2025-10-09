@@ -14,10 +14,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 import com.extrotarget.extropos.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class FragmentMenuBinding extends ViewDataBinding {
+  @NonNull
+  public final FloatingActionButton addCategoryFab;
+
   @NonNull
   public final RecyclerView categoriesRecyclerView;
 
@@ -40,10 +44,11 @@ public abstract class FragmentMenuBinding extends ViewDataBinding {
   public final EditText searchEditText;
 
   protected FragmentMenuBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      RecyclerView categoriesRecyclerView, ImageButton clearSearchButton,
-      TextView emptyStateTextView, TextView errorTextView, RecyclerView menuItemsRecyclerView,
-      ProgressBar progressBar, EditText searchEditText) {
+      FloatingActionButton addCategoryFab, RecyclerView categoriesRecyclerView,
+      ImageButton clearSearchButton, TextView emptyStateTextView, TextView errorTextView,
+      RecyclerView menuItemsRecyclerView, ProgressBar progressBar, EditText searchEditText) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.addCategoryFab = addCategoryFab;
     this.categoriesRecyclerView = categoriesRecyclerView;
     this.clearSearchButton = clearSearchButton;
     this.emptyStateTextView = emptyStateTextView;

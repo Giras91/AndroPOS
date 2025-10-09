@@ -21,6 +21,7 @@ public class FragmentMenuBindingImpl extends FragmentMenuBinding  {
         sViewsWithIds.put(R.id.emptyStateTextView, 5);
         sViewsWithIds.put(R.id.progressBar, 6);
         sViewsWithIds.put(R.id.errorTextView, 7);
+        sViewsWithIds.put(R.id.addCategoryFab, 8);
     }
     // views
     @NonNull
@@ -31,10 +32,11 @@ public class FragmentMenuBindingImpl extends FragmentMenuBinding  {
     // Inverse Binding Event Handlers
 
     public FragmentMenuBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 8, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 9, sIncludes, sViewsWithIds));
     }
     private FragmentMenuBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
+            , (com.google.android.material.floatingactionbutton.FloatingActionButton) bindings[8]
             , (androidx.recyclerview.widget.RecyclerView) bindings[3]
             , (android.widget.ImageButton) bindings[2]
             , (android.widget.TextView) bindings[5]

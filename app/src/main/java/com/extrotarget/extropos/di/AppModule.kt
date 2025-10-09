@@ -37,11 +37,7 @@ object AppModule {
         return (app as App).appwriteClient
     }
 
-    @Provides
-    @Singleton
-    fun provideProductDao(): ProductDao {
-        return InMemoryProductDao()
-    }
+    // Product DAO provided by Room below
 
     @Provides
     @Singleton
@@ -49,17 +45,7 @@ object AppModule {
         return InMemoryTicketDao()
     }
 
-    @Provides
-    @Singleton
-    fun provideCategoryDao(): com.extrotarget.extropos.data.local.dao.CategoryDao {
-        return com.extrotarget.extropos.data.local.InMemoryCategoryDao()
-    }
-
-    @Provides
-    @Singleton
-    fun provideMenuItemDao(): com.extrotarget.extropos.data.local.dao.MenuItemDao {
-        return com.extrotarget.extropos.data.local.InMemoryMenuItemDao()
-    }
+    // Category and MenuItem DAOs are provided by Room below
 
     @Provides
     @Singleton
@@ -77,6 +63,30 @@ object AppModule {
     @Singleton
     fun provideTableDao(): com.extrotarget.extropos.data.local.dao.TableDao {
         return com.extrotarget.extropos.data.local.InMemoryTableDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(application: Application): com.extrotarget.extropos.data.local.AppDatabase {
+        return com.extrotarget.extropos.data.local.AppDatabase.create(application.applicationContext)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductDao(db: com.extrotarget.extropos.data.local.AppDatabase): ProductDao {
+        return db.productDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCategoryDao(db: com.extrotarget.extropos.data.local.AppDatabase): com.extrotarget.extropos.data.local.dao.CategoryDao {
+        return db.categoryDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMenuItemDao(db: com.extrotarget.extropos.data.local.AppDatabase): com.extrotarget.extropos.data.local.dao.MenuItemDao {
+        return db.menuItemDao()
     }
 
     @Provides

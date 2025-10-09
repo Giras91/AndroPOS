@@ -30,4 +30,25 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <!-- Floating action buttons for adding products / categories -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addProductFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="Add product"
+    app:srcCompat="@drawable/ic_add_24dp"
+        app:layout_anchorGravity="bottom|end"
+        app:layout_anchor="@id/inventoryViewPager" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addCategoryFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="Add category"
+    app:srcCompat="@drawable/ic_add_24dp"
+        app:layout_anchorGravity="bottom|start"
+        app:layout_anchor="@id/inventoryViewPager" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

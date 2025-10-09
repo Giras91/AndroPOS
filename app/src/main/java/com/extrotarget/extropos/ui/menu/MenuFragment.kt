@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
@@ -24,6 +25,7 @@ class MenuFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: MenuViewModel by viewModels()
+    private val productViewModel: com.extrotarget.extropos.ui.product.ProductViewModel by activityViewModels()
 
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var menuItemAdapter: MenuItemAdapter
@@ -43,6 +45,42 @@ class MenuFragment : Fragment() {
         setupRecyclerViews()
         setupSearch()
         observeViewModel()
+        setupAddCategory()
+    }
+
+    private fun setupAddCategory() {
+        binding.addCategoryFab.setOnClickListener {
+            // Show a simple dialog to collect id and name
+            val ctx = requireContext()
+            val container = android.widget.LinearLayout(ctx).apply {
+                orientation = android.widget.LinearLayout.VERTICAL
+                setPadding(16, 16, 16, 16)
+            }
+            val idInput = android.widget.EditText(ctx).apply {
+                hint = "Category ID (e.g. 1)"
+                id = com.extrotarget.extropos.R.id.dialog_category_id_input
+            }
+            val nameInput = android.widget.EditText(ctx).apply {
+                hint = "Category name"
+                id = com.extrotarget.extropos.R.id.dialog_category_name_input
+            }
+            container.addView(idInput)
+            container.addView(nameInput)
+
+            androidx.appcompat.app.AlertDialog.Builder(ctx)
+                .setTitle("Add Category")
+                .setView(container)
+                .setPositiveButton("Add") { _, _ ->
+                    val id = idInput.text.toString().trim()
+                    val name = nameInput.text.toString().trim()
+                    if (id.isNotBlank() && name.isNotBlank()) {
+                        // Add category using the shared activity ProductViewModel
+                        productViewModel.addCategory(id, name)
+                    }
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
+        }
     }
 
     private fun setupRecyclerViews() {

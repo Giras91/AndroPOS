@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.lifecycleScope
@@ -28,7 +29,7 @@ class ProductsGridFragment : Fragment() {
     private var _binding: FragmentProductsGridBinding? = null
     private val binding get() = _binding!!
 
-    private val productViewModel: ProductViewModel by viewModels()
+    private val productViewModel: ProductViewModel by activityViewModels()
     private val cartViewModel: CartViewModel by viewModels()
 
     private lateinit var productsAdapter: ProductsAdapter
@@ -54,6 +55,70 @@ class ProductsGridFragment : Fragment() {
         setupSearch()
         observeViewModel()
         loadProducts()
+        setupAddProduct()
+    }
+
+    private fun setupAddProduct() {
+        // If layout doesn't include the FAB (older builds), skip
+        try {
+            binding.addProductFab.setOnClickListener {
+                val ctx = requireContext()
+                val container = android.widget.LinearLayout(ctx).apply {
+                    orientation = android.widget.LinearLayout.VERTICAL
+                    setPadding(16, 16, 16, 16)
+                }
+                val idInput = android.widget.EditText(ctx).apply {
+                    hint = "Product ID (unique)"
+                    id = com.extrotarget.extropos.R.id.dialog_product_id_input
+                }
+                val nameInput = android.widget.EditText(ctx).apply {
+                    hint = "Product name"
+                    id = com.extrotarget.extropos.R.id.dialog_product_name_input
+                }
+                val priceInput = android.widget.EditText(ctx).apply {
+                    hint = "Price (RM, e.g. 3.50)"
+                    id = com.extrotarget.extropos.R.id.dialog_product_price_input
+                }
+                val categoryInput = android.widget.EditText(ctx).apply {
+                    hint = "Category ID (e.g. 1)"
+                    id = com.extrotarget.extropos.R.id.dialog_product_category_input
+                }
+                container.addView(idInput)
+                container.addView(nameInput)
+                container.addView(priceInput)
+                container.addView(categoryInput)
+
+                androidx.appcompat.app.AlertDialog.Builder(ctx)
+                    .setTitle("Add Product")
+                    .setView(container)
+                    .setPositiveButton("Add") { _, _ ->
+                        val id = idInput.text.toString().trim()
+                        val name = nameInput.text.toString().trim()
+                        val priceText = priceInput.text.toString().trim()
+                        val categoryId = categoryInput.text.toString().trim().ifBlank { "0" }
+                        if (id.isNotBlank() && name.isNotBlank() && priceText.isNotBlank()) {
+                            val priceCents = try {
+                                (priceText.replace(",", "").toDouble() * 100).toLong()
+                            } catch (e: Exception) { 0L }
+
+                            val product = Product(
+                                id = id,
+                                name = name,
+                                description = "",
+                                priceCents = priceCents,
+                                categoryId = categoryId,
+                                isAvailable = true
+                            )
+
+                            productViewModel.addProduct(product)
+                        }
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            }
+        } catch (e: Exception) {
+            // No FAB in layout or binding missing, ignore
+        }
     }
 
     // Called by parent fragment to set search query programmatically

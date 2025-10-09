@@ -1,0 +1,38 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.extrotarget.extropos.test.app-mergeDebugAndroidTestResources-39:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "/home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "/home/hp/.gradle/caches/8.13/transforms/e6453936d60c1ca4103708c818a55176/transformed/appcompat-1.6.1/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -12,6 +12,7 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import androidx.viewpager2.widget.ViewPager2;
 import com.extrotarget.extropos.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -20,6 +21,12 @@ import java.lang.String;
 public final class FragmentInventoryManagementBinding implements ViewBinding {
   @NonNull
   private final CoordinatorLayout rootView;
+
+  @NonNull
+  public final FloatingActionButton addCategoryFab;
+
+  @NonNull
+  public final FloatingActionButton addProductFab;
 
   @NonNull
   public final TabLayout inventoryTabs;
@@ -31,9 +38,12 @@ public final class FragmentInventoryManagementBinding implements ViewBinding {
   public final Toolbar toolbar;
 
   private FragmentInventoryManagementBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull FloatingActionButton addCategoryFab, @NonNull FloatingActionButton addProductFab,
       @NonNull TabLayout inventoryTabs, @NonNull ViewPager2 inventoryViewPager,
       @NonNull Toolbar toolbar) {
     this.rootView = rootView;
+    this.addCategoryFab = addCategoryFab;
+    this.addProductFab = addProductFab;
     this.inventoryTabs = inventoryTabs;
     this.inventoryViewPager = inventoryViewPager;
     this.toolbar = toolbar;
@@ -66,6 +76,18 @@ public final class FragmentInventoryManagementBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.addCategoryFab;
+      FloatingActionButton addCategoryFab = ViewBindings.findChildViewById(rootView, id);
+      if (addCategoryFab == null) {
+        break missingId;
+      }
+
+      id = R.id.addProductFab;
+      FloatingActionButton addProductFab = ViewBindings.findChildViewById(rootView, id);
+      if (addProductFab == null) {
+        break missingId;
+      }
+
       id = R.id.inventoryTabs;
       TabLayout inventoryTabs = ViewBindings.findChildViewById(rootView, id);
       if (inventoryTabs == null) {
@@ -84,8 +106,8 @@ public final class FragmentInventoryManagementBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentInventoryManagementBinding((CoordinatorLayout) rootView, inventoryTabs,
-          inventoryViewPager, toolbar);
+      return new FragmentInventoryManagementBinding((CoordinatorLayout) rootView, addCategoryFab,
+          addProductFab, inventoryTabs, inventoryViewPager, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

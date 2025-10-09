@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.extrotarget.extropos.printer.test.feature-printer-mergeDebugAndroidTestResources-16:/values-ms/values-ms.xml",
+            "map": [
+                {
+                    "source": "/home/hp/.gradle/caches/8.13/transforms/3e24ef8a1d7d24ba1b7894e7b5ceb976/transformed/core-1.8.0/res/values-ms/values-ms.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}
