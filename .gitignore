@@ -1,7 +1,10 @@
 /.github
 /.gradle
 /.vscode
-/gradle
 /gradle-5.6.4
 /gradle-5.6.4-bin.zip
 /local.properties
+
+# Allow gradle wrapper to be committed
+!/gradle/wrapper/gradle-wrapper.jar
+!/gradle/wrapper/gradle-wrapper.properties

@@ -12,8 +12,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
@@ -38,13 +38,13 @@ if (aarFiles.isNotEmpty()) {
 
 // Use Kotlin JVM toolchain to ensure kapt and javac target the same Java version
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(17)
 }
 
-// Ensure Kotlin compilation targets JVM 21 using the compilerOptions DSL
+// Ensure Kotlin compilation targets JVM 17 using the compilerOptions DSL
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     compilerOptions {
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 }
 
