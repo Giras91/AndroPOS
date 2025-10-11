@@ -1,0 +1,54 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "package": "com.extrotarget.extropos",
+    "version": 3,
+    "entities": [
+      {
+        "tableName": "sales",
+        "createSql": "CREATE TABLE IF NOT EXISTS `sales` (`id` TEXT NOT NULL PRIMARY KEY, `receiptNo` TEXT, `userId` TEXT, `customerId` TEXT, `createdAt` INTEGER NOT NULL, `totalAmountCents` INTEGER NOT NULL, `paymentMethod` TEXT, `paymentStatus` TEXT)",
+        "fields": [
+          { "fieldPath": "id", "columnName": "id", "affinity": "TEXT" },
+          { "fieldPath": "receiptNo", "columnName": "receiptNo", "affinity": "TEXT" },
+          { "fieldPath": "userId", "columnName": "userId", "affinity": "TEXT" },
+          { "fieldPath": "customerId", "columnName": "customerId", "affinity": "TEXT" },
+          { "fieldPath": "createdAt", "columnName": "createdAt", "affinity": "INTEGER" },
+          { "fieldPath": "totalAmountCents", "columnName": "totalAmountCents", "affinity": "INTEGER" },
+          { "fieldPath": "paymentMethod", "columnName": "paymentMethod", "affinity": "TEXT" },
+          { "fieldPath": "paymentStatus", "columnName": "paymentStatus", "affinity": "TEXT" }
+        ]
+      },
+      {
+        "tableName": "sale_items",
+        "createSql": "CREATE TABLE IF NOT EXISTS `sale_items` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `saleId` TEXT NOT NULL, `productId` TEXT NOT NULL, `productName` TEXT, `qty` INTEGER NOT NULL, `unitPriceCents` INTEGER NOT NULL, `totalPriceCents` INTEGER NOT NULL)",
+        "fields": [
+          { "fieldPath": "id", "columnName": "id", "affinity": "INTEGER" },
+          { "fieldPath": "saleId", "columnName": "saleId", "affinity": "TEXT" },
+          { "fieldPath": "productId", "columnName": "productId", "affinity": "TEXT" },
+          { "fieldPath": "productName", "columnName": "productName", "affinity": "TEXT" },
+          { "fieldPath": "qty", "columnName": "qty", "affinity": "INTEGER" },
+          { "fieldPath": "unitPriceCents", "columnName": "unitPriceCents", "affinity": "INTEGER" },
+          { "fieldPath": "totalPriceCents", "columnName": "totalPriceCents", "affinity": "INTEGER" }
+        ]
+      },
+      {
+        "tableName": "shifts",
+        "createSql": "CREATE TABLE IF NOT EXISTS `shifts` (`id` TEXT NOT NULL PRIMARY KEY, `userId` TEXT NOT NULL, `username` TEXT NOT NULL, `startedAt` INTEGER NOT NULL, `endedAt` INTEGER, `notes` TEXT)",
+        "fields": [
+          { "fieldPath": "id", "columnName": "id", "affinity": "TEXT" },
+          { "fieldPath": "userId", "columnName": "userId", "affinity": "TEXT" },
+          { "fieldPath": "username", "columnName": "username", "affinity": "TEXT" },
+          { "fieldPath": "startedAt", "columnName": "startedAt", "affinity": "INTEGER" },
+          { "fieldPath": "endedAt", "columnName": "endedAt", "affinity": "INTEGER" },
+          { "fieldPath": "notes", "columnName": "notes", "affinity": "TEXT" }
+        ]
+      }
+    ],
+    "views": [],
+    "indices": [
+      { "name": "index_sales_createdAt", "table": "sales", "unique": false, "columns": ["createdAt"] },
+      { "name": "index_sale_items_saleId", "table": "sale_items", "unique": false, "columns": ["saleId"] },
+      { "name": "index_sale_items_productId", "table": "sale_items", "unique": false, "columns": ["productId"] }
+    ]
+  }
+}
