@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Test-only theme used by FragmentScenario's EmptyFragmentActivity (aliased to HiltTestActivity) -->
+    <style name="FragmentScenarioEmptyFragmentActivityTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- keep minimal overrides for tests -->
+        <!-- Use a concrete android color to avoid unresolved test-package attributes during resource linking -->
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+</resources>

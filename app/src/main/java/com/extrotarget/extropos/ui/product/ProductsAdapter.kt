@@ -9,7 +9,8 @@ import com.extrotarget.extropos.databinding.ItemProductBinding
 import com.extrotarget.extropos.domain.model.Product
 
 class ProductsAdapter(
-    private val onProductClick: (Product) -> Unit
+    private val onProductClick: (Product) -> Unit,
+    private val getCategoryName: (String) -> String = { _ -> "" }
 ) : ListAdapter<Product, ProductsAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -40,7 +41,12 @@ class ProductsAdapter(
             binding.apply {
                 productNameTextView.text = product.name
                 productPriceTextView.text = "RM ${String.format("%.2f", product.priceCents / 100.0)}"
-                stockTextView.text = "Stock: ${product.stockQuantity}"
+                
+                // Show category and stock info
+                val categoryName = getCategoryName(product.categoryId)
+                val categoryText = if (categoryName.isNotBlank()) categoryName else "No Category"
+                stockTextView.text = "$categoryText • Stock: ${product.stockQuantity}"
+                
                 root.alpha = if (product.isAvailable) 1.0f else 0.6f
             }
         }

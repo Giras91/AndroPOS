@@ -3,5 +3,6 @@
     <!-- Use the standard launcher background and foreground mipmaps. Kept simple and canonical to avoid
          multiple concatenated adaptive-icon entries which break AAPT. -->
     <background android:drawable="@mipmap/ic_launcher_background" />
-    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
+    <!-- Reference the vector drawable directly to avoid using <bitmap> which requires a raster src. -->
+    <foreground android:drawable="@drawable/ic_launcher_foreground" />
 </adaptive-icon>

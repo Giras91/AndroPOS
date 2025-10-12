@@ -3,11 +3,17 @@ package com.extrotarget.extropos;
 import com.extrotarget.extropos.auth.EmailAuthActivity_GeneratedInjector;
 import com.extrotarget.extropos.auth.EmailAuthViewModel_HiltModules;
 import com.extrotarget.extropos.di.AppModule;
+import com.extrotarget.extropos.di.ReceiptSettingsModule;
 import com.extrotarget.extropos.di.RepositoryModule;
 import com.extrotarget.extropos.di.UseCaseModule;
 import com.extrotarget.extropos.pdf.test.PdfTestActivity_GeneratedInjector;
+import com.extrotarget.extropos.printer.di.GlobalPrinterModule;
 import com.extrotarget.extropos.printer.di.PrinterModule;
+import com.extrotarget.extropos.printer.ui.PrinterManagementFragmentSimple_GeneratedInjector;
+import com.extrotarget.extropos.printer.ui.PrinterManagementFragment_GeneratedInjector;
+import com.extrotarget.extropos.printer.ui.PrinterManagementViewModel_HiltModules;
 import com.extrotarget.extropos.printer.ui.PrinterViewModel_HiltModules;
+import com.extrotarget.extropos.reporting.ReportingViewModel_HiltModules;
 import com.extrotarget.extropos.ui.auth.AppLockFragment_GeneratedInjector;
 import com.extrotarget.extropos.ui.auth.AuthViewModel_HiltModules;
 import com.extrotarget.extropos.ui.auth.LoginFragment_GeneratedInjector;
@@ -31,7 +37,11 @@ import com.extrotarget.extropos.ui.product.ProductViewModel_HiltModules;
 import com.extrotarget.extropos.ui.product.ProductsGridFragment_GeneratedInjector;
 import com.extrotarget.extropos.ui.settings.SettingsFragment_GeneratedInjector;
 import com.extrotarget.extropos.ui.settings.employee.EmployeeManagementFragment_GeneratedInjector;
+import com.extrotarget.extropos.ui.settings.hardware.HardwareSettingsFragment_GeneratedInjector;
+import com.extrotarget.extropos.ui.settings.hardware.HardwareSettingsViewModel_HiltModules;
+import com.extrotarget.extropos.ui.settings.payment.PaymentSettingsViewModel_HiltModules;
 import com.extrotarget.extropos.ui.settings.printer.PrinterSetupFragment_GeneratedInjector;
+import com.extrotarget.extropos.ui.settings.reporting.ReportingSettingsFragment_GeneratedInjector;
 import com.extrotarget.extropos.ui.table.TableViewModel_HiltModules;
 import com.extrotarget.extropos.ui.user.AddUserActivity_GeneratedInjector;
 import com.extrotarget.extropos.ui.user.AddUserViewModel_HiltModules;
@@ -163,8 +173,10 @@ public final class App_HiltComponents {
           ActivityRetainedCBuilderModule.class,
           ServiceCBuilderModule.class,
           ApplicationContextModule.class,
+          GlobalPrinterModule.class,
           HiltWrapper_FragmentGetContextFix_FragmentGetContextFixModule.class,
           PrinterModule.class,
+          ReceiptSettingsModule.class,
           RepositoryModule.class,
           UseCaseModule.class
       }
@@ -195,14 +207,18 @@ public final class App_HiltComponents {
           AuthViewModel_HiltModules.KeyModule.class,
           CartViewModel_HiltModules.KeyModule.class,
           EmailAuthViewModel_HiltModules.KeyModule.class,
+          HardwareSettingsViewModel_HiltModules.KeyModule.class,
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
           HiltWrapper_SavedStateHandleModule.class,
           LoginViewModel_HiltModules.KeyModule.class,
           MenuViewModel_HiltModules.KeyModule.class,
           OrderViewModel_HiltModules.KeyModule.class,
+          PaymentSettingsViewModel_HiltModules.KeyModule.class,
           PinLoginViewModel_HiltModules.KeyModule.class,
+          PrinterManagementViewModel_HiltModules.KeyModule.class,
           PrinterViewModel_HiltModules.KeyModule.class,
           ProductViewModel_HiltModules.KeyModule.class,
+          ReportingViewModel_HiltModules.KeyModule.class,
           TableViewModel_HiltModules.KeyModule.class,
           TicketViewModel_HiltModules.KeyModule.class
       }
@@ -251,13 +267,17 @@ public final class App_HiltComponents {
           AuthViewModel_HiltModules.BindsModule.class,
           CartViewModel_HiltModules.BindsModule.class,
           EmailAuthViewModel_HiltModules.BindsModule.class,
+          HardwareSettingsViewModel_HiltModules.BindsModule.class,
           HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
           LoginViewModel_HiltModules.BindsModule.class,
           MenuViewModel_HiltModules.BindsModule.class,
           OrderViewModel_HiltModules.BindsModule.class,
+          PaymentSettingsViewModel_HiltModules.BindsModule.class,
           PinLoginViewModel_HiltModules.BindsModule.class,
+          PrinterManagementViewModel_HiltModules.BindsModule.class,
           PrinterViewModel_HiltModules.BindsModule.class,
           ProductViewModel_HiltModules.BindsModule.class,
+          ReportingViewModel_HiltModules.BindsModule.class,
           TableViewModel_HiltModules.BindsModule.class,
           TicketViewModel_HiltModules.BindsModule.class
       }
@@ -284,7 +304,9 @@ public final class App_HiltComponents {
       modules = ViewWithFragmentCBuilderModule.class
   )
   @FragmentScoped
-  public abstract static class FragmentC implements AppLockFragment_GeneratedInjector,
+  public abstract static class FragmentC implements PrinterManagementFragmentSimple_GeneratedInjector,
+      PrinterManagementFragment_GeneratedInjector,
+      AppLockFragment_GeneratedInjector,
       LoginFragment_GeneratedInjector,
       SignupFragment_GeneratedInjector,
       CartFragment_GeneratedInjector,
@@ -296,7 +318,9 @@ public final class App_HiltComponents {
       ProductsGridFragment_GeneratedInjector,
       SettingsFragment_GeneratedInjector,
       EmployeeManagementFragment_GeneratedInjector,
+      HardwareSettingsFragment_GeneratedInjector,
       PrinterSetupFragment_GeneratedInjector,
+      ReportingSettingsFragment_GeneratedInjector,
       FragmentComponent,
       DefaultViewModelFactories.FragmentEntryPoint,
       ViewComponentManager.ViewWithFragmentComponentBuilderEntryPoint,

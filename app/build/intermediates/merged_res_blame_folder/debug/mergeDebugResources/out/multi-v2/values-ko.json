@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.extrotarget.extropos.app-mergeDebugResources-60:/values-ko/values-ko.xml",
+            "outputFile": "com.extrotarget.extropos.app-mergeDebugResources-64:/values-ko/values-ko.xml",
             "map": [
                 {
                     "source": "/home/hp/.gradle/caches/8.13/transforms/a785356afe8e52d09bf8ffaa1131ed7c/transformed/material-1.11.0/res/values-ko/values-ko.xml",

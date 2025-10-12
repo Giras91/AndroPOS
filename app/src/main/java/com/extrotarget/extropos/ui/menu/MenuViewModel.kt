@@ -7,6 +7,8 @@ import com.extrotarget.extropos.domain.model.MenuItem
 import com.extrotarget.extropos.domain.usecase.GetCategoriesUseCase
 import com.extrotarget.extropos.domain.usecase.GetMenuItemsUseCase
 import com.extrotarget.extropos.domain.usecase.SearchMenuItemsUseCase
+import com.extrotarget.extropos.domain.usecase.UpdateCategoryUseCase
+import com.extrotarget.extropos.domain.usecase.DeleteCategoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,7 +19,9 @@ import javax.inject.Inject
 class MenuViewModel @Inject constructor(
     private val getCategories: GetCategoriesUseCase,
     private val getMenuItemsUseCase: GetMenuItemsUseCase,
-    private val searchMenuItemsUseCase: SearchMenuItemsUseCase
+    private val searchMenuItemsUseCase: SearchMenuItemsUseCase,
+    private val updateCategoryUseCase: UpdateCategoryUseCase,
+    private val deleteCategoryUseCase: DeleteCategoryUseCase
 ) : ViewModel() {
 
     private val _categories = MutableStateFlow<List<Category>>(emptyList())
@@ -41,16 +45,19 @@ class MenuViewModel @Inject constructor(
     }
 
     fun loadCategories() {
+        android.util.Log.d("MenuViewModel", "loadCategories called")
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
             try {
                 val categoriesList = getCategories()
+                android.util.Log.d("MenuViewModel", "Loaded ${categoriesList.size} categories: $categoriesList")
                 _categories.value = categoriesList
                 if (categoriesList.isNotEmpty() && _selectedCategory.value == null) {
                     _selectedCategory.value = categoriesList.first()
                 }
             } catch (e: Exception) {
+                android.util.Log.e("MenuViewModel", "Failed to load categories", e)
                 _error.value = "Failed to load categories: ${e.message}"
             } finally {
                 _isLoading.value = false
@@ -110,5 +117,34 @@ class MenuViewModel @Inject constructor(
 
     fun clearSearch() {
         loadAllMenuItems()
+    }
+
+    fun updateCategory(category: Category) {
+        viewModelScope.launch {
+            try {
+                updateCategoryUseCase(category)
+                loadCategories() // Refresh categories
+            } catch (e: Exception) {
+                _error.value = "Failed to update category: ${e.message}"
+                android.util.Log.e("MenuViewModel", "Failed to update category", e)
+            }
+        }
+    }
+
+    fun deleteCategory(categoryId: String) {
+        viewModelScope.launch {
+            try {
+                deleteCategoryUseCase(categoryId)
+                loadCategories() // Refresh categories
+                // If the deleted category was selected, clear selection and load all items
+                if (_selectedCategory.value?.id == categoryId) {
+                    _selectedCategory.value = null
+                    loadAllMenuItems()
+                }
+            } catch (e: Exception) {
+                _error.value = "Failed to delete category: ${e.message}"
+                android.util.Log.e("MenuViewModel", "Failed to delete category", e)
+            }
+        }
     }
 }

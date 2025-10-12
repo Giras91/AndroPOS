@@ -18,8 +18,14 @@
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" /> <!-- Bluetooth permissions for printer connectivity -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
 
     <permission
         android:name="com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
@@ -48,6 +54,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Quick smoke test activity (added programmatically by debug build) -->
+        <activity
+            android:name="com.extrotarget.extropos.DebugSmokeActivity"
+            android:exported="true" />
         <!-- Expose debug helper activity that inserts a deterministic category for instrumentation tests -->
         <activity
             android:name="com.extrotarget.extropos.ui.debug.DebugCategoryActivity"
@@ -55,6 +65,22 @@
         <activity
             android:name="com.extrotarget.extropos.ui.debug.DebugProductActivity"
             android:exported="true" />
+
+        <!-- Hilt test host activities for FragmentScenario/ActivityScenario while running connected tests -->
+        <activity
+            android:name="dagger.hilt.android.testing.HiltTestActivity"
+            android:exported="true"
+            android:theme="@style/FragmentScenarioEmptyFragmentActivityTheme" />
+
+        <activity-alias
+            android:name="androidx.fragment.app.testing.EmptyFragmentActivity"
+            android:exported="true"
+            android:targetActivity="dagger.hilt.android.testing.HiltTestActivity" />
+
+        <activity
+            android:name="com.extrotarget.extropos.ui.tests.HiltTestActivity"
+            android:exported="true"
+            android:theme="@style/FragmentScenarioEmptyFragmentActivityTheme" />
         <!-- Two-step auth flow activities -->
         <!--
  Use MainActivity as the launcher so the fragment-based dashboard is the home entry.
@@ -92,6 +118,16 @@
             android:name="com.extrotarget.extropos.pdf.test.PdfTestActivity"
             android:exported="false"
             android:label="PDF Test" />
+        <activity
+            android:name="androidx.fragment.app.testing.EmptyFragmentActivity"
+            android:exported="true"
+            android:multiprocess="true"
+            android:taskAffinity=""
+            android:theme="@style/FragmentScenarioEmptyFragmentActivityTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="androidx.startup.InitializationProvider"
@@ -114,6 +150,31 @@
         <uses-library
             android:name="androidx.window.sidecar"
             android:required="false" />
+
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+            android:exported="true"
+            android:theme="@style/WhiteBackgroundTheme" >
+            <intent-filter android:priority="-100" >
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+            android:exported="true"
+            android:theme="@style/WhiteBackgroundTheme" >
+            <intent-filter android:priority="-100" >
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+            android:exported="true"
+            android:theme="@style/WhiteBackgroundDialogTheme" >
+            <intent-filter android:priority="-100" >
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name="androidx.room.MultiInstanceInvalidationService"

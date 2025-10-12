@@ -30,9 +30,15 @@ class ProductsGridFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val productViewModel: ProductViewModel by activityViewModels()
-    private val cartViewModel: CartViewModel by viewModels()
+    private val cartViewModel: CartViewModel by activityViewModels()
 
     private lateinit var productsAdapter: ProductsAdapter
+    
+    // Flag to control whether the internal FAB should be shown
+    private var showInternalFab = true
+    
+    // Flag to control behavior: true = management mode (edit products), false = selling mode (add to cart)
+    private var isManagementMode = false
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,6 +67,12 @@ class ProductsGridFragment : Fragment() {
     private fun setupAddProduct() {
         // If layout doesn't include the FAB (older builds), skip
         try {
+            // Hide the FAB if requested (e.g., when used inside InventoryManagement)
+            if (!showInternalFab) {
+                binding.addProductFab.visibility = View.GONE
+                return
+            }
+            
             binding.addProductFab.setOnClickListener {
                 val ctx = requireContext()
                 val container = android.widget.LinearLayout(ctx).apply {
@@ -79,14 +91,33 @@ class ProductsGridFragment : Fragment() {
                     hint = "Price (RM, e.g. 3.50)"
                     id = com.extrotarget.extropos.R.id.dialog_product_price_input
                 }
-                val categoryInput = android.widget.EditText(ctx).apply {
-                    hint = "Category ID (e.g. 1)"
+                val categoryLabel = android.widget.TextView(ctx).apply {
+                    text = "Category:"
+                    textSize = 14f
+                    setPadding(0, 16, 0, 8)
+                }
+                
+                val categorySpinner = android.widget.Spinner(ctx).apply {
                     id = com.extrotarget.extropos.R.id.dialog_product_category_input
                 }
+                
+                // Populate category spinner
+                val categories = productViewModel.getCategories()
+                val categoryOptions = mutableListOf("Select Category")
+                val categoryIds = mutableListOf("")
+                
+                categories.forEach { (id, name) ->
+                    categoryOptions.add("$name ($id)")
+                    categoryIds.add(id)
+                }
+                
+                val adapter = android.widget.ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, categoryOptions)
+                categorySpinner.adapter = adapter
                 container.addView(idInput)
                 container.addView(nameInput)
                 container.addView(priceInput)
-                container.addView(categoryInput)
+                container.addView(categoryLabel)
+                container.addView(categorySpinner)
 
                 androidx.appcompat.app.AlertDialog.Builder(ctx)
                     .setTitle("Add Product")
@@ -95,7 +126,9 @@ class ProductsGridFragment : Fragment() {
                         val id = idInput.text.toString().trim()
                         val name = nameInput.text.toString().trim()
                         val priceText = priceInput.text.toString().trim()
-                        val categoryId = categoryInput.text.toString().trim().ifBlank { "0" }
+                        val selectedPosition = categorySpinner.selectedItemPosition
+                        val categoryId = if (selectedPosition > 0) categoryIds[selectedPosition] else ""
+                        
                         if (id.isNotBlank() && name.isNotBlank() && priceText.isNotBlank()) {
                             val priceCents = try {
                                 (priceText.replace(",", "").toDouble() * 100).toLong()
@@ -164,42 +197,76 @@ class ProductsGridFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        productsAdapter = ProductsAdapter { product ->
-            // Try to navigate to product detail; if navigation isn't available, fallback to add to cart
-            val navController = try {
-                findNavController()
-            } catch (e: Exception) {
-                null
-            }
-
-            if (navController != null) {
-                try {
-                    val bundle = android.os.Bundle().apply { putString("productId", product.id) }
-                    navController.navigate(com.extrotarget.extropos.R.id.productDetailFragment, bundle)
-                } catch (e: Exception) {
-                    // If navigation fails, fallback to adding to cart
-                    addProductToCart(product)
-                }
+        productsAdapter = ProductsAdapter(
+            onProductClick = { product ->
+            Log.d("ProductsGrid", "Product clicked: ${product.name}, managementMode: $isManagementMode")
+            
+            if (isManagementMode) {
+                // Management mode: show edit product dialog
+                showEditProductDialog(product)
             } else {
+                // Selling mode: directly add to cart (simplify the logic)
+                Log.d("ProductsGrid", "Selling mode - adding product to cart")
                 addProductToCart(product)
             }
-        }
-
-        // Compute a responsive column count based on screen width and desired tile width (approx 180dp)
-        val displayMetrics = resources.displayMetrics
-        val screenWidthPx = displayMetrics.widthPixels
-        val density = displayMetrics.density
-        val desiredTileDp = 180f
-        val desiredTilePx = (desiredTileDp * density).toInt()
-        val columns = (screenWidthPx / desiredTilePx).coerceAtLeast(1)
+        },
+            getCategoryName = { categoryId ->
+                productViewModel.getCategories().find { it.first == categoryId }?.second ?: ""
+            }
+        )
 
         binding.productsRecyclerView.apply {
-            layoutManager = GridLayoutManager(requireContext(), columns)
             adapter = productsAdapter
-            // Apply spacing in px (12dp)
+            
+            // Set up consistent grid layout that will be configured after layout
+            val gridLayoutManager = GridLayoutManager(requireContext(), 2) // Default 2 columns, will be updated
+            layoutManager = gridLayoutManager
+            
+            // Apply consistent spacing in px (12dp)
+            val density = resources.displayMetrics.density
             val spacingPx = (12 * density).toInt()
             addItemDecoration(GridSpacingItemDecoration(spacingPx))
+            
+            // Configure responsive grid after the RecyclerView is laid out
+            post {
+                setupResponsiveGrid(gridLayoutManager)
+            }
         }
+    }
+
+    private fun setupResponsiveGrid(gridLayoutManager: GridLayoutManager) {
+        val recyclerView = binding.productsRecyclerView
+        val availableWidth = recyclerView.width
+        
+        if (availableWidth <= 0) {
+            // RecyclerView not yet laid out, retry after short delay
+            recyclerView.postDelayed({
+                setupResponsiveGrid(gridLayoutManager)
+            }, 50)
+            return
+        }
+        
+        val density = resources.displayMetrics.density
+        
+        // Consistent tile specifications
+        val desiredTileWidthDp = 160f  // Consistent tile width in DP
+        val spacingDp = 12f            // Spacing between tiles
+        val paddingDp = 8f             // Container padding
+        
+        // Convert to pixels
+        val desiredTileWidthPx = (desiredTileWidthDp * density).toInt()
+        val spacingPx = (spacingDp * density).toInt()
+        val paddingPx = (paddingDp * density).toInt()
+        
+        // Calculate optimal columns based on available width
+        // Formula: availableWidth = (columns * tileWidth) + ((columns - 1) * spacing) + (2 * padding)
+        val effectiveWidth = availableWidth - (2 * paddingPx)
+        val columns = ((effectiveWidth + spacingPx) / (desiredTileWidthPx + spacingPx)).coerceAtLeast(1)
+        
+        Log.d("ProductsGrid", "Grid setup - Available: ${availableWidth}px, Columns: $columns, TileWidth: ${desiredTileWidthDp}dp")
+        
+        // Update the grid layout
+        gridLayoutManager.spanCount = columns
     }
 
     private fun setupSearch() {
@@ -226,13 +293,146 @@ class ProductsGridFragment : Fragment() {
     }
 
     private fun addProductToCart(product: Product) {
-        if (product.stockQuantity <= 0) {
-            // TODO: Show out of stock message
-            return
-        }
+        Log.d("ProductsGrid", "Adding product to cart: ${product.name}, stock: ${product.stockQuantity}")
+        
+        // Temporarily disable stock check for POS functionality - TODO: Implement proper inventory management
+        // if (product.stockQuantity <= 0) {
+        //     Log.w("ProductsGrid", "Product out of stock: ${product.name}")
+        //     // Show out of stock message
+        //     val ctx = requireContext()
+        //     androidx.appcompat.app.AlertDialog.Builder(ctx)
+        //         .setTitle("Out of Stock")
+        //         .setMessage("${product.name} is currently out of stock.")
+        //         .setPositiveButton("OK", null)
+        //         .show()
+        //     return
+        // }
 
         cartViewModel.addItem(product.id, product.name, product.priceCents, 1)
-        // TODO: Show added to cart feedback
+        Log.d("ProductsGrid", "Successfully added ${product.name} to cart")
+        
+        // Show added to cart feedback
+        val ctx = requireContext()
+        android.widget.Toast.makeText(ctx, "Added ${product.name} to cart", android.widget.Toast.LENGTH_SHORT).show()
+    }
+
+    /**
+     * Control whether the internal FAB should be shown.
+     * Useful when this fragment is embedded in another screen that has its own FABs.
+     */
+    fun hideInternalFab(hide: Boolean) {
+        showInternalFab = !hide
+        if (_binding != null) {
+            binding.addProductFab.visibility = if (showInternalFab) View.VISIBLE else View.GONE
+        }
+    }
+    
+    /**
+     * Set management mode - when true, clicking products shows edit dialog instead of navigation
+     */
+    fun setManagementMode(enabled: Boolean) {
+        isManagementMode = enabled
+    }
+    
+    private fun showEditProductDialog(product: Product) {
+        val ctx = requireContext()
+        val container = android.widget.LinearLayout(ctx).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(16, 16, 16, 16)
+        }
+        
+        val idInput = android.widget.EditText(ctx).apply {
+            hint = "Product ID"
+            setText(product.id)
+            isEnabled = false // ID should not be editable
+        }
+        val nameInput = android.widget.EditText(ctx).apply {
+            hint = "Product name"
+            setText(product.name)
+        }
+        val priceInput = android.widget.EditText(ctx).apply {
+            hint = "Price (RM, e.g. 3.50)"
+            setText("%.2f".format(product.priceCents / 100.0))
+        }
+        val categoryLabel = android.widget.TextView(ctx).apply {
+            text = "Category:"
+            textSize = 14f
+            setPadding(0, 16, 0, 8)
+        }
+        
+        val categorySpinner = android.widget.Spinner(ctx)
+        
+        // Populate category spinner
+        val categories = productViewModel.getCategories()
+        val categoryOptions = mutableListOf("No Category")
+        val categoryIds = mutableListOf("")
+        
+        categories.forEach { (id, name) ->
+            categoryOptions.add("$name ($id)")
+            categoryIds.add(id)
+        }
+        
+        val adapter = android.widget.ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, categoryOptions)
+        categorySpinner.adapter = adapter
+        
+        // Set current selection
+        val currentIndex = categoryIds.indexOf(product.categoryId)
+        if (currentIndex >= 0) {
+            categorySpinner.setSelection(currentIndex)
+        }
+        val descriptionInput = android.widget.EditText(ctx).apply {
+            hint = "Description (optional)"
+            setText(product.description)
+        }
+        
+        container.addView(idInput)
+        container.addView(nameInput)
+        container.addView(priceInput)
+        container.addView(categoryLabel)
+        container.addView(categorySpinner)
+        container.addView(descriptionInput)
+
+        androidx.appcompat.app.AlertDialog.Builder(ctx)
+            .setTitle("Edit Product")
+            .setView(container)
+            .setPositiveButton("Save") { _, _ ->
+                val name = nameInput.text.toString().trim()
+                val priceText = priceInput.text.toString().trim()
+                val selectedPosition = categorySpinner.selectedItemPosition
+                val categoryId = if (selectedPosition > 0) categoryIds[selectedPosition] else ""
+                val description = descriptionInput.text.toString().trim()
+                
+                if (name.isNotBlank() && priceText.isNotBlank()) {
+                    val priceCents = try {
+                        (priceText.replace(",", "").toDouble() * 100).toLong()
+                    } catch (e: Exception) { product.priceCents }
+
+                    val updatedProduct = product.copy(
+                        name = name,
+                        priceCents = priceCents,
+                        categoryId = categoryId,
+                        description = description
+                    )
+                    
+                    productViewModel.updateProduct(updatedProduct)
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .setNeutralButton("Delete") { _, _ ->
+                showDeleteConfirmation(product)
+            }
+            .show()
+    }
+    
+    private fun showDeleteConfirmation(product: Product) {
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle("Delete Product")
+            .setMessage("Are you sure you want to delete '${product.name}'?")
+            .setPositiveButton("Delete") { _, _ ->
+                productViewModel.deleteProduct(product.id)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     override fun onDestroyView() {

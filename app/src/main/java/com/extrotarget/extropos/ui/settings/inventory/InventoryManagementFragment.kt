@@ -68,10 +68,24 @@ class InventoryManagementFragment : Fragment() {
             override fun onTabReselected(tab: com.google.android.material.tabs.TabLayout.Tab?) {}
         })
 
+        // Setup ViewPager with fragments
+        val pagerAdapter = InventoryPagerAdapter(requireActivity())
+        binding.inventoryViewPager.adapter = pagerAdapter
+        
+        // Connect tabs with ViewPager
+        com.google.android.material.tabs.TabLayoutMediator(binding.inventoryTabs, binding.inventoryViewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Products"
+                1 -> "Categories"
+                2 -> "Stock Levels"
+                3 -> "Barcodes"
+                else -> "Tab $position"
+            }
+        }.attach()
+
         // Wire fab actions
         setupAddCategoryFab()
         setupAddProductFab()
-        // TODO: Implement tab content switching
     }
 
     private val productViewModel: ProductViewModel by activityViewModels()
@@ -102,7 +116,10 @@ class InventoryManagementFragment : Fragment() {
                         val id = idInput.text.toString().trim()
                         val name = nameInput.text.toString().trim()
                         if (id.isNotBlank() && name.isNotBlank()) {
+                            android.util.Log.d("InventoryManagement", "Adding category from Inventory Management: id=$id, name=$name")
                             productViewModel.addCategory(id, name)
+                        } else {
+                            android.util.Log.d("InventoryManagement", "Category add failed: empty id or name")
                         }
                     }
                     .setNegativeButton("Cancel", null)

@@ -29,6 +29,9 @@ class MenuFragment : Fragment() {
 
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var menuItemAdapter: MenuItemAdapter
+    
+    // Flag to control whether the internal FAB should be shown
+    private var showInternalFab = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +52,12 @@ class MenuFragment : Fragment() {
     }
 
     private fun setupAddCategory() {
+        // Hide the FAB if requested (e.g., when used inside InventoryManagement)
+        if (!showInternalFab) {
+            binding.addCategoryFab.visibility = View.GONE
+            return
+        }
+        
         binding.addCategoryFab.setOnClickListener {
             // Show a simple dialog to collect id and name
             val ctx = requireContext()
@@ -75,7 +84,16 @@ class MenuFragment : Fragment() {
                     val name = nameInput.text.toString().trim()
                     if (id.isNotBlank() && name.isNotBlank()) {
                         // Add category using the shared activity ProductViewModel
+                        android.util.Log.d("MenuFragment", "Adding category: id=$id, name=$name")
                         productViewModel.addCategory(id, name)
+                        
+                        // Reload categories in MenuViewModel to show the new category
+                        android.util.Log.d("MenuFragment", "Reloading categories in MenuViewModel")
+                        viewModel.loadCategories()
+                        
+                        android.util.Log.d("MenuFragment", "Category add process completed")
+                    } else {
+                        android.util.Log.d("MenuFragment", "Category add failed: empty id or name")
                     }
                 }
                 .setNegativeButton("Cancel", null)
@@ -85,9 +103,14 @@ class MenuFragment : Fragment() {
 
     private fun setupRecyclerViews() {
         // Categories horizontal list
-        categoryAdapter = CategoryAdapter { category ->
-            viewModel.selectCategory(category)
-        }
+        categoryAdapter = CategoryAdapter(
+            onCategoryClick = { category ->
+                viewModel.selectCategory(category)
+            },
+            onCategoryLongClick = { category ->
+                showEditCategoryDialog(category)
+            }
+        )
         binding.categoriesRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = categoryAdapter
@@ -162,6 +185,86 @@ class MenuFragment : Fragment() {
     private fun showAddToCartDialog(menuItem: MenuItem) {
         // TODO: Implement add to cart dialog
         // This would show quantity selector and add to order
+    }
+
+    private fun showEditCategoryDialog(category: Category) {
+        val ctx = requireContext()
+        
+        // Create options dialog: Edit or Delete
+        val options = arrayOf("Edit Category", "Delete Category")
+        androidx.appcompat.app.AlertDialog.Builder(ctx)
+            .setTitle(category.name)
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> showEditCategoryFormDialog(category)
+                    1 -> showDeleteCategoryConfirmDialog(category)
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun showEditCategoryFormDialog(category: Category) {
+        val ctx = requireContext()
+        val container = android.widget.LinearLayout(ctx).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(16, 16, 16, 16)
+        }
+
+        val nameEditText = android.widget.EditText(ctx).apply {
+            hint = "Category Name"
+            setText(category.name)
+        }
+        val descriptionEditText = android.widget.EditText(ctx).apply {
+            hint = "Description"
+            setText(category.description)
+        }
+
+        container.addView(nameEditText)
+        container.addView(descriptionEditText)
+
+        androidx.appcompat.app.AlertDialog.Builder(ctx)
+            .setTitle("Edit Category")
+            .setView(container)
+            .setPositiveButton("Update") { _, _ ->
+                val name = nameEditText.text.toString().trim()
+                val description = descriptionEditText.text.toString().trim()
+
+                if (name.isNotBlank()) {
+                    val updatedCategory = category.copy(
+                        name = name,
+                        description = description
+                    )
+                    viewModel.updateCategory(updatedCategory)
+                    android.util.Log.d("MenuFragment", "Category update process completed")
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun showDeleteCategoryConfirmDialog(category: Category) {
+        val ctx = requireContext()
+        androidx.appcompat.app.AlertDialog.Builder(ctx)
+            .setTitle("Delete Category")
+            .setMessage("Are you sure you want to delete \"${category.name}\"?\n\nThis action cannot be undone.")
+            .setPositiveButton("Delete") { _, _ ->
+                viewModel.deleteCategory(category.id)
+                android.util.Log.d("MenuFragment", "Category delete process completed")
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    /**
+     * Control whether the internal FAB should be shown.
+     * Useful when this fragment is embedded in another screen that has its own FABs.
+     */
+    fun hideInternalFab(hide: Boolean) {
+        showInternalFab = !hide
+        if (_binding != null) {
+            binding.addCategoryFab.visibility = if (showInternalFab) View.VISIBLE else View.GONE
+        }
     }
 
     override fun onDestroyView() {

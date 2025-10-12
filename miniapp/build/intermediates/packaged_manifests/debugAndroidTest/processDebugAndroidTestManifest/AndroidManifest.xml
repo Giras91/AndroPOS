@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.extrotarget.extropos.test" >
+    package="com.extrotarget.extropos.miniapp.test" >
 
     <uses-sdk
         android:minSdkVersion="24"
@@ -10,8 +10,8 @@
         android:name="android.test.InstrumentationTestRunner"
         android:functionalTest="false"
         android:handleProfiling="false"
-        android:label="Tests for com.extrotarget.extropos"
-        android:targetPackage="com.extrotarget.extropos" />
+        android:label="Tests for com.extrotarget.extropos.miniapp"
+        android:targetPackage="com.extrotarget.extropos.miniapp" />
 
     <application
         android:debuggable="true"

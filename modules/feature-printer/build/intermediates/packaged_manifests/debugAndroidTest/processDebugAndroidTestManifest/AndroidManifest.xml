@@ -13,6 +13,12 @@
         android:label="Tests for com.extrotarget.extropos.printer.test"
         android:targetPackage="com.extrotarget.extropos.printer.test" />
 
+    <permission
+        android:name="com.extrotarget.extropos.printer.test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.extrotarget.extropos.printer.test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+
     <application
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
@@ -23,6 +29,12 @@
             android:name="androidx.startup.InitializationProvider"
             android:authorities="com.extrotarget.extropos.printer.test.androidx-startup"
             android:exported="false" >
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+                android:value="androidx.startup" />
             <meta-data
                 android:name="androidx.profileinstaller.ProfileInstallerInitializer"
                 android:value="androidx.startup" />

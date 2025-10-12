@@ -1,8 +1,10 @@
 package com.extrotarget.extropos.ui.menu;
 
+import com.extrotarget.extropos.domain.usecase.DeleteCategoryUseCase;
 import com.extrotarget.extropos.domain.usecase.GetCategoriesUseCase;
 import com.extrotarget.extropos.domain.usecase.GetMenuItemsUseCase;
 import com.extrotarget.extropos.domain.usecase.SearchMenuItemsUseCase;
+import com.extrotarget.extropos.domain.usecase.UpdateCategoryUseCase;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
@@ -32,27 +34,38 @@ public final class MenuViewModel_Factory implements Factory<MenuViewModel> {
 
   private final Provider<SearchMenuItemsUseCase> searchMenuItemsUseCaseProvider;
 
+  private final Provider<UpdateCategoryUseCase> updateCategoryUseCaseProvider;
+
+  private final Provider<DeleteCategoryUseCase> deleteCategoryUseCaseProvider;
+
   public MenuViewModel_Factory(Provider<GetCategoriesUseCase> getCategoriesProvider,
       Provider<GetMenuItemsUseCase> getMenuItemsUseCaseProvider,
-      Provider<SearchMenuItemsUseCase> searchMenuItemsUseCaseProvider) {
+      Provider<SearchMenuItemsUseCase> searchMenuItemsUseCaseProvider,
+      Provider<UpdateCategoryUseCase> updateCategoryUseCaseProvider,
+      Provider<DeleteCategoryUseCase> deleteCategoryUseCaseProvider) {
     this.getCategoriesProvider = getCategoriesProvider;
     this.getMenuItemsUseCaseProvider = getMenuItemsUseCaseProvider;
     this.searchMenuItemsUseCaseProvider = searchMenuItemsUseCaseProvider;
+    this.updateCategoryUseCaseProvider = updateCategoryUseCaseProvider;
+    this.deleteCategoryUseCaseProvider = deleteCategoryUseCaseProvider;
   }
 
   @Override
   public MenuViewModel get() {
-    return newInstance(getCategoriesProvider.get(), getMenuItemsUseCaseProvider.get(), searchMenuItemsUseCaseProvider.get());
+    return newInstance(getCategoriesProvider.get(), getMenuItemsUseCaseProvider.get(), searchMenuItemsUseCaseProvider.get(), updateCategoryUseCaseProvider.get(), deleteCategoryUseCaseProvider.get());
   }
 
   public static MenuViewModel_Factory create(Provider<GetCategoriesUseCase> getCategoriesProvider,
       Provider<GetMenuItemsUseCase> getMenuItemsUseCaseProvider,
-      Provider<SearchMenuItemsUseCase> searchMenuItemsUseCaseProvider) {
-    return new MenuViewModel_Factory(getCategoriesProvider, getMenuItemsUseCaseProvider, searchMenuItemsUseCaseProvider);
+      Provider<SearchMenuItemsUseCase> searchMenuItemsUseCaseProvider,
+      Provider<UpdateCategoryUseCase> updateCategoryUseCaseProvider,
+      Provider<DeleteCategoryUseCase> deleteCategoryUseCaseProvider) {
+    return new MenuViewModel_Factory(getCategoriesProvider, getMenuItemsUseCaseProvider, searchMenuItemsUseCaseProvider, updateCategoryUseCaseProvider, deleteCategoryUseCaseProvider);
   }
 
   public static MenuViewModel newInstance(GetCategoriesUseCase getCategories,
-      GetMenuItemsUseCase getMenuItemsUseCase, SearchMenuItemsUseCase searchMenuItemsUseCase) {
-    return new MenuViewModel(getCategories, getMenuItemsUseCase, searchMenuItemsUseCase);
+      GetMenuItemsUseCase getMenuItemsUseCase, SearchMenuItemsUseCase searchMenuItemsUseCase,
+      UpdateCategoryUseCase updateCategoryUseCase, DeleteCategoryUseCase deleteCategoryUseCase) {
+    return new MenuViewModel(getCategories, getMenuItemsUseCase, searchMenuItemsUseCase, updateCategoryUseCase, deleteCategoryUseCase);
   }
 }

@@ -9,7 +9,8 @@ import com.extrotarget.extropos.databinding.ItemCategoryBinding
 import com.extrotarget.extropos.domain.model.Category
 
 class CategoryAdapter(
-    private val onCategoryClick: (Category) -> Unit
+    private val onCategoryClick: (Category) -> Unit,
+    private val onCategoryLongClick: (Category) -> Unit = { }
 ) : ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -32,6 +33,16 @@ class CategoryAdapter(
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onCategoryClick(getItem(position))
+                }
+            }
+            
+            binding.root.setOnLongClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onCategoryLongClick(getItem(position))
+                    true
+                } else {
+                    false
                 }
             }
         }

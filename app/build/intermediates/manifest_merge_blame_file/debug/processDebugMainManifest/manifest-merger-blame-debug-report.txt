@@ -32,228 +32,349 @@
 20    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
 20-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:11:5-75
 20-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:11:22-72
-21    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+21    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" /> <!-- Bluetooth permissions for printer connectivity -->
 21-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:12:5-75
 21-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:12:22-72
-22    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-22-->[io.appwrite:sdk-for-android:5.0.0] /home/hp/.gradle/caches/8.13/transforms/0c488d7af665043d74b738d157b58abe/transformed/sdk-for-android-5.0.0/AndroidManifest.xml:8:5-77
-22-->[io.appwrite:sdk-for-android:5.0.0] /home/hp/.gradle/caches/8.13/transforms/0c488d7af665043d74b738d157b58abe/transformed/sdk-for-android-5.0.0/AndroidManifest.xml:8:22-74
-23
-24    <permission
-24-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
-25        android:name="com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-25-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
-26        android:protectionLevel="signature" />
-26-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
-27
-28    <uses-permission android:name="com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-28-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
-28-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+22    <uses-permission android:name="android.permission.BLUETOOTH" />
+22-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:15:5-68
+22-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:15:22-65
+23    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+23-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:16:5-74
+23-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:16:22-71
+24    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+24-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:17:5-76
+24-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:17:22-73
+25    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+25-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:18:5-73
+25-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:18:22-70
+26    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+26-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:19:5-79
+26-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:19:22-76
+27    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+27-->[io.appwrite:sdk-for-android:5.0.0] /home/hp/.gradle/caches/8.13/transforms/0c488d7af665043d74b738d157b58abe/transformed/sdk-for-android-5.0.0/AndroidManifest.xml:8:5-77
+27-->[io.appwrite:sdk-for-android:5.0.0] /home/hp/.gradle/caches/8.13/transforms/0c488d7af665043d74b738d157b58abe/transformed/sdk-for-android-5.0.0/AndroidManifest.xml:8:22-74
+28    <uses-permission android:name="android.permission.REORDER_TASKS" />
+28-->[androidx.fragment:fragment-testing-manifest:1.6.2] /home/hp/.gradle/caches/8.13/transforms/15c83be57439428fd4645056672f2a17/transformed/fragment-testing-manifest-1.6.2/AndroidManifest.xml:23:5-72
+28-->[androidx.fragment:fragment-testing-manifest:1.6.2] /home/hp/.gradle/caches/8.13/transforms/15c83be57439428fd4645056672f2a17/transformed/fragment-testing-manifest-1.6.2/AndroidManifest.xml:23:22-69
 29
-30    <application
-30-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:14:5-67:19
-31        android:name="com.extrotarget.extropos.App"
-31-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:15:9-28
-32        android:allowBackup="true"
-32-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:16:9-35
-33        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-33-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
-34        android:debuggable="true"
-35        android:extractNativeLibs="false"
-36        android:icon="@mipmap/ic_launcher"
-36-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:17:9-43
-37        android:label="@string/app_name"
-37-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:18:9-41
-38        android:theme="@style/AppTheme"
-38-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:19:9-40
-39        android:usesCleartextTraffic="true" >
-39-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:20:9-44
-40
-41        <!-- Debug-only activity to quickly open the dashboard during development. -->
-42        <activity
-42-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:7:9-13:20
-43            android:name="com.extrotarget.extropos.debug.DebugLauncherActivity"
-43-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:7:19-86
-44            android:exported="true" >
-44-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:8:13-36
-45            <intent-filter>
-45-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:51:13-54:29
-46                <action android:name="android.intent.action.MAIN" />
-46-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:52:17-69
-46-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:52:25-66
-47
-48                <category android:name="android.intent.category.LAUNCHER" />
-48-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:53:17-77
-48-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:53:27-74
-49            </intent-filter>
-50        </activity>
-51        <!-- Expose debug helper activity that inserts a deterministic category for instrumentation tests -->
-52        <activity
-52-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:15:9-16:39
-53            android:name="com.extrotarget.extropos.ui.debug.DebugCategoryActivity"
-53-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:15:19-65
-54            android:exported="true" />
-54-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:16:13-36
-55        <activity
-55-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:17:9-18:39
-56            android:name="com.extrotarget.extropos.ui.debug.DebugProductActivity"
-56-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:17:19-64
-57            android:exported="true" />
-57-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:18:13-36
-58        <!-- Two-step auth flow activities -->
-59        <!--
-60 Use MainActivity as the launcher so the fragment-based dashboard is the home entry.
-61             DashboardActivity is kept but marked non-exported; it can be started from the app's debug-only launcher
-62             activity or via internal navigation for testing.
-63        -->
-64        <activity
-64-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:26:9-30:50
-65            android:name="com.extrotarget.extropos.ui.dashboard.DashboardActivity"
-65-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:27:13-59
-66            android:exported="false"
-66-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:28:13-37
-67            android:icon="@mipmap/ic_launcher"
-67-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:30:13-47
-68            android:label="@string/app_name" />
-68-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:29:13-45
-69        <activity
-69-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:32:9-35:55
-70            android:name="com.extrotarget.extropos.auth.EmailAuthActivity"
-70-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:33:13-51
-71            android:exported="false"
-71-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:34:13-37
-72            android:windowSoftInputMode="adjustPan" />
-72-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:35:13-52
-73        <activity
-73-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:37:9-39:40
-74            android:name="com.extrotarget.extropos.ui.pin.PinLoginActivity"
-74-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:38:13-52
-75            android:exported="false" />
-75-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:39:13-37
-76        <activity
-76-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:41:9-43:40
-77            android:name="com.extrotarget.extropos.ui.user.AddUserActivity"
-77-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:42:13-52
-78            android:exported="false" /> <!-- Existing main entry - will be the app's main host for fragment navigation. Keep non-exported. -->
-78-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:43:13-37
-79        <activity
-79-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:46:9-55:20
-80            android:name="com.extrotarget.extropos.MainActivity"
-80-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:47:13-41
-81            android:exported="true"
-81-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:48:13-36
-82            android:icon="@mipmap/ic_launcher"
-82-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:50:13-47
-83            android:label="@string/app_name" >
-83-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:49:13-45
-84            <intent-filter>
-84-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:51:13-54:29
-85                <action android:name="android.intent.action.MAIN" />
-85-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:52:17-69
-85-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:52:25-66
-86
-87                <category android:name="android.intent.category.LAUNCHER" />
-87-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:53:17-77
-87-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:53:27-74
-88            </intent-filter>
-89        </activity> <!-- Legacy DashboardActivity removed: the fragment-based dashboard (MainActivity -> MainFragment) is used instead. -->
-90        <!-- PDF Generation Test Activity -->
-91        <activity
-91-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:60:9-63:40
-92            android:name="com.extrotarget.extropos.pdf.test.PdfTestActivity"
-92-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:61:13-53
-93            android:exported="false"
-93-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:62:13-37
-94            android:label="PDF Test" />
-94-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:63:13-37
-95
-96        <provider
-96-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
-97            android:name="androidx.startup.InitializationProvider"
-97-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
-98            android:authorities="com.extrotarget.extropos.androidx-startup"
-98-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
-99            android:exported="false" >
-99-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
-100            <meta-data
-100-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
-101                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-101-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
-102                android:value="androidx.startup" />
-102-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
-103            <meta-data
-103-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/hp/.gradle/caches/8.13/transforms/f31ec8544190f707ec635d9ae5023c0c/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
-104                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-104-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/hp/.gradle/caches/8.13/transforms/f31ec8544190f707ec635d9ae5023c0c/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
-105                android:value="androidx.startup" />
-105-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/hp/.gradle/caches/8.13/transforms/f31ec8544190f707ec635d9ae5023c0c/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
-106            <meta-data
-106-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
-107                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-107-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
-108                android:value="androidx.startup" />
-108-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
-109        </provider>
-110
-111        <uses-library
-111-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
-112            android:name="androidx.window.extensions"
-112-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
-113            android:required="false" />
-113-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
-114        <uses-library
-114-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
-115            android:name="androidx.window.sidecar"
-115-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
-116            android:required="false" />
-116-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
-117
-118        <service
-118-->[androidx.room:room-runtime-android:2.7.0] /home/hp/.gradle/caches/8.13/transforms/7b9adb17880d3d7e5c8097f11328fd09/transformed/room-runtime-release/AndroidManifest.xml:24:9-28:63
-119            android:name="androidx.room.MultiInstanceInvalidationService"
-119-->[androidx.room:room-runtime-android:2.7.0] /home/hp/.gradle/caches/8.13/transforms/7b9adb17880d3d7e5c8097f11328fd09/transformed/room-runtime-release/AndroidManifest.xml:25:13-74
-120            android:directBootAware="true"
-120-->[androidx.room:room-runtime-android:2.7.0] /home/hp/.gradle/caches/8.13/transforms/7b9adb17880d3d7e5c8097f11328fd09/transformed/room-runtime-release/AndroidManifest.xml:26:13-43
-121            android:exported="false" />
-121-->[androidx.room:room-runtime-android:2.7.0] /home/hp/.gradle/caches/8.13/transforms/7b9adb17880d3d7e5c8097f11328fd09/transformed/room-runtime-release/AndroidManifest.xml:27:13-37
-122
-123        <receiver
-123-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
-124            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-124-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
-125            android:directBootAware="false"
-125-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
-126            android:enabled="true"
-126-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
-127            android:exported="true"
-127-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
-128            android:permission="android.permission.DUMP" >
-128-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
-129            <intent-filter>
-129-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
-130                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-130-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
-130-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
-131            </intent-filter>
-132            <intent-filter>
-132-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
-133                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-133-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
-133-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
-134            </intent-filter>
-135            <intent-filter>
-135-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
-136                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-136-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
-136-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
-137            </intent-filter>
-138            <intent-filter>
-138-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
-139                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-139-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
-139-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
-140            </intent-filter>
-141        </receiver>
-142    </application>
-143
-144</manifest>
+30    <permission
+30-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
+31        android:name="com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+31-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
+32        android:protectionLevel="signature" />
+32-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
+33
+34    <uses-permission android:name="com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+34-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
+34-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+35
+36    <application
+36-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:21:5-74:19
+37        android:name="com.extrotarget.extropos.App"
+37-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:22:9-28
+38        android:allowBackup="true"
+38-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:23:9-35
+39        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+39-->[androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
+40        android:debuggable="true"
+41        android:extractNativeLibs="false"
+42        android:icon="@mipmap/ic_launcher"
+42-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:24:9-43
+43        android:label="@string/app_name"
+43-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:25:9-41
+44        android:theme="@style/AppTheme"
+44-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:26:9-40
+45        android:usesCleartextTraffic="true" >
+45-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:27:9-44
+46
+47        <!-- Debug-only activity to quickly open the dashboard during development. -->
+48        <activity
+48-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:7:9-13:20
+49            android:name="com.extrotarget.extropos.debug.DebugLauncherActivity"
+49-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:7:19-86
+50            android:exported="true" >
+50-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:8:13-36
+51            <intent-filter>
+51-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:58:13-61:29
+52                <action android:name="android.intent.action.MAIN" />
+52-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:59:17-69
+52-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:59:25-66
+53
+54                <category android:name="android.intent.category.LAUNCHER" />
+54-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:60:17-77
+54-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:60:27-74
+55            </intent-filter>
+56        </activity>
+57        <!-- Quick smoke test activity (added programmatically by debug build) -->
+58        <activity
+58-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:15:5-76
+59            android:name="com.extrotarget.extropos.DebugSmokeActivity"
+59-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:15:15-49
+60            android:exported="true" />
+60-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:15:50-73
+61        <!-- Expose debug helper activity that inserts a deterministic category for instrumentation tests -->
+62        <activity
+62-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:17:9-18:39
+63            android:name="com.extrotarget.extropos.ui.debug.DebugCategoryActivity"
+63-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:17:19-65
+64            android:exported="true" />
+64-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:18:13-36
+65        <activity
+65-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:19:9-20:39
+66            android:name="com.extrotarget.extropos.ui.debug.DebugProductActivity"
+66-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:19:19-64
+67            android:exported="true" />
+67-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:20:13-36
+68
+69        <!-- Hilt test host activities for FragmentScenario/ActivityScenario while running connected tests -->
+70        <activity
+70-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:23:9-26:81
+71            android:name="dagger.hilt.android.testing.HiltTestActivity"
+71-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:24:13-72
+72            android:exported="true"
+72-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:25:13-36
+73            android:theme="@style/FragmentScenarioEmptyFragmentActivityTheme" />
+73-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:26:13-78
+74
+75        <activity-alias
+75-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:28:9-31:85
+76            android:name="androidx.fragment.app.testing.EmptyFragmentActivity"
+76-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:29:13-79
+77            android:exported="true"
+77-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:30:13-36
+78            android:targetActivity="dagger.hilt.android.testing.HiltTestActivity" />
+78-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:31:13-82
+79
+80        <activity
+80-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:33:9-36:81
+81            android:name="com.extrotarget.extropos.ui.tests.HiltTestActivity"
+81-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:34:13-78
+82            android:exported="true"
+82-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:35:13-36
+83            android:theme="@style/FragmentScenarioEmptyFragmentActivityTheme" />
+83-->/home/hp/Documents/AndroPOS/app/src/debug/AndroidManifest.xml:36:13-78
+84        <!-- Two-step auth flow activities -->
+85        <!--
+86 Use MainActivity as the launcher so the fragment-based dashboard is the home entry.
+87             DashboardActivity is kept but marked non-exported; it can be started from the app's debug-only launcher
+88             activity or via internal navigation for testing.
+89        -->
+90        <activity
+90-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:33:9-37:50
+91            android:name="com.extrotarget.extropos.ui.dashboard.DashboardActivity"
+91-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:34:13-59
+92            android:exported="false"
+92-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:35:13-37
+93            android:icon="@mipmap/ic_launcher"
+93-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:37:13-47
+94            android:label="@string/app_name" />
+94-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:36:13-45
+95        <activity
+95-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:39:9-42:55
+96            android:name="com.extrotarget.extropos.auth.EmailAuthActivity"
+96-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:40:13-51
+97            android:exported="false"
+97-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:41:13-37
+98            android:windowSoftInputMode="adjustPan" />
+98-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:42:13-52
+99        <activity
+99-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:44:9-46:40
+100            android:name="com.extrotarget.extropos.ui.pin.PinLoginActivity"
+100-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:45:13-52
+101            android:exported="false" />
+101-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:46:13-37
+102        <activity
+102-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:48:9-50:40
+103            android:name="com.extrotarget.extropos.ui.user.AddUserActivity"
+103-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:49:13-52
+104            android:exported="false" /> <!-- Existing main entry - will be the app's main host for fragment navigation. Keep non-exported. -->
+104-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:50:13-37
+105        <activity
+105-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:53:9-62:20
+106            android:name="com.extrotarget.extropos.MainActivity"
+106-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:54:13-41
+107            android:exported="true"
+107-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:55:13-36
+108            android:icon="@mipmap/ic_launcher"
+108-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:57:13-47
+109            android:label="@string/app_name" >
+109-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:56:13-45
+110            <intent-filter>
+110-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:58:13-61:29
+111                <action android:name="android.intent.action.MAIN" />
+111-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:59:17-69
+111-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:59:25-66
+112
+113                <category android:name="android.intent.category.LAUNCHER" />
+113-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:60:17-77
+113-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:60:27-74
+114            </intent-filter>
+115        </activity> <!-- Legacy DashboardActivity removed: the fragment-based dashboard (MainActivity -> MainFragment) is used instead. -->
+116        <!-- PDF Generation Test Activity -->
+117        <activity
+117-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:67:9-70:40
+118            android:name="com.extrotarget.extropos.pdf.test.PdfTestActivity"
+118-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:68:13-53
+119            android:exported="false"
+119-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:69:13-37
+120            android:label="PDF Test" />
+120-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:70:13-37
+121        <activity
+121-->[androidx.fragment:fragment-testing-manifest:1.6.2] /home/hp/.gradle/caches/8.13/transforms/15c83be57439428fd4645056672f2a17/transformed/fragment-testing-manifest-1.6.2/AndroidManifest.xml:26:9-35:20
+122            android:name="androidx.fragment.app.testing.EmptyFragmentActivity"
+122-->[androidx.fragment:fragment-testing-manifest:1.6.2] /home/hp/.gradle/caches/8.13/transforms/15c83be57439428fd4645056672f2a17/transformed/fragment-testing-manifest-1.6.2/AndroidManifest.xml:27:13-79
+123            android:exported="true"
+123-->[androidx.fragment:fragment-testing-manifest:1.6.2] /home/hp/.gradle/caches/8.13/transforms/15c83be57439428fd4645056672f2a17/transformed/fragment-testing-manifest-1.6.2/AndroidManifest.xml:28:13-36
+124            android:multiprocess="true"
+124-->[androidx.fragment:fragment-testing-manifest:1.6.2] /home/hp/.gradle/caches/8.13/transforms/15c83be57439428fd4645056672f2a17/transformed/fragment-testing-manifest-1.6.2/AndroidManifest.xml:29:13-40
+125            android:taskAffinity=""
+125-->[androidx.fragment:fragment-testing-manifest:1.6.2] /home/hp/.gradle/caches/8.13/transforms/15c83be57439428fd4645056672f2a17/transformed/fragment-testing-manifest-1.6.2/AndroidManifest.xml:30:13-36
+126            android:theme="@style/FragmentScenarioEmptyFragmentActivityTheme" >
+126-->[androidx.fragment:fragment-testing-manifest:1.6.2] /home/hp/.gradle/caches/8.13/transforms/15c83be57439428fd4645056672f2a17/transformed/fragment-testing-manifest-1.6.2/AndroidManifest.xml:31:13-78
+127            <intent-filter>
+127-->[androidx.fragment:fragment-testing-manifest:1.6.2] /home/hp/.gradle/caches/8.13/transforms/15c83be57439428fd4645056672f2a17/transformed/fragment-testing-manifest-1.6.2/AndroidManifest.xml:32:13-34:29
+128                <action android:name="android.intent.action.MAIN" />
+128-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:59:17-69
+128-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:59:25-66
+129            </intent-filter>
+130        </activity>
+131
+132        <provider
+132-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+133            android:name="androidx.startup.InitializationProvider"
+133-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+134            android:authorities="com.extrotarget.extropos.androidx-startup"
+134-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+135            android:exported="false" >
+135-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+136            <meta-data
+136-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+137                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+137-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+138                android:value="androidx.startup" />
+138-->[androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+139            <meta-data
+139-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/hp/.gradle/caches/8.13/transforms/f31ec8544190f707ec635d9ae5023c0c/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
+140                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+140-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/hp/.gradle/caches/8.13/transforms/f31ec8544190f707ec635d9ae5023c0c/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
+141                android:value="androidx.startup" />
+141-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/hp/.gradle/caches/8.13/transforms/f31ec8544190f707ec635d9ae5023c0c/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
+142            <meta-data
+142-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+143                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+143-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+144                android:value="androidx.startup" />
+144-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+145        </provider>
+146
+147        <uses-library
+147-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
+148            android:name="androidx.window.extensions"
+148-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
+149            android:required="false" />
+149-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
+150        <uses-library
+150-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
+151            android:name="androidx.window.sidecar"
+151-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
+152            android:required="false" />
+152-->[androidx.window:window:1.0.0] /home/hp/.gradle/caches/8.13/transforms/e6b6fc451bd41ec8897cfe6e9c074c23/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
+153
+154        <activity
+154-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:27:9-34:20
+155            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+155-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:28:13-99
+156            android:exported="true"
+156-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:29:13-36
+157            android:theme="@style/WhiteBackgroundTheme" >
+157-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:30:13-56
+158            <intent-filter android:priority="-100" >
+158-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:31:13-33:29
+158-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:31:28-51
+159                <category android:name="android.intent.category.LAUNCHER" />
+159-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:60:17-77
+159-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:60:27-74
+160            </intent-filter>
+161        </activity>
+162        <activity
+162-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:35:9-42:20
+163            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+163-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:36:13-95
+164            android:exported="true"
+164-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:37:13-36
+165            android:theme="@style/WhiteBackgroundTheme" >
+165-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:38:13-56
+166            <intent-filter android:priority="-100" >
+166-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:31:13-33:29
+166-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:31:28-51
+167                <category android:name="android.intent.category.LAUNCHER" />
+167-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:60:17-77
+167-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:60:27-74
+168            </intent-filter>
+169        </activity>
+170        <activity
+170-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:43:9-50:20
+171            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+171-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:44:13-103
+172            android:exported="true"
+172-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:45:13-36
+173            android:theme="@style/WhiteBackgroundDialogTheme" >
+173-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:46:13-62
+174            <intent-filter android:priority="-100" >
+174-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:31:13-33:29
+174-->[androidx.test:core:1.5.0] /home/hp/.gradle/caches/8.13/transforms/69feeb726c0ad58ab57a78e9cc740cd9/transformed/core-1.5.0/AndroidManifest.xml:31:28-51
+175                <category android:name="android.intent.category.LAUNCHER" />
+175-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:60:17-77
+175-->/home/hp/Documents/AndroPOS/app/src/main/AndroidManifest.xml:60:27-74
+176            </intent-filter>
+177        </activity>
+178
+179        <service
+179-->[androidx.room:room-runtime-android:2.7.0] /home/hp/.gradle/caches/8.13/transforms/7b9adb17880d3d7e5c8097f11328fd09/transformed/room-runtime-release/AndroidManifest.xml:24:9-28:63
+180            android:name="androidx.room.MultiInstanceInvalidationService"
+180-->[androidx.room:room-runtime-android:2.7.0] /home/hp/.gradle/caches/8.13/transforms/7b9adb17880d3d7e5c8097f11328fd09/transformed/room-runtime-release/AndroidManifest.xml:25:13-74
+181            android:directBootAware="true"
+181-->[androidx.room:room-runtime-android:2.7.0] /home/hp/.gradle/caches/8.13/transforms/7b9adb17880d3d7e5c8097f11328fd09/transformed/room-runtime-release/AndroidManifest.xml:26:13-43
+182            android:exported="false" />
+182-->[androidx.room:room-runtime-android:2.7.0] /home/hp/.gradle/caches/8.13/transforms/7b9adb17880d3d7e5c8097f11328fd09/transformed/room-runtime-release/AndroidManifest.xml:27:13-37
+183
+184        <receiver
+184-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+185            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+185-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+186            android:directBootAware="false"
+186-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+187            android:enabled="true"
+187-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+188            android:exported="true"
+188-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+189            android:permission="android.permission.DUMP" >
+189-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+190            <intent-filter>
+190-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+191                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+191-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+191-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+192            </intent-filter>
+193            <intent-filter>
+193-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+194                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+194-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+194-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+195            </intent-filter>
+196            <intent-filter>
+196-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+197                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+197-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+197-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+198            </intent-filter>
+199            <intent-filter>
+199-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+200                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+200-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+200-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/hp/.gradle/caches/8.13/transforms/e13696da06eb01690f22ee5169be82ed/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+201            </intent-filter>
+202        </receiver>
+203    </application>
+204
+205</manifest>

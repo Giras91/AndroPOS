@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:2:1-18:12
-INJECTED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:2:1-18:12
-INJECTED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:2:1-18:12
-INJECTED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:2:1-18:12
+ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:2:1-19:12
 MERGED from [androidx.databinding:viewbinding:8.5.2] /home/hp/.gradle/caches/8.13/transforms/4248250b7cd76dad4ce0ec8e24803456/transformed/viewbinding-8.5.2/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /home/hp/.gradle/caches/8.13/transforms/54ab424d659f6d5f529fa3b37fa7975d/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.appcompat:appcompat:1.6.1] /home/hp/.gradle/caches/8.13/transforms/e6453936d60c1ca4103708c818a55176/transformed/appcompat-1.6.1/AndroidManifest.xml:17:1-22:12
@@ -42,8 +42,8 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /home/hp/.gradle/caches/8
 	xmlns:android
 		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:2:11-69
 application
-ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:4:5-16:19
-INJECTED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:4:5-16:19
+ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:4:5-17:19
+INJECTED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:4:5-17:19
 MERGED from [androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.emoji2:emoji2:1.2.0] /home/hp/.gradle/caches/8.13/transforms/8b3785824524dba51dfed6a7f67fbfb4/transformed/emoji2-1.2.0/AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:28:5-89
@@ -68,22 +68,24 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/hp/.g
 		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:7:9-43
 	android:allowBackup
 		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:5:9-35
+	android:theme
+		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:10:9-40
 activity#com.extrotarget.extropos.MainActivity
-ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:10:9-15:20
+ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:11:9-16:20
 	android:exported
-		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:10:72-95
+		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:11:72-95
 	android:name
-		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:10:19-71
+		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:11:19-71
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:11:13-14:29
+ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:12:13-15:29
 action#android.intent.action.MAIN
-ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:12:17-69
+ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:13:17-69
 	android:name
-		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:12:25-66
+		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:13:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:13:17-77
+ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:14:17-77
 	android:name
-		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:13:27-74
+		ADDED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml:14:27-74
 uses-sdk
 INJECTED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/hp/Documents/AndroPOS/miniapp/src/main/AndroidManifest.xml
@@ -176,7 +178,7 @@ ADDED from [androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a
 		ADDED from [androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
 	android:name
 		ADDED from [androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
-permission#com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+permission#com.extrotarget.extropos.miniapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
 		ADDED from [androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
@@ -186,7 +188,7 @@ uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
-uses-permission#com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission#com.extrotarget.extropos.miniapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.12.0] /home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/AndroidManifest.xml:26:22-94

@@ -11,11 +11,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+    <!-- Quick smoke test activity (added programmatically by debug build) -->
+    <activity android:name=".DebugSmokeActivity" android:exported="true" />
         <!-- Expose debug helper activity that inserts a deterministic category for instrumentation tests -->
         <activity android:name=".ui.debug.DebugCategoryActivity"
             android:exported="true" />
         <activity android:name=".ui.debug.DebugProductActivity"
             android:exported="true" />
+
+        <!-- Hilt test host activities for FragmentScenario/ActivityScenario while running connected tests -->
+        <activity
+            android:name="dagger.hilt.android.testing.HiltTestActivity"
+            android:exported="true"
+            android:theme="@style/FragmentScenarioEmptyFragmentActivityTheme" />
+
+        <activity-alias
+            android:name="androidx.fragment.app.testing.EmptyFragmentActivity"
+            android:exported="true"
+            android:targetActivity="dagger.hilt.android.testing.HiltTestActivity" />
+
+        <activity
+            android:name="com.extrotarget.extropos.ui.tests.HiltTestActivity"
+            android:exported="true"
+            android:theme="@style/FragmentScenarioEmptyFragmentActivityTheme" />
     </application>
 
 </manifest>

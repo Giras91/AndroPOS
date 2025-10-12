@@ -1,6 +1,8 @@
 package com.extrotarget.extropos.ui.cart;
 
+import com.extrotarget.extropos.data.repository.PaymentConfigurationRepository;
 import com.extrotarget.extropos.domain.usecase.ticket.AddItemToTicketUseCase;
+import com.extrotarget.extropos.domain.usecase.ticket.AddTicketTenderUseCase;
 import com.extrotarget.extropos.domain.usecase.ticket.ClearTicketUseCase;
 import com.extrotarget.extropos.domain.usecase.ticket.CompleteTicketUseCase;
 import com.extrotarget.extropos.domain.usecase.ticket.CreateTicketUseCase;
@@ -47,6 +49,10 @@ public final class CartViewModel_Factory implements Factory<CartViewModel> {
 
   private final Provider<CompleteTicketUseCase> completeTicketUseCaseProvider;
 
+  private final Provider<AddTicketTenderUseCase> addTicketTenderUseCaseProvider;
+
+  private final Provider<PaymentConfigurationRepository> paymentConfigRepoProvider;
+
   public CartViewModel_Factory(Provider<GetCurrentTicketUseCase> getCurrentTicketUseCaseProvider,
       Provider<CreateTicketUseCase> createTicketUseCaseProvider,
       Provider<AddItemToTicketUseCase> addItemToTicketUseCaseProvider,
@@ -54,7 +60,9 @@ public final class CartViewModel_Factory implements Factory<CartViewModel> {
       Provider<RemoveItemFromTicketUseCase> removeItemFromTicketUseCaseProvider,
       Provider<ClearTicketUseCase> clearTicketUseCaseProvider,
       Provider<SuspendTicketUseCase> suspendTicketUseCaseProvider,
-      Provider<CompleteTicketUseCase> completeTicketUseCaseProvider) {
+      Provider<CompleteTicketUseCase> completeTicketUseCaseProvider,
+      Provider<AddTicketTenderUseCase> addTicketTenderUseCaseProvider,
+      Provider<PaymentConfigurationRepository> paymentConfigRepoProvider) {
     this.getCurrentTicketUseCaseProvider = getCurrentTicketUseCaseProvider;
     this.createTicketUseCaseProvider = createTicketUseCaseProvider;
     this.addItemToTicketUseCaseProvider = addItemToTicketUseCaseProvider;
@@ -63,11 +71,13 @@ public final class CartViewModel_Factory implements Factory<CartViewModel> {
     this.clearTicketUseCaseProvider = clearTicketUseCaseProvider;
     this.suspendTicketUseCaseProvider = suspendTicketUseCaseProvider;
     this.completeTicketUseCaseProvider = completeTicketUseCaseProvider;
+    this.addTicketTenderUseCaseProvider = addTicketTenderUseCaseProvider;
+    this.paymentConfigRepoProvider = paymentConfigRepoProvider;
   }
 
   @Override
   public CartViewModel get() {
-    return newInstance(getCurrentTicketUseCaseProvider.get(), createTicketUseCaseProvider.get(), addItemToTicketUseCaseProvider.get(), updateItemQuantityUseCaseProvider.get(), removeItemFromTicketUseCaseProvider.get(), clearTicketUseCaseProvider.get(), suspendTicketUseCaseProvider.get(), completeTicketUseCaseProvider.get());
+    return newInstance(getCurrentTicketUseCaseProvider.get(), createTicketUseCaseProvider.get(), addItemToTicketUseCaseProvider.get(), updateItemQuantityUseCaseProvider.get(), removeItemFromTicketUseCaseProvider.get(), clearTicketUseCaseProvider.get(), suspendTicketUseCaseProvider.get(), completeTicketUseCaseProvider.get(), addTicketTenderUseCaseProvider.get(), paymentConfigRepoProvider.get());
   }
 
   public static CartViewModel_Factory create(
@@ -78,8 +88,10 @@ public final class CartViewModel_Factory implements Factory<CartViewModel> {
       Provider<RemoveItemFromTicketUseCase> removeItemFromTicketUseCaseProvider,
       Provider<ClearTicketUseCase> clearTicketUseCaseProvider,
       Provider<SuspendTicketUseCase> suspendTicketUseCaseProvider,
-      Provider<CompleteTicketUseCase> completeTicketUseCaseProvider) {
-    return new CartViewModel_Factory(getCurrentTicketUseCaseProvider, createTicketUseCaseProvider, addItemToTicketUseCaseProvider, updateItemQuantityUseCaseProvider, removeItemFromTicketUseCaseProvider, clearTicketUseCaseProvider, suspendTicketUseCaseProvider, completeTicketUseCaseProvider);
+      Provider<CompleteTicketUseCase> completeTicketUseCaseProvider,
+      Provider<AddTicketTenderUseCase> addTicketTenderUseCaseProvider,
+      Provider<PaymentConfigurationRepository> paymentConfigRepoProvider) {
+    return new CartViewModel_Factory(getCurrentTicketUseCaseProvider, createTicketUseCaseProvider, addItemToTicketUseCaseProvider, updateItemQuantityUseCaseProvider, removeItemFromTicketUseCaseProvider, clearTicketUseCaseProvider, suspendTicketUseCaseProvider, completeTicketUseCaseProvider, addTicketTenderUseCaseProvider, paymentConfigRepoProvider);
   }
 
   public static CartViewModel newInstance(GetCurrentTicketUseCase getCurrentTicketUseCase,
@@ -87,7 +99,8 @@ public final class CartViewModel_Factory implements Factory<CartViewModel> {
       UpdateItemQuantityUseCase updateItemQuantityUseCase,
       RemoveItemFromTicketUseCase removeItemFromTicketUseCase,
       ClearTicketUseCase clearTicketUseCase, SuspendTicketUseCase suspendTicketUseCase,
-      CompleteTicketUseCase completeTicketUseCase) {
-    return new CartViewModel(getCurrentTicketUseCase, createTicketUseCase, addItemToTicketUseCase, updateItemQuantityUseCase, removeItemFromTicketUseCase, clearTicketUseCase, suspendTicketUseCase, completeTicketUseCase);
+      CompleteTicketUseCase completeTicketUseCase, AddTicketTenderUseCase addTicketTenderUseCase,
+      PaymentConfigurationRepository paymentConfigRepo) {
+    return new CartViewModel(getCurrentTicketUseCase, createTicketUseCase, addItemToTicketUseCase, updateItemQuantityUseCase, removeItemFromTicketUseCase, clearTicketUseCase, suspendTicketUseCase, completeTicketUseCase, addTicketTenderUseCase, paymentConfigRepo);
   }
 }

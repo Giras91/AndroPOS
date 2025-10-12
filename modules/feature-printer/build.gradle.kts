@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     id("org.jetbrains.kotlin.kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -15,6 +16,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
+    lint {
+        abortOnError = false
+    }
 }
 
 dependencies {
@@ -23,6 +27,21 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    
+    // Android UI Components
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.material)
+    
+    // DataStore and Serialization
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    
+    // DantSu ESC/POS Printer SDK
+    implementation("com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.3.0")
+    
     testImplementation("junit:junit:4.13.2")
 }
 

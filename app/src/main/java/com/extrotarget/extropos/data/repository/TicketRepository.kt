@@ -17,6 +17,7 @@ interface ITicketRepository {
     fun getCurrentTicket(): Flow<Ticket?>
     suspend fun getTicketById(id: Int): Ticket?
     suspend fun addItemToTicket(item: TicketItem)
+    suspend fun addTicketTender(tender: com.extrotarget.extropos.domain.model.TicketTender)
     suspend fun updateItemQuantity(item: TicketItem, newQuantity: Int)
     suspend fun removeItemFromTicket(item: TicketItem)
     suspend fun clearCurrentTicket()
@@ -73,6 +74,19 @@ class TicketRepository @Inject constructor(
             state = 1
         )
         ticketDao.insertTicketItem(entity)
+    }
+
+    override suspend fun addTicketTender(tender: com.extrotarget.extropos.domain.model.TicketTender) {
+        val ticketId = getCurrentTicketId()
+        val tenderEntity = TicketTenderEntity(
+            id = 0,
+            ticketId = ticketId,
+            tenderId = tender.id,
+            tenderType = tender.tenderType,
+            amount = tender.amountCents,
+            status = 1
+        )
+        ticketDao.insertTicketTender(tenderEntity)
     }
 
     override suspend fun updateItemQuantity(item: TicketItem, newQuantity: Int) {
@@ -136,7 +150,7 @@ class TicketRepository @Inject constructor(
                 ticketId = tenderEntity.ticketId.toString(),
                 tenderType = tenderEntity.tenderType,
                 amountCents = tenderEntity.amount,
-                reference = ""
+                reference = tenderEntity.tenderId
             )
         }
 
@@ -144,6 +158,7 @@ class TicketRepository @Inject constructor(
             id = entity.id.toString(),
             status = intToStatus(entity.state),
             items = items,
+            tenders = tenders,
             createdAt = entity.createdAt,
             updatedAt = entity.updatedAt
         )

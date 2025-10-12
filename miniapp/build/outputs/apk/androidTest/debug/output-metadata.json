@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.extrotarget.extropos.test",
+  "applicationId": "com.extrotarget.extropos.miniapp.test",
   "variantName": "debugAndroidTest",
   "elements": [
     {

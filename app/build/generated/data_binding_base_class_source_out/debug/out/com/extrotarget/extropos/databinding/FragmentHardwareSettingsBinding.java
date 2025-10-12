@@ -4,6 +4,10 @@ package com.extrotarget.extropos.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -11,6 +15,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.extrotarget.extropos.R;
+import com.google.android.material.textfield.TextInputEditText;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -20,11 +25,78 @@ public final class FragmentHardwareSettingsBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
+  public final CheckBox autoCutCheckbox;
+
+  @NonNull
+  public final CheckBox duplicateReceiptCheckbox;
+
+  @NonNull
+  public final TextInputEditText footerEditText;
+
+  @NonNull
+  public final RadioButton paper58mmRadio;
+
+  @NonNull
+  public final RadioButton paper80mmRadio;
+
+  @NonNull
+  public final RadioGroup paperSizeRadioGroup;
+
+  @NonNull
+  public final TextInputEditText phoneEditText;
+
+  @NonNull
+  public final Button previewReceiptButton;
+
+  @NonNull
+  public final Button printSampleButton;
+
+  @NonNull
+  public final Button saveSettingsButton;
+
+  @NonNull
+  public final CheckBox showLogoCheckbox;
+
+  @NonNull
+  public final CheckBox showQrCodeCheckbox;
+
+  @NonNull
+  public final CheckBox showTaxBreakdownCheckbox;
+
+  @NonNull
+  public final TextInputEditText storeAddressEditText;
+
+  @NonNull
+  public final TextInputEditText storeNameEditText;
+
+  @NonNull
   public final Toolbar toolbar;
 
   private FragmentHardwareSettingsBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull Toolbar toolbar) {
+      @NonNull CheckBox autoCutCheckbox, @NonNull CheckBox duplicateReceiptCheckbox,
+      @NonNull TextInputEditText footerEditText, @NonNull RadioButton paper58mmRadio,
+      @NonNull RadioButton paper80mmRadio, @NonNull RadioGroup paperSizeRadioGroup,
+      @NonNull TextInputEditText phoneEditText, @NonNull Button previewReceiptButton,
+      @NonNull Button printSampleButton, @NonNull Button saveSettingsButton,
+      @NonNull CheckBox showLogoCheckbox, @NonNull CheckBox showQrCodeCheckbox,
+      @NonNull CheckBox showTaxBreakdownCheckbox, @NonNull TextInputEditText storeAddressEditText,
+      @NonNull TextInputEditText storeNameEditText, @NonNull Toolbar toolbar) {
     this.rootView = rootView;
+    this.autoCutCheckbox = autoCutCheckbox;
+    this.duplicateReceiptCheckbox = duplicateReceiptCheckbox;
+    this.footerEditText = footerEditText;
+    this.paper58mmRadio = paper58mmRadio;
+    this.paper80mmRadio = paper80mmRadio;
+    this.paperSizeRadioGroup = paperSizeRadioGroup;
+    this.phoneEditText = phoneEditText;
+    this.previewReceiptButton = previewReceiptButton;
+    this.printSampleButton = printSampleButton;
+    this.saveSettingsButton = saveSettingsButton;
+    this.showLogoCheckbox = showLogoCheckbox;
+    this.showQrCodeCheckbox = showQrCodeCheckbox;
+    this.showTaxBreakdownCheckbox = showTaxBreakdownCheckbox;
+    this.storeAddressEditText = storeAddressEditText;
+    this.storeNameEditText = storeNameEditText;
     this.toolbar = toolbar;
   }
 
@@ -55,13 +127,107 @@ public final class FragmentHardwareSettingsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.autoCutCheckbox;
+      CheckBox autoCutCheckbox = ViewBindings.findChildViewById(rootView, id);
+      if (autoCutCheckbox == null) {
+        break missingId;
+      }
+
+      id = R.id.duplicateReceiptCheckbox;
+      CheckBox duplicateReceiptCheckbox = ViewBindings.findChildViewById(rootView, id);
+      if (duplicateReceiptCheckbox == null) {
+        break missingId;
+      }
+
+      id = R.id.footerEditText;
+      TextInputEditText footerEditText = ViewBindings.findChildViewById(rootView, id);
+      if (footerEditText == null) {
+        break missingId;
+      }
+
+      id = R.id.paper58mmRadio;
+      RadioButton paper58mmRadio = ViewBindings.findChildViewById(rootView, id);
+      if (paper58mmRadio == null) {
+        break missingId;
+      }
+
+      id = R.id.paper80mmRadio;
+      RadioButton paper80mmRadio = ViewBindings.findChildViewById(rootView, id);
+      if (paper80mmRadio == null) {
+        break missingId;
+      }
+
+      id = R.id.paperSizeRadioGroup;
+      RadioGroup paperSizeRadioGroup = ViewBindings.findChildViewById(rootView, id);
+      if (paperSizeRadioGroup == null) {
+        break missingId;
+      }
+
+      id = R.id.phoneEditText;
+      TextInputEditText phoneEditText = ViewBindings.findChildViewById(rootView, id);
+      if (phoneEditText == null) {
+        break missingId;
+      }
+
+      id = R.id.previewReceiptButton;
+      Button previewReceiptButton = ViewBindings.findChildViewById(rootView, id);
+      if (previewReceiptButton == null) {
+        break missingId;
+      }
+
+      id = R.id.printSampleButton;
+      Button printSampleButton = ViewBindings.findChildViewById(rootView, id);
+      if (printSampleButton == null) {
+        break missingId;
+      }
+
+      id = R.id.saveSettingsButton;
+      Button saveSettingsButton = ViewBindings.findChildViewById(rootView, id);
+      if (saveSettingsButton == null) {
+        break missingId;
+      }
+
+      id = R.id.showLogoCheckbox;
+      CheckBox showLogoCheckbox = ViewBindings.findChildViewById(rootView, id);
+      if (showLogoCheckbox == null) {
+        break missingId;
+      }
+
+      id = R.id.showQrCodeCheckbox;
+      CheckBox showQrCodeCheckbox = ViewBindings.findChildViewById(rootView, id);
+      if (showQrCodeCheckbox == null) {
+        break missingId;
+      }
+
+      id = R.id.showTaxBreakdownCheckbox;
+      CheckBox showTaxBreakdownCheckbox = ViewBindings.findChildViewById(rootView, id);
+      if (showTaxBreakdownCheckbox == null) {
+        break missingId;
+      }
+
+      id = R.id.storeAddressEditText;
+      TextInputEditText storeAddressEditText = ViewBindings.findChildViewById(rootView, id);
+      if (storeAddressEditText == null) {
+        break missingId;
+      }
+
+      id = R.id.storeNameEditText;
+      TextInputEditText storeNameEditText = ViewBindings.findChildViewById(rootView, id);
+      if (storeNameEditText == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
       Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
         break missingId;
       }
 
-      return new FragmentHardwareSettingsBinding((CoordinatorLayout) rootView, toolbar);
+      return new FragmentHardwareSettingsBinding((CoordinatorLayout) rootView, autoCutCheckbox,
+          duplicateReceiptCheckbox, footerEditText, paper58mmRadio, paper80mmRadio,
+          paperSizeRadioGroup, phoneEditText, previewReceiptButton, printSampleButton,
+          saveSettingsButton, showLogoCheckbox, showQrCodeCheckbox, showTaxBreakdownCheckbox,
+          storeAddressEditText, storeNameEditText, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

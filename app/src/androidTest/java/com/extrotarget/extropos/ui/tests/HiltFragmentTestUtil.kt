@@ -1,13 +1,11 @@
 package com.extrotarget.extropos.ui.tests
-
-import android.content.ComponentName
-import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.StyleRes
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.test.core.app.ActivityScenario
-import androidx.test.core.app.ApplicationProvider
+// no-op
 
 /**
  * Launches a fragment inside a HiltTestActivity so the fragment can use Hilt injection.
@@ -19,10 +17,14 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
     fragmentFactory: FragmentFactory? = null,
     crossinline action: T.() -> Unit = {}
 ): ActivityScenario<HiltTestActivity> {
-    val startActivityIntent = Intent(ApplicationProvider.getApplicationContext(), HiltTestActivity::class.java)
-        .putExtra("theme", themeResId)
+    // Launch the Hilt-provided test activity with the requested theme
+    val intent = Intent(Intent.ACTION_MAIN).setClassName(
+        androidx.test.core.app.ApplicationProvider.getApplicationContext(),
+        HiltTestActivity::class.java.name
+    ).putExtra("theme", themeResId)
 
-    return ActivityScenario.launch<HiltTestActivity>(startActivityIntent).onActivity { activity ->
+    val scenario = ActivityScenario.launch<HiltTestActivity>(intent)
+    scenario.onActivity { activity ->
         fragmentFactory?.let {
             activity.supportFragmentManager.fragmentFactory = it
         }
@@ -37,4 +39,5 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
 
         fragment.action()
     }
+    return scenario
 }

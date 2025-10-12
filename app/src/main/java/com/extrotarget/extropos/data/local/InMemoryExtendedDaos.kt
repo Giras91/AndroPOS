@@ -19,6 +19,12 @@ class InMemorySaleItemDao : SaleItemDao {
         return items.values.filter { it.saleId == saleId }
     }
 
+    // New batched method required by updated SaleItemDao interface
+    override suspend fun getItemsBySaleIds(saleIds: List<String>): List<SaleItemEntity> {
+        if (saleIds.isEmpty()) return emptyList()
+        return items.values.filter { it.saleId in saleIds }
+    }
+
     override fun observeItemsBySaleId(saleId: String): Flow<List<SaleItemEntity>> {
         return itemsFlow.map { list -> list.filter { it.saleId == saleId } }
     }

@@ -83,6 +83,7 @@ class InMemoryTicketDao : TicketDao {
 
     override suspend fun insertTicketTender(tender: TicketTenderEntity): Long {
         val newId = (ticketTenders.maxOfOrNull { it.id } ?: 0) + 1
+        // Preserve tender.tenderId (string), only assign numeric DB id
         val newTender = tender.copy(id = newId)
         ticketTenders.add(newTender)
         return newId.toLong()

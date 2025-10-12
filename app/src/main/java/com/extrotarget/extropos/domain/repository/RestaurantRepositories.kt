@@ -12,6 +12,8 @@ interface IMenuRepository {
     // Persistence operations for adding/updating
     suspend fun upsertCategory(category: Category)
     suspend fun upsertMenuItem(item: MenuItem)
+    // Delete operations
+    suspend fun deleteCategoryById(id: String)
 }
 
 interface IOrderRepository {

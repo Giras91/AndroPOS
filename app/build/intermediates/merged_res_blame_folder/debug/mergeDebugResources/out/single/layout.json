@@ -1,130 +1,162 @@
 [
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_tables.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_tables.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_inventory_management.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_inventory_management.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/item_printer.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/item_printer.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_printer_setup.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_printer_setup.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_hardware_settings.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_hardware_settings.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_main.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_main.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/item_product.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/item_product.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_shift_report.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_shift_report.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_main.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_main.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_product_detail.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_product_detail.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/activity_dashboard.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/activity_dashboard.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_cart.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_cart.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_login.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_login.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_payment_settings.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_payment_settings.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_menu.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_menu.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_pos.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_pos.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/activity_pdf_test.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/activity_pdf_test.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_app_lock.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_app_lock.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_customers.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_customers.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/activity_add_user.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/activity_add_user.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/item_cart.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/item_cart.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_reporting_settings.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_reporting_settings.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_pos.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_pos.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_employee.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_employee.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/activity_add_user.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/activity_add_user.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_product.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_product.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_app_lock.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_app_lock.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/dialog_add_payment_method.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/dialog_add_payment_method.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_signup.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_signup.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_customers.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_customers.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_cart.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_cart.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/activity_pdf_test.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/activity_pdf_test.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/activity_pin_login.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/activity_pin_login.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_login.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_login.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_printer_setup.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_printer_setup.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_category.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_category.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/activity_email_auth.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/activity_email_auth.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_signup.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_signup.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/item_category.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/item_category.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/activity_dashboard.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/activity_dashboard.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/activity_main.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/activity_main.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/activity_main.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/activity_main.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_reporting_settings.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_reporting_settings.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_payment_method.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_payment_method.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_inventory_management.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_inventory_management.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_shift.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_shift.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_product_detail.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_product_detail.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_product_summary.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_product_summary.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/item_employee.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/item_employee.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_menu.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_menu.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_employee_management.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_employee_management.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/activity_pin_login.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/activity_pin_login.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_settings.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_settings.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_settings.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_settings.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_payment_settings.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_payment_settings.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_dashboard_button.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_dashboard_button.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/item_dashboard_button.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/item_dashboard_button.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_tables.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_tables.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/fragment_products_grid.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/fragment_products_grid.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_hardware_settings.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_hardware_settings.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/item_menu_item.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/item_menu_item.xml"
+        "merged": "com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_payment_settings.xml",
+        "source": "com.extrotarget.extropos.app-main-68:/layout/fragment_payment_settings.xml"
     },
     {
-        "merged": "com.extrotarget.extropos.app-mergeDebugResources-61:/layout/dialog_add_printer.xml",
-        "source": "com.extrotarget.extropos.app-main-64:/layout/dialog_add_printer.xml"
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_cart.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_cart.xml"
+    },
+    {
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/activity_email_auth.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/activity_email_auth.xml"
+    },
+    {
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/dialog_add_tax_rate.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/dialog_add_tax_rate.xml"
+    },
+    {
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_employee_management.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_employee_management.xml"
+    },
+    {
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/fragment_products_grid.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/fragment_products_grid.xml"
+    },
+    {
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/dialog_add_printer.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/dialog_add_printer.xml"
+    },
+    {
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_tax_rate.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_tax_rate.xml"
+    },
+    {
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_printer.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_printer.xml"
+    },
+    {
+        "merged": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-mergeDebugResources-65:/layout/item_menu_item.xml",
+        "source": "/home/hp/.gradle/daemon/8.13/com.extrotarget.extropos.app-main-68:/layout/item_menu_item.xml"
     }
 ]

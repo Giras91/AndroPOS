@@ -19,8 +19,12 @@ import com.extrotarget.extropos.data.local.dao.OrderItemDao;
 import com.extrotarget.extropos.data.local.dao.OrderItemDao_Impl;
 import com.extrotarget.extropos.data.local.dao.ProductDao;
 import com.extrotarget.extropos.data.local.dao.ProductDao_Impl;
+import com.extrotarget.extropos.data.local.dao.ShiftDao;
+import com.extrotarget.extropos.data.local.dao.ShiftDao_Impl;
 import com.extrotarget.extropos.data.local.dao.TableDao;
 import com.extrotarget.extropos.data.local.dao.TableDao_Impl;
+import com.extrotarget.extropos.data.local.room.RoomTicketDao;
+import com.extrotarget.extropos.data.local.room.RoomTicketDao_Impl;
 import java.lang.Class;
 import java.lang.Override;
 import java.lang.String;
@@ -49,10 +53,14 @@ public final class AppDatabase_Impl extends AppDatabase {
 
   private volatile TableDao _tableDao;
 
+  private volatile ShiftDao _shiftDao;
+
+  private volatile RoomTicketDao _roomTicketDao;
+
   @Override
   @NonNull
   protected RoomOpenDelegate createOpenDelegate() {
-    final RoomOpenDelegate _openDelegate = new RoomOpenDelegate(1, "a8d793dc536bf4d4313af95cde2747cc", "58319c9643b47f9bf5197f05396759cf") {
+    final RoomOpenDelegate _openDelegate = new RoomOpenDelegate(4, "3d7c63a22cc0b1ec08c368878236ac87", "b6ba4c2108e51281c3845d2767673e1a") {
       @Override
       public void createAllTables(@NonNull final SQLiteConnection connection) {
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `categories` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `description` TEXT, `displayOrder` INTEGER NOT NULL, `isActive` INTEGER NOT NULL, PRIMARY KEY(`id`))");
@@ -61,6 +69,12 @@ public final class AppDatabase_Impl extends AppDatabase {
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `orders` (`id` TEXT NOT NULL, `tableId` TEXT, `orderNumber` TEXT NOT NULL, `status` TEXT NOT NULL, `orderType` TEXT NOT NULL, `subtotalCents` INTEGER NOT NULL, `taxCents` INTEGER NOT NULL, `discountCents` INTEGER NOT NULL, `totalCents` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `notes` TEXT, PRIMARY KEY(`id`))");
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `order_items` (`id` TEXT NOT NULL, `orderId` TEXT NOT NULL, `menuItemId` TEXT NOT NULL, `menuItemName` TEXT NOT NULL, `quantity` INTEGER NOT NULL, `unitPriceCents` INTEGER NOT NULL, `totalPriceCents` INTEGER NOT NULL, `notes` TEXT, `status` TEXT NOT NULL, PRIMARY KEY(`id`))");
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `tables` (`id` TEXT NOT NULL, `number` TEXT NOT NULL, `capacity` INTEGER NOT NULL, `status` TEXT NOT NULL, `currentOrderId` TEXT, PRIMARY KEY(`id`))");
+        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `tickets` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ticketType` INTEGER NOT NULL, `state` INTEGER NOT NULL, `total` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `sessionId` INTEGER NOT NULL)");
+        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `ticket_items` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ticketId` INTEGER NOT NULL, `itemId` INTEGER NOT NULL, `sku` TEXT, `quantity` INTEGER NOT NULL, `amount` INTEGER NOT NULL, `cost` INTEGER NOT NULL, `itemDesc` TEXT NOT NULL, `state` INTEGER NOT NULL)");
+        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `ticket_tenders` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ticketId` INTEGER NOT NULL, `tenderId` TEXT NOT NULL, `tenderType` TEXT NOT NULL, `amount` INTEGER NOT NULL, `status` INTEGER NOT NULL)");
+        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `tenders` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `type` TEXT NOT NULL, `openDrawer` INTEGER NOT NULL, `printReceipt` INTEGER NOT NULL)");
+        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `departments` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `taxGroupId` INTEGER)");
+        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `tax_groups` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `rate` REAL NOT NULL, `inclusive` INTEGER NOT NULL)");
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `sales` (`id` TEXT NOT NULL, `receiptNo` TEXT NOT NULL, `totalAmountCents` INTEGER NOT NULL, `subtotalCents` INTEGER NOT NULL, `taxCents` INTEGER NOT NULL, `discountCents` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `completedAt` INTEGER, `customerId` TEXT, `userId` TEXT NOT NULL, `paymentMethod` TEXT NOT NULL, `paymentStatus` TEXT NOT NULL, `notes` TEXT, `isTraining` INTEGER NOT NULL, PRIMARY KEY(`id`))");
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `sale_items` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `saleId` TEXT NOT NULL, `productId` TEXT NOT NULL, `productName` TEXT NOT NULL, `quantity` INTEGER NOT NULL, `unitPriceCents` INTEGER NOT NULL, `totalPriceCents` INTEGER NOT NULL, `discountCents` INTEGER NOT NULL, `notes` TEXT, FOREIGN KEY(`saleId`) REFERENCES `sales`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`productId`) REFERENCES `products`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )");
         SQLite.execSQL(connection, "CREATE INDEX IF NOT EXISTS `index_sale_items_saleId` ON `sale_items` (`saleId`)");
@@ -68,10 +82,11 @@ public final class AppDatabase_Impl extends AppDatabase {
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `customers` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `email` TEXT, `phone` TEXT, `address` TEXT, `loyaltyPoints` INTEGER NOT NULL, `totalPurchasesCents` INTEGER NOT NULL, `isActive` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `lastVisitAt` INTEGER, `notes` TEXT, PRIMARY KEY(`id`))");
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `inventory_transactions` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `productId` TEXT NOT NULL, `type` TEXT NOT NULL, `quantityChange` INTEGER NOT NULL, `quantityAfter` INTEGER NOT NULL, `referenceSaleId` TEXT, `userId` TEXT NOT NULL, `reason` TEXT, `createdAt` INTEGER NOT NULL, FOREIGN KEY(`productId`) REFERENCES `products`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )");
         SQLite.execSQL(connection, "CREATE INDEX IF NOT EXISTS `index_inventory_transactions_productId` ON `inventory_transactions` (`productId`)");
+        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `shifts` (`id` TEXT NOT NULL, `userId` TEXT NOT NULL, `username` TEXT NOT NULL, `startedAt` INTEGER NOT NULL, `endedAt` INTEGER, `notes` TEXT, PRIMARY KEY(`id`))");
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `payments` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `saleId` TEXT NOT NULL, `method` TEXT NOT NULL, `amountCents` INTEGER NOT NULL, `receivedCents` INTEGER, `changeCents` INTEGER, `referenceNo` TEXT, `status` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, FOREIGN KEY(`saleId`) REFERENCES `sales`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
         SQLite.execSQL(connection, "CREATE INDEX IF NOT EXISTS `index_payments_saleId` ON `payments` (`saleId`)");
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        SQLite.execSQL(connection, "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a8d793dc536bf4d4313af95cde2747cc')");
+        SQLite.execSQL(connection, "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3d7c63a22cc0b1ec08c368878236ac87')");
       }
 
       @Override
@@ -82,10 +97,17 @@ public final class AppDatabase_Impl extends AppDatabase {
         SQLite.execSQL(connection, "DROP TABLE IF EXISTS `orders`");
         SQLite.execSQL(connection, "DROP TABLE IF EXISTS `order_items`");
         SQLite.execSQL(connection, "DROP TABLE IF EXISTS `tables`");
+        SQLite.execSQL(connection, "DROP TABLE IF EXISTS `tickets`");
+        SQLite.execSQL(connection, "DROP TABLE IF EXISTS `ticket_items`");
+        SQLite.execSQL(connection, "DROP TABLE IF EXISTS `ticket_tenders`");
+        SQLite.execSQL(connection, "DROP TABLE IF EXISTS `tenders`");
+        SQLite.execSQL(connection, "DROP TABLE IF EXISTS `departments`");
+        SQLite.execSQL(connection, "DROP TABLE IF EXISTS `tax_groups`");
         SQLite.execSQL(connection, "DROP TABLE IF EXISTS `sales`");
         SQLite.execSQL(connection, "DROP TABLE IF EXISTS `sale_items`");
         SQLite.execSQL(connection, "DROP TABLE IF EXISTS `customers`");
         SQLite.execSQL(connection, "DROP TABLE IF EXISTS `inventory_transactions`");
+        SQLite.execSQL(connection, "DROP TABLE IF EXISTS `shifts`");
         SQLite.execSQL(connection, "DROP TABLE IF EXISTS `payments`");
       }
 
@@ -223,6 +245,100 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoTables + "\n"
                   + " Found:\n" + _existingTables);
         }
+        final Map<String, TableInfo.Column> _columnsTickets = new HashMap<String, TableInfo.Column>(7);
+        _columnsTickets.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTickets.put("ticketType", new TableInfo.Column("ticketType", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTickets.put("state", new TableInfo.Column("state", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTickets.put("total", new TableInfo.Column("total", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTickets.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTickets.put("updatedAt", new TableInfo.Column("updatedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTickets.put("sessionId", new TableInfo.Column("sessionId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final Set<TableInfo.ForeignKey> _foreignKeysTickets = new HashSet<TableInfo.ForeignKey>(0);
+        final Set<TableInfo.Index> _indicesTickets = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoTickets = new TableInfo("tickets", _columnsTickets, _foreignKeysTickets, _indicesTickets);
+        final TableInfo _existingTickets = TableInfo.read(connection, "tickets");
+        if (!_infoTickets.equals(_existingTickets)) {
+          return new RoomOpenDelegate.ValidationResult(false, "tickets(com.extrotarget.extropos.data.local.entity.TicketEntity).\n"
+                  + " Expected:\n" + _infoTickets + "\n"
+                  + " Found:\n" + _existingTickets);
+        }
+        final Map<String, TableInfo.Column> _columnsTicketItems = new HashMap<String, TableInfo.Column>(9);
+        _columnsTicketItems.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketItems.put("ticketId", new TableInfo.Column("ticketId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketItems.put("itemId", new TableInfo.Column("itemId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketItems.put("sku", new TableInfo.Column("sku", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketItems.put("quantity", new TableInfo.Column("quantity", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketItems.put("amount", new TableInfo.Column("amount", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketItems.put("cost", new TableInfo.Column("cost", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketItems.put("itemDesc", new TableInfo.Column("itemDesc", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketItems.put("state", new TableInfo.Column("state", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final Set<TableInfo.ForeignKey> _foreignKeysTicketItems = new HashSet<TableInfo.ForeignKey>(0);
+        final Set<TableInfo.Index> _indicesTicketItems = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoTicketItems = new TableInfo("ticket_items", _columnsTicketItems, _foreignKeysTicketItems, _indicesTicketItems);
+        final TableInfo _existingTicketItems = TableInfo.read(connection, "ticket_items");
+        if (!_infoTicketItems.equals(_existingTicketItems)) {
+          return new RoomOpenDelegate.ValidationResult(false, "ticket_items(com.extrotarget.extropos.data.local.entity.TicketItemEntity).\n"
+                  + " Expected:\n" + _infoTicketItems + "\n"
+                  + " Found:\n" + _existingTicketItems);
+        }
+        final Map<String, TableInfo.Column> _columnsTicketTenders = new HashMap<String, TableInfo.Column>(6);
+        _columnsTicketTenders.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketTenders.put("ticketId", new TableInfo.Column("ticketId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketTenders.put("tenderId", new TableInfo.Column("tenderId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketTenders.put("tenderType", new TableInfo.Column("tenderType", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketTenders.put("amount", new TableInfo.Column("amount", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTicketTenders.put("status", new TableInfo.Column("status", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final Set<TableInfo.ForeignKey> _foreignKeysTicketTenders = new HashSet<TableInfo.ForeignKey>(0);
+        final Set<TableInfo.Index> _indicesTicketTenders = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoTicketTenders = new TableInfo("ticket_tenders", _columnsTicketTenders, _foreignKeysTicketTenders, _indicesTicketTenders);
+        final TableInfo _existingTicketTenders = TableInfo.read(connection, "ticket_tenders");
+        if (!_infoTicketTenders.equals(_existingTicketTenders)) {
+          return new RoomOpenDelegate.ValidationResult(false, "ticket_tenders(com.extrotarget.extropos.data.local.entity.TicketTenderEntity).\n"
+                  + " Expected:\n" + _infoTicketTenders + "\n"
+                  + " Found:\n" + _existingTicketTenders);
+        }
+        final Map<String, TableInfo.Column> _columnsTenders = new HashMap<String, TableInfo.Column>(5);
+        _columnsTenders.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTenders.put("name", new TableInfo.Column("name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTenders.put("type", new TableInfo.Column("type", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTenders.put("openDrawer", new TableInfo.Column("openDrawer", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTenders.put("printReceipt", new TableInfo.Column("printReceipt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final Set<TableInfo.ForeignKey> _foreignKeysTenders = new HashSet<TableInfo.ForeignKey>(0);
+        final Set<TableInfo.Index> _indicesTenders = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoTenders = new TableInfo("tenders", _columnsTenders, _foreignKeysTenders, _indicesTenders);
+        final TableInfo _existingTenders = TableInfo.read(connection, "tenders");
+        if (!_infoTenders.equals(_existingTenders)) {
+          return new RoomOpenDelegate.ValidationResult(false, "tenders(com.extrotarget.extropos.data.local.entity.TenderEntity).\n"
+                  + " Expected:\n" + _infoTenders + "\n"
+                  + " Found:\n" + _existingTenders);
+        }
+        final Map<String, TableInfo.Column> _columnsDepartments = new HashMap<String, TableInfo.Column>(3);
+        _columnsDepartments.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDepartments.put("name", new TableInfo.Column("name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDepartments.put("taxGroupId", new TableInfo.Column("taxGroupId", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final Set<TableInfo.ForeignKey> _foreignKeysDepartments = new HashSet<TableInfo.ForeignKey>(0);
+        final Set<TableInfo.Index> _indicesDepartments = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoDepartments = new TableInfo("departments", _columnsDepartments, _foreignKeysDepartments, _indicesDepartments);
+        final TableInfo _existingDepartments = TableInfo.read(connection, "departments");
+        if (!_infoDepartments.equals(_existingDepartments)) {
+          return new RoomOpenDelegate.ValidationResult(false, "departments(com.extrotarget.extropos.data.local.entity.DepartmentEntity).\n"
+                  + " Expected:\n" + _infoDepartments + "\n"
+                  + " Found:\n" + _existingDepartments);
+        }
+        final Map<String, TableInfo.Column> _columnsTaxGroups = new HashMap<String, TableInfo.Column>(4);
+        _columnsTaxGroups.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTaxGroups.put("name", new TableInfo.Column("name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTaxGroups.put("rate", new TableInfo.Column("rate", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTaxGroups.put("inclusive", new TableInfo.Column("inclusive", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final Set<TableInfo.ForeignKey> _foreignKeysTaxGroups = new HashSet<TableInfo.ForeignKey>(0);
+        final Set<TableInfo.Index> _indicesTaxGroups = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoTaxGroups = new TableInfo("tax_groups", _columnsTaxGroups, _foreignKeysTaxGroups, _indicesTaxGroups);
+        final TableInfo _existingTaxGroups = TableInfo.read(connection, "tax_groups");
+        if (!_infoTaxGroups.equals(_existingTaxGroups)) {
+          return new RoomOpenDelegate.ValidationResult(false, "tax_groups(com.extrotarget.extropos.data.local.entity.TaxGroupEntity).\n"
+                  + " Expected:\n" + _infoTaxGroups + "\n"
+                  + " Found:\n" + _existingTaxGroups);
+        }
         final Map<String, TableInfo.Column> _columnsSales = new HashMap<String, TableInfo.Column>(14);
         _columnsSales.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsSales.put("receiptNo", new TableInfo.Column("receiptNo", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -312,6 +428,22 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoInventoryTransactions + "\n"
                   + " Found:\n" + _existingInventoryTransactions);
         }
+        final Map<String, TableInfo.Column> _columnsShifts = new HashMap<String, TableInfo.Column>(6);
+        _columnsShifts.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsShifts.put("userId", new TableInfo.Column("userId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsShifts.put("username", new TableInfo.Column("username", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsShifts.put("startedAt", new TableInfo.Column("startedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsShifts.put("endedAt", new TableInfo.Column("endedAt", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsShifts.put("notes", new TableInfo.Column("notes", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final Set<TableInfo.ForeignKey> _foreignKeysShifts = new HashSet<TableInfo.ForeignKey>(0);
+        final Set<TableInfo.Index> _indicesShifts = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoShifts = new TableInfo("shifts", _columnsShifts, _foreignKeysShifts, _indicesShifts);
+        final TableInfo _existingShifts = TableInfo.read(connection, "shifts");
+        if (!_infoShifts.equals(_existingShifts)) {
+          return new RoomOpenDelegate.ValidationResult(false, "shifts(com.extrotarget.extropos.data.local.entity.ShiftEntity).\n"
+                  + " Expected:\n" + _infoShifts + "\n"
+                  + " Found:\n" + _existingShifts);
+        }
         final Map<String, TableInfo.Column> _columnsPayments = new HashMap<String, TableInfo.Column>(9);
         _columnsPayments.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsPayments.put("saleId", new TableInfo.Column("saleId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -344,12 +476,12 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final Map<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final Map<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "categories", "menu_items", "products", "orders", "order_items", "tables", "sales", "sale_items", "customers", "inventory_transactions", "payments");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "categories", "menu_items", "products", "orders", "order_items", "tables", "tickets", "ticket_items", "ticket_tenders", "tenders", "departments", "tax_groups", "sales", "sale_items", "customers", "inventory_transactions", "shifts", "payments");
   }
 
   @Override
   public void clearAllTables() {
-    super.performClear(true, "categories", "menu_items", "products", "orders", "order_items", "tables", "sales", "sale_items", "customers", "inventory_transactions", "payments");
+    super.performClear(true, "categories", "menu_items", "products", "orders", "order_items", "tables", "tickets", "ticket_items", "ticket_tenders", "tenders", "departments", "tax_groups", "sales", "sale_items", "customers", "inventory_transactions", "shifts", "payments");
   }
 
   @Override
@@ -362,6 +494,8 @@ public final class AppDatabase_Impl extends AppDatabase {
     _typeConvertersMap.put(OrderDao.class, OrderDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(OrderItemDao.class, OrderItemDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(TableDao.class, TableDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(ShiftDao.class, ShiftDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(RoomTicketDao.class, RoomTicketDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -460,6 +594,34 @@ public final class AppDatabase_Impl extends AppDatabase {
           _tableDao = new TableDao_Impl(this);
         }
         return _tableDao;
+      }
+    }
+  }
+
+  @Override
+  public ShiftDao shiftDao() {
+    if (_shiftDao != null) {
+      return _shiftDao;
+    } else {
+      synchronized(this) {
+        if(_shiftDao == null) {
+          _shiftDao = new ShiftDao_Impl(this);
+        }
+        return _shiftDao;
+      }
+    }
+  }
+
+  @Override
+  public RoomTicketDao ticketDao() {
+    if (_roomTicketDao != null) {
+      return _roomTicketDao;
+    } else {
+      synchronized(this) {
+        if(_roomTicketDao == null) {
+          _roomTicketDao = new RoomTicketDao_Impl(this);
+        }
+        return _roomTicketDao;
       }
     }
   }

@@ -74,6 +74,11 @@ class MenuRepository @Inject constructor(
         return menuItemDao.searchByName(query).map { it.toDomain() }
     }
 
+    override suspend fun deleteCategoryById(id: String) {
+        // Soft delete by setting isActive = false
+        categoryDao.updateActiveStatus(id, false)
+    }
+
     private fun CategoryEntity.toDomain(): Category {
         return Category(
             id = id,

@@ -4,35 +4,35 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        android:padding="8dp"
         android:clickable="true"
         android:focusable="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:padding="8dp">
 
             <ImageView
                 android:id="@+id/productImageView"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:scaleType="centerCrop"
                 android:src="@android:drawable/ic_menu_gallery"
                 android:contentDescription="Product image"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="6dp" />
 
             <TextView
                 android:id="@+id/productNameTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:text="Product Name"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/on_surface"
                 android:gravity="center"
@@ -44,19 +44,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Stock: 0"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 android:textColor="@color/muted"
                 android:gravity="center"
-                android:layout_marginTop="4dp" />
+                android:layout_marginTop="2dp" />
 
             <TextView
                 android:id="@+id/productPriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="RM 0.00"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:textColor="@color/success_color"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="4dp"
                 android:textStyle="bold" />
 
         </LinearLayout>

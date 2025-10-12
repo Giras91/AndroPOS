@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.extrotarget.extropos.test.app-mergeDebugAndroidTestResources-39:/values-et/values-et.xml",
+            "outputFile": "com.extrotarget.extropos.test.app-mergeDebugAndroidTestResources-43:/values-et/values-et.xml",
             "map": [
                 {
                     "source": "/home/hp/.gradle/caches/8.13/transforms/a2b3fea530eb18e1785b2b98bbd730eb/transformed/core-1.12.0/res/values-et/values-et.xml",

@@ -6,11 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -23,7 +21,7 @@ import java.lang.String;
 
 public final class FragmentPosBinding implements ViewBinding {
   @NonNull
-  private final ConstraintLayout rootView;
+  private final LinearLayout rootView;
 
   @NonNull
   public final MaterialButton posBtnDiscount;
@@ -41,22 +39,16 @@ public final class FragmentPosBinding implements ViewBinding {
   public final LinearLayout posCategories;
 
   @NonNull
-  public final LinearLayout posCenterColumn;
-
-  @NonNull
   public final MaterialButton posCheckoutButton;
 
   @NonNull
   public final TextView posItemsCount;
 
   @NonNull
-  public final ScrollView posLeftScroll;
+  public final LinearLayout posLowerHalf;
 
   @NonNull
   public final FrameLayout posProductsContainer;
-
-  @NonNull
-  public final LinearLayout posRightColumn;
 
   @NonNull
   public final TextInputEditText posSearch;
@@ -70,35 +62,36 @@ public final class FragmentPosBinding implements ViewBinding {
   @NonNull
   public final TextView posTotal;
 
-  private FragmentPosBinding(@NonNull ConstraintLayout rootView,
-      @NonNull MaterialButton posBtnDiscount, @NonNull MaterialButton posBtnHold,
-      @NonNull RecyclerView posCartRecycler, @NonNull TextView posCartTitle,
-      @NonNull LinearLayout posCategories, @NonNull LinearLayout posCenterColumn,
+  @NonNull
+  public final LinearLayout posUpperHalf;
+
+  private FragmentPosBinding(@NonNull LinearLayout rootView, @NonNull MaterialButton posBtnDiscount,
+      @NonNull MaterialButton posBtnHold, @NonNull RecyclerView posCartRecycler,
+      @NonNull TextView posCartTitle, @NonNull LinearLayout posCategories,
       @NonNull MaterialButton posCheckoutButton, @NonNull TextView posItemsCount,
-      @NonNull ScrollView posLeftScroll, @NonNull FrameLayout posProductsContainer,
-      @NonNull LinearLayout posRightColumn, @NonNull TextInputEditText posSearch,
-      @NonNull TextView posSubtotal, @NonNull TextView posTax, @NonNull TextView posTotal) {
+      @NonNull LinearLayout posLowerHalf, @NonNull FrameLayout posProductsContainer,
+      @NonNull TextInputEditText posSearch, @NonNull TextView posSubtotal, @NonNull TextView posTax,
+      @NonNull TextView posTotal, @NonNull LinearLayout posUpperHalf) {
     this.rootView = rootView;
     this.posBtnDiscount = posBtnDiscount;
     this.posBtnHold = posBtnHold;
     this.posCartRecycler = posCartRecycler;
     this.posCartTitle = posCartTitle;
     this.posCategories = posCategories;
-    this.posCenterColumn = posCenterColumn;
     this.posCheckoutButton = posCheckoutButton;
     this.posItemsCount = posItemsCount;
-    this.posLeftScroll = posLeftScroll;
+    this.posLowerHalf = posLowerHalf;
     this.posProductsContainer = posProductsContainer;
-    this.posRightColumn = posRightColumn;
     this.posSearch = posSearch;
     this.posSubtotal = posSubtotal;
     this.posTax = posTax;
     this.posTotal = posTotal;
+    this.posUpperHalf = posUpperHalf;
   }
 
   @Override
   @NonNull
-  public ConstraintLayout getRoot() {
+  public LinearLayout getRoot() {
     return rootView;
   }
 
@@ -153,12 +146,6 @@ public final class FragmentPosBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.pos_center_column;
-      LinearLayout posCenterColumn = ViewBindings.findChildViewById(rootView, id);
-      if (posCenterColumn == null) {
-        break missingId;
-      }
-
       id = R.id.pos_checkout_button;
       MaterialButton posCheckoutButton = ViewBindings.findChildViewById(rootView, id);
       if (posCheckoutButton == null) {
@@ -171,21 +158,15 @@ public final class FragmentPosBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.pos_left_scroll;
-      ScrollView posLeftScroll = ViewBindings.findChildViewById(rootView, id);
-      if (posLeftScroll == null) {
+      id = R.id.pos_lower_half;
+      LinearLayout posLowerHalf = ViewBindings.findChildViewById(rootView, id);
+      if (posLowerHalf == null) {
         break missingId;
       }
 
       id = R.id.pos_products_container;
       FrameLayout posProductsContainer = ViewBindings.findChildViewById(rootView, id);
       if (posProductsContainer == null) {
-        break missingId;
-      }
-
-      id = R.id.pos_right_column;
-      LinearLayout posRightColumn = ViewBindings.findChildViewById(rootView, id);
-      if (posRightColumn == null) {
         break missingId;
       }
 
@@ -213,10 +194,16 @@ public final class FragmentPosBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentPosBinding((ConstraintLayout) rootView, posBtnDiscount, posBtnHold,
-          posCartRecycler, posCartTitle, posCategories, posCenterColumn, posCheckoutButton,
-          posItemsCount, posLeftScroll, posProductsContainer, posRightColumn, posSearch,
-          posSubtotal, posTax, posTotal);
+      id = R.id.pos_upper_half;
+      LinearLayout posUpperHalf = ViewBindings.findChildViewById(rootView, id);
+      if (posUpperHalf == null) {
+        break missingId;
+      }
+
+      return new FragmentPosBinding((LinearLayout) rootView, posBtnDiscount, posBtnHold,
+          posCartRecycler, posCartTitle, posCategories, posCheckoutButton, posItemsCount,
+          posLowerHalf, posProductsContainer, posSearch, posSubtotal, posTax, posTotal,
+          posUpperHalf);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

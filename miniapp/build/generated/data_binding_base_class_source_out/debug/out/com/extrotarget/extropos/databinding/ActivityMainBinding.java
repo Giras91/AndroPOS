@@ -4,7 +4,8 @@ package com.extrotarget.extropos.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,19 +18,37 @@ import java.lang.String;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final ScrollView rootView;
 
   @NonNull
-  public final TextView textView;
+  public final Button openMainAppButton;
 
-  private ActivityMainBinding(@NonNull LinearLayout rootView, @NonNull TextView textView) {
+  @NonNull
+  public final Button quickSaleButton;
+
+  @NonNull
+  public final Button settingsButton;
+
+  @NonNull
+  public final TextView statusText;
+
+  @NonNull
+  public final Button viewReportsButton;
+
+  private ActivityMainBinding(@NonNull ScrollView rootView, @NonNull Button openMainAppButton,
+      @NonNull Button quickSaleButton, @NonNull Button settingsButton, @NonNull TextView statusText,
+      @NonNull Button viewReportsButton) {
     this.rootView = rootView;
-    this.textView = textView;
+    this.openMainAppButton = openMainAppButton;
+    this.quickSaleButton = quickSaleButton;
+    this.settingsButton = settingsButton;
+    this.statusText = statusText;
+    this.viewReportsButton = viewReportsButton;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public ScrollView getRoot() {
     return rootView;
   }
 
@@ -54,13 +73,38 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.textView;
-      TextView textView = ViewBindings.findChildViewById(rootView, id);
-      if (textView == null) {
+      id = R.id.openMainAppButton;
+      Button openMainAppButton = ViewBindings.findChildViewById(rootView, id);
+      if (openMainAppButton == null) {
         break missingId;
       }
 
-      return new ActivityMainBinding((LinearLayout) rootView, textView);
+      id = R.id.quickSaleButton;
+      Button quickSaleButton = ViewBindings.findChildViewById(rootView, id);
+      if (quickSaleButton == null) {
+        break missingId;
+      }
+
+      id = R.id.settingsButton;
+      Button settingsButton = ViewBindings.findChildViewById(rootView, id);
+      if (settingsButton == null) {
+        break missingId;
+      }
+
+      id = R.id.statusText;
+      TextView statusText = ViewBindings.findChildViewById(rootView, id);
+      if (statusText == null) {
+        break missingId;
+      }
+
+      id = R.id.viewReportsButton;
+      Button viewReportsButton = ViewBindings.findChildViewById(rootView, id);
+      if (viewReportsButton == null) {
+        break missingId;
+      }
+
+      return new ActivityMainBinding((ScrollView) rootView, openMainAppButton, quickSaleButton,
+          settingsButton, statusText, viewReportsButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

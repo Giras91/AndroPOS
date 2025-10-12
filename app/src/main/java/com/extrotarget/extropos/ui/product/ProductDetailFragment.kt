@@ -20,8 +20,8 @@ class ProductDetailFragment : Fragment() {
     private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
 
-    // ProductViewModel is kept parent/activity scoped in the grid; use activityViewModels to share
-    private val productViewModel: ProductViewModel by viewModels({ requireParentFragment() })
+    // Use activityViewModels to share the same ViewModel instance across the app
+    private val productViewModel: ProductViewModel by activityViewModels()
     private val cartViewModel: CartViewModel by activityViewModels()
 
     override fun onCreateView(

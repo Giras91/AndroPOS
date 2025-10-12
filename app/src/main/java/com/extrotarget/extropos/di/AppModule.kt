@@ -41,8 +41,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideTicketDao(): TicketDao {
-        return InMemoryTicketDao()
+    fun provideTicketDao(db: com.extrotarget.extropos.data.local.AppDatabase): TicketDao {
+        // Return a Room-backed adapter that implements the application's TicketDao
+        val roomDao = db.ticketDao()
+        return com.extrotarget.extropos.data.local.dao.RoomTicketDaoAdapter(roomDao)
     }
 
     // Category and MenuItem DAOs are provided by Room below
@@ -145,5 +147,11 @@ object AppModule {
     @Singleton
     fun provideSaleDao(): com.extrotarget.extropos.data.local.dao.SaleDao {
         return com.extrotarget.extropos.data.local.InMemorySaleDaoExtended()
+    }
+
+    @Provides
+    @Singleton
+    fun provideShiftDao(db: com.extrotarget.extropos.data.local.AppDatabase): com.extrotarget.extropos.data.local.dao.ShiftDao {
+        return db.shiftDao()
     }
 }

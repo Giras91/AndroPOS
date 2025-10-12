@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.extrotarget.extropos.app-mergeDebugResources-60:/values-v23/values-v23.xml",
+            "outputFile": "com.extrotarget.extropos.app-mergeDebugResources-64:/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "/home/hp/.gradle/caches/8.13/transforms/488a827ebf1aa5a0c36fca5890b6d613/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",

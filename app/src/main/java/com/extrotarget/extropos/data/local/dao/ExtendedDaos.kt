@@ -12,6 +12,9 @@ interface SaleItemDao {
     @Query("SELECT * FROM sale_items WHERE saleId = :saleId")
     suspend fun getItemsBySaleId(saleId: String): List<SaleItemEntity>
 
+    @Query("SELECT * FROM sale_items WHERE saleId IN (:saleIds)")
+    suspend fun getItemsBySaleIds(saleIds: List<String>): List<SaleItemEntity>
+
     @Query("SELECT * FROM sale_items WHERE saleId = :saleId")
     fun observeItemsBySaleId(saleId: String): Flow<List<SaleItemEntity>>
 

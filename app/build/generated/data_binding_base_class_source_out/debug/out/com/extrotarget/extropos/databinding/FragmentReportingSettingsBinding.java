@@ -4,10 +4,14 @@ package com.extrotarget.extropos.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.extrotarget.extropos.R;
@@ -20,12 +24,56 @@ public final class FragmentReportingSettingsBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
+  public final Button btnEndDate;
+
+  @NonNull
+  public final Button btnEndShift;
+
+  @NonNull
+  public final Button btnExportCsv;
+
+  @NonNull
+  public final Button btnGenerateReport;
+
+  @NonNull
+  public final Button btnSalesByProduct;
+
+  @NonNull
+  public final Button btnStartDate;
+
+  @NonNull
+  public final Button btnStartShift;
+
+  @NonNull
+  public final RecyclerView rvResults;
+
+  @NonNull
+  public final Spinner spinnerReportType;
+
+  @NonNull
   public final Toolbar toolbar;
 
+  @NonNull
+  public final TextView tvResultsTitle;
+
   private FragmentReportingSettingsBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull Toolbar toolbar) {
+      @NonNull Button btnEndDate, @NonNull Button btnEndShift, @NonNull Button btnExportCsv,
+      @NonNull Button btnGenerateReport, @NonNull Button btnSalesByProduct,
+      @NonNull Button btnStartDate, @NonNull Button btnStartShift, @NonNull RecyclerView rvResults,
+      @NonNull Spinner spinnerReportType, @NonNull Toolbar toolbar,
+      @NonNull TextView tvResultsTitle) {
     this.rootView = rootView;
+    this.btnEndDate = btnEndDate;
+    this.btnEndShift = btnEndShift;
+    this.btnExportCsv = btnExportCsv;
+    this.btnGenerateReport = btnGenerateReport;
+    this.btnSalesByProduct = btnSalesByProduct;
+    this.btnStartDate = btnStartDate;
+    this.btnStartShift = btnStartShift;
+    this.rvResults = rvResults;
+    this.spinnerReportType = spinnerReportType;
     this.toolbar = toolbar;
+    this.tvResultsTitle = tvResultsTitle;
   }
 
   @Override
@@ -55,13 +103,75 @@ public final class FragmentReportingSettingsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btnEndDate;
+      Button btnEndDate = ViewBindings.findChildViewById(rootView, id);
+      if (btnEndDate == null) {
+        break missingId;
+      }
+
+      id = R.id.btnEndShift;
+      Button btnEndShift = ViewBindings.findChildViewById(rootView, id);
+      if (btnEndShift == null) {
+        break missingId;
+      }
+
+      id = R.id.btnExportCsv;
+      Button btnExportCsv = ViewBindings.findChildViewById(rootView, id);
+      if (btnExportCsv == null) {
+        break missingId;
+      }
+
+      id = R.id.btnGenerateReport;
+      Button btnGenerateReport = ViewBindings.findChildViewById(rootView, id);
+      if (btnGenerateReport == null) {
+        break missingId;
+      }
+
+      id = R.id.btnSalesByProduct;
+      Button btnSalesByProduct = ViewBindings.findChildViewById(rootView, id);
+      if (btnSalesByProduct == null) {
+        break missingId;
+      }
+
+      id = R.id.btnStartDate;
+      Button btnStartDate = ViewBindings.findChildViewById(rootView, id);
+      if (btnStartDate == null) {
+        break missingId;
+      }
+
+      id = R.id.btnStartShift;
+      Button btnStartShift = ViewBindings.findChildViewById(rootView, id);
+      if (btnStartShift == null) {
+        break missingId;
+      }
+
+      id = R.id.rvResults;
+      RecyclerView rvResults = ViewBindings.findChildViewById(rootView, id);
+      if (rvResults == null) {
+        break missingId;
+      }
+
+      id = R.id.spinnerReportType;
+      Spinner spinnerReportType = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerReportType == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
       Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
         break missingId;
       }
 
-      return new FragmentReportingSettingsBinding((CoordinatorLayout) rootView, toolbar);
+      id = R.id.tvResultsTitle;
+      TextView tvResultsTitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvResultsTitle == null) {
+        break missingId;
+      }
+
+      return new FragmentReportingSettingsBinding((CoordinatorLayout) rootView, btnEndDate,
+          btnEndShift, btnExportCsv, btnGenerateReport, btnSalesByProduct, btnStartDate,
+          btnStartShift, rvResults, spinnerReportType, toolbar, tvResultsTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

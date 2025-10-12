@@ -80,7 +80,27 @@ class CartFragment : Fragment() {
 
     private fun setupButtons() {
         payButton.setOnClickListener {
-            cartViewModel.completeTicket()
+            // Show payment method chooser before completing ticket
+
+            val enabledMethods = cartViewModel.getEnabledPaymentMethods()
+
+            if (enabledMethods.isEmpty()) {
+                // If no methods enabled, just complete
+                cartViewModel.completeTicket()
+                return@setOnClickListener
+            }
+
+            val names = enabledMethods.map { it.displayName }.toTypedArray()
+
+            androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Choose payment method")
+                .setItems(names) { _, which ->
+                    val method = enabledMethods[which]
+                    cartViewModel.setSelectedPaymentMethod(method.id)
+                    cartViewModel.completeTicket()
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
         }
 
         clearButton.setOnClickListener {

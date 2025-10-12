@@ -6,6 +6,7 @@ import com.extrotarget.extropos.domain.model.Product
 import com.extrotarget.extropos.domain.model.Category
 import com.extrotarget.extropos.domain.repository.IProductRepository
 import com.extrotarget.extropos.domain.usecase.AddCategoryUseCase
+import com.extrotarget.extropos.domain.usecase.GetCategoriesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductViewModel @Inject constructor(
     private val productRepository: IProductRepository,
-    private val addCategoryUseCase: AddCategoryUseCase
+    private val addCategoryUseCase: AddCategoryUseCase,
+    private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
 
     private val _products = MutableStateFlow<List<Product>>(emptyList())
@@ -39,11 +41,42 @@ class ProductViewModel @Inject constructor(
         // Start empty; we'll populate from repository later when available
         _products.value = emptyList()
         _categories.value = emptyList()
+        
+        // Load products from database on initialization
+        loadProductsFromDatabase()
     }
 
     fun loadProducts() {
         // Keep compatibility: publish current in-memory list
         _products.value = allProducts.toList()
+    }
+
+    private fun loadProductsFromDatabase() {
+        viewModelScope.launch {
+            try {
+                // Load products from database
+                val productsFromDb = productRepository.getAllProducts()
+                allProducts.clear()
+                allProducts.addAll(productsFromDb)
+                _products.value = allProducts.toList()
+                
+                // Load categories from database (proper way)
+                val categoriesFromDb = getCategoriesUseCase()
+                val categoryPairs = categoriesFromDb.map { Pair(it.id, it.name) }.toMutableList()
+                
+                // Ensure there's always an "Uncategorized" option
+                if (categoryPairs.none { it.first == "0" }) {
+                    categoryPairs.add(0, Pair("0", "Uncategorized"))
+                }
+                
+                _categories.value = categoryPairs
+                
+                android.util.Log.d("ProductViewModel", "Loaded ${productsFromDb.size} products and ${categoriesFromDb.size} categories from database")
+            } catch (e: Exception) {
+                android.util.Log.e("ProductViewModel", "Failed to load data from database", e)
+                _error.value = e.message
+            }
+        }
     }
 
     fun searchProducts(query: String) {
@@ -74,6 +107,7 @@ class ProductViewModel @Inject constructor(
 
     // Management API for runtime adding categories and products (in-memory)
     fun addCategory(id: String, name: String) {
+        android.util.Log.d("ProductViewModel", "addCategory called: id=$id, name=$name")
         // delegate to repository via menu repository? product repo doesn't manage categories
         val category = Category(id = id, name = name)
         // We still need to call menu repository for categories — fallback to no-op if not available
@@ -83,11 +117,15 @@ class ProductViewModel @Inject constructor(
             current.removeAll { it.first == id }
             current.add(Pair(id, name))
             _categories.value = current
+            android.util.Log.d("ProductViewModel", "Updated ProductViewModel categories: ${_categories.value}")
 
             // persist the category via use-case
             try {
+                android.util.Log.d("ProductViewModel", "Calling addCategoryUseCase")
                 addCategoryUseCase(category)
+                android.util.Log.d("ProductViewModel", "addCategoryUseCase completed successfully")
             } catch (e: Exception) {
+                android.util.Log.e("ProductViewModel", "addCategoryUseCase failed", e)
                 _error.value = e.message
             }
         }
@@ -107,6 +145,45 @@ class ProductViewModel @Inject constructor(
                 val catList = _categories.value.toMutableList()
                 catList.add(Pair(catId, "Category $catId"))
                 _categories.value = catList
+            }
+        }
+    }
+    
+    fun updateProduct(product: Product) {
+        viewModelScope.launch {
+            try {
+                productRepository.upsertProduct(product)
+                
+                // Update in-memory list
+                val index = allProducts.indexOfFirst { it.id == product.id }
+                if (index >= 0) {
+                    allProducts[index] = product
+                    _products.value = allProducts.toList()
+                }
+                
+                android.util.Log.d("ProductViewModel", "Product updated: ${product.name}")
+            } catch (e: Exception) {
+                android.util.Log.e("ProductViewModel", "Failed to update product", e)
+                _error.value = e.message
+            }
+        }
+    }
+    
+    fun deleteProduct(productId: String) {
+        viewModelScope.launch {
+            try {
+                // Remove from in-memory list first
+                val removedProduct = allProducts.find { it.id == productId }
+                allProducts.removeAll { it.id == productId }
+                _products.value = allProducts.toList()
+                
+                // TODO: Add deleteProduct to repository interface when available
+                // For now, we'll just remove from memory
+                
+                android.util.Log.d("ProductViewModel", "Product deleted: $productId")
+            } catch (e: Exception) {
+                android.util.Log.e("ProductViewModel", "Failed to delete product", e)
+                _error.value = e.message
             }
         }
     }

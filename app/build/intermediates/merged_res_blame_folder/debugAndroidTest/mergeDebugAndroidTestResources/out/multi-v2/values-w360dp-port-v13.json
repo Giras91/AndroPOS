@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.extrotarget.extropos.test.app-mergeDebugAndroidTestResources-39:/values-w360dp-port-v13/values-w360dp-port-v13.xml",
+            "outputFile": "com.extrotarget.extropos.test.app-mergeDebugAndroidTestResources-43:/values-w360dp-port-v13/values-w360dp-port-v13.xml",
             "map": [
                 {
                     "source": "/home/hp/.gradle/caches/8.13/transforms/a785356afe8e52d09bf8ffaa1131ed7c/transformed/material-1.11.0/res/values-w360dp-port-v13/values-w360dp-port-v13.xml",

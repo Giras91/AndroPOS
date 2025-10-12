@@ -8,9 +8,16 @@ import org.junit.Test
 
 class PrinterRepositoryTest {
     @Test
-    fun testPrintReturnsFailureWhenNoPrinter() = runBlocking {
+    fun testPrintSimulation() = runBlocking {
         val repo = PrinterRepository()
-        val res = repo.print(PrintJob("t", "b"))
-        Assert.assertTrue(res.isFailure)
+        val printItems = listOf(
+            com.extrotarget.extropos.printer.domain.model.PrintItem("text", "Test content")
+        )
+        val res = repo.print(PrintJob(content = printItems))
+        // Our current implementation simulates successful printing
+        Assert.assertTrue("Print simulation should succeed", res.isSuccess)
+        
+        val printers = repo.availablePrinters()
+        Assert.assertFalse("Should have simulated printers available", printers.isEmpty())
     }
 }

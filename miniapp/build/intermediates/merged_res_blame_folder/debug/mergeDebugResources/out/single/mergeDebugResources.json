@@ -8,11 +8,19 @@
         "source": "com.extrotarget.extropos.miniapp-main-22:/layout/activity_main.xml"
     },
     {
+        "merged": "com.extrotarget.extropos.miniapp-debug-20:/drawable_card_background.xml.flat",
+        "source": "com.extrotarget.extropos.miniapp-main-22:/drawable/card_background.xml"
+    },
+    {
         "merged": "com.extrotarget.extropos.miniapp-debug-20:/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "com.extrotarget.extropos.miniapp-main-22:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
         "merged": "com.extrotarget.extropos.miniapp-debug-20:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "com.extrotarget.extropos.miniapp-main-22:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.extrotarget.extropos.miniapp-debug-20:/drawable_button_primary.xml.flat",
+        "source": "com.extrotarget.extropos.miniapp-main-22:/drawable/button_primary.xml"
     }
 ]

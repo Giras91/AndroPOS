@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.extrotarget.extropos.app-mergeDebugResources-60:/values-ky/values-ky.xml",
+            "outputFile": "com.extrotarget.extropos.app-mergeDebugResources-64:/values-ky/values-ky.xml",
             "map": [
                 {
                     "source": "/home/hp/.gradle/caches/8.13/transforms/8cc2411fcbbcf7bf150cd029dec83fe0/transformed/navigation-ui-2.7.6/res/values-ky/values-ky.xml",

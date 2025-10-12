@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.extrotarget.extropos"
+    package="com.extrotarget.extropos.miniapp"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -9,10 +9,10 @@
         android:targetSdkVersion="34" />
 
     <permission
-        android:name="com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.extrotarget.extropos.miniapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.extrotarget.extropos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="com.extrotarget.extropos.miniapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +22,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="ExtroPOS MiniApp"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true" >
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
         <activity
             android:name="com.extrotarget.extropos.MainActivity"
             android:exported="true" >
@@ -35,7 +36,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.extrotarget.extropos.androidx-startup"
+            android:authorities="com.extrotarget.extropos.miniapp.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"
