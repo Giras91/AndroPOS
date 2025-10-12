@@ -1,0 +1,200 @@
+10-12 12:38:39.910  1073  1073 W ServiceManagerCppClient: Waited one second for vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s (is service started? Number of threads started in the threadpool: 1. Are binder threads started and available?)
+10-12 12:38:39.914   492 21878 W libc    : Unable to set property "ctl.interface_start" to "aidl/vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-12 12:38:40.049  8124  9513 D PowerCheckerService: onBatteryChanged, mBatteryLevel = 92, status = 2, level = 92, plug = 2, scale = 100
+10-12 12:38:40.050  8124  8398 I ProcAudioPowerManager: onBatteryChanged, onBattery is false
+10-12 12:38:40.050  8124  8398 D PowerKeeper.FrozenApp: onBatteryChanged plug=true mBatteryPlugged=2
+10-12 12:38:40.050  8124  8874 D PowerKeeper.Thermal: mBatteryTemperature: 31
+10-12 12:38:40.053  1309  1309 D UiModeManager: updateConfigurationLocked: mDockState=0; mCarMode=false; mCar=false; mPowerSave=false; mOverrideNightModeOn=false; mOverrideNightModeOff=false; mComputedNightMode=false; mNightModeValue=1; uiMode=17
+10-12 12:38:40.056  7112  7112 I PowerSaveService: onReceive: android.intent.action.BATTERY_CHANGED
+10-12 12:38:40.057  7112  7112 I PowerNoticeUI: handleBatteryChanged oldPlugType 2 mPlugType 2 oldBatteryLevel 92 mBatteryLevel 92 temperature 310
+10-12 12:38:40.057  7112  7112 I ChargerBatteryIntelligenceReceiver: onBatteryChanged temperature：31,plugType:2
+10-12 12:38:40.057  7112  7112 D BaseChargeProtect_HighTemp: mCountByMinute:0,isScreenOn:true
+10-12 12:38:40.193  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:40.193  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:40.193  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:40.193  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:40.193  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:40.193  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:40.193  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:40.193  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:40.193  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:40.193  1110  1110 I thermal_src: recvmsg_expect 4, but get 5 
+10-12 12:38:40.193  1110  1110 V thermal_src: TA_DAEMON_CMD_SET_TTJ:ERROR ret=-1
+10-12 12:38:40.193  1110  1110 E thermal_src: set_ttj_to_kernel 1:error -1
+10-12 12:38:40.193  1110  1110 I thermal_src: recvmsg_expect 2, but get 5 
+10-12 12:38:40.193  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:40.193  1110  1110 I thermal_src: recvmsg_expect 2, but get 5 
+10-12 12:38:40.193  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:40.193  1110  1110 I thermal_src: recvmsg_expect 2, but get 4 
+10-12 12:38:40.193  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:40.538  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{4156b5f 16883:com.facebook.katana/u0a307} (uid 10307) need cached broadcast
+10-12 12:38:40.538  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{4156b5f 16883:com.facebook.katana/u0a307} (uid 10307) need cached broadcast
+10-12 12:38:40.539  1309  1355 I SmartPower: com.xiaomi.discover/10173(16051): idle->background(2375ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:40.540  1309  1355 I SmartPower: com.google.android.apps.tachyon/10182(21527): idle->background(2375ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:40.541  1309  1355 I SmartPower: com.google.android.apps.youtube.music/10198(32402): idle->background(2375ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:40.543  1309  1355 I SmartPower: com.google.android.youtube/10200(32675): idle->background(2376ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:40.544  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{6d1daec 13809:com.zhiliaoapp.musically/u0a268} (uid 10268) need cached broadcast
+10-12 12:38:40.544  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{6d1daec 13809:com.zhiliaoapp.musically/u0a268} (uid 10268) need cached broadcast
+10-12 12:38:40.545  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{6d1daec 13809:com.zhiliaoapp.musically/u0a268} (uid 10268) need cached broadcast
+10-12 12:38:40.545  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{6d1daec 13809:com.zhiliaoapp.musically/u0a268} (uid 10268) need cached broadcast
+10-12 12:38:40.545  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{6d1daec 13809:com.zhiliaoapp.musically/u0a268} (uid 10268) need cached broadcast
+10-12 12:38:40.546  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{b08495 23588:com.ss.android.ugc.trill/u0a305} (uid 10305) need cached broadcast
+10-12 12:38:40.546  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{b08495 23588:com.ss.android.ugc.trill/u0a305} (uid 10305) need cached broadcast
+10-12 12:38:40.546  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{b08495 23588:com.ss.android.ugc.trill/u0a305} (uid 10305) need cached broadcast
+10-12 12:38:40.546  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{b08495 23588:com.ss.android.ugc.trill/u0a305} (uid 10305) need cached broadcast
+10-12 12:38:40.845  2036  2036 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+10-12 12:38:40.855  2036  2036 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+10-12 12:38:40.859   911   911 I BufferQueueProducer: [StatusBar#118](this:0xb400006fd0fb4550,id:-1,api:0,p:-1,c:911) queueBuffer: fps=0.78 dur=1280.26 max=1280.26 min=1280.26
+10-12 12:38:40.862   863   863 I hwcomposer: [HWCDisplay] (0 updateFps():3644), (type:1, mode:2) fps:1.562304,dur:1280.16,max:1132.92,min:147.24  
+10-12 12:38:40.865  2036  2036 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+10-12 12:38:40.865   911   911 I MI-SF   : surfaceflinger setAffinity mode=0
+10-12 12:38:40.866   911   911 E MI-SF   : surfaceflinger setAffinity success
+10-12 12:38:40.913  1073  1073 W ServiceManagerCppClient: Waited one second for vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s (is service started? Number of threads started in the threadpool: 1. Are binder threads started and available?)
+10-12 12:38:40.916   492 21879 W libc    : Unable to set property "ctl.interface_start" to "aidl/vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-12 12:38:41.008   863  1231 I hwcomposer: [HWC] (0)fire a callback of refresh to SF[4]  
+10-12 12:38:41.029   911   911 I BufferQueueProducer: [FramebufferSurface](this:0xb400006df0d6ef50,id:-1,api:1,p:911,c:911) queueBuffer: fps=0.77 dur=1300.76 max=1300.76 min=1300.76
+10-12 12:38:41.033   911   911 I MI-SF   : surfaceflinger setAffinity mode=1
+10-12 12:38:41.033   911   911 E MI-SF   : surfaceflinger setAffinity success
+10-12 12:38:41.033   911   911 I MI-SF   : surfaceflinger setreAffinity reTid=1160
+10-12 12:38:41.033   911   911 E MI-SF   : surfaceflinger setAffinity success
+10-12 12:38:41.150  1070  1070 D EMDLOGGER1: ccb_init_cond: wait required modem status time out
+10-12 12:38:41.184  8606  8769 W ProxyAndroidLoggerBackend: Too many Flogger logs received before configuration. Dropping old logs.
+10-12 12:38:41.289  1024  1154 D connsyslogger: SD_LOG_ROOT is /data/debuglogger/connsyslog/fw.
+10-12 12:38:41.289  1024  1154 D connsyslogger: systemReady:1
+10-12 12:38:41.373  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:41.374  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:41.374  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:41.374  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:41.374  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:41.374  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:41.374  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:41.374  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:41.374  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:41.374  1110  1110 I thermal_src: recvmsg_expect 4, but get 5 
+10-12 12:38:41.374  1110  1110 V thermal_src: TA_DAEMON_CMD_SET_TTJ:ERROR ret=-1
+10-12 12:38:41.374  1110  1110 E thermal_src: set_ttj_to_kernel 1:error -1
+10-12 12:38:41.374  1110  1110 I thermal_src: recvmsg_expect 2, but get 5 
+10-12 12:38:41.374  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:41.375  1110  1110 I thermal_src: recvmsg_expect 2, but get 5 
+10-12 12:38:41.375  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:41.375  1110  1110 I thermal_src: recvmsg_expect 2, but get 4 
+10-12 12:38:41.375  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:41.858   880   960 I libPerfCtl: xgfGetFPS pid:911 fps:-1
+10-12 12:38:41.858   880   960 I libPerfCtl: xgfGetFPS pid:2036 fps:-1
+10-12 12:38:41.916  1073  1073 W ServiceManagerCppClient: Waited one second for vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s (is service started? Number of threads started in the threadpool: 1. Are binder threads started and available?)
+10-12 12:38:41.919   492 21883 W libc    : Unable to set property "ctl.interface_start" to "aidl/vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-12 12:38:42.384   493   493 I hwservicemanager: getTransport: Cannot find entry vendor.mediatek.hardware.mtkradioex@3.0::IMtkRadioEx/mtkSmartRatSwitch1 in either framework or device VINTF manifest.
+10-12 12:38:42.555   493   493 I hwservicemanager: getTransport: Cannot find entry vendor.mediatek.hardware.mtkradioex@3.0::IMtkRadioEx/mtkCap1 in either framework or device VINTF manifest.
+10-12 12:38:42.557   493   493 I hwservicemanager: getTransport: Cannot find entry vendor.mediatek.hardware.mtkradioex@2.0::IMtkRadioEx/mtkCap1 in either framework or device VINTF manifest.
+10-12 12:38:42.560   493   493 I hwservicemanager: getTransport: Cannot find entry vendor.mediatek.hardware.mtkradioex@3.0::IMtkRadioEx/imsSlot1 in either framework or device VINTF manifest.
+10-12 12:38:42.568  2036  2036 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+10-12 12:38:42.571  2036  2036 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+10-12 12:38:42.585  2036  2036 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+10-12 12:38:42.600   911   911 I BufferQueueProducer: [StatusBar#118](this:0xb400006fd0fb4550,id:-1,api:0,p:-1,c:911) queueBuffer: fps=0.57 dur=1741.08 max=1741.08 min=1741.08
+10-12 12:38:42.604   863   863 I hwcomposer: [HWCDisplay] (0 updateFps():3644), (type:1, mode:2) fps:1.148588,dur:1741.27,max:1573.42,min:167.85  
+10-12 12:38:42.605  2036  2036 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+10-12 12:38:42.606   911   911 I MI-SF   : surfaceflinger setAffinity mode=0
+10-12 12:38:42.607   911   911 E MI-SF   : surfaceflinger setAffinity success
+10-12 12:38:42.724   863  1231 I hwcomposer: [HWC] (0)fire a callback of refresh to SF[4]  
+10-12 12:38:42.746   911   911 I BufferQueueProducer: [FramebufferSurface](this:0xb400006df0d6ef50,id:-1,api:1,p:911,c:911) queueBuffer: fps=0.58 dur=1717.09 max=1717.09 min=1717.09
+10-12 12:38:42.748   911   911 I MI-SF   : surfaceflinger setAffinity mode=1
+10-12 12:38:42.748   911   911 E MI-SF   : surfaceflinger setAffinity success
+10-12 12:38:42.749   911   911 I MI-SF   : surfaceflinger setreAffinity reTid=1160
+10-12 12:38:42.749   911   911 E MI-SF   : surfaceflinger setAffinity success
+10-12 12:38:42.858   880   960 I libPerfCtl: xgfGetFPS pid:911 fps:-1
+10-12 12:38:42.858   880   960 I libPerfCtl: xgfGetFPS pid:2036 fps:-1
+10-12 12:38:42.918  1073  1073 W ServiceManagerCppClient: Waited one second for vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s (is service started? Number of threads started in the threadpool: 1. Are binder threads started and available?)
+10-12 12:38:42.922   492 21884 W libc    : Unable to set property "ctl.interface_start" to "aidl/vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-12 12:38:43.150  1070  1070 D EMDLOGGER1: ccb_init_cond: wait required modem status time out
+10-12 12:38:43.290  1024  1154 D connsyslogger: SD_LOG_ROOT is /data/debuglogger/connsyslog/fw.
+10-12 12:38:43.291  1024  1154 D connsyslogger: systemReady:1
+10-12 12:38:43.374  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:43.374  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:43.375  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:43.375  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:43.375  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:43.375  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:43.375  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:43.375  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:43.375  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:43.376  1110  1110 I thermal_src: recvmsg_expect 4, but get 5 
+10-12 12:38:43.376  1110  1110 V thermal_src: TA_DAEMON_CMD_SET_TTJ:ERROR ret=-1
+10-12 12:38:43.376  1110  1110 E thermal_src: set_ttj_to_kernel 1:error -1
+10-12 12:38:43.376  1110  1110 I thermal_src: recvmsg_expect 2, but get 5 
+10-12 12:38:43.376  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:43.376  1110  1110 I thermal_src: recvmsg_expect 2, but get 5 
+10-12 12:38:43.376  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:43.376  1110  1110 I thermal_src: recvmsg_expect 2, but get 4 
+10-12 12:38:43.376  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:43.543  1309  1619 I SmartPower: com.xiaomi.discover/10173(16051): background->idle(3004ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:43.543  1309  1619 I SmartPower: com.google.android.apps.tachyon/10182(21527): background->idle(3003ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:43.544  1309  1619 I SmartPower: com.google.android.apps.youtube.music/10198(32402): background->idle(3003ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:43.544  1309  1619 I SmartPower: com.google.android.youtube/10200(32675): background->idle(3001ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:43.859   880   960 I libPerfCtl: xgfGetFPS pid:2036 fps:-1
+10-12 12:38:43.921  1073  1073 W ServiceManagerCppClient: Waited one second for vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s (is service started? Number of threads started in the threadpool: 1. Are binder threads started and available?)
+10-12 12:38:43.924   492 21885 W libc    : Unable to set property "ctl.interface_start" to "aidl/vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-12 12:38:44.373  1102  1102 I thermal_repeater: socket -1
+10-12 12:38:44.923  1073  1073 W ServiceManagerCppClient: Waited one second for vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s (is service started? Number of threads started in the threadpool: 1. Are binder threads started and available?)
+10-12 12:38:44.927   492 21886 W libc    : Unable to set property "ctl.interface_start" to "aidl/vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-12 12:38:45.151  1070  1070 D EMDLOGGER1: ccb_init_cond: wait required modem status time out
+10-12 12:38:45.151  1309  1609 D HyperStabilitySdkService: checkDmabufStatus done, exceedLimitsList:[], totalDmabufSize:0
+10-12 12:38:45.292  1024  1154 D connsyslogger: SD_LOG_ROOT is /data/debuglogger/connsyslog/fw.
+10-12 12:38:45.292  1024  1154 D connsyslogger: systemReady:1
+10-12 12:38:45.376  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:45.376  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:45.376  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:45.376  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:45.376  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:45.376  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:45.377  1110  1110 I thermal_src: recvmsg_expect 5, but get 2 
+10-12 12:38:45.377  1110  1110 V thermal_src: TA_DAEMON_CMD_GET_TPCB:ERROR ret=-1
+10-12 12:38:45.377  1110  1110 E thermal_src: get_tpcb_from_kernel:error -1. retry...
+10-12 12:38:45.377  1110  1110 I thermal_src: recvmsg_expect 4, but get 5 
+10-12 12:38:45.377  1110  1110 V thermal_src: TA_DAEMON_CMD_SET_TTJ:ERROR ret=-1
+10-12 12:38:45.377  1110  1110 E thermal_src: set_ttj_to_kernel 1:error -1
+10-12 12:38:45.377  1110  1110 I thermal_src: recvmsg_expect 2, but get 5 
+10-12 12:38:45.377  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:45.377  1110  1110 I thermal_src: recvmsg_expect 2, but get 5 
+10-12 12:38:45.378  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:45.378  1110  1110 I thermal_src: recvmsg_expect 2, but get 4 
+10-12 12:38:45.378  1110  1110 V thermal_src: waiting NOTIFY from kernel miss, -1
+10-12 12:38:45.428  8124  8398 I ProcAudioPowerManager: onBatteryChanged, onBattery is false
+10-12 12:38:45.428  8124  8398 D PowerKeeper.FrozenApp: onBatteryChanged plug=true mBatteryPlugged=2
+10-12 12:38:45.429  8124  9513 D PowerCheckerService: onBatteryChanged, mBatteryLevel = 92, status = 2, level = 92, plug = 2, scale = 100
+10-12 12:38:45.429  8124  8874 D PowerKeeper.Thermal: mBatteryTemperature: 31
+10-12 12:38:45.432  1309  1309 D UiModeManager: updateConfigurationLocked: mDockState=0; mCarMode=false; mCar=false; mPowerSave=false; mOverrideNightModeOn=false; mOverrideNightModeOff=false; mComputedNightMode=false; mNightModeValue=1; uiMode=17
+10-12 12:38:45.437  7112  7112 I PowerSaveService: onReceive: android.intent.action.BATTERY_CHANGED
+10-12 12:38:45.437  7112  7112 I PowerNoticeUI: handleBatteryChanged oldPlugType 2 mPlugType 2 oldBatteryLevel 92 mBatteryLevel 92 temperature 310
+10-12 12:38:45.437  7112  7112 I ChargerBatteryIntelligenceReceiver: onBatteryChanged temperature：31,plugType:2
+10-12 12:38:45.438  7112  7112 D BaseChargeProtect_HighTemp: mCountByMinute:0,isScreenOn:true
+10-12 12:38:45.585  2036  2036 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+10-12 12:38:45.587  2036  2036 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+10-12 12:38:45.600   911   911 I BufferQueueProducer: [StatusBar#118](this:0xb400006fd0fb4550,id:-1,api:0,p:-1,c:911) queueBuffer: fps=0.33 dur=3000.38 max=3000.38 min=3000.38
+10-12 12:38:45.602   863   863 I hwcomposer: [HWCDisplay] (0 updateFps():3644), (type:1, mode:2) fps:0.667023,dur:2998.40,max:2855.09,min:143.30  
+10-12 12:38:45.603   911   911 I MI-SF   : surfaceflinger setAffinity mode=0
+10-12 12:38:45.603   911   911 E MI-SF   : surfaceflinger setAffinity success
+10-12 12:38:45.605  2036  2036 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+10-12 12:38:45.624  2036  2036 D ControlCenterHeaderExpandController: onExpansionChanged: progress =  0.0
+10-12 12:38:45.744   863  1231 I hwcomposer: [HWC] (0)fire a callback of refresh to SF[4]  
+10-12 12:38:45.766   911   911 I BufferQueueProducer: [FramebufferSurface](this:0xb400006df0d6ef50,id:-1,api:1,p:911,c:911) queueBuffer: fps=0.33 dur=3019.19 max=3019.19 min=3019.19
+10-12 12:38:45.768   911   911 I MI-SF   : surfaceflinger setAffinity mode=1
+10-12 12:38:45.768   911   911 E MI-SF   : surfaceflinger setAffinity success
+10-12 12:38:45.768   911   911 I MI-SF   : surfaceflinger setreAffinity reTid=1160
+10-12 12:38:45.768   911   911 E MI-SF   : surfaceflinger setAffinity success
+10-12 12:38:45.912  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{4156b5f 16883:com.facebook.katana/u0a307} (uid 10307) need cached broadcast
+10-12 12:38:45.913  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{4156b5f 16883:com.facebook.katana/u0a307} (uid 10307) need cached broadcast
+10-12 12:38:45.914  1309  1355 I SmartPower: com.xiaomi.discover/10173(16051): idle->background(2372ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:45.916  1309  1355 I SmartPower: com.google.android.apps.tachyon/10182(21527): idle->background(2373ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:45.916  1309  1355 I SmartPower: com.google.android.apps.youtube.music/10198(32402): idle->background(2373ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:45.918  1309  1355 I SmartPower: com.google.android.youtube/10200(32675): idle->background(2374ms) R(broadcast start Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }) adj=905.
+10-12 12:38:45.919  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{6d1daec 13809:com.zhiliaoapp.musically/u0a268} (uid 10268) need cached broadcast
+10-12 12:38:45.920  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{6d1daec 13809:com.zhiliaoapp.musically/u0a268} (uid 10268) need cached broadcast
+10-12 12:38:45.921  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{6d1daec 13809:com.zhiliaoapp.musically/u0a268} (uid 10268) need cached broadcast
+10-12 12:38:45.921  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{6d1daec 13809:com.zhiliaoapp.musically/u0a268} (uid 10268) need cached broadcast
+10-12 12:38:45.921  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{6d1daec 13809:com.zhiliaoapp.musically/u0a268} (uid 10268) need cached broadcast
+10-12 12:38:45.922  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{b08495 23588:com.ss.android.ugc.trill/u0a305} (uid 10305) need cached broadcast
+10-12 12:38:45.922  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{b08495 23588:com.ss.android.ugc.trill/u0a305} (uid 10305) need cached broadcast
+10-12 12:38:45.923  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{b08495 23588:com.ss.android.ugc.trill/u0a305} (uid 10305) need cached broadcast
+10-12 12:38:45.923  1309  1355 W BroadcastQueue: Greezer Denial: sending Intent { act=android.intent.action.BATTERY_CHANGED flg=0x60000010 (has extras) }, action: android.intent.action.BATTERY_CHANGED from null (uid=1000) due to receiver ProcessRecord{b08495 23588:com.ss.android.ugc.trill/u0a305} (uid 10305) need cached broadcast
+10-12 12:38:45.926  1073  1073 W ServiceManagerCppClient: Waited one second for vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s (is service started? Number of threads started in the threadpool: 1. Are binder threads started and available?)
+10-12 12:38:45.927   492 21895 W libc    : Unable to set property "ctl.interface_start" to "aidl/vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
