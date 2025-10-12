@@ -4,4 +4,28 @@
 /gradle
 /gradle-5.6.4
 /gradle-5.6.4-bin.zip
+/local.properties# Gradle / Android build outputs
+.gradle/
+build/
+**/build/
+app/build/
+modules/*/build/
+miniapp/build/
+
+# IntelliJ/Android Studio
+/.idea/
+*.iml
+
+# Local config
 /local.properties
+
+# Generated files
+*.class
+*.jar
+*.keystore
+
+# Android Studio captures
+captures/
+
+# Misc
+.externalNativeBuild/
