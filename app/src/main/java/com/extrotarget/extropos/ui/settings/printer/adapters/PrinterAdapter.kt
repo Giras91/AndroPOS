@@ -11,7 +11,8 @@ import com.extrotarget.extropos.ui.settings.printer.Printer
 class PrinterAdapter(
     private val onPrinterClick: (Printer) -> Unit,
     private val onTestPrintClick: (Printer) -> Unit,
-    private val onDeleteClick: (Printer) -> Unit
+    private val onDeleteClick: (Printer) -> Unit,
+    private val onDetailsClick: (Printer) -> Unit
 ) : ListAdapter<Printer, PrinterAdapter.PrinterViewHolder>(PrinterDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrinterViewHolder {
@@ -35,9 +36,9 @@ class PrinterAdapter(
                 com.extrotarget.extropos.ui.settings.printer.PrinterType.KITCHEN -> "Kitchen Printer"
             }
             binding.connectionTypeTextView.text = when (printer.connectionType) {
-                com.extrotarget.extropos.ui.settings.printer.ConnectionType.USB -> "USB: ${printer.address}"
-                com.extrotarget.extropos.ui.settings.printer.ConnectionType.BLUETOOTH -> "Bluetooth: ${printer.address}"
-                com.extrotarget.extropos.ui.settings.printer.ConnectionType.NETWORK -> "Network: ${printer.address}${printer.port?.let { ":$it" } ?: ""}"
+                com.extrotarget.extropos.ui.settings.printer.ConnectionType.USB -> "🔌 USB: ${printer.address}"
+                com.extrotarget.extropos.ui.settings.printer.ConnectionType.BLUETOOTH -> "📶 Bluetooth: ${printer.address}"
+                com.extrotarget.extropos.ui.settings.printer.ConnectionType.NETWORK -> "🌐 Network: ${printer.address}${printer.port?.let { ":$it" } ?: ""}"
             }
 
             binding.statusIndicator.setBackgroundColor(
@@ -49,6 +50,7 @@ class PrinterAdapter(
             binding.root.setOnClickListener { onPrinterClick(printer) }
             binding.testPrintButton.setOnClickListener { onTestPrintClick(printer) }
             binding.deleteButton.setOnClickListener { onDeleteClick(printer) }
+            binding.detailsButton.setOnClickListener { onDetailsClick(printer) }
         }
     }
 

@@ -5,10 +5,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.5.2'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21'
+        classpath 'com.android.tools.build:gradle:8.13.0'
+    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0'
     // Hilt Gradle plugin
-    classpath 'com.google.dagger:hilt-android-gradle-plugin:2.52'
+    classpath 'com.google.dagger:hilt-android-gradle-plugin:2.54'
     }
 }
 
@@ -18,5 +18,18 @@ allprojects {
         mavenCentral()
     // JitPack for popular GitHub libraries (e.g. DantSu ESCPOS thermal printer lib)
     maven { url = uri('https://jitpack.io') }
+    }
+    // Temporarily force Kotlin runtime + metadata versions to restore a working build
+    configurations.all {
+        resolutionStrategy {
+            // Pin Kotlin stdlib/reflect to the project's stable version
+            force(
+                'org.jetbrains.kotlin:kotlin-stdlib:2.1.0',
+                'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0',
+                'org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.0',
+                'org.jetbrains.kotlin:kotlin-reflect:2.1.0',
+                'org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0'
+            )
+        }
     }
 }

@@ -154,4 +154,11 @@ object AppModule {
     fun provideShiftDao(db: com.extrotarget.extropos.data.local.AppDatabase): com.extrotarget.extropos.data.local.dao.ShiftDao {
         return db.shiftDao()
     }
+
+    // Provide PrinterDao (Room)
+    @Provides
+    @Singleton
+    fun providePrinterDao(db: com.extrotarget.extropos.data.local.AppDatabase): com.extrotarget.extropos.printer.data.PrinterDao {
+        return db.printerDao()
+    }
 }

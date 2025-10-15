@@ -49,15 +49,45 @@
             app:layout_constraintStart_toStartOf="@+id/printersRecyclerView"
             app:layout_constraintTop_toTopOf="@+id/printersRecyclerView" />
 
-        <Button
-            android:id="@+id/scanPrintersButton"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Scan for Printers"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/scanPrintersButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="🔍 Scan Printers"
+                style="@style/Widget.Material3.Button.OutlinedButton" />
+
+            <Button
+                android:id="@+id/addPrinterButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="➕ Add Printer"
+                style="@style/Widget.Material3.Button" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addPrinterFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_add_24dp"
+                android:contentDescription="Add Printer"
+                app:backgroundTint="@color/design_default_color_primary"
+                app:tint="@android:color/white"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/scanningProgressBar"
@@ -69,22 +99,6 @@
             app:layout_constraintEnd_toEndOf="@+id/scanPrintersButton"
             app:layout_constraintStart_toStartOf="@+id/scanPrintersButton"
             app:layout_constraintTop_toTopOf="@+id/scanPrintersButton" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addPrinterFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_add_24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

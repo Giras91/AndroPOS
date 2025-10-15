@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Printer name" />
+
+    <EditText
+        android:id="@+id/inputIp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="IP address"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/inputPort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Port (default 9100)"
+        android:inputType="number" />
+
+    <Spinner
+        android:id="@+id/spinnerSdk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textSdkDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Select an SDK to match your printer. If none are listed, install the DantSu ESC/POS adapter or add a compatible driver." />
+
+    <TextView
+        android:id="@+id/linkSdkHelp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:textColor="#1565C0"
+        android:text="How to install printer SDKs"
+        android:textStyle="bold" />
+
+</LinearLayout>

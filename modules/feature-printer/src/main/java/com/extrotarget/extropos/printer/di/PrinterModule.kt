@@ -8,7 +8,6 @@ import com.extrotarget.extropos.printer.domain.catalog.PrinterSdkCatalog
 import com.extrotarget.extropos.printer.domain.service.PrinterConfigService
 import com.extrotarget.extropos.printer.domain.service.PrinterDetectionService
 import com.extrotarget.extropos.printer.domain.service.PrinterService
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,24 +18,23 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class PrinterModule {
-    @Binds
-    @Singleton
-    abstract fun bindPrinterRepository(impl: PrinterRepository): IPrinterRepository
-
     companion object {
         @Provides
+        @JvmStatic
         @Singleton
         fun providePrinterConfigService(@ApplicationContext context: Context): PrinterConfigService {
             return PrinterConfigService(context)
         }
 
         @Provides
+        @JvmStatic
         @Singleton
         fun providePrinterSdkCatalog(): com.extrotarget.extropos.printer.domain.catalog.PrinterSdkCatalog {
             return com.extrotarget.extropos.printer.domain.catalog.PrinterSdkCatalog()
         }
 
         @Provides
+        @JvmStatic
         @Singleton
         fun providePrinterDetectionService(
             @ApplicationContext context: Context,
@@ -46,12 +44,14 @@ abstract class PrinterModule {
         }
 
         @Provides
+        @JvmStatic
         @Singleton
         fun providePrinterAdapterFactory(@ApplicationContext context: Context): PrinterAdapterFactory {
             return PrinterAdapterFactory(context)
         }
 
         @Provides
+        @JvmStatic
         @Singleton
         fun providePrinterService(
             printerDetectionService: PrinterDetectionService,
@@ -60,5 +60,6 @@ abstract class PrinterModule {
         ): PrinterService {
             return PrinterService(printerDetectionService, printerConfigService, adapterFactory)
         }
+
     }
 }

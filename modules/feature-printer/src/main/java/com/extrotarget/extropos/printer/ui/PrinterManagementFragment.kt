@@ -6,25 +6,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.extrotarget.extropos.printer.domain.service.PrinterService
-import com.extrotarget.extropos.printer.template.ReceiptTemplateBuilder
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.extrotarget.extropos.printer.domain.model.DetectedPrinter
+import com.extrotarget.extropos.printer.domain.service.PrinterConnectionStatus
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class PrinterManagementFragment : Fragment() {
 
-    @Inject
-    lateinit var printerService: PrinterService
+    private val vm: PrinterManagementViewModel by viewModels()
 
     companion object {
         private const val PERMISSION_REQUEST_CODE = 1001
@@ -34,264 +34,136 @@ class PrinterManagementFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        return createPrinterManagementUI()
+    ): View? {
+        return inflater.inflate(
+            com.extrotarget.extropos.printer.R.layout.fragment_printer_management,
+            container,
+            false
+        )
     }
 
-    private fun createPrinterManagementUI(): LinearLayout {
-        val rootLayout = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(16, 16, 16, 16)
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        // Title
-        val titleText = TextView(requireContext()).apply {
-            text = "🖨️ Printer Management"
-            textSize = 24f
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setPadding(0, 0, 0, 24)
-        }
-        rootLayout.addView(titleText)
+            val scanButton: Button = view.findViewById(com.extrotarget.extropos.printer.R.id.scanButton)
+            val connectDefaultButton: Button = view.findViewById(com.extrotarget.extropos.printer.R.id.connectDefaultButton)
+            val testPrintButton: Button = view.findViewById(com.extrotarget.extropos.printer.R.id.testPrintButton)
+            val addNetworkPrinterButton: Button = view.findViewById(com.extrotarget.extropos.printer.R.id.addNetworkPrinterButton)
+            val recycler: RecyclerView = view.findViewById(com.extrotarget.extropos.printer.R.id.printerList)
 
-        // Quick Actions Card
-        val quickActionsCard = createQuickActionsCard()
-        rootLayout.addView(quickActionsCard)
+            val adapter = PrinterListAdapter { detected ->
+                // Connect on item click
+                vm.connectToPrinter(detected)
+            }
 
-        // SDK Info Card
-        val sdkInfoCard = createSdkInfoCard()
-        rootLayout.addView(sdkInfoCard)
+            recycler.layoutManager = LinearLayoutManager(requireContext())
+            recycler.adapter = adapter
 
-        // Test Printing Card
-        val testCard = createTestPrintingCard()
-        rootLayout.addView(testCard)
+            scanButton.setOnClickListener { vm.scanForPrinters() }
+            connectDefaultButton.setOnClickListener { vm.connectToDefaultPrinter() }
+            testPrintButton.setOnClickListener { vm.printTestReceipt() }
+            addNetworkPrinterButton.setOnClickListener {
+                // Simple dialog to add network printer (name, ip, port) - minimal inputs
+                showAddNetworkPrinterDialog()
+            }
 
-        return rootLayout
+            // Observe flows
+            lifecycleScope.launch {
+                vm.printers.collectLatest { list ->
+                    adapter.submitList(list)
+                }
+            }
+
+            lifecycleScope.launch {
+                vm.message.collectLatest { msg ->
+                    msg?.let { showMessage(it) }
+                }
+            }
+
+            lifecycleScope.launch {
+                vm.status.collectLatest { status ->
+                    when (status) {
+                        is PrinterConnectionStatus.Connected -> {
+                            showMessage("Connected: ${status.printerName} (${status.connectionType})")
+                        }
+                        PrinterConnectionStatus.Disconnected -> {
+                            // no-op
+                        }
+                    }
+                }
+            }
     }
 
-    private fun createQuickActionsCard(): MaterialCardView {
-        val card = MaterialCardView(requireContext()).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { setMargins(0, 0, 0, 16) }
-            radius = 12f
-            cardElevation = 4f
-        }
+    private fun showAddNetworkPrinterDialog() {
+        val ctx = requireContext()
+        val inflater = LayoutInflater.from(ctx)
+        val dialogView = inflater.inflate(com.extrotarget.extropos.printer.R.layout.dialog_add_network_printer, null)
 
-        val content = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(16, 16, 16, 16)
-        }
+    val nameField = dialogView.findViewById<android.widget.EditText>(com.extrotarget.extropos.printer.R.id.inputName)
+    val ipField = dialogView.findViewById<android.widget.EditText>(com.extrotarget.extropos.printer.R.id.inputIp)
+    val portField = dialogView.findViewById<android.widget.EditText>(com.extrotarget.extropos.printer.R.id.inputPort)
+    val spinner = dialogView.findViewById<android.widget.Spinner>(com.extrotarget.extropos.printer.R.id.spinnerSdk)
+    val sdkDesc = dialogView.findViewById<android.widget.TextView>(com.extrotarget.extropos.printer.R.id.textSdkDescription)
+    val sdkHelp = dialogView.findViewById<android.widget.TextView>(com.extrotarget.extropos.printer.R.id.linkSdkHelp)
 
-        val title = TextView(requireContext()).apply {
-            text = "🔍 Printer Detection"
-            textSize = 18f
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setPadding(0, 0, 0, 16)
-        }
-        content.addView(title)
-
-        // Scan Buttons
-        val scanButton = MaterialButton(requireContext()).apply {
-            text = "Scan for Printers"
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { setMargins(0, 0, 0, 8) }
-            setOnClickListener { scanForPrinters() }
-        }
-        content.addView(scanButton)
-
-        val connectButton = MaterialButton(requireContext()).apply {
-            text = "Connect to Default Printer"
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            setOnClickListener { connectToDefaultPrinter() }
-        }
-        content.addView(connectButton)
-
-        card.addView(content)
-        return card
-    }
-
-    private fun createSdkInfoCard(): MaterialCardView {
-        val card = MaterialCardView(requireContext()).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { setMargins(0, 0, 0, 16) }
-            radius = 12f
-            cardElevation = 4f
-        }
-
-        val content = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(16, 16, 16, 16)
-        }
-
-        val title = TextView(requireContext()).apply {
-            text = "📚 Active SDK: DantSu ESC/POS"
-            textSize = 18f
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setPadding(0, 0, 0, 8)
-        }
-        content.addView(title)
-
-        val description = TextView(requireContext()).apply {
-            text = "✅ Supports: Text, Barcodes, QR Codes, Images, Paper Cutting\n" +
-                   "🔌 Connections: USB, Bluetooth, Network (TCP/IP)\n" +
-                   "🏭 Compatible: Most ESC/POS thermal printers"
-            textSize = 14f
-            setLineSpacing(4f, 1f)
-        }
-        content.addView(description)
-
-        card.addView(content)
-        return card
-    }
-
-    private fun createTestPrintingCard(): MaterialCardView {
-        val card = MaterialCardView(requireContext()).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { setMargins(0, 0, 0, 16) }
-            radius = 12f
-            cardElevation = 4f
-        }
-
-        val content = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(16, 16, 16, 16)
-        }
-
-        val title = TextView(requireContext()).apply {
-            text = "🧪 Test Printing"
-            textSize = 18f
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setPadding(0, 0, 0, 16)
-        }
-        content.addView(title)
-
-        // Test buttons
-        val testReceiptButton = MaterialButton(requireContext()).apply {
-            text = "Print Test Receipt"
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { setMargins(0, 0, 0, 8) }
-            setOnClickListener { printTestReceipt() }
-        }
-        content.addView(testReceiptButton)
-
-        val testConnectionButton = MaterialButton(requireContext()).apply {
-            text = "Test Connection"
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            setOnClickListener { testConnection() }
-        }
-        content.addView(testConnectionButton)
-
-        card.addView(content)
-        return card
-    }
-
-    // Action methods
-
-    private fun scanForPrinters() {
+        // Populate SDK spinner from ViewModel
         lifecycleScope.launch {
-            try {
-                showMessage("Scanning for printers...")
-                val printers = printerService.scanAllPrinters()
-                
-                if (printers.isEmpty()) {
-                    showMessage("No printers found. Try connecting a printer or check network settings.")
+            vm.sdks.collectLatest { sdkList ->
+                val names = if (sdkList.isEmpty()) listOf("(no SDKs installed)") else sdkList.map { it.name }
+                val adapter = android.widget.ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, names)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = adapter
+
+                // Update description for selected SDK or default text
+                if (sdkList.isEmpty()) {
+                    sdkDesc.text = "No SDKs detected. Install a compatible printer SDK (e.g., DantSu ESC/POS) or add a vendor AAR to modules/feature-printer/libs/."
                 } else {
-                    showMessage("Found ${printers.size} printer(s)! Check logs for details.")
-                    // Log printer details for debugging
-                    printers.forEach { printer ->
-                        println("Found printer: ${printer.name} (${printer.connectionType})")
-                    }
+                    val sel = spinner.selectedItemPosition.coerceAtLeast(0)
+                    val sdk = sdkList.getOrNull(sel)
+                    sdkDesc.text = sdk?.description ?: "Select an SDK"
                 }
-            } catch (e: Exception) {
-                showMessage("Scan failed: ${e.message}")
             }
         }
-    }
 
-    private fun connectToDefaultPrinter() {
-        lifecycleScope.launch {
-            try {
-                showMessage("Connecting to default printer...")
-                val connected = printerService.connectToDefaultPrinter()
-                
-                if (connected) {
-                    val status = printerService.getConnectionStatus()
-                    if (status is com.extrotarget.extropos.printer.domain.service.PrinterConnectionStatus.Connected) {
-                        showMessage("✅ Connected to ${status.printerName} via ${status.connectionType}")
-                    } else {
-                        showMessage("✅ Connected to default printer")
-                    }
+        sdkHelp.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Installing Printer SDKs")
+                .setMessage("To add SDKs place vendor AAR files in modules/feature-printer/libs/ and rebuild, or configure a Maven coordinate in modules/feature-printer/build.gradle.kts. For ESC/POS use the DantSu library which we wire by default.")
+                .setPositiveButton("OK", null)
+                .show()
+        }
+
+        MaterialAlertDialogBuilder(ctx)
+            .setTitle("Add Network Printer")
+            .setView(dialogView)
+            .setPositiveButton("Add") { _, _ ->
+                val name = nameField.text.toString().takeIf { it.isNotBlank() } ?: "Network Printer"
+                val ip = ipField.text.toString()
+                val port = portField.text.toString().toIntOrNull() ?: 9100
+                val sdkIndex = spinner.selectedItemPosition
+                val sdkId = vm.sdks.value.getOrNull(sdkIndex)?.id ?: ""
+
+                // Basic IP validation (IPv4) and port range check
+                val ipRegex = Regex("^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$")
+                if (ip.isBlank()) {
+                    showMessage("IP address is required")
+                } else if (!ipRegex.matches(ip)) {
+                    showMessage("Invalid IPv4 address")
+                } else if (port !in 1..65535) {
+                    showMessage("Port must be between 1 and 65535")
+                } else if (sdkId.isBlank()) {
+                    showMessage("Select a printer SDK first")
                 } else {
-                    showMessage("❌ Failed to connect. Please configure a default printer first.")
+                    vm.addNetworkPrinter(name, ip, port, sdkId)
                 }
-            } catch (e: Exception) {
-                showMessage("Connection failed: ${e.message}")
             }
-        }
-    }
-
-    private fun printTestReceipt() {
-        lifecycleScope.launch {
-            try {
-                showMessage("Preparing test receipt...")
-                
-                // Create a test receipt using our template builder
-                val testReceipt = ReceiptTemplateBuilder.createTestReceipt()
-                
-                // Print the receipt
-                val result = printerService.print(testReceipt)
-                
-                if (result.success) {
-                    showMessage("✅ Test receipt printed successfully!")
-                } else {
-                    showMessage("❌ Print failed: ${result.message}")
-                }
-            } catch (e: Exception) {
-                showMessage("Print error: ${e.message}")
-            }
-        }
-    }
-
-    private fun testConnection() {
-        lifecycleScope.launch {
-            try {
-                val status = printerService.getConnectionStatus()
-                
-                when (status) {
-                    is com.extrotarget.extropos.printer.domain.service.PrinterConnectionStatus.Connected -> {
-                        showMessage("✅ Printer connected: ${status.printerName}\n" +
-                                  "SDK: ${status.sdkName}\n" +
-                                  "Connection: ${status.connectionType}\n" +
-                                  "Features: ${status.features.size} available")
-                    }
-                    is com.extrotarget.extropos.printer.domain.service.PrinterConnectionStatus.Disconnected -> {
-                        showMessage("❌ No printer connected. Please connect to a printer first.")
-                    }
-                }
-            } catch (e: Exception) {
-                showMessage("Status check failed: ${e.message}")
-            }
-        }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     private fun showMessage(message: String) {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Printer Status")
+            .setTitle("Printer")
             .setMessage(message)
             .setPositiveButton("OK", null)
             .show()

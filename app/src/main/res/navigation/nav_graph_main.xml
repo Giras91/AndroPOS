@@ -68,8 +68,8 @@
     <!-- Settings Sub-fragments -->
     <fragment
         android:id="@+id/printerSetupFragment"
-        android:name="com.extrotarget.extropos.printer.ui.PrinterManagementFragmentSimple"
-        android:label="Printer Management"
+        android:name="com.extrotarget.extropos.printer.ui.PrinterManagementFragment"
+        android:label="Printer Setup"
         tools:layout="@layout/fragment_printer_management" />
 
     <fragment

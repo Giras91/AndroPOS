@@ -119,8 +119,13 @@ class PaymentSettingsFragment : Fragment() {
             binding.debugCard.visibility = View.VISIBLE
             binding.runSmokeTestButton.setOnClickListener {
                 // Launch debug activity which will run the smoke test and export DB
-                val intent = android.content.Intent(requireContext(), com.extrotarget.extropos.DebugSmokeActivity::class.java)
-                startActivity(intent)
+                // Use dynamic class name to avoid compile-time dependency on a debug-only activity
+                val intent = android.content.Intent().setClassName(requireContext(), "com.extrotarget.extropos.DebugSmokeActivity")
+                try {
+                    startActivity(intent)
+                } catch (_: Exception) {
+                    // Activity not found or other issue in non-debug builds; ignore gracefully
+                }
             }
 
             // Secret gesture: long-press toolbar title to toggle debug card

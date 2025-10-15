@@ -1,17 +1,9 @@
 package com.extrotarget.extropos.printer.di
 
-import com.extrotarget.extropos.printer.data.IPrinterRepository
-import com.extrotarget.extropos.printer.data.PrinterRepository
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+// App-level placeholder to avoid accidental duplicate PrinterModule FQCN in the app module.
+// The real DI modules for printers live in modules/feature-printer (PrinterModule) and
+// GlobalPrinterModule provides app-specific concrete implementations.
 
-@Module
-@InstallIn(SingletonComponent::class)
-abstract class PrinterModule {
-    @Binds
-    @Singleton
-    abstract fun bindPrinterRepository(impl: PrinterRepository): IPrinterRepository
+object AppPrinterModulePlaceholder {
+    // Intentionally empty. Do not annotate with @Module to avoid Dagger picking this up.
 }

@@ -13,7 +13,7 @@ import javax.inject.Singleton
  * Main printer service that coordinates detection, configuration, and printing operations
  */
 @Singleton
-class PrinterService @Inject constructor(
+open class PrinterService @Inject constructor(
     private val printerDetectionService: PrinterDetectionService,
     private val printerConfigService: PrinterConfigService,
     private val adapterFactory: PrinterAdapterFactory
@@ -24,7 +24,7 @@ class PrinterService @Inject constructor(
     /**
      * Scan for available printers across all connection types
      */
-    suspend fun scanAllPrinters(): List<DetectedPrinter> {
+    open suspend fun scanAllPrinters(): List<DetectedPrinter> {
         return withContext(Dispatchers.IO) {
             val usbPrinters = printerDetectionService.scanUsbPrinters().first()
             val bluetoothPrinters = printerDetectionService.scanBluetoothPrinters().first()
@@ -243,7 +243,7 @@ class PrinterService @Inject constructor(
     /**
      * Get all available printer SDKs
      */
-    fun getAvailableSdks(): List<PrinterSdk> {
+    open fun getAvailableSdks(): List<PrinterSdk> {
         return printerDetectionService.getAllAvailableSdks()
     }
 }

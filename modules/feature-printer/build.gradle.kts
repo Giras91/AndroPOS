@@ -22,6 +22,7 @@ android {
 }
 
 dependencies {
+    // Ensure kapt has the correct kotlinx-metadata-jvm version compatible with Kotlin 2.2.x
     kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0")
     implementation(libs.coroutines.android)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -43,6 +44,10 @@ dependencies {
     implementation("com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.3.0")
     
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.20")
+    testImplementation("org.mockito:mockito-core:4.11.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
 }
 
 // If you add vendor SDK AARs into modules/feature-printer/libs/, include them automatically

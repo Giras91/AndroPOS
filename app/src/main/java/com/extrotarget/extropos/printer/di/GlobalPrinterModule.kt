@@ -16,4 +16,16 @@ object GlobalPrinterModule {
     fun provideGlobalPrinterService(): GlobalPrinterService {
         return GlobalPrinterService()
     }
+
+    @Provides
+    @Singleton
+    fun providePrinterRepository(impl: com.extrotarget.extropos.printer.data.PrinterRepository): com.extrotarget.extropos.printer.data.IPrinterRepository = impl
+
+    @Provides
+    @Singleton
+    fun providePrinterLocalRepository(impl: com.extrotarget.extropos.printer.data.PrinterLocalRepository): com.extrotarget.extropos.printer.data.IPrinterLocalRepository = impl
+
+    @Provides
+    @Singleton
+    fun providePrinterScanner(impl: com.extrotarget.extropos.printer.data.PrinterScannerImpl): com.extrotarget.extropos.printer.data.IPrinterScanner = impl
 }

@@ -1,12 +1,6 @@
-package com.extrotarget.extropos.printer.data
+// This file intentionally left empty in the app module. The canonical
+// `IPrinterRepository` interface is defined in the `modules/feature-printer`
+// feature module to avoid duplicate class definitions across modules.
 
-import com.extrotarget.extropos.printer.domain.model.PrintJob
-
-/**
- * High-level repository for printing operations. Implementations should
- * coordinate between available printer SDK wrappers and fallbacks.
- */
-interface IPrinterRepository {
-    suspend fun print(job: PrintJob): Result<Boolean>
-    suspend fun availablePrinters(): List<String>
-}
+// If you need to reference the interface from app code, depend on the
+// feature-printer module's artifact instead of duplicating the type here.

@@ -30,16 +30,101 @@ class Migration3To4Test {
         // Create a v3 database file by executing SQL that represents the old schema
         val dbName = "migration-test.db"
         val db = helper.createDatabase(dbName, 3).apply {
-            // Create the old ticket_tenders table with integer tenderId and insert a row
+            // Load the v3 exported schema JSON (exported by Room during kapt)
+            val assetName = "com.extrotarget.extropos.data.local.AppDatabase/3.json"
+            val schemaJson = InstrumentationRegistry.getInstrumentation().context.assets.open(assetName).use { it.bufferedReader().use { r -> r.readText() } }
+            val root = org.json.JSONObject(schemaJson)
+            val database = root.getJSONObject("database")
+            val entities = database.getJSONArray("entities")
+
+            // Execute each createSql for the entities to recreate the v3 schema
+            for (i in 0 until entities.length()) {
+                val entity = entities.getJSONObject(i)
+                val tableName = entity.getString("tableName")
+                var createSql = entity.getString("createSql")
+                    // replace the `${TABLE_NAME}` placeholder from Room's exported SQL
+                    // Use Kotlin-escaped string "\${TABLE_NAME}" so the literal ${TABLE_NAME} is matched
+                    createSql = createSql.replace("\${TABLE_NAME}", tableName)
+                execSQL(createSql)
+            }
+
+                        // Ensure ticket_tenders exists in case the v3 exported schema did not include it
+                        // Use a safe CREATE TABLE IF NOT EXISTS for the v3 schema (tenderId as INTEGER)
+                        execSQL(
+                                """
+                                CREATE TABLE IF NOT EXISTS `ticket_tenders` (
+                                    `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                    `ticketId` INTEGER NOT NULL,
+                                    `tenderId` INTEGER NOT NULL,
+                                    `tenderType` TEXT NOT NULL,
+                                    `amount` INTEGER NOT NULL,
+                                    `status` INTEGER NOT NULL
+                                )
+                                """.trimIndent()
+                        )
+
+                                    // Ensure basic ticketing tables exist (tickets, ticket_items, tenders) so Room's
+                                    // migration validation has a consistent starting point when the exported schema
+                                    // didn't include ticketing entities.
+                                    execSQL(
+                                            """
+                                            CREATE TABLE IF NOT EXISTS `tickets` (
+                                                `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                `ticketType` INTEGER NOT NULL,
+                                                `state` INTEGER NOT NULL,
+                                                `total` INTEGER NOT NULL,
+                                                `createdAt` INTEGER NOT NULL,
+                                                `updatedAt` INTEGER NOT NULL,
+                                                `sessionId` INTEGER NOT NULL
+                                            )
+                                            """.trimIndent()
+                                    )
+
             execSQL(
                 """
-                CREATE TABLE IF NOT EXISTS `ticket_tenders` (
+                CREATE TABLE IF NOT EXISTS `ticket_items` (
                   `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                   `ticketId` INTEGER NOT NULL,
-                  `tenderId` INTEGER NOT NULL,
-                  `tenderType` TEXT NOT NULL,
+                  `itemId` INTEGER NOT NULL,
+                  `sku` TEXT,
+                  `quantity` INTEGER NOT NULL,
                   `amount` INTEGER NOT NULL,
-                  `status` INTEGER NOT NULL
+                  `cost` INTEGER NOT NULL,
+                  `itemDesc` TEXT NOT NULL,
+                  `state` INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+
+            execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `tenders` (
+                  `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                  `name` TEXT NOT NULL,
+                  `type` TEXT NOT NULL,
+                  `openDrawer` INTEGER NOT NULL,
+                  `printReceipt` INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+
+            execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `departments` (
+                  `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                  `name` TEXT NOT NULL,
+                  `taxGroupId` INTEGER
+                )
+                """.trimIndent()
+            )
+
+            execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `tax_groups` (
+                  `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                  `name` TEXT NOT NULL,
+                  `rate` REAL NOT NULL,
+                  `inclusive` INTEGER NOT NULL
                 )
                 """.trimIndent()
             )
