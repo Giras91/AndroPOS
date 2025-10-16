@@ -21,7 +21,11 @@ data class ProductEntity(
     val imageUrl: String? = null,
     val isActive: Boolean = true,
     val createdAt: Long = System.currentTimeMillis(),
-    val updatedAt: Long = System.currentTimeMillis()
+    val updatedAt: Long = System.currentTimeMillis(),
+    // New fields to match SQL schema
+    val costCents: Long? = null,        // Cost price in cents
+    val barcode: String? = null,        // Barcode for scanning
+    val metadata: String? = null        // JSON blob for extensions
 )
 
 /**
@@ -43,7 +47,11 @@ data class SaleEntity(
     val paymentMethod: String,       // CASH, CARD, EWALLET, etc.
     val paymentStatus: String = "PAID", // PAID, PENDING, REFUNDED
     val notes: String? = null,
-    val isTraining: Boolean = false  // True if created in training mode
+    val isTraining: Boolean = false, // True if created in training mode
+    // New fields to match SQL schema
+    val currency: String = "MYR",
+    val externalId: String? = null,  // Remote/external reference
+    val metadata: String? = null     // JSON blob
 )
 
 /**

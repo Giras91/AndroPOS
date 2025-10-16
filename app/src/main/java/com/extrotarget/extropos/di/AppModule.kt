@@ -161,4 +161,22 @@ object AppModule {
     fun providePrinterDao(db: com.extrotarget.extropos.data.local.AppDatabase): com.extrotarget.extropos.printer.data.PrinterDao {
         return db.printerDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideTableSectionDao(db: com.extrotarget.extropos.data.local.AppDatabase): com.extrotarget.extropos.data.local.dao.TableSectionDao {
+        return db.tableSectionDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideTableLayoutDao(db: com.extrotarget.extropos.data.local.AppDatabase): com.extrotarget.extropos.data.local.dao.TableLayoutDao {
+        return db.tableLayoutDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideReservationDao(db: com.extrotarget.extropos.data.local.AppDatabase): com.extrotarget.extropos.data.local.dao.ReservationDao {
+        return db.reservationDao()
+    }
 }

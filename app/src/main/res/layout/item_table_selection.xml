@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:gravity="center"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/tableNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            tools:text="T15" />
+
+        <TextView
+            android:id="@+id/tableCapacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4 seats"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="center"
+            tools:text="6 seats" />
+
+        <TextView
+            android:id="@+id/tableStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available"
+            android:textSize="10sp"
+            android:textColor="@android:color/holo_green_dark"
+            android:gravity="center"
+            tools:text="Occupied" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -48,6 +48,8 @@ class PrinterManagementFragment : Fragment() {
             val scanButton: Button = view.findViewById(com.extrotarget.extropos.printer.R.id.scanButton)
             val connectDefaultButton: Button = view.findViewById(com.extrotarget.extropos.printer.R.id.connectDefaultButton)
             val testPrintButton: Button = view.findViewById(com.extrotarget.extropos.printer.R.id.testPrintButton)
+            val addUsbPrinterButton: Button = view.findViewById(com.extrotarget.extropos.printer.R.id.addUsbPrinterButton)
+            val addBluetoothPrinterButton: Button = view.findViewById(com.extrotarget.extropos.printer.R.id.addBluetoothPrinterButton)
             val addNetworkPrinterButton: Button = view.findViewById(com.extrotarget.extropos.printer.R.id.addNetworkPrinterButton)
             val recycler: RecyclerView = view.findViewById(com.extrotarget.extropos.printer.R.id.printerList)
 
@@ -62,6 +64,14 @@ class PrinterManagementFragment : Fragment() {
             scanButton.setOnClickListener { vm.scanForPrinters() }
             connectDefaultButton.setOnClickListener { vm.connectToDefaultPrinter() }
             testPrintButton.setOnClickListener { vm.printTestReceipt() }
+            addUsbPrinterButton.setOnClickListener {
+                // Show USB printer selection dialog
+                showAddUsbPrinterDialog()
+            }
+            addBluetoothPrinterButton.setOnClickListener {
+                // Show Bluetooth printer selection dialog
+                showAddBluetoothPrinterDialog()
+            }
             addNetworkPrinterButton.setOnClickListener {
                 // Simple dialog to add network printer (name, ip, port) - minimal inputs
                 showAddNetworkPrinterDialog()
@@ -94,17 +104,147 @@ class PrinterManagementFragment : Fragment() {
             }
     }
 
+    private fun showAddUsbPrinterDialog() {
+        val ctx = requireContext()
+        val inflater = LayoutInflater.from(ctx)
+        val dialogView = inflater.inflate(com.extrotarget.extropos.printer.R.layout.dialog_add_usb_printer, null)
+
+        val printerList = dialogView.findViewById<android.widget.ListView>(com.extrotarget.extropos.printer.R.id.usbPrinterList)
+        val noPrintersText = dialogView.findViewById<android.widget.TextView>(com.extrotarget.extropos.printer.R.id.noUsbPrintersText)
+        val refreshButton = dialogView.findViewById<android.widget.Button>(com.extrotarget.extropos.printer.R.id.refreshUsbButton)
+
+        var usbPrinters = listOf<com.extrotarget.extropos.printer.domain.model.DetectedPrinter>()
+
+        fun updatePrinterList() {
+            lifecycleScope.launch {
+                try {
+                    usbPrinters = vm.printerServicePublic.scanAllPrinters().filter { it.connectionType == com.extrotarget.extropos.printer.domain.model.ConnectionType.USB }
+
+                    if (usbPrinters.isEmpty()) {
+                        printerList.visibility = android.view.View.GONE
+                        noPrintersText.visibility = android.view.View.VISIBLE
+                    } else {
+                        printerList.visibility = android.view.View.VISIBLE
+                        noPrintersText.visibility = android.view.View.GONE
+
+                        val adapter = android.widget.ArrayAdapter(
+                            ctx,
+                            android.R.layout.simple_list_item_single_choice,
+                            usbPrinters.map { it.name }
+                        )
+                        printerList.adapter = adapter
+                    }
+                } catch (e: Exception) {
+                    showMessage("Failed to scan USB printers: ${e.message}")
+                }
+            }
+        }
+
+        // Initial scan
+        updatePrinterList()
+
+        refreshButton.setOnClickListener {
+            updatePrinterList()
+        }
+
+        MaterialAlertDialogBuilder(ctx)
+            .setTitle("Add USB Printer")
+            .setView(dialogView)
+            .setPositiveButton("Add Selected") { _, _ ->
+                val selectedPosition = printerList.checkedItemPosition
+                if (selectedPosition >= 0 && selectedPosition < usbPrinters.size) {
+                    val selectedPrinter = usbPrinters[selectedPosition]
+                    val sdkId = selectedPrinter.compatibleSdks.firstOrNull()?.id ?: vm.sdks.value.firstOrNull()?.id ?: ""
+
+                    if (sdkId.isNotBlank()) {
+                        vm.addUsbPrinter(selectedPrinter, sdkId)
+                    } else {
+                        showMessage("No printer SDKs available")
+                    }
+                } else {
+                    showMessage("Please select a USB printer")
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun showAddBluetoothPrinterDialog() {
+        val ctx = requireContext()
+        val inflater = LayoutInflater.from(ctx)
+        val dialogView = inflater.inflate(com.extrotarget.extropos.printer.R.layout.dialog_add_bluetooth_printer, null)
+
+        val printerList = dialogView.findViewById<android.widget.ListView>(com.extrotarget.extropos.printer.R.id.bluetoothPrinterList)
+        val noPrintersText = dialogView.findViewById<android.widget.TextView>(com.extrotarget.extropos.printer.R.id.noBluetoothPrintersText)
+        val refreshButton = dialogView.findViewById<android.widget.Button>(com.extrotarget.extropos.printer.R.id.refreshBluetoothButton)
+
+        var bluetoothPrinters = listOf<com.extrotarget.extropos.printer.domain.model.DetectedPrinter>()
+
+        fun updatePrinterList() {
+            lifecycleScope.launch {
+                try {
+                    bluetoothPrinters = vm.printerServicePublic.scanAllPrinters().filter { it.connectionType == com.extrotarget.extropos.printer.domain.model.ConnectionType.BLUETOOTH }
+
+                    if (bluetoothPrinters.isEmpty()) {
+                        printerList.visibility = android.view.View.GONE
+                        noPrintersText.visibility = android.view.View.VISIBLE
+                    } else {
+                        printerList.visibility = android.view.View.VISIBLE
+                        noPrintersText.visibility = android.view.View.GONE
+
+                        val adapter = android.widget.ArrayAdapter(
+                            ctx,
+                            android.R.layout.simple_list_item_single_choice,
+                            bluetoothPrinters.map { it.name }
+                        )
+                        printerList.adapter = adapter
+                    }
+                } catch (e: Exception) {
+                    showMessage("Failed to scan Bluetooth printers: ${e.message}")
+                }
+            }
+        }
+
+        // Initial scan
+        updatePrinterList()
+
+        refreshButton.setOnClickListener {
+            updatePrinterList()
+        }
+
+        MaterialAlertDialogBuilder(ctx)
+            .setTitle("Add Bluetooth Printer")
+            .setView(dialogView)
+            .setPositiveButton("Add Selected") { _, _ ->
+                val selectedPosition = printerList.checkedItemPosition
+                if (selectedPosition >= 0 && selectedPosition < bluetoothPrinters.size) {
+                    val selectedPrinter = bluetoothPrinters[selectedPosition]
+                    val sdkId = selectedPrinter.compatibleSdks.firstOrNull()?.id ?: vm.sdks.value.firstOrNull()?.id ?: ""
+
+                    if (sdkId.isNotBlank()) {
+                        vm.addBluetoothPrinter(selectedPrinter, sdkId)
+                    } else {
+                        showMessage("No printer SDKs available")
+                    }
+                } else {
+                    showMessage("Please select a Bluetooth printer")
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
     private fun showAddNetworkPrinterDialog() {
         val ctx = requireContext()
         val inflater = LayoutInflater.from(ctx)
         val dialogView = inflater.inflate(com.extrotarget.extropos.printer.R.layout.dialog_add_network_printer, null)
 
-    val nameField = dialogView.findViewById<android.widget.EditText>(com.extrotarget.extropos.printer.R.id.inputName)
-    val ipField = dialogView.findViewById<android.widget.EditText>(com.extrotarget.extropos.printer.R.id.inputIp)
-    val portField = dialogView.findViewById<android.widget.EditText>(com.extrotarget.extropos.printer.R.id.inputPort)
-    val spinner = dialogView.findViewById<android.widget.Spinner>(com.extrotarget.extropos.printer.R.id.spinnerSdk)
-    val sdkDesc = dialogView.findViewById<android.widget.TextView>(com.extrotarget.extropos.printer.R.id.textSdkDescription)
-    val sdkHelp = dialogView.findViewById<android.widget.TextView>(com.extrotarget.extropos.printer.R.id.linkSdkHelp)
+        val nameField = dialogView.findViewById<android.widget.EditText>(com.extrotarget.extropos.printer.R.id.inputName)
+        val ipField = dialogView.findViewById<android.widget.EditText>(com.extrotarget.extropos.printer.R.id.inputIp)
+        val portField = dialogView.findViewById<android.widget.EditText>(com.extrotarget.extropos.printer.R.id.inputPort)
+        val spinner = dialogView.findViewById<android.widget.Spinner>(com.extrotarget.extropos.printer.R.id.spinnerSdk)
+        val sdkDesc = dialogView.findViewById<android.widget.TextView>(com.extrotarget.extropos.printer.R.id.textSdkDescription)
+        val sdkHelp = dialogView.findViewById<android.widget.TextView>(com.extrotarget.extropos.printer.R.id.linkSdkHelp)
 
         // Populate SDK spinner from ViewModel
         lifecycleScope.launch {

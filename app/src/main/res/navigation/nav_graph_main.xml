@@ -31,7 +31,17 @@
         android:id="@+id/posFragment"
         android:name="com.extrotarget.extropos.ui.pos.PosFragment"
         android:label="POS"
-        tools:layout="@layout/fragment_pos" />
+        tools:layout="@layout/fragment_pos">
+        <!-- Allow POS to accept an optional tableId to create an order on navigation -->
+        <argument
+            android:name="tableId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_pos_to_order_editor"
+            app:destination="@id/orderEditorFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/productDetailFragment"
@@ -63,6 +73,9 @@
         <action
             android:id="@+id/action_settings_to_reporting_settings"
             app:destination="@id/reportingSettingsFragment" />
+        <action
+            android:id="@+id/action_settings_to_table_management"
+            app:destination="@id/tableManagementFragment" />
     </fragment>
 
     <!-- Settings Sub-fragments -->
@@ -102,17 +115,80 @@
         android:label="Reporting Settings"
         tools:layout="@layout/fragment_reporting_settings" />
 
+    <fragment
+        android:id="@+id/tableManagementFragment"
+        android:name="com.extrotarget.extropos.ui.settings.table.TableManagementFragment"
+        android:label="Table Management"
+        tools:layout="@layout/fragment_table_management">
+        <action
+            android:id="@+id/action_table_management_to_table_configuration"
+            app:destination="@id/tableConfigurationFragment" />
+        <action
+            android:id="@+id/action_table_management_to_table_sections"
+            app:destination="@id/tableSectionsFragment" />
+        <action
+            android:id="@+id/action_table_management_to_table_layouts"
+            app:destination="@id/tableLayoutsFragment" />
+        <action
+            android:id="@+id/action_table_management_to_reservations"
+            app:destination="@id/reservationsFragment" />
+    </fragment>
+
     <!-- Tables placeholder fragment -->
     <fragment
         android:id="@+id/tablesFragment"
         android:name="com.extrotarget.extropos.ui.main.TablesFragment"
         android:label="Tables"
-        tools:layout="@layout/fragment_tables" />
+        tools:layout="@layout/fragment_tables">
+        <action
+            android:id="@+id/action_tables_to_pos"
+            app:destination="@id/posFragment" />
+        <action
+            android:id="@+id/action_tables_to_order_editor"
+            app:destination="@id/orderEditorFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/customersFragment"
         android:name="com.extrotarget.extropos.ui.customers.CustomersFragment"
         android:label="Customers"
         tools:layout="@layout/fragment_customers" />
+
+    <fragment
+        android:id="@+id/orderEditorFragment"
+        android:name="com.extrotarget.extropos.ui.order.OrderEditorFragment"
+        android:label="Order Editor"
+        tools:layout="@layout/fragment_order_editor">
+        <argument
+            android:name="orderId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <!-- Table Management Sub-fragments -->
+    <fragment
+        android:id="@+id/tableConfigurationFragment"
+        android:name="com.extrotarget.extropos.ui.settings.table.TableConfigurationFragment"
+        android:label="Table Configuration"
+        tools:layout="@layout/fragment_table_configuration" />
+
+    <fragment
+        android:id="@+id/tableSectionsFragment"
+        android:name="com.extrotarget.extropos.ui.settings.table.TableSectionsFragment"
+        android:label="Table Sections"
+        tools:layout="@layout/fragment_table_sections" />
+
+    <fragment
+        android:id="@+id/tableLayoutsFragment"
+        android:name="com.extrotarget.extropos.ui.settings.table.TableLayoutsFragment"
+        android:label="Table Layouts"
+        tools:layout="@layout/fragment_table_layouts" />
+
+    <fragment
+        android:id="@+id/reservationsFragment"
+        android:name="com.extrotarget.extropos.ui.settings.table.ReservationsFragment"
+        android:label="Reservations"
+        tools:layout="@layout/fragment_reservations" />
 
 </navigation>

@@ -42,10 +42,24 @@
         android:gravity="end">
 
         <Button
+            android:id="@+id/addUsbPrinterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add USB Printer" />
+
+        <Button
+            android:id="@+id/addBluetoothPrinterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Bluetooth Printer"
+            android:layout_marginStart="8dp" />
+
+        <Button
             android:id="@+id/addNetworkPrinterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Network Printer" />
+            android:text="Add Network Printer"
+            android:layout_marginStart="8dp" />
 
         <Button
             android:id="@+id/testPrintButton"

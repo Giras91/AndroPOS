@@ -19,6 +19,9 @@ class PrinterManagementViewModel @Inject constructor(
     private val printerService: PrinterService
 ) : ViewModel() {
 
+    // Expose printerService for fragment access
+    val printerServicePublic: PrinterService = printerService
+
     private val _printers = MutableStateFlow<List<DetectedPrinter>>(emptyList())
     val printers: StateFlow<List<DetectedPrinter>> = _printers.asStateFlow()
 
@@ -114,6 +117,30 @@ class PrinterManagementViewModel @Inject constructor(
                 _message.value = "Network printer added"
             } catch (e: Exception) {
                 _message.value = "Add network failed: ${e.message}"
+            }
+        }
+    }
+
+    fun addUsbPrinter(detectedPrinter: DetectedPrinter, sdkId: String, customName: String? = null) {
+        viewModelScope.launch {
+            try {
+                printerService.addUsbPrinter(detectedPrinter, sdkId, customName)
+                scanForPrinters()
+                _message.value = "USB printer added"
+            } catch (e: Exception) {
+                _message.value = "Add USB printer failed: ${e.message}"
+            }
+        }
+    }
+
+    fun addBluetoothPrinter(detectedPrinter: DetectedPrinter, sdkId: String, customName: String? = null) {
+        viewModelScope.launch {
+            try {
+                printerService.addBluetoothPrinter(detectedPrinter, sdkId, customName)
+                scanForPrinters()
+                _message.value = "Bluetooth printer added"
+            } catch (e: Exception) {
+                _message.value = "Add Bluetooth printer failed: ${e.message}"
             }
         }
     }

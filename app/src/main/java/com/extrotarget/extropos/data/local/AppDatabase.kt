@@ -19,6 +19,9 @@ import com.extrotarget.extropos.printer.data.PrinterDao
         OrderEntity::class,
         OrderItemEntity::class,
         TableEntity::class,
+        TableSectionEntity::class,
+        TableLayoutEntity::class,
+        ReservationEntity::class,
         // Ticketing entities
         com.extrotarget.extropos.data.local.entity.TicketEntity::class,
         com.extrotarget.extropos.data.local.entity.TicketItemEntity::class,
@@ -34,9 +37,17 @@ import com.extrotarget.extropos.printer.data.PrinterDao
         com.extrotarget.extropos.data.local.entity.ShiftEntity::class,
         PaymentEntity::class,
         // Printers (new)
-        com.extrotarget.extropos.printer.data.PrinterEntity::class
+        com.extrotarget.extropos.printer.data.PrinterEntity::class,
+        // New entities to match SQL schema
+        UserEntity::class,
+        InventoryEntity::class,
+        CartEntity::class,
+        CartItemEntity::class,
+        SyncStateEntity::class,
+        KeyValueEntity::class,
+        LocalChangeEntity::class
     ],
-    version = 5,
+    version = 8, // Updated version for table sections and layouts
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -46,10 +57,20 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun orderDao(): OrderDao
     abstract fun orderItemDao(): OrderItemDao
     abstract fun tableDao(): TableDao
+    abstract fun tableSectionDao(): TableSectionDao
+    abstract fun tableLayoutDao(): TableLayoutDao
+    abstract fun reservationDao(): ReservationDao
     abstract fun shiftDao(): com.extrotarget.extropos.data.local.dao.ShiftDao
     abstract fun ticketDao(): com.extrotarget.extropos.data.local.room.RoomTicketDao
     // ...existing code...
     abstract fun printerDao(): com.extrotarget.extropos.printer.data.PrinterDao
+    // New DAOs to match SQL schema
+    abstract fun userDao(): UserDao
+    abstract fun inventoryDao(): InventoryDao
+    abstract fun cartDao(): CartDao
+    abstract fun syncStateDao(): SyncStateDao
+    abstract fun keyValueDao(): KeyValueDao
+    abstract fun localChangeDao(): LocalChangeDao
 
     companion object {
         private const val DB_NAME = "extropos.db"
@@ -60,7 +81,7 @@ abstract class AppDatabase : RoomDatabase() {
             // when an unknown/unsupported migration is encountered.
             // Replace with proper migrations before shipping to production.
             return Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DB_NAME)
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
                 .fallbackToDestructiveMigration()
                 .build()
         }
@@ -376,7 +397,199 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        // Migration from version 5 -> 6: add new tables and columns to match SQL schema
+        private val MIGRATION_5_6 = object : Migration(5, 6) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                // Add missing columns to existing tables
+                db.execSQL("ALTER TABLE products ADD COLUMN costCents INTEGER")
+                db.execSQL("ALTER TABLE products ADD COLUMN barcode TEXT")
+                db.execSQL("ALTER TABLE products ADD COLUMN metadata TEXT")
+
+                db.execSQL("ALTER TABLE categories ADD COLUMN parentId TEXT")
+                db.execSQL("ALTER TABLE categories ADD COLUMN createdAt INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE categories ADD COLUMN updatedAt INTEGER NOT NULL DEFAULT 0")
+
+                db.execSQL("ALTER TABLE orders ADD COLUMN currency TEXT NOT NULL DEFAULT 'MYR'")
+                db.execSQL("ALTER TABLE orders ADD COLUMN externalId TEXT")
+                db.execSQL("ALTER TABLE orders ADD COLUMN metadata TEXT")
+
+                db.execSQL("ALTER TABLE sales ADD COLUMN currency TEXT NOT NULL DEFAULT 'MYR'")
+                db.execSQL("ALTER TABLE sales ADD COLUMN externalId TEXT")
+                db.execSQL("ALTER TABLE sales ADD COLUMN metadata TEXT")
+
+                // Create new tables
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS users (
+                        id TEXT PRIMARY KEY NOT NULL,
+                        username TEXT NOT NULL,
+                        displayName TEXT,
+                        passwordHash TEXT NOT NULL,
+                        role TEXT NOT NULL,
+                        isActive INTEGER NOT NULL DEFAULT 1,
+                        createdAt INTEGER NOT NULL,
+                        updatedAt INTEGER NOT NULL
+                    )
+                """)
+                db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS index_users_username ON users(username)")
+
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS inventory (
+                        productId TEXT PRIMARY KEY NOT NULL,
+                        quantity INTEGER NOT NULL DEFAULT 0,
+                        reserved INTEGER NOT NULL DEFAULT 0,
+                        updatedAt INTEGER NOT NULL
+                    )
+                """)
+
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS carts (
+                        id TEXT PRIMARY KEY NOT NULL,
+                        userId TEXT,
+                        createdAt INTEGER NOT NULL,
+                        updatedAt INTEGER NOT NULL
+                    )
+                """)
+
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS cart_items (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        cartId TEXT NOT NULL,
+                        productId TEXT,
+                        name TEXT NOT NULL,
+                        sku TEXT,
+                        quantity INTEGER NOT NULL DEFAULT 1,
+                        priceCents INTEGER NOT NULL,
+                        createdAt INTEGER NOT NULL
+                    )
+                """)
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_cart_items_cartId ON cart_items(cartId)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_cart_items_productId ON cart_items(productId)")
+
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS sync_states (
+                        entity TEXT PRIMARY KEY NOT NULL,
+                        lastSyncedAt INTEGER NOT NULL
+                    )
+                """)
+
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS kv_store (
+                        key TEXT PRIMARY KEY NOT NULL,
+                        value TEXT,
+                        updatedAt INTEGER NOT NULL
+                    )
+                """)
+
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS local_changes (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        entity TEXT NOT NULL,
+                        entityId TEXT,
+                        operation TEXT NOT NULL,
+                        payload TEXT,
+                        createdAt INTEGER NOT NULL
+                    )
+                """)
+            }
+        }
+
+        // Migration from version 6 -> 7: Enhanced table management and reservations
+        private val MIGRATION_6_7 = object : Migration(6, 7) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                // Add new columns to tables table
+                db.execSQL("ALTER TABLE tables ADD COLUMN section TEXT")
+                db.execSQL("ALTER TABLE tables ADD COLUMN tableType TEXT")
+                db.execSQL("ALTER TABLE tables ADD COLUMN positionX REAL")
+                db.execSQL("ALTER TABLE tables ADD COLUMN positionY REAL")
+                db.execSQL("ALTER TABLE tables ADD COLUMN width REAL")
+                db.execSQL("ALTER TABLE tables ADD COLUMN height REAL")
+                db.execSQL("ALTER TABLE tables ADD COLUMN rotation REAL DEFAULT 0.0")
+                db.execSQL("ALTER TABLE tables ADD COLUMN assignedServerId TEXT")
+                db.execSQL("ALTER TABLE tables ADD COLUMN lastServedAt INTEGER")
+                db.execSQL("ALTER TABLE tables ADD COLUMN estimatedOccupancyTime INTEGER")
+                db.execSQL("ALTER TABLE tables ADD COLUMN specialNotes TEXT")
+                db.execSQL("ALTER TABLE tables ADD COLUMN isReservable INTEGER DEFAULT 1")
+                db.execSQL("ALTER TABLE tables ADD COLUMN minimumSpendCents INTEGER")
+                db.execSQL("ALTER TABLE tables ADD COLUMN depositRequiredCents INTEGER")
+                db.execSQL("ALTER TABLE tables ADD COLUMN createdAt INTEGER DEFAULT 0")
+                db.execSQL("ALTER TABLE tables ADD COLUMN updatedAt INTEGER DEFAULT 0")
+                db.execSQL("ALTER TABLE tables ADD COLUMN isActive INTEGER DEFAULT 1")
+
+                // Update existing records with default timestamps
+                val currentTime = System.currentTimeMillis()
+                db.execSQL("UPDATE tables SET createdAt = $currentTime, updatedAt = $currentTime WHERE createdAt = 0")
+
+                // Create table_reservations table
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS table_reservations (
+                        id TEXT PRIMARY KEY NOT NULL,
+                        tableId TEXT NOT NULL,
+                        customerName TEXT NOT NULL,
+                        customerPhone TEXT,
+                        customerEmail TEXT,
+                        partySize INTEGER NOT NULL,
+                        reservationDateTime INTEGER NOT NULL,
+                        durationMinutes INTEGER NOT NULL DEFAULT 120,
+                        specialRequests TEXT,
+                        status TEXT NOT NULL,
+                        createdBy TEXT,
+                        depositAmountCents INTEGER,
+                        depositPaid INTEGER NOT NULL DEFAULT 0,
+                        notes TEXT,
+                        createdAt INTEGER NOT NULL DEFAULT 0,
+                        updatedAt INTEGER NOT NULL DEFAULT 0,
+                        FOREIGN KEY(tableId) REFERENCES tables(id) ON DELETE CASCADE
+                    )
+                """)
+
+                // Create indices for reservations
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_table_reservations_tableId ON table_reservations(tableId)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_table_reservations_reservationDateTime ON table_reservations(reservationDateTime)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_table_reservations_status ON table_reservations(status)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_table_reservations_customerPhone ON table_reservations(customerPhone)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_table_reservations_customerEmail ON table_reservations(customerEmail)")
+            }
+        }
+
+        // Migration from version 7 -> 8: add table sections and layouts
+        private val MIGRATION_7_8 = object : Migration(7, 8) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                // Create table_sections table
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS table_sections (
+                        id TEXT PRIMARY KEY NOT NULL,
+                        name TEXT NOT NULL,
+                        description TEXT,
+                        color TEXT,
+                        displayOrder INTEGER NOT NULL DEFAULT 0,
+                        isActive INTEGER NOT NULL DEFAULT 1,
+                        createdAt INTEGER NOT NULL,
+                        updatedAt INTEGER NOT NULL
+                    )
+                """)
+
+                // Create table_layouts table
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS table_layouts (
+                        id TEXT PRIMARY KEY NOT NULL,
+                        name TEXT NOT NULL,
+                        description TEXT,
+                        isDefault INTEGER NOT NULL DEFAULT 0,
+                        layoutData TEXT,
+                        createdBy TEXT,
+                        createdAt INTEGER NOT NULL,
+                        updatedAt INTEGER NOT NULL
+                    )
+                """)
+
+                // Create indices
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_table_sections_displayOrder ON table_sections(displayOrder)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_table_sections_isActive ON table_sections(isActive)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_table_layouts_isDefault ON table_layouts(isDefault)")
+            }
+        }
+
         // Publicly expose migrations for use in tests
-        val ALL_MIGRATIONS = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+        val ALL_MIGRATIONS = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
     }
 }

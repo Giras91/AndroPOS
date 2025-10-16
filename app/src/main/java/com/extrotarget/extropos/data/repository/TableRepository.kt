@@ -37,6 +37,14 @@ class TableRepository @Inject constructor(
         return tableDao.getOccupied().map { it.toDomain() }
     }
 
+    override suspend fun upsertTable(table: Table) {
+        tableDao.upsert(table.toEntity())
+    }
+
+    override suspend fun deleteTable(tableId: String) {
+        tableDao.delete(tableId)
+    }
+
     // Map TableEntity -> Table (convert number:String -> Int)
     private fun TableEntity.toDomain(): Table {
         val num = number.toIntOrNull() ?: 0
@@ -45,7 +53,27 @@ class TableRepository @Inject constructor(
             number = num,
             capacity = capacity,
             status = try { TableStatus.valueOf(status) } catch (e: Exception) { TableStatus.AVAILABLE },
-            currentOrderId = currentOrderId
+            currentOrderId = currentOrderId,
+            section = section,
+            tableType = tableType,
+            positionX = positionX,
+            positionY = positionY,
+            width = width,
+            height = height,
+            rotation = rotation ?: 0f,
+            assignedServerId = assignedServerId,
+            lastServedAt = lastServedAt,
+            estimatedOccupancyTime = estimatedOccupancyTime,
+            specialNotes = specialNotes,
+            isReservable = isReservable,
+            minimumSpendCents = minimumSpendCents,
+            depositRequiredCents = depositRequiredCents,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+            isActive = isActive,
+            isSmokingAllowed = isSmokingAllowed,
+            isAccessible = isAccessible,
+            hasPowerOutlet = hasPowerOutlet
         )
     }
 
@@ -56,7 +84,27 @@ class TableRepository @Inject constructor(
             number = number.toString(),
             capacity = capacity,
             status = status.name,
-            currentOrderId = currentOrderId
+            currentOrderId = currentOrderId,
+            section = section,
+            tableType = tableType,
+            positionX = positionX,
+            positionY = positionY,
+            width = width,
+            height = height,
+            rotation = rotation,
+            assignedServerId = assignedServerId,
+            lastServedAt = lastServedAt,
+            estimatedOccupancyTime = estimatedOccupancyTime,
+            specialNotes = specialNotes,
+            isReservable = isReservable,
+            minimumSpendCents = minimumSpendCents,
+            depositRequiredCents = depositRequiredCents,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+            isActive = isActive,
+            isSmokingAllowed = isSmokingAllowed,
+            isAccessible = isAccessible,
+            hasPowerOutlet = hasPowerOutlet
         )
     }
 }

@@ -69,6 +69,11 @@ class SettingsFragment : Fragment() {
         binding.reportingSettingsCard.setOnClickListener {
             findNavController().navigate(R.id.action_settings_to_reporting_settings)
         }
+
+        // Table Management
+        binding.tableManagementCard.setOnClickListener {
+            findNavController().navigate(R.id.action_settings_to_table_management)
+        }
     }
 
     override fun onDestroyView() {

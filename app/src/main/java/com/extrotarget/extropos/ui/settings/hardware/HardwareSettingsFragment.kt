@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.extrotarget.extropos.R
 import com.extrotarget.extropos.data.model.ReceiptSettings
 import com.extrotarget.extropos.databinding.FragmentHardwareSettingsBinding
-import com.extrotarget.extropos.printer.service.GlobalPrinterService
+// import com.extrotarget.extropos.printer.service.GlobalPrinterService // TODO: migrate to feature-printer module
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -25,8 +25,8 @@ class HardwareSettingsFragment : Fragment() {
     private var _binding: FragmentHardwareSettingsBinding? = null
     private val binding get() = _binding!!
     
-    @Inject
-    lateinit var printerService: GlobalPrinterService
+    // @Inject
+    // lateinit var printerService: GlobalPrinterService // TODO: migrate to feature-printer module
     
     private val viewModel: HardwareSettingsViewModel by viewModels()
 
@@ -169,6 +169,8 @@ class HardwareSettingsFragment : Fragment() {
     }
 
     private fun printSampleReceipt() {
+        // TODO: Migrate to feature-printer module's PrinterService
+        /*
         if (!printerService.isConnected()) {
             Toast.makeText(requireContext(), "Printer not connected. Please connect printer first.", Toast.LENGTH_LONG).show()
             return
@@ -184,6 +186,8 @@ class HardwareSettingsFragment : Fragment() {
                 Toast.makeText(requireContext(), "Failed to print sample receipt", Toast.LENGTH_SHORT).show()
             }
         }
+        */
+        Toast.makeText(requireContext(), "Print feature migrated to Printer Management screen", Toast.LENGTH_SHORT).show()
     }
 
     private fun generateSampleReceiptText(settings: ReceiptSettings): String {

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,12 +10,29 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tables (placeholder)"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Select Table"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:textColor="@android:color/black" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/sectionSpinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This screen will host table/floorplan features later."/>
+        android:layout_marginBottom="16dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:padding="12dp"
+        tools:listitem="@android:layout/simple_spinner_item" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tablesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="4"
+        tools:itemCount="8"
+        tools:listitem="@layout/item_table_selection" />
 
 </LinearLayout>

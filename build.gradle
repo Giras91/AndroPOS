@@ -9,6 +9,8 @@ buildscript {
     classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0'
     // Hilt Gradle plugin
     classpath 'com.google.dagger:hilt-android-gradle-plugin:2.54'
+    // Navigation Safe Args plugin
+    classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.6.0"
     }
 }
 

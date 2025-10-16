@@ -2,8 +2,9 @@ package com.extrotarget.extropos.ui.settings.printer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.extrotarget.extropos.printer.data.IPrinterLocalRepository
-import com.extrotarget.extropos.printer.data.IPrinterScanner
+// TODO: Migrate to feature-printer module
+// import com.extrotarget.extropos.printer.data.IPrinterLocalRepository
+// import com.extrotarget.extropos.printer.data.IPrinterScanner
 import com.extrotarget.extropos.printer.data.PrinterEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,8 +14,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PrinterSetupViewModel @Inject constructor(
-    private val localRepo: IPrinterLocalRepository,
-    private val scanner: IPrinterScanner
+    // TODO: Migrate to feature-printer module dependencies
+    // private val localRepo: IPrinterLocalRepository,
+    // private val scanner: IPrinterScanner
 ) : ViewModel() {
 
     private val _printers = MutableStateFlow<List<Printer>>(emptyList())
@@ -30,6 +32,8 @@ class PrinterSetupViewModel @Inject constructor(
     val error: StateFlow<String?> = _error
 
     init {
+        // TODO: Migrate to feature-printer module
+        /*
         // Observe DB-backed printers and update UI state
         viewModelScope.launch {
             try {
@@ -40,9 +44,13 @@ class PrinterSetupViewModel @Inject constructor(
                 _error.value = "Failed to observe printers: ${e.message}"
             }
         }
+        */
+        _error.value = "This screen is deprecated. Use Printer Management in main menu."
     }
 
     fun loadPrinters() {
+        // TODO: Migrate to feature-printer module
+        /*
         viewModelScope.launch {
             try {
                 val list = localRepo.getAll()
@@ -51,9 +59,12 @@ class PrinterSetupViewModel @Inject constructor(
                 _error.value = "Failed to load printers: ${e.message}"
             }
         }
+        */
     }
 
     fun scanForPrinters() {
+        // TODO: Migrate to feature-printer module
+        /*
         viewModelScope.launch {
             _isScanning.value = true
             _error.value = null
@@ -73,9 +84,12 @@ class PrinterSetupViewModel @Inject constructor(
                 _isScanning.value = false
             }
         }
+        */
     }
 
     fun scanBluetoothPrinters() {
+        // TODO: Migrate to feature-printer module
+        /*
         viewModelScope.launch {
             _isScanning.value = true
             _error.value = null
@@ -89,9 +103,12 @@ class PrinterSetupViewModel @Inject constructor(
                 _isScanning.value = false
             }
         }
+        */
     }
 
     fun scanUsbPrinters() {
+        // TODO: Migrate to feature-printer module
+        /*
         viewModelScope.launch {
             _isScanning.value = true
             _error.value = null
@@ -105,9 +122,12 @@ class PrinterSetupViewModel @Inject constructor(
                 _isScanning.value = false
             }
         }
+        */
     }
 
     fun scanNetworkPrinters() {
+        // TODO: Migrate to feature-printer module
+        /*
         viewModelScope.launch {
             _isScanning.value = true
             _error.value = null
@@ -121,10 +141,13 @@ class PrinterSetupViewModel @Inject constructor(
                 _isScanning.value = false
             }
         }
+        */
     }
 
 
     fun addPrinter(name: String, type: PrinterType, connectionType: ConnectionType, address: String, port: Int? = null) {
+        // TODO: Migrate to feature-printer module
+        /*
         viewModelScope.launch {
             val newPrinter = Printer(
                 id = System.currentTimeMillis().toString(),
@@ -143,9 +166,12 @@ class PrinterSetupViewModel @Inject constructor(
                 _error.value = "Failed to add printer: ${e.message}"
             }
         }
+        */
     }
 
     fun deletePrinter(printer: Printer) {
+        // TODO: Migrate to feature-printer module
+        /*
         viewModelScope.launch {
             try {
                 localRepo.deleteById(printer.id)
@@ -153,9 +179,12 @@ class PrinterSetupViewModel @Inject constructor(
                 _error.value = "Failed to delete printer: ${e.message}"
             }
         }
+        */
     }
 
     fun setDefaultPrinter(printer: Printer) {
+        // TODO: Migrate to feature-printer module
+        /*
         viewModelScope.launch {
             try {
                 localRepo.setDefault(printer.id)
@@ -163,6 +192,7 @@ class PrinterSetupViewModel @Inject constructor(
                 _error.value = "Failed to set default printer: ${e.message}"
             }
         }
+        */
     }
 
     fun testPrint(printer: Printer) {
@@ -177,6 +207,8 @@ class PrinterSetupViewModel @Inject constructor(
     }
 
     // --- Converters between UI model and entity ---
+    // TODO: Migrate to feature-printer module
+    /*
     private fun Printer.toEntity(): PrinterEntity {
         return PrinterEntity(
             id = this.id,
@@ -204,4 +236,5 @@ class PrinterSetupViewModel @Inject constructor(
             isConnected = this.isConnected
         )
     }
+    */
 }

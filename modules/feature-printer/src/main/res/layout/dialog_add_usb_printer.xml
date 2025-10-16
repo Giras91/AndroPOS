@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select USB Printer"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Available USB printers:"
+        android:textSize="14sp"
+        android:paddingBottom="8dp" />
+
+    <ListView
+        android:id="@+id/usbPrinterList"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:choiceMode="singleChoice" />
+
+    <TextView
+        android:id="@+id/noUsbPrintersText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No USB printers detected. Make sure your printer is connected and powered on."
+        android:textSize="14sp"
+        android:textColor="#666"
+        android:paddingVertical="16dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/refreshUsbButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Refresh USB Devices"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

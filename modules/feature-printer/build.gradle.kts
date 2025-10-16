@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("plugin.serialization") version "1.9.20"
     id("org.jetbrains.kotlin.kapt")
     id("dagger.hilt.android.plugin")
 }
@@ -42,6 +43,11 @@ dependencies {
     
     // DantSu ESC/POS Printer SDK
     implementation("com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.3.0")
+
+    // Room (entities/dao used by app module)
+    implementation("androidx.room:room-runtime:2.7.0")
+    implementation("androidx.room:room-ktx:2.7.0")
+    kapt("androidx.room:room-compiler:2.7.0")
     
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")

@@ -218,11 +218,55 @@ open class PrinterService @Inject constructor(
     }
 
     /**
+     * Create a USB printer configuration
+     */
+    suspend fun addUsbPrinter(
+        detectedPrinter: DetectedPrinter,
+        sdkId: String,
+        customName: String? = null
+    ): String {
+        val config = PrinterConfig(
+            id = java.util.UUID.randomUUID().toString(),
+            name = customName?.takeIf { it.isNotBlank() } ?: detectedPrinter.name,
+            connectionType = ConnectionType.USB,
+            address = detectedPrinter.address,
+            port = null,
+            selectedSdk = sdkId,
+            isDefault = false
+        )
+
+        printerConfigService.saveConfig(config)
+        return config.id
+    }
+
+    /**
+     * Create a Bluetooth printer configuration
+     */
+    suspend fun addBluetoothPrinter(
+        detectedPrinter: DetectedPrinter,
+        sdkId: String,
+        customName: String? = null
+    ): String {
+        val config = PrinterConfig(
+            id = java.util.UUID.randomUUID().toString(),
+            name = customName?.takeIf { it.isNotBlank() } ?: detectedPrinter.name,
+            connectionType = ConnectionType.BLUETOOTH,
+            address = detectedPrinter.address,
+            port = null,
+            selectedSdk = sdkId,
+            isDefault = false
+        )
+
+        printerConfigService.saveConfig(config)
+        return config.id
+    }
+
+    /**
      * Create a network printer configuration
      */
     suspend fun addNetworkPrinter(
         name: String,
-        ipAddress: String,
+        ip: String,
         port: Int,
         sdkId: String
     ): String {
@@ -230,12 +274,12 @@ open class PrinterService @Inject constructor(
             id = java.util.UUID.randomUUID().toString(),
             name = name,
             connectionType = ConnectionType.NETWORK,
-            address = ipAddress,
+            address = ip,
             port = port,
             selectedSdk = sdkId,
             isDefault = false
         )
-        
+
         printerConfigService.saveConfig(config)
         return config.id
     }

@@ -9,7 +9,11 @@ data class CategoryEntity(
     val name: String,
     val description: String?,
     val displayOrder: Int = 0,
-    val isActive: Boolean = true
+    val isActive: Boolean = true,
+    // New fields to match SQL schema
+    val parentId: String? = null,        // For nested categories
+    val createdAt: Long = System.currentTimeMillis(),
+    val updatedAt: Long = System.currentTimeMillis()
 )
 
 @Entity(tableName = "menu_items")
@@ -38,7 +42,11 @@ data class OrderEntity(
     val totalCents: Long = 0,
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis(),
-    val notes: String?
+    val notes: String?,
+    // New fields to match SQL schema
+    val currency: String = "MYR",
+    val externalId: String? = null,      // Remote/external reference
+    val metadata: String? = null         // JSON blob
 )
 
 @Entity(tableName = "order_items")
@@ -54,11 +62,49 @@ data class OrderItemEntity(
     val status: String // OrderItemStatus enum name
 )
 
-@Entity(tableName = "tables")
-data class TableEntity(
+@Entity(tableName = "table_sections")
+data class TableSectionEntity(
     @PrimaryKey val id: String,
-    val number: String,
-    val capacity: Int,
-    val status: String, // TableStatus enum name
-    val currentOrderId: String?
+    val name: String, // Section name (e.g., "Main Dining", "Patio", "Bar")
+    val description: String? = null,
+    val color: String? = null, // Color code for UI representation
+    val displayOrder: Int = 0,
+    val isActive: Boolean = true,
+    val createdAt: Long = System.currentTimeMillis(),
+    val updatedAt: Long = System.currentTimeMillis()
+)
+
+@Entity(tableName = "table_layouts")
+data class TableLayoutEntity(
+    @PrimaryKey val id: String,
+    val name: String, // Layout name (e.g., "Weekend Setup", "Private Event")
+    val description: String? = null,
+    val isDefault: Boolean = false,
+    val layoutData: String? = null, // JSON string containing layout configuration
+    val createdBy: String? = null, // User who created the layout
+    val createdAt: Long = System.currentTimeMillis(),
+    val updatedAt: Long = System.currentTimeMillis()
+)
+
+@Entity(tableName = "table_reservations")
+data class ReservationEntity(
+    @PrimaryKey val id: String,
+    val tableId: String,
+    val tableNumber: String, // For display purposes
+    val customerName: String,
+    val customerPhone: String?,
+    val customerEmail: String?,
+    val partySize: Int,
+    val reservationDateTime: Long,
+    val durationMinutes: Int = 120, // Default 2 hours
+    val status: String, // CONFIRMED, PENDING, CANCELLED, COMPLETED, NO_SHOW, WAITLIST, SEATED
+    val specialRequests: String?,
+    val depositRequired: Boolean = false,
+    val depositAmountCents: Long = 0,
+    val depositPaid: Boolean = false,
+    val notes: String?,
+    val createdBy: String? = null,
+    val assignedServerId: String? = null,
+    val createdAt: Long = System.currentTimeMillis(),
+    val updatedAt: Long = System.currentTimeMillis()
 )

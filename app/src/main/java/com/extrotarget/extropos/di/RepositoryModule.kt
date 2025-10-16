@@ -37,4 +37,16 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindTicketRepository(impl: TicketRepository): ITicketRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindTableSectionRepository(impl: TableSectionRepository): ITableSectionRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindTableLayoutRepository(impl: TableLayoutRepository): ITableLayoutRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindReservationRepository(impl: ReservationRepository): IReservationRepository
 }

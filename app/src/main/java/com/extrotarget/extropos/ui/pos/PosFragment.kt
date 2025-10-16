@@ -21,6 +21,8 @@ import com.extrotarget.extropos.ui.order.OrderViewModel
 import com.extrotarget.extropos.ui.product.ProductsAdapter
 import com.extrotarget.extropos.ui.product.ProductsGridFragment
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.navigation.fragment.findNavController
+import com.extrotarget.extropos.ui.pos.PosFragmentDirections
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import android.util.Log
@@ -52,6 +54,18 @@ class PosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // If navigation provided a tableId, create a new order for that table
+        try {
+            val args = requireArguments()
+            val tableIdArg = if (args.containsKey("tableId")) args.getString("tableId") else null
+            if (!tableIdArg.isNullOrBlank()) {
+                // Create order immediately for the selected table
+                orderViewModel.createNewOrder(tableIdArg)
+            }
+        } catch (e: Exception) {
+            // no-op: fragment may be created without nav args
+        }
 
         // Debug log to prove PosFragment was instantiated and key views exist
         try {
@@ -160,6 +174,47 @@ class PosFragment : Fragment() {
                 // show minimal feedback (title in subtotal)
                 if (order != null) {
                     subtotalView.text = "Order: ${order.id}"
+                }
+            }
+        }
+
+        // When an order is created from table selection, bring attention to cart/order editor
+        lifecycleScope.launch {
+            orderViewModel.currentOrder.collectLatest { order ->
+                if (order != null) {
+                    try {
+                        // Update cart title to show order id and table if available
+                        val titleView = view?.findViewById<android.widget.TextView?>(R.id.pos_cart_title)
+                        titleView?.text = "Order: ${order.id}"
+
+                        // Scroll cart recycler to top to show items (if any)
+                        val recycler = view?.findViewById<androidx.recyclerview.widget.RecyclerView?>(R.id.pos_cart_recycler)
+                        recycler?.post {
+                            recycler.scrollToPosition(0)
+                        }
+
+                        // Give focus to checkout button to prompt next action
+                        val checkout = view?.findViewById<com.google.android.material.button.MaterialButton?>(R.id.pos_checkout_button)
+                        checkout?.requestFocus()
+
+                        // Show a Snackbar offering to open the editor
+                        try {
+                            val root = requireActivity().findViewById(android.R.id.content) as? android.view.View
+                            root?.let { r ->
+                                com.google.android.material.snackbar.Snackbar.make(r, "Order ${order.id} created", com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
+                                    .setAction("Open") {
+                                        // Navigate to order editor
+                                        // Build the generated action and set the orderId
+                                        val action = PosFragmentDirections.actionPosToOrderEditor().setOrderId(order.id)
+                                        findNavController().navigate(action)
+                                    }
+                                    .show()
+                            }
+                        } catch (_: Exception) {
+                        }
+                    } catch (e: Exception) {
+                        // ignore UI focus failures
+                    }
                 }
             }
         }

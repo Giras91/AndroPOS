@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ExtroPOS</string>
+    <string name="table_layouts">Table Layouts</string>
+    <string name="empty_table_layouts">No layouts yet</string>
+    <string name="label_default">Default</string>
+    <string name="action_set_default">Set default</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_description">Description</string>
+    <string name="hint_layout_json">Layout JSON</string>
+    <string name="label_set_as_default">Set as default</string>
 </resources>

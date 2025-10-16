@@ -282,7 +282,16 @@ class InMemoryTableDao : com.extrotarget.extropos.data.local.dao.TableDao {
 
     override suspend fun getOccupied(): List<com.extrotarget.extropos.data.local.entity.TableEntity> = tables.filter { it.status == "OCCUPIED" }
 
+    override suspend fun getReserved(): List<com.extrotarget.extropos.data.local.entity.TableEntity> = tables.filter { it.status == "RESERVED" }
+
     override suspend fun upsert(vararg tables: com.extrotarget.extropos.data.local.entity.TableEntity) {
+        tables.forEach { t ->
+            val idx = this.tables.indexOfFirst { it.id == t.id }
+            if (idx >= 0) this.tables[idx] = t else this.tables.add(t)
+        }
+    }
+
+    override suspend fun upsert(tables: List<com.extrotarget.extropos.data.local.entity.TableEntity>) {
         tables.forEach { t ->
             val idx = this.tables.indexOfFirst { it.id == t.id }
             if (idx >= 0) this.tables[idx] = t else this.tables.add(t)
@@ -298,6 +307,58 @@ class InMemoryTableDao : com.extrotarget.extropos.data.local.dao.TableDao {
         val idx = tables.indexOfFirst { it.id == tableId }
         if (idx >= 0) tables[idx] = tables[idx].copy(currentOrderId = orderId)
     }
+
+    override suspend fun clearOrder(tableId: String) {
+        val idx = tables.indexOfFirst { it.id == tableId }
+        if (idx >= 0) tables[idx] = tables[idx].copy(currentOrderId = null)
+    }
+
+    override suspend fun delete(tableId: String) {
+        tables.removeIf { it.id == tableId }
+    }
+
+    override suspend fun delete(table: com.extrotarget.extropos.data.local.entity.TableEntity) {
+        tables.remove(table)
+    }
+
+    override suspend fun getBySection(sectionId: String): List<com.extrotarget.extropos.data.local.entity.TableEntity> =
+        tables.filter { it.section == sectionId && it.isActive }
+
+    override suspend fun getByType(tableType: String): List<com.extrotarget.extropos.data.local.entity.TableEntity> =
+        tables.filter { it.tableType == tableType && it.isActive }
+
+    override suspend fun getByCapacityRange(minCapacity: Int, maxCapacity: Int): List<com.extrotarget.extropos.data.local.entity.TableEntity> =
+        tables.filter { it.capacity in minCapacity..maxCapacity && it.isActive }
+
+    override suspend fun getBySmokingPreference(smokingAllowed: Boolean): List<com.extrotarget.extropos.data.local.entity.TableEntity> =
+        tables.filter { it.isSmokingAllowed == smokingAllowed && it.isActive }
+
+    override suspend fun getAccessibleTables(): List<com.extrotarget.extropos.data.local.entity.TableEntity> =
+        tables.filter { it.isAccessible && it.isActive }
+
+    override suspend fun getTablesWithPowerOutlets(): List<com.extrotarget.extropos.data.local.entity.TableEntity> =
+        tables.filter { it.hasPowerOutlet && it.isActive }
+
+    override suspend fun getByMinimumPriority(minPriority: Int): List<com.extrotarget.extropos.data.local.entity.TableEntity> =
+        tables.filter { it.priority >= minPriority && it.isActive }.sortedByDescending { it.priority }
+
+    override suspend fun getAllSections(): List<String> =
+        tables.filter { it.section != null && it.isActive }.mapNotNull { it.section }.distinct()
+
+    override suspend fun getAllTableTypes(): List<String> =
+        tables.filter { it.tableType != null && it.isActive }.mapNotNull { it.tableType }.distinct()
+
+    override suspend fun findAvailableTablesForTimeSlot(startTime: Long, endTime: Long, partySize: Int): List<com.extrotarget.extropos.data.local.entity.TableEntity> =
+        tables.filter { it.status == "AVAILABLE" && it.capacity >= partySize && it.isActive }
+            .sortedByDescending { it.priority }
+
+    override suspend fun updateSectionActiveStatus(sectionId: String, isActive: Boolean, updatedAt: Long) {
+        tables.replaceAll { if (it.section == sectionId) it.copy(isActive = isActive, updatedAt = updatedAt) else it }
+    }
+
+    override suspend fun getActiveTableCount(): Int = tables.count { it.isActive }
+
+    override suspend fun getTableCountByStatus(status: String): Int = tables.count { it.status == status && it.isActive }
 
     fun clearAll() {
         tables.clear()
