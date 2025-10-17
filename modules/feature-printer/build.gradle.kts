@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("plugin.serialization") version "1.9.20"
+    kotlin("plugin.serialization") version "2.1.0"
     id("org.jetbrains.kotlin.kapt")
     id("dagger.hilt.android.plugin")
 }
@@ -39,7 +39,7 @@ dependencies {
     
     // DataStore and Serialization
     implementation("androidx.datastore:datastore-preferences:1.0.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
     
     // DantSu ESC/POS Printer SDK
     implementation("com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.3.0")
