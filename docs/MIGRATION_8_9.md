@@ -30,3 +30,21 @@ Notes for maintainers
 
 - If you change the `TableEntity` fields (nullability, types or names), update the migration and exported schema via Room's `exportSchema` so the migration logic and the exported JSON remain consistent.
 - Prefer the create-new-table/copy/drop/rename pattern for complex schema changes (adding NOT NULL columns) to keep migrations deterministic.
+
+Local run (developer)
+
+1. Build and run the single migration instrumentation test on a connected device or emulator:
+
+```bash
+./gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.extrotarget.extropos.data.local.AppDatabaseMigrationTest --no-daemon --console=plain
+```
+
+2. The test uses the asset at `app/src/androidTest/assets/extropos_pre_v8.db`. If you want to use a different pre-migration DB, replace that file before running the test.
+
+CI notes
+
+- The CI workflow `.github/workflows/migration-test.yml` runs the same focused test on an Android emulator. The workflow provisions an emulator (API 31 x86_64), builds the app and runs the single instrumentation class.
+- Storing large binary DB snapshots in the repo is generally discouraged. Alternatives:
+  - Store the pre-migration DB in release artifacts and download it in the workflow before the test run.
+  - Use Git LFS if you must keep the DB in the repo.
+  - Generate a pre-migration DB programmatically in a unit-test if possible, which is faster and keeps CI light-weight.
