@@ -66,6 +66,15 @@ android {
     }
 }
 
+// Force consistent kotlinx.serialization versions to avoid AbstractMethodError from mixed runtimes
+configurations.all {
+    resolutionStrategy {
+        force 'org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.1',
+              'org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.8.1',
+              'org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1'
+    }
+}
+
 dependencies {
     implementation libs.androidx.appcompat
     implementation libs.androidx.core.ktx
@@ -92,6 +101,10 @@ dependencies {
     implementation libs.room.runtime
     implementation libs.room.ktx
     kapt libs.room.compiler
+    // Ensure kotlinx.serialization is available to annotation processors (Room schema export)
+    // This prevents AbstractMethodError when Room's annotation processor deserializes schema JSON
+    kapt 'org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.6.3'
+    kapt 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3'
     // No explicit kapt kotlinx-metadata-jvm entry; rely on compatible processor versions.
     implementation project(':modules:feature-printer')
     // AndroidX Security for EncryptedSharedPreferences (LocalAuthManager)
@@ -113,7 +126,7 @@ dependencies {
     // Room testing helpers for unit tests
     testImplementation 'androidx.room:room-testing:2.7.0'
     // Ensure serialization runtime available during tests
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1'
     testImplementation 'org.mockito:mockito-core:5.5.0'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
     // Instrumentation tests (Espresso + AndroidX Test)
@@ -123,11 +136,14 @@ dependencies {
     // Room testing helper for migration tests
     androidTestImplementation "androidx.room:room-testing:2.7.0"
     // Needed by Room's schema parsing during instrumentation tests
-    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3'
-    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3'
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1'
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.1'
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.8.1'
 
     // Ensure runtime is present in the app process when running instrumentation tests
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1'
+    kapt 'org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.8.1'
+    kapt 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.1'

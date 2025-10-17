@@ -47,7 +47,7 @@ import com.extrotarget.extropos.printer.data.PrinterDao
         KeyValueEntity::class,
         LocalChangeEntity::class
     ],
-    version = 8, // Updated version for table sections and layouts
+    version = 9, // Bump to 9: add corrective migration to fix tables schema mismatch
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -76,13 +76,11 @@ abstract class AppDatabase : RoomDatabase() {
         private const val DB_NAME = "extropos.db"
 
         fun create(context: Context): AppDatabase {
-            // NOTE: For development and to unblock device testing we enable
-            // destructive migration fallback. This will wipe and recreate the DB
-            // when an unknown/unsupported migration is encountered.
-            // Replace with proper migrations before shipping to production.
+            // Use explicit migrations (no destructive fallback) so on-device data is
+            // preserved. We add a corrective migration 8->9 below to patch older
+            // schemas that are missing recently added columns.
             return Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DB_NAME)
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
-                .fallbackToDestructiveMigration()
+                .addMigrations(*ALL_MIGRATIONS)
                 .build()
         }
 
@@ -589,7 +587,125 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        // Migration from version 8 -> 9: robust migration that recreates the
+        // `tables` table with the full expected schema, copies data from the old
+        // table using safe defaults for missing columns, then swaps tables. This
+        // approach handles older variants where some columns/nullable flags differ.
+        private val MIGRATION_8_9 = object : Migration(8, 9) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                try {
+                    // Detect existing columns in the current `tables` table
+                    val cursor = db.query("PRAGMA table_info('tables')")
+                    val existing = mutableSetOf<String>()
+                    while (cursor.moveToNext()) {
+                        val nameIdx = cursor.getColumnIndex("name")
+                        if (nameIdx >= 0) {
+                            existing.add(cursor.getString(nameIdx))
+                        }
+                    }
+                    cursor.close()
+
+                    // Define the desired final column list and create SQL
+                    val cols = listOf(
+                        "id",
+                        "number",
+                        "capacity",
+                        "status",
+                        "currentOrderId",
+                        "section",
+                        "tableType",
+                        "positionX",
+                        "positionY",
+                        "width",
+                        "height",
+                        "rotation",
+                        "assignedServerId",
+                        "lastServedAt",
+                        "estimatedOccupancyTime",
+                        "specialNotes",
+                        "isReservable",
+                        "minimumSpendCents",
+                        "depositRequiredCents",
+                        "createdAt",
+                        "updatedAt",
+                        "isActive",
+                        "isSmokingAllowed",
+                        "isAccessible",
+                        "hasPowerOutlet",
+                        "priority"
+                    )
+
+                                        val createSql = """
+                                                CREATE TABLE IF NOT EXISTS `__tables_new` (
+                                                    `id` TEXT NOT NULL PRIMARY KEY,
+                                                    `number` TEXT NOT NULL,
+                                                    `capacity` INTEGER NOT NULL,
+                                                    `status` TEXT NOT NULL,
+                                                    `currentOrderId` TEXT,
+                                                    `section` TEXT,
+                                                    `tableType` TEXT,
+                                                    `positionX` REAL,
+                                                    `positionY` REAL,
+                                                    `width` REAL,
+                                                    `height` REAL,
+                                                      `rotation` REAL,
+                                                    `assignedServerId` TEXT,
+                                                    `lastServedAt` INTEGER,
+                                                    `estimatedOccupancyTime` INTEGER,
+                                                    `specialNotes` TEXT,
+                                                    `isReservable` INTEGER NOT NULL,
+                                                    `minimumSpendCents` INTEGER,
+                                                    `depositRequiredCents` INTEGER,
+                                                    `createdAt` INTEGER NOT NULL,
+                                                    `updatedAt` INTEGER NOT NULL,
+                                                    `isActive` INTEGER NOT NULL,
+                                                    `isSmokingAllowed` INTEGER NOT NULL,
+                                                    `isAccessible` INTEGER NOT NULL,
+                                                    `hasPowerOutlet` INTEGER NOT NULL,
+                                                    `priority` INTEGER NOT NULL
+                                                )
+                                        """.trimIndent()
+
+                    db.execSQL(createSql)
+
+                    // Build SELECT expressions that either use the existing column
+                    // value or a safe default when the column is missing.
+                    val selectExprs = cols.map { col ->
+                        if (existing.contains(col)) {
+                            "`$col`"
+                        } else {
+                            when (col) {
+                                "id" -> "''"
+                                "number" -> "''"
+                                "capacity" -> "0"
+                                "status" -> "''"
+                                "currentOrderId", "section", "tableType", "positionX", "positionY", "width", "height", "assignedServerId", "specialNotes", "minimumSpendCents", "depositRequiredCents" -> "NULL"
+                                "rotation" -> "0.0"
+                                "lastServedAt", "estimatedOccupancyTime", "createdAt", "updatedAt", "priority" -> "0"
+                                "isReservable" -> "1"
+                                "isActive" -> "1"
+                                "isSmokingAllowed" -> "0"
+                                "isAccessible" -> "1"
+                                "hasPowerOutlet" -> "0"
+                                else -> "NULL"
+                            }
+                        }
+                    }
+
+                    val insertSql = "INSERT INTO `__tables_new` (${cols.joinToString(",")}) SELECT ${selectExprs.joinToString(",")} FROM `tables`"
+                    db.execSQL(insertSql)
+
+                    db.execSQL("DROP TABLE IF EXISTS `tables`")
+                    db.execSQL("ALTER TABLE `__tables_new` RENAME TO `tables`")
+                } catch (e: Exception) {
+                    // If anything fails, log and rethrow so migration doesn't silently succeed
+                    android.util.Log.w("AppDatabase", "MIGRATION_8_9 failed: ${e.message}")
+                    throw e
+                }
+            }
+        }
+
         // Publicly expose migrations for use in tests
-        val ALL_MIGRATIONS = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+        val ALL_MIGRATIONS = arrayOf(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
     }
 }
