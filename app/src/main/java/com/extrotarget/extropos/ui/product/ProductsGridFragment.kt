@@ -308,12 +308,18 @@ class ProductsGridFragment : Fragment() {
         //     return
         // }
 
-        cartViewModel.addItem(product.id, product.name, product.priceCents, 1)
-        Log.d("ProductsGrid", "Successfully added ${product.name} to cart")
-        
-        // Show added to cart feedback
-        val ctx = requireContext()
-        android.widget.Toast.makeText(ctx, "Added ${product.name} to cart", android.widget.Toast.LENGTH_SHORT).show()
+        try {
+            cartViewModel.addItem(product.id, product.name, product.priceCents, 1)
+            Log.d("ProductsGrid", "Successfully added ${product.name} to cart")
+            
+            // Show added to cart feedback
+            val ctx = requireContext()
+            android.widget.Toast.makeText(ctx, "Added ${product.name} to cart", android.widget.Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Log.e("ProductsGrid", "Failed to add product to cart", e)
+            val ctx = requireContext()
+            android.widget.Toast.makeText(ctx, "Failed to add to cart: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+        }
     }
 
     /**

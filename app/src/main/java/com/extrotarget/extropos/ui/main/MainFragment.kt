@@ -94,17 +94,14 @@ class MainFragment : Fragment() {
                         navController.navigate(R.id.action_main_to_customers)
                     }
                     R.id.btn_table -> {
-                        Log.i("DashboardDebug", "clicked: Table -> navigating to Tables or fallback to POS")
-                        val actionId = resources.getIdentifier("action_main_to_tables", "id", requireContext().packageName)
-                        if (actionId != 0) {
-                            navController.navigate(actionId)
-                        } else {
-                            navController.navigate(R.id.action_main_to_pos)
-                        }
+                        Log.i("DashboardDebug", "clicked: Table -> navigating to Tables")
+                        navController.navigate(R.id.action_main_to_tables)
                     }
                 }
             } catch (ex: Exception) {
-                Log.w("DashboardDebug", "MainFragment click handler failed, fallback (exception): ${ex.message}")
+                Log.e("DashboardDebug", "MainFragment navigation failed: ${ex.message}", ex)
+                // Show error to user
+                android.widget.Toast.makeText(requireContext(), "Navigation failed: ${ex.message}", android.widget.Toast.LENGTH_LONG).show()
             }
         }
     }
