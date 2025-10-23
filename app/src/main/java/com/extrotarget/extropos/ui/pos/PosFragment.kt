@@ -22,7 +22,7 @@ import com.extrotarget.extropos.ui.product.ProductsAdapter
 import com.extrotarget.extropos.ui.product.ProductsGridFragment
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.navigation.fragment.findNavController
-import com.extrotarget.extropos.ui.pos.PosFragmentDirections
+import androidx.core.os.bundleOf
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import android.util.Log
@@ -203,10 +203,9 @@ class PosFragment : Fragment() {
                             root?.let { r ->
                                 com.google.android.material.snackbar.Snackbar.make(r, "Order ${order.id} created", com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                                     .setAction("Open") {
-                                        // Navigate to order editor
-                                        // Build the generated action and set the orderId
-                                        val action = PosFragmentDirections.actionPosToOrderEditor().setOrderId(order.id)
-                                        findNavController().navigate(action)
+                                        // Navigate to order editor with orderId as argument
+                                        val bundle = bundleOf("orderId" to order.id)
+                                        findNavController().navigate(R.id.action_pos_to_order_editor, bundle)
                                     }
                                     .show()
                             }

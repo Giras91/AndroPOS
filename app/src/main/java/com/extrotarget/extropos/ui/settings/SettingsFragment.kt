@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.extrotarget.extropos.R
 import com.extrotarget.extropos.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import android.util.Log
+import android.widget.Toast
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -35,44 +37,58 @@ class SettingsFragment : Fragment() {
     private fun setupUI() {
         binding.toolbar.title = "Settings"
         binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
+            try {
+                findNavController().navigateUp()
+            } catch (e: Exception) {
+                Log.e("SettingsFragment", "Navigation up failed", e)
+                requireActivity().onBackPressed()
+            }
+        }
+    }
+
+    private fun safeNavigate(actionId: Int, actionName: String) {
+        try {
+            findNavController().navigate(actionId)
+        } catch (e: Exception) {
+            Log.e("SettingsFragment", "Navigation to $actionName failed", e)
+            Toast.makeText(requireContext(), "Navigation failed: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
     private fun setupClickListeners() {
         // Printer Setup
         binding.printerSetupCard.setOnClickListener {
-            findNavController().navigate(R.id.action_settings_to_printer_setup)
+            safeNavigate(R.id.action_settings_to_printer_setup, "Printer Setup")
         }
 
         // Employee Management
         binding.employeeManagementCard.setOnClickListener {
-            findNavController().navigate(R.id.action_settings_to_employee_management)
+            safeNavigate(R.id.action_settings_to_employee_management, "Employee Management")
         }
 
         // Inventory Management
         binding.inventoryManagementCard.setOnClickListener {
-            findNavController().navigate(R.id.action_settings_to_inventory_management)
+            safeNavigate(R.id.action_settings_to_inventory_management, "Inventory Management")
         }
 
         // Payment Settings
         binding.paymentSettingsCard.setOnClickListener {
-            findNavController().navigate(R.id.action_settings_to_payment_settings)
+            safeNavigate(R.id.action_settings_to_payment_settings, "Payment Settings")
         }
 
         // Hardware Settings
         binding.hardwareSettingsCard.setOnClickListener {
-            findNavController().navigate(R.id.action_settings_to_hardware_settings)
+            safeNavigate(R.id.action_settings_to_hardware_settings, "Hardware Settings")
         }
 
         // Reporting Settings
         binding.reportingSettingsCard.setOnClickListener {
-            findNavController().navigate(R.id.action_settings_to_reporting_settings)
+            safeNavigate(R.id.action_settings_to_reporting_settings, "Reporting Settings")
         }
 
         // Table Management
         binding.tableManagementCard.setOnClickListener {
-            findNavController().navigate(R.id.action_settings_to_table_management)
+            safeNavigate(R.id.action_settings_to_table_management, "Table Management")
         }
     }
 
